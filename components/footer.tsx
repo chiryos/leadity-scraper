@@ -1,0 +1,142 @@
+import Link from "next/link";
+import Image from "next/image";
+import { Instagram } from "lucide-react";
+
+const cols = [
+  {
+    label: "Product",
+    items: [
+      { label: "Features", href: "#features" },
+      { label: "How it works", href: "#how-it-works" },
+      { label: "Pricing", href: "#pricing" },
+      { label: "FAQ", href: "#faq" },
+      { label: "Dashboard", href: "#" },
+    ],
+  },
+  {
+    label: "Company",
+    items: [
+      { label: "About", href: "#" },
+      { label: "Blog", href: "#" },
+      { label: "Contact", href: "mailto:hello@leadity.com" },
+      { label: "Instagram", href: "#" },
+    ],
+  },
+  {
+    label: "Support",
+    items: [
+      { label: "Documentation", href: "#" },
+      { label: "Help center", href: "#" },
+      { label: "Status", href: "#" },
+    ],
+  },
+  {
+    label: "Legal",
+    items: [
+      { label: "Privacy policy", href: "#" },
+      { label: "Terms of service", href: "#" },
+      { label: "Security", href: "#" },
+      { label: "Cookie policy", href: "#" },
+    ],
+  },
+];
+
+export function Footer() {
+  return (
+    <footer className="relative overflow-hidden text-white">
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(135deg, #1B86FF 0%, #1A5BD9 55%, #0F3DA8 100%)",
+        }}
+      />
+
+      {/* Main column content — no watermark here so it can't overlap */}
+      <div className="relative container-page pt-20 pb-16">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <Link
+              href="#top"
+              className="inline-flex items-center gap-3"
+              aria-label="Leadity Scraper home"
+            >
+              <Image
+                src="/logo.png"
+                alt=""
+                width={36}
+                height={36}
+                className="h-9 w-9 object-contain"
+              />
+              <span className="text-[22px] font-semibold tracking-[-0.04em] text-white">
+                Leadity
+              </span>
+            </Link>
+            <p className="mt-5 max-w-[320px] text-[14px] leading-[1.6] text-white/80">
+              Mobile-only lead infrastructure for SMS marketing teams. Scrape
+              Google Maps, classify carriers, ship clean CSVs.
+            </p>
+            <div className="mt-6 flex items-center gap-2">
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white transition-colors hover:bg-white/20"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+
+          <div className="lg:col-span-8 grid grid-cols-2 gap-8 sm:grid-cols-4">
+            {cols.map((col) => (
+              <div key={col.label}>
+                <h4 className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/60">
+                  {col.label}
+                </h4>
+                <ul className="mt-4 flex flex-col gap-3">
+                  {col.items.map((it) => (
+                    <li key={it.label}>
+                      <a
+                        href={it.href}
+                        className="text-[14px] text-white/85 transition-colors hover:text-white"
+                      >
+                        {it.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Watermark strip — isolated, overflow-clipped so letters never touch the columns above */}
+      <div className="relative h-[180px] md:h-[220px] lg:h-[260px] overflow-hidden">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-semibold text-white/[0.08]"
+          style={{
+            fontSize: "clamp(180px, 26vw, 420px)",
+            lineHeight: 0.85,
+            letterSpacing: "-0.06em",
+            bottom: "-32%",
+          }}
+        >
+          Leadity
+        </span>
+
+        <div className="relative container-page h-full">
+          <div className="flex h-full flex-col items-start justify-end gap-3 border-t border-white/15 pt-6 pb-6 text-[12px] text-white/80 md:flex-row md:items-center md:justify-between">
+            <span>© 2026 Leadity Scraper. All rights reserved.</span>
+            <span className="inline-flex items-center gap-2">
+              <span aria-hidden className="block h-1.5 w-1.5 rounded-full bg-[#3DDB7F]" />
+              All systems operational
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

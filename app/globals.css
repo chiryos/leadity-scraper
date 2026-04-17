@@ -1,0 +1,297 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #ffffff;
+  --color-surface: #fafaf9;
+  --color-surface-muted: #f4f4f2;
+  --color-border: #ececea;
+  --color-border-strong: #e0e0dc;
+  --color-text-primary: #0a0a0a;
+  --color-text-secondary: #525252;
+  --color-text-muted: #8a8a8a;
+  --color-accent: #111111;
+  --color-accent-hover: #1f1f1f;
+  --color-brand-mint: #d5eefd;
+  --color-brand-mint-ink: #0b5394;
+  --color-brand-glow: rgba(34, 201, 245, 0.2);
+  --color-brand-glow-strong: rgba(27, 134, 255, 0.22);
+  --color-warning-amber: #f6d38a;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  --container-content: 1200px;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-border);
+  }
+
+  html {
+    /* Lenis owns the smooth scroll; native smooth fights it. */
+    scroll-behavior: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-mint);
+    color: var(--color-brand-mint-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+@layer utilities {
+  .container-page {
+    width: 100%;
+    max-width: var(--container-content);
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 48px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-inline: 64px;
+    }
+  }
+
+  .section-py {
+    padding-block: 96px;
+  }
+
+  @media (min-width: 768px) {
+    .section-py {
+      padding-block: 128px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-py {
+      padding-block: 160px;
+    }
+  }
+
+  .text-display {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    font-size: clamp(44px, 7vw, 88px);
+    line-height: 1.02;
+  }
+
+  .text-h2 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.08;
+  }
+
+  .text-eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+
+  .serif-italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .text-brand-gradient {
+    background-image: linear-gradient(180deg, #22c9f5 0%, #1b86ff 55%, #0951ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-brand-gradient {
+    background-image: linear-gradient(135deg, #22c9f5 0%, #1b86ff 50%, #0951ff 100%);
+  }
+
+  .bg-page-gradient {
+    background:
+      radial-gradient(60% 40% at 50% 0%, rgba(34, 201, 245, 0.18) 0%, transparent 70%),
+      linear-gradient(180deg, #f3faff 0%, #eaf3ff 35%, #ffffff 100%);
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(34, 201, 245, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(34, 201, 245, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .underline-draw {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    animation: underlineDraw 700ms cubic-bezier(0.16, 1, 0.3, 1) 400ms forwards;
+    padding-bottom: 2px;
+  }
+
+  @keyframes underlineDraw {
+    to {
+      background-size: 100% 1px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .underline-draw {
+      animation: none;
+      background-size: 100% 1px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  .dot-loader span {
+    animation: dotPulse 1.2s infinite ease-in-out;
+  }
+  .dot-loader span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .dot-loader span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  @keyframes dotPulse {
+    0%,
+    80%,
+    100% {
+      opacity: 0.3;
+    }
+    40% {
+      opacity: 1;
+    }
+  }
+
+  .fade-edge-right {
+    mask-image: linear-gradient(to right, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, black 90%, transparent);
+  }
+
+  .glow-blob {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 9999px;
+  }
+
+  .glow-breathe {
+    animation: glowBreathe 5.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    will-change: opacity;
+  }
+
+  .glow-breathe-slow {
+    animation: glowBreathe 7.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation-delay: -2s;
+    will-change: opacity;
+  }
+}
+
+@keyframes glowBreathe {
+  0%,
+  100% {
+    opacity: 0.78;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-breathe,
+  .glow-breathe-slow {
+    animation: none;
+    opacity: 0.9;
+  }
+}
+
+@keyframes accordionDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordionUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
