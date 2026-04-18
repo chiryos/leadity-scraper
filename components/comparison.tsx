@@ -32,8 +32,9 @@ const features: Feature[] = [
 
 const oursGradient =
   "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)";
+// Same light-gray gradient as the Scale pricing card for a unified, premium look
 const theirsGradient =
-  "linear-gradient(160deg, #2A2F36 0%, #1D2229 55%, #121619 100%)";
+  "linear-gradient(180deg, #FBFCFD 0%, #EEF1F6 55%, #E2E7EE 100%)";
 
 // spacing rhythm used in BOTH the card price rows and the pills overlay
 // so the pills line up perfectly with each price row.
@@ -190,7 +191,7 @@ export function Comparison() {
 
               {/* ───────────── THEIRS CARD ───────────── */}
               <article
-                className="relative order-1 rounded-[28px] px-8 pt-[110px] pb-10 text-white shadow-[0_40px_80px_-30px_rgba(15,23,42,0.5)]"
+                className="relative order-1 rounded-[28px] border border-[#D8DEE6] px-8 pt-[110px] pb-10 shadow-[0_20px_40px_-24px_rgba(15,23,42,0.18)]"
                 style={{ background: theirsGradient }}
               >
                 {/* floating logos — centered, z-20 to sit above adjacent cards */}
@@ -199,10 +200,10 @@ export function Comparison() {
                   className="absolute -top-[75px] left-1/2 z-20 flex -translate-x-1/2 items-center gap-3"
                 >
                   <div
-                    className="relative h-[130px] w-[130px] overflow-hidden rounded-2xl ring-4 ring-[#1D2229]"
+                    className="relative h-[130px] w-[130px] overflow-hidden rounded-2xl ring-4 ring-white"
                     style={{
                       boxShadow:
-                        "0 24px 40px rgba(0,0,0,0.35), 0 6px 14px rgba(0,0,0,0.3)",
+                        "0 24px 40px rgba(15,23,42,0.18), 0 6px 14px rgba(15,23,42,0.12)",
                       transform: "rotate(-6deg)",
                     }}
                   >
@@ -215,10 +216,10 @@ export function Comparison() {
                     />
                   </div>
                   <div
-                    className="relative flex h-[130px] w-[130px] items-center justify-center overflow-hidden rounded-2xl bg-white ring-4 ring-[#1D2229]"
+                    className="relative flex h-[130px] w-[130px] items-center justify-center overflow-hidden rounded-2xl bg-white ring-4 ring-white"
                     style={{
                       boxShadow:
-                        "0 24px 40px rgba(0,0,0,0.35), 0 6px 14px rgba(0,0,0,0.3)",
+                        "0 24px 40px rgba(15,23,42,0.18), 0 6px 14px rgba(15,23,42,0.12)",
                       transform: "rotate(6deg)",
                     }}
                   >
@@ -234,7 +235,7 @@ export function Comparison() {
 
                 {/* Title */}
                 <h3
-                  className="text-center font-semibold tracking-[-0.04em] text-white"
+                  className="text-center font-semibold tracking-[-0.04em] text-[var(--color-text-primary)]"
                   style={{
                     fontSize: "clamp(40px, 4.4vw, 56px)",
                     lineHeight: 1,
@@ -243,7 +244,7 @@ export function Comparison() {
                   Theirs
                 </h3>
 
-                <div className="mt-8 h-px w-full bg-white/15" />
+                <div className="mt-8 h-px w-full bg-[#D8DEE6]" />
 
                 {/* Prices */}
                 <div className="flex flex-col">
@@ -252,7 +253,7 @@ export function Comparison() {
                       key={t.competitor}
                       className={
                         `${pricePadY} text-center ` +
-                        (i < tiers.length - 1 ? "border-b border-white/15" : "")
+                        (i < tiers.length - 1 ? "border-b border-[#D8DEE6]" : "")
                       }
                     >
                       <span
@@ -261,20 +262,20 @@ export function Comparison() {
                           fontSize: "clamp(22px, 2.6vw, 30px)",
                           letterSpacing: "-0.025em",
                           lineHeight: 1,
-                          textShadow: "0 0 24px rgba(255,90,90,0.35)",
+                          textShadow: "0 0 24px rgba(255,90,90,0.25)",
                         }}
                       >
                         {t.competitor}
                       </span>
                       {/* Inline tier label on mobile */}
-                      <span className="mt-2 block text-[12px] font-medium text-white/60 lg:hidden">
+                      <span className="mt-2 block text-[12px] font-medium text-[var(--color-text-muted)] lg:hidden">
                         {t.label} Owners Mobiles
                       </span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-2 h-px w-full bg-white/15" />
+                <div className="mt-2 h-px w-full bg-[#D8DEE6]" />
 
                 {/* Features */}
                 <ul className="flex flex-col">
@@ -283,16 +284,16 @@ export function Comparison() {
                       key={f.theirs}
                       className={
                         "flex items-center gap-3 py-4 " +
-                        (i < features.length - 1 ? "border-b border-white/15" : "")
+                        (i < features.length - 1 ? "border-b border-[#D8DEE6]" : "")
                       }
                     >
                       <span
                         aria-hidden
-                        className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/15 text-white/80"
+                        className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#E2E7EE] text-[var(--color-text-muted)]"
                       >
                         <X className="h-4 w-4" strokeWidth={3} />
                       </span>
-                      <span className="text-[15px] font-medium text-white/80 md:text-[16px]">
+                      <span className="text-[15px] font-medium text-[var(--color-text-secondary)] md:text-[16px]">
                         {f.theirs}
                       </span>
                     </li>
