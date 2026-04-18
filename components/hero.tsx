@@ -19,13 +19,13 @@ export function Hero() {
 
   return (
     <section className="relative isolate flex min-h-[calc(100svh-72px)] flex-col bg-white">
-      {/* Apple-style ambient depth: a single restrained radial behind the H1 */}
+      {/* Apple-style ambient depth: wider horizontal wash, same softness vertically */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[900px]"
         style={{
           background:
-            "radial-gradient(50% 55% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
+            "radial-gradient(80% 55% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
         }}
       />
 
@@ -92,16 +92,16 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, y: 14 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease }}
-          className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:gap-3 md:mt-10"
+          className="mt-7 flex flex-row items-center justify-center gap-3 md:mt-10"
         >
+          <Button asChild size="lg" variant="ghost">
+            <a href="#how-it-works">See how it works</a>
+          </Button>
           <Button asChild size="lg" variant="gradient">
             <a href="#pricing">
               Start Scraping
               <ArrowRight className="ml-2 h-4 w-4" />
             </a>
-          </Button>
-          <Button asChild size="lg" variant="ghost">
-            <a href="#how-it-works">See how it works</a>
           </Button>
         </motion.div>
 

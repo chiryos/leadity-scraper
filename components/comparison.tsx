@@ -87,7 +87,7 @@ export function Comparison() {
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-10">
               {/* ───────────── OURS CARD ───────────── */}
               <article
-                className="relative rounded-[28px] px-8 pt-[110px] pb-10 text-white shadow-[0_40px_80px_-30px_rgba(27,134,255,0.55)]"
+                className="relative order-2 rounded-[28px] px-8 pt-[110px] pb-10 text-white shadow-[0_40px_80px_-30px_rgba(27,134,255,0.55)]"
                 style={{ background: oursGradient }}
               >
                 {/* floating logo + white glow */}
@@ -190,7 +190,7 @@ export function Comparison() {
 
               {/* ───────────── THEIRS CARD ───────────── */}
               <article
-                className="relative rounded-[28px] px-8 pt-[110px] pb-10 text-white shadow-[0_40px_80px_-30px_rgba(15,23,42,0.5)]"
+                className="relative order-1 rounded-[28px] px-8 pt-[110px] pb-10 text-white shadow-[0_40px_80px_-30px_rgba(15,23,42,0.5)]"
                 style={{ background: theirsGradient }}
               >
                 {/* floating logos */}
@@ -256,11 +256,12 @@ export function Comparison() {
                       }
                     >
                       <span
-                        className="inline-block font-semibold tabular-nums text-white"
+                        className="inline-block font-semibold tabular-nums text-[#FF5A5A]"
                         style={{
                           fontSize: "clamp(22px, 2.6vw, 30px)",
                           letterSpacing: "-0.025em",
                           lineHeight: 1,
+                          textShadow: "0 0 24px rgba(255,90,90,0.35)",
                         }}
                       >
                         {t.competitor}

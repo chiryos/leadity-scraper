@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -39,6 +40,8 @@ function Wordmark({ size = 20 }: { size?: number }) {
   );
 }
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 export function Nav() {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -50,12 +53,16 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close drawer when resizing up to desktop
   React.useEffect(() => {
-    document.documentElement.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.documentElement.style.overflow = "";
+    const onResize = () => {
+      if (window.innerWidth >= 768) setOpen(false);
     };
-  }, [open]);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const closeOnLink = React.useCallback(() => setOpen(false), []);
 
   return (
     <header
@@ -63,7 +70,7 @@ export function Nav() {
       className={cn(
         "sticky top-0 z-50 backdrop-blur-md transition-colors duration-200",
         "bg-white/80",
-        scrolled && "border-b border-[var(--color-border)]",
+        (scrolled || open) && "border-b border-[var(--color-border)]",
       )}
     >
       <nav
@@ -99,65 +106,82 @@ export function Nav() {
 
         <button
           type="button"
-          className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg text-[var(--color-text-primary)]"
-          aria-label="Open menu"
+          className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-surface)]"
+          aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          onClick={() => setOpen(true)}
+          onClick={() => setOpen((v) => !v)}
         >
-          <Menu className="h-5 w-5" aria-hidden />
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={open ? "x" : "menu"}
+              initial={{ opacity: 0, rotate: -90 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              exit={{ opacity: 0, rotate: 90 }}
+              transition={{ duration: 0.18, ease }}
+              className="inline-flex"
+            >
+              {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
+            </motion.span>
+          </AnimatePresence>
         </button>
       </nav>
 
-      {open ? (
-        <div
-          className="fixed inset-0 z-50 flex flex-col bg-white md:hidden"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="container-page flex h-[72px] items-center justify-between">
-            <Wordmark />
-            <button
-              type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg"
-              onClick={() => setOpen(false)}
-              aria-label="Close menu"
+      {/* Mobile drawer island — smooth slide-down, clean white, non-fullscreen */}
+      <AnimatePresence>
+        {open ? (
+          <>
+            {/* Soft backdrop to dismiss on tap outside */}
+            <motion.div
+              aria-hidden
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 top-[72px] z-40 bg-black/25 backdrop-blur-[2px] md:hidden"
+              onClick={closeOnLink}
+            />
+            <motion.div
+              id="mobile-drawer"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Menu"
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.28, ease }}
+              className="md:hidden absolute left-4 right-4 top-[calc(72px+8px)] z-50 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white shadow-[0_24px_60px_-20px_rgba(15,23,42,0.25)]"
             >
-              <X className="h-5 w-5" aria-hidden />
-            </button>
-          </div>
-          <div
-            className="container-page flex flex-1 flex-col gap-6 pt-12"
-            onClick={(e) => {
-              if (e.target === e.currentTarget) setOpen(false);
-            }}
-          >
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="text-[32px] font-semibold tracking-[-0.03em] text-[var(--color-text-primary)]"
-              >
-                {l.label}
-              </a>
-            ))}
-            <div className="mt-8 flex flex-col gap-4">
-              <a
-                href="#"
-                onClick={() => setOpen(false)}
-                className="text-[18px] text-[var(--color-text-secondary)]"
-              >
-                Sign in
-              </a>
-              <Button asChild size="lg" className="w-full">
-                <a href="#pricing" onClick={() => setOpen(false)}>
-                  Get leads
+              <nav className="flex flex-col p-2">
+                {links.map((l) => (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    onClick={closeOnLink}
+                    className="rounded-xl px-4 py-3 text-[15px] font-medium text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-surface)]"
+                  >
+                    {l.label}
+                  </a>
+                ))}
+                <div className="my-2 h-px bg-[var(--color-border)]" aria-hidden />
+                <a
+                  href="#"
+                  onClick={closeOnLink}
+                  className="rounded-xl px-4 py-3 text-[14px] font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-surface)]"
+                >
+                  Sign in
                 </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      ) : null}
+                <div className="p-2">
+                  <Button asChild size="block" variant="gradient">
+                    <a href="#pricing" onClick={closeOnLink}>
+                      Get leads
+                    </a>
+                  </Button>
+                </div>
+              </nav>
+            </motion.div>
+          </>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }
