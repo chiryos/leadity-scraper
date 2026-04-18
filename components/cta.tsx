@@ -73,7 +73,13 @@ export function CTA() {
                 Ready when you are
               </p>
 
-              {/* Headline */}
+              {/* Headline
+                  Mirrors the hero's "Scrape Google Maps. / Get Owners Mobiles."
+                  imperative pair, but closes on the benefit of SPEED. Two
+                  alternates kept as comments — swap in whichever reads best
+                  after a live look:
+                    • "Pick a niche. / Ship a CSV."   (echoes the subtitle)
+                    • "Niche in. / CSV out."          (minimalist, ultra-punchy) */}
               <h2
                 className="text-balance mt-4 font-semibold text-white"
                 style={{
@@ -82,8 +88,8 @@ export function CTA() {
                   lineHeight: 1.04,
                 }}
               >
-                <span className="block">Stop stitching tools.</span>
-                <span className="block">Start shipping lists.</span>
+                <span className="block">Scrape today.</span>
+                <span className="block">Text tomorrow.</span>
               </h2>
 
               {/* Subtitle */}
