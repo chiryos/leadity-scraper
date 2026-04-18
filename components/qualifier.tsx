@@ -18,41 +18,45 @@ import { cn } from "@/lib/utils";
 
 type Item = { lead: string; body: string };
 
+// Each column covers a DIFFERENT axis of buyer fit (audience, data scope,
+// geography, usage pattern on the left; role, use-case, volume, delivery
+// on the right) so the two sides are genuinely distinct qualifiers and
+// not inverse-phrasings of each other.
 const notFor: Item[] = [
   {
-    lead: "Don't run outbound.",
-    body: "No cold SMS, no cold calls, no paid traffic feeding a dialer.",
+    lead: "Sell to consumers.",
+    body: "We carry business-owner mobiles only — no D2C or residential lists.",
   },
   {
-    lead: "Only need crumbs.",
-    body: "A few hundred leads a month covers your whole pipeline.",
+    lead: "Need emails, not phones.",
+    body: "We don't enrich emails, firmographics, or LinkedIn data. Just mobiles.",
   },
   {
-    lead: "Don't mind VOIPs.",
-    body: "You're okay paying for numbers that can't actually be texted.",
+    lead: "Live outside the US.",
+    body: "Coverage is US-only — 32,741 ZIPs. No EU, UK, Canada, or APAC data.",
   },
   {
-    lead: "Prefer many tools.",
-    body: "You'd rather juggle three scrapers than consolidate to one.",
+    lead: "Want a one-off batch.",
+    body: "We're built for recurring scrapes, not a single export-and-done job.",
   },
 ];
 
 const isFor: Item[] = [
   {
-    lead: "Run real outbound.",
-    body: "Cold SMS or cold-call every week, not once a quarter.",
+    lead: "Run a lead-gen agency.",
+    body: "Multi-client, multi-niche campaigns delivered as clean CSVs every month.",
   },
   {
-    lead: "Need real mobiles.",
-    body: "Your stack can't afford to waste sends on VOIPs and landlines.",
+    lead: "Text business owners direct.",
+    body: "Roofers, dentists, HVAC, solar — owner mobiles, not front-desk lines.",
   },
   {
-    lead: "Scrape often.",
-    body: "New niches every month, not a single one-off batch a year.",
+    lead: "Need production volume.",
+    body: "5k+ verified mobiles a month without rate-limits, retries, or queues.",
   },
   {
-    lead: "Want one vendor.",
-    body: "One product. One price. One refund policy. No tool-stacking.",
+    lead: "Live inside a dialer.",
+    body: "CSV or webhook delivery that drops straight into your SMS stack.",
   },
 ];
 
