@@ -28,7 +28,7 @@ export function Hero() {
         }}
       />
 
-      {/* Cinematic bottom glow - stronger so the 3 stats sit on a punchy light strip */}
+      {/* Cinematic bottom glow - same light tone as the top, just mirrored */}
       <div
         aria-hidden
         className="glow-breathe pointer-events-none absolute inset-x-0 -z-10"
@@ -36,7 +36,7 @@ export function Hero() {
           bottom: "-140px",
           height: "520px",
           background:
-            "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.75) 0%, rgba(27, 134, 255, 0.5) 22%, rgba(27, 134, 255, 0.22) 45%, rgba(27, 134, 255, 0.08) 65%, transparent 82%)",
+            "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
         }}
       />
       <div
@@ -46,7 +46,7 @@ export function Hero() {
           bottom: "-240px",
           height: "680px",
           background:
-            "radial-gradient(85% 100% at 50% 100%, rgba(34, 201, 245, 0.32) 0%, rgba(27, 134, 255, 0.18) 40%, transparent 78%)",
+            "radial-gradient(85% 100% at 50% 100%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
         }}
       />
 

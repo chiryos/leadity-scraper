@@ -126,7 +126,7 @@ export function Nav() {
         </button>
       </nav>
 
-      {/* Mobile drawer island - smooth slide-down, clean white, non-fullscreen */}
+      {/* Mobile drawer island - silky smooth spring slide, clean white, non-fullscreen */}
       <AnimatePresence>
         {open ? (
           <>
@@ -136,8 +136,8 @@ export function Nav() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="fixed inset-0 top-[72px] z-40 bg-black/25 backdrop-blur-[2px] md:hidden"
+              transition={{ duration: 0.45, ease }}
+              className="fixed inset-0 top-[72px] z-40 bg-black/25 backdrop-blur-[3px] md:hidden"
               onClick={closeOnLink}
             />
             <motion.div
@@ -145,39 +145,69 @@ export function Nav() {
               role="dialog"
               aria-modal="true"
               aria-label="Menu"
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.28, ease }}
+              initial={{ opacity: 0, y: -20, scaleY: 0.92 }}
+              animate={{ opacity: 1, y: 0, scaleY: 1 }}
+              exit={{ opacity: 0, y: -16, scaleY: 0.94 }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 28,
+                mass: 0.9,
+                opacity: { duration: 0.3, ease },
+              }}
+              style={{ transformOrigin: "top center", willChange: "transform, opacity" }}
               className="md:hidden absolute left-4 right-4 top-[calc(72px+8px)] z-50 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white shadow-[0_24px_60px_-20px_rgba(15,23,42,0.25)]"
             >
-              <nav className="flex flex-col p-2">
+              <motion.nav
+                initial="hidden"
+                animate="show"
+                variants={{
+                  hidden: {},
+                  show: { transition: { staggerChildren: 0.035, delayChildren: 0.08 } },
+                }}
+                className="flex flex-col p-2"
+              >
                 {links.map((l) => (
-                  <a
+                  <motion.a
                     key={l.href}
+                    variants={{
+                      hidden: { opacity: 0, y: -8 },
+                      show: { opacity: 1, y: 0 },
+                    }}
+                    transition={{ duration: 0.4, ease }}
                     href={l.href}
                     onClick={closeOnLink}
                     className="rounded-xl px-4 py-3 text-[15px] font-medium text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-surface)]"
                   >
                     {l.label}
-                  </a>
+                  </motion.a>
                 ))}
-                <div className="my-2 h-px bg-[var(--color-border)]" aria-hidden />
-                <a
+                <motion.div
+                  variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+                  className="my-2 h-px bg-[var(--color-border)]"
+                  aria-hidden
+                />
+                <motion.a
+                  variants={{ hidden: { opacity: 0, y: -8 }, show: { opacity: 1, y: 0 } }}
+                  transition={{ duration: 0.4, ease }}
                   href="#"
                   onClick={closeOnLink}
                   className="rounded-xl px-4 py-3 text-[14px] font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-surface)]"
                 >
                   Sign in
-                </a>
-                <div className="p-2">
+                </motion.a>
+                <motion.div
+                  variants={{ hidden: { opacity: 0, y: -8 }, show: { opacity: 1, y: 0 } }}
+                  transition={{ duration: 0.4, ease }}
+                  className="p-2"
+                >
                   <Button asChild size="block" variant="gradient">
                     <a href="#pricing" onClick={closeOnLink}>
                       Get leads
                     </a>
                   </Button>
-                </div>
-              </nav>
+                </motion.div>
+              </motion.nav>
             </motion.div>
           </>
         ) : null}

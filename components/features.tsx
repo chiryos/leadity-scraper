@@ -100,7 +100,7 @@ export function Features() {
         className="absolute inset-x-0 top-0 h-[420px] pointer-events-none"
         style={{
           background:
-            "radial-gradient(60% 50% at 50% 0%, rgba(34, 201, 245, 0.12), transparent 70%)",
+            "radial-gradient(60% 50% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
         }}
       />
       <div className="relative container-page">

@@ -31,7 +31,7 @@ export function Qualifier() {
         className="absolute inset-x-0 top-0 h-[420px] pointer-events-none"
         style={{
           background:
-            "radial-gradient(50% 60% at 50% 0%, rgba(34, 201, 245, 0.14), transparent 70%)",
+            "radial-gradient(50% 60% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
         }}
       />
       <div className="relative container-page">

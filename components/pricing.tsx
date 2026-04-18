@@ -69,7 +69,7 @@ export function Pricing() {
         className="absolute inset-x-0 top-0 h-[500px] pointer-events-none"
         style={{
           background:
-            "radial-gradient(60% 50% at 50% 0%, rgba(34, 201, 245, 0.16), transparent 70%)",
+            "radial-gradient(60% 50% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
         }}
       />
       <div className="relative container-page">
@@ -231,7 +231,7 @@ export function Pricing() {
                     className="pointer-events-none absolute -inset-6 -z-10"
                     style={{
                       background:
-                        "radial-gradient(60% 55% at 50% 60%, rgba(34,201,245,0.18) 0%, rgba(27,134,255,0.08) 40%, transparent 75%)",
+                        "radial-gradient(60% 55% at 50% 60%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
                       filter: "blur(8px)",
                     }}
                   />

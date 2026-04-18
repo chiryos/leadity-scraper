@@ -63,7 +63,7 @@ export function Comparison() {
         className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
         style={{
           background:
-            "radial-gradient(60% 50% at 50% 0%, rgba(34, 201, 245, 0.10), transparent 70%)",
+            "radial-gradient(60% 50% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
         }}
       />
       <div className="relative container-page">
@@ -83,18 +83,18 @@ export function Comparison() {
 
         <Reveal delay={0.1}>
           <div className="relative mx-auto mt-28 max-w-[1200px]">
-            {/* Two cards side-by-side */}
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-10">
+            {/* Two cards side-by-side; generous vertical gap on mobile so the floating Ours logo clears the Theirs card above */}
+            <div className="grid grid-cols-1 gap-28 lg:grid-cols-2 lg:gap-10">
               {/* ───────────── OURS CARD ───────────── */}
               <article
                 className="relative order-2 rounded-[28px] px-8 pt-[110px] pb-10 text-white shadow-[0_40px_80px_-30px_rgba(27,134,255,0.55)]"
                 style={{ background: oursGradient }}
               >
-                {/* floating logo + white glow */}
+                {/* floating logo + white glow — centered on top, z-20 to sit above adjacent cards */}
                 <div
                   aria-hidden
-                  className="absolute -top-[90px] left-1/2 -translate-x-1/2"
-                  style={{ transform: "translateX(-50%) rotate(-6deg)" }}
+                  className="absolute left-1/2 z-20 -translate-x-1/2"
+                  style={{ top: "-90px" }}
                 >
                   <div
                     aria-hidden
@@ -193,10 +193,10 @@ export function Comparison() {
                 className="relative order-1 rounded-[28px] px-8 pt-[110px] pb-10 text-white shadow-[0_40px_80px_-30px_rgba(15,23,42,0.5)]"
                 style={{ background: theirsGradient }}
               >
-                {/* floating logos */}
+                {/* floating logos — centered, z-20 to sit above adjacent cards */}
                 <div
                   aria-hidden
-                  className="absolute -top-[75px] left-1/2 flex -translate-x-1/2 items-center gap-3"
+                  className="absolute -top-[75px] left-1/2 z-20 flex -translate-x-1/2 items-center gap-3"
                 >
                   <div
                     className="relative h-[130px] w-[130px] overflow-hidden rounded-2xl ring-4 ring-[#1D2229]"

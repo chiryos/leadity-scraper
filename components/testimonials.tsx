@@ -68,6 +68,7 @@ const testimonials: Testimonial[] = [
 const looped = [...testimonials, ...testimonials, ...testimonials];
 
 export function Testimonials() {
+  const sectionRef = React.useRef<HTMLElement>(null);
   const trackRef = React.useRef<HTMLDivElement>(null);
   const cardsRef = React.useRef<(HTMLButtonElement | null)[]>([]);
   const pausedRef = React.useRef(false);
@@ -76,7 +77,8 @@ export function Testimonials() {
 
   React.useEffect(() => {
     const track = trackRef.current;
-    if (!track) return;
+    const section = sectionRef.current;
+    if (!track || !section) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const SET_COUNT = testimonials.length;
@@ -92,6 +94,7 @@ export function Testimonials() {
 
     let setWidth = 0;
     let rafId = 0;
+    let inView = false; // only run the loop when the section is visible
 
     const smoothstep = (t: number) => t * t * (3 - 2 * t);
 
@@ -118,17 +121,31 @@ export function Testimonials() {
         const maxDistance = vw / 2 + rect.width * 0.6;
         const t = Math.min(distance / maxDistance, 1);
         const e = smoothstep(t);
-        // Softened falloff so edge cards remain legible while moving
-        const scale = 1 - e * 0.18; // 1.0 at center, 0.82 at far edges
-        const opacity = 1 - e * 0.55; // 1.0 at center, 0.45 at far edges
+        const scale = 1 - e * 0.18;
+        const opacity = 1 - e * 0.55;
         card.style.transform = `scale(${scale})`;
         card.style.opacity = `${opacity}`;
         card.style.zIndex = `${Math.round(100 - distance / 10)}`;
       }
 
-      rafId = requestAnimationFrame(tick);
+      if (inView) rafId = requestAnimationFrame(tick);
     };
-    rafId = requestAnimationFrame(tick);
+
+    // Start/stop the RAF loop based on visibility — saves enormous cost on mobile scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries[0]?.isIntersecting ?? false;
+        if (visible && !inView) {
+          inView = true;
+          rafId = requestAnimationFrame(tick);
+        } else if (!visible && inView) {
+          inView = false;
+          if (rafId) cancelAnimationFrame(rafId);
+        }
+      },
+      { rootMargin: "200px 0px" },
+    );
+    observer.observe(section);
 
     const onResize = () => {
       setWidth = measureSetWidth();
@@ -136,20 +153,21 @@ export function Testimonials() {
     window.addEventListener("resize", onResize);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      observer.disconnect();
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener("resize", onResize);
     };
   }, []);
 
   return (
-    <section className="relative overflow-hidden pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28">
+    <section ref={sectionRef} className="relative overflow-hidden pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28">
       <div aria-hidden className="absolute inset-0 bg-grid opacity-50" />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
         style={{
           background:
-            "radial-gradient(60% 50% at 50% 0%, rgba(34, 201, 245, 0.12), transparent 70%)",
+            "radial-gradient(60% 50% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
         }}
       />
       <div className="relative">
@@ -178,7 +196,7 @@ export function Testimonials() {
               pausedRef.current = false;
             }}
           >
-            {/* Spotlight glow behind the focused card - sized to the carousel, not the full section */}
+            {/* Spotlight glow behind the focused card - unified light tone */}
             <div
               aria-hidden
               className="glow-breathe pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2"
@@ -186,7 +204,7 @@ export function Testimonials() {
                 width: "min(1000px, 85vw)",
                 height: "min(560px, 60vw)",
                 background:
-                  "radial-gradient(closest-side, rgba(34,201,245,0.42) 0%, rgba(27,134,255,0.22) 35%, rgba(27,134,255,0.08) 60%, transparent 82%)",
+                  "radial-gradient(closest-side, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
               }}
             />
             <div
@@ -196,7 +214,7 @@ export function Testimonials() {
                 width: "min(1400px, 100vw)",
                 height: "min(700px, 75vw)",
                 background:
-                  "radial-gradient(closest-side, rgba(34,201,245,0.14) 0%, rgba(27,134,255,0.07) 50%, transparent 78%)",
+                  "radial-gradient(closest-side, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
               }}
             />
 
