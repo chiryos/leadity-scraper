@@ -70,7 +70,7 @@ export function SignupPopup() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           onClick={close}
-          className="fixed inset-0 z-[70] flex items-end justify-center bg-black/45 p-4 backdrop-blur-sm sm:items-center"
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/45 p-4 backdrop-blur-sm"
         >
           <motion.div
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40, scale: 0.94 }}
