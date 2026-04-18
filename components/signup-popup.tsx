@@ -127,12 +127,16 @@ export function SignupPopup() {
               style={{
                 fontSize: "clamp(22px, 3.2vw, 28px)",
                 letterSpacing: "-0.03em",
-                lineHeight: 1.12,
+                lineHeight: 1.15,
               }}
             >
-              Sign up now and get{" "}
-              <span className="whitespace-nowrap">300 Mobile Leads</span> for{" "}
-              <span className="whitespace-nowrap">FREE.</span>
+              <span className="block">
+                Sign Up <span className="font-extrabold">NOW</span> and get
+              </span>
+              <span className="block">
+                300 Owners Mobile Phones for{" "}
+                <span className="font-extrabold">FREE</span>
+              </span>
             </h3>
 
             <p className="relative mt-3 text-center text-[13.5px] leading-[1.55] text-white/85">
