@@ -135,11 +135,11 @@ export function Hero() {
         transition={{ duration: 0.8, delay: 0.55, ease }}
         className="container-page relative pb-6 md:pb-10"
       >
-        <div className="mx-auto flex max-w-[900px] flex-wrap items-center justify-center divide-x divide-[rgba(138,138,138,0.55)] gap-y-4">
+        <div className="mx-auto flex max-w-[900px] items-center justify-center divide-x divide-[rgba(138,138,138,0.55)]">
           {stats.map((s) => (
             <div
               key={s.label}
-              className="flex min-w-[110px] flex-col items-center px-5 sm:min-w-[140px] sm:px-8 md:px-12"
+              className="flex min-w-0 flex-1 flex-col items-center px-2 sm:min-w-[140px] sm:flex-initial sm:px-8 md:px-12"
             >
               <span
                 className={
@@ -148,14 +148,14 @@ export function Hero() {
                     : "font-semibold tabular-nums text-[var(--color-text-primary)]"
                 }
                 style={{
-                  fontSize: "clamp(28px, 5vw, 52px)",
+                  fontSize: "clamp(20px, 5.4vw, 52px)",
                   letterSpacing: "-0.035em",
                   lineHeight: 1,
                 }}
               >
                 {s.value}
               </span>
-              <span className="mt-2 text-center text-[10px] font-medium uppercase tracking-[0.12em] text-[var(--color-text-muted)] md:text-[12px]">
+              <span className="mt-2 text-center text-[9px] font-medium uppercase tracking-[0.08em] text-[var(--color-text-muted)] md:text-[12px] md:tracking-[0.12em]">
                 {s.label}
               </span>
             </div>

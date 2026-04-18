@@ -52,20 +52,18 @@ export function SmoothScroll() {
     const NAV_HEIGHT = 72;
     const BREATHING_ROOM = 8; // small gap between nav and content
 
-    const getSectionOffset = (el: HTMLElement) => {
-      // Each section has internal top padding (section-py: 96–160px). Without
-      // accounting for it, we land at the section's box top — which means the
-      // user sees 96–160px of empty padding before the heading. We want the
-      // actual CONTENT to land just below the sticky nav, so we shift the scroll
-      // target DOWN by the section's paddingTop.
-      if (el === document.body) return 0;
-      const style = getComputedStyle(el);
-      const padTop = parseFloat(style.paddingTop) || 0;
-      // Lenis-style offset: final scroll = element.top + offset
-      // We want content (element.top + padTop) to sit at viewport y = NAV_HEIGHT + BREATHING_ROOM
-      // → scroll position = element.top + padTop - (NAV_HEIGHT + BREATHING_ROOM)
-      // → offset = padTop - NAV_HEIGHT - BREATHING_ROOM
-      return padTop - NAV_HEIGHT - BREATHING_ROOM;
+    // Find the actual "first content" inside a section (eyebrow, heading, or an
+    // explicit [data-section-start]). Each section has 96–160px of internal
+    // top padding for the ambient glow — without this, we'd land at the section's
+    // box top and see a big empty gap before the heading. Targeting the first
+    // content element directly is more reliable than measuring paddingTop
+    // (which can be flaky on iOS Safari under smooth-scroll animations).
+    const getScrollTarget = (el: HTMLElement): HTMLElement => {
+      if (el === document.body) return el;
+      const firstContent = el.querySelector<HTMLElement>(
+        "[data-section-start], .text-eyebrow, h1, h2",
+      );
+      return firstContent ?? el;
     };
 
     const onClick = (e: MouseEvent) => {
@@ -83,15 +81,18 @@ export function SmoothScroll() {
       if (!el) return;
 
       e.preventDefault();
-      const offset = getSectionOffset(el);
+      const scrollEl = getScrollTarget(el);
+      // We want the first content to sit at viewport y = NAV + BREATH
+      // → scroll position = scrollEl.top − (NAV + BREATH)
+      const offset = scrollEl === document.body ? 0 : -(NAV_HEIGHT + BREATHING_ROOM);
       if (lenis) {
-        lenis.scrollTo(el, { offset, duration: 1.3 });
+        lenis.scrollTo(scrollEl, { offset, duration: 1.3 });
       } else {
         // Mobile: native smooth-scroll
         const top =
-          el === document.body
+          scrollEl === document.body
             ? 0
-            : el.getBoundingClientRect().top + window.scrollY + offset;
+            : scrollEl.getBoundingClientRect().top + window.scrollY + offset;
         window.scrollTo({ top, behavior: "smooth" });
       }
       if (typeof history !== "undefined") {
