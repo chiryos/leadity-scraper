@@ -125,7 +125,12 @@ export function Features() {
             return (
               <StaggerItem
                 key={f.title}
-                className="group rounded-2xl border border-[var(--color-border)] bg-white p-7 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-border-strong)] hover:shadow-[0_18px_40px_-22px_rgba(27,134,255,0.35)]"
+                // Only transition border + shadow via CSS. Transform is owned
+                // entirely by framer-motion (via StaggerItem's y variants) —
+                // letting `transition-all` animate transform at the same time
+                // creates a tug-of-war with the stagger intro under Lenis
+                // smooth-scroll and causes the cards to twitch on enter.
+                className="group rounded-2xl border border-[var(--color-border)] bg-white p-7 transition-[border-color,box-shadow] duration-200 hover:border-[var(--color-border-strong)] hover:shadow-[0_18px_40px_-22px_rgba(27,134,255,0.35)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <span
