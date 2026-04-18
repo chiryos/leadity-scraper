@@ -89,19 +89,6 @@ export function SignupPopup() {
                 "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
             }}
           >
-            {/* Decorative glow halo behind the ghost */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute left-1/2 top-0 -z-0 -translate-x-1/2 -translate-y-1/3"
-              style={{
-                width: 320,
-                height: 320,
-                background:
-                  "radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 45%, transparent 75%)",
-                filter: "blur(6px)",
-              }}
-            />
-
             {/* Close button */}
             <button
               type="button"
@@ -123,7 +110,7 @@ export function SignupPopup() {
                 className="h-[76px] w-[76px] object-contain"
                 style={{
                   filter:
-                    "drop-shadow(0 14px 30px rgba(255,255,255,0.45)) drop-shadow(0 0 24px rgba(255,255,255,0.55))",
+                    "drop-shadow(0 14px 26px rgba(0,0,0,0.35)) drop-shadow(0 4px 10px rgba(0,0,0,0.25))",
                 }}
               />
             </div>
