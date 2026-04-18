@@ -1,40 +1,123 @@
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
-import { Button } from "@/components/ui/button";
 
+/**
+ * Closing CTA — the climactic blue-gradient card that lands right before
+ * the footer. Mirrors the Ours comparison card and the Growth pricing card
+ * so the page closes on a consistent, unmistakable brand moment.
+ */
 export function CTA() {
   return (
-    <section className="relative overflow-hidden border-y border-[var(--color-border)] bg-[var(--color-surface)] py-24 md:py-28 lg:py-[160px]">
+    <section className="relative overflow-hidden bg-white py-20 md:py-28 lg:py-32">
+      {/* Soft ambient glow under the card so it feels like it's floating */}
       <div
         aria-hidden
-        className="absolute inset-0"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[520px]"
         style={{
           background:
-            "radial-gradient(50% 60% at 50% 50%, rgba(34, 201, 245, 0.18) 0%, rgba(27, 134, 255, 0.06) 50%, transparent 75%)",
+            "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
         }}
       />
-      <div className="relative container-page">
+
+      <div className="container-page relative">
         <Reveal>
-          <div className="mx-auto flex max-w-[820px] flex-col items-center text-center">
-            <h2 className="text-h2 text-balance text-[var(--color-text-primary)]">
-              <span className="block">Stop stitching tools.</span>
-              <span className="block">
-                Start <span className="text-brand-gradient">shipping</span> lists.
-              </span>
-            </h2>
-            <p className="mt-6 max-w-[640px] text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
-              Your next 2,000 verified Owners Mobiles are one click away - with a refund
-              policy that means you&apos;re never paying for bad data.
-            </p>
-            <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-4">
-              <Button asChild size="lg">
-                <a href="#pricing">Get leads</a>
-              </Button>
-              <a
-                href="mailto:hello@leadity.com"
-                className="text-[14px] font-medium text-[var(--color-text-primary)] underline-offset-4 hover:underline"
+          <div
+            className="relative mx-auto max-w-[1120px] overflow-hidden rounded-[28px] px-6 py-14 text-white shadow-[0_60px_120px_-40px_rgba(9,81,255,0.55)] md:rounded-[32px] md:px-14 md:py-20 lg:px-20 lg:py-24"
+            style={{
+              background:
+                "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
+            }}
+          >
+            {/* Top-center white halo — subtle spotlight the ghost sits in */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/3"
+              style={{
+                width: 560,
+                height: 560,
+                background:
+                  "radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 45%, transparent 75%)",
+                filter: "blur(8px)",
+              }}
+            />
+            {/* Faint hairline grid for texture */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-[0.1]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+                backgroundSize: "56px 56px",
+              }}
+            />
+
+            <div className="relative flex flex-col items-center text-center">
+              {/* Ghost logo */}
+              <Image
+                src="/logo.png"
+                alt=""
+                aria-hidden
+                width={96}
+                height={96}
+                className="h-[80px] w-[80px] object-contain md:h-[92px] md:w-[92px]"
+                style={{
+                  filter:
+                    "drop-shadow(0 18px 32px rgba(0,0,0,0.32)) drop-shadow(0 4px 10px rgba(0,0,0,0.22))",
+                }}
+                priority={false}
+              />
+
+              {/* Eyebrow */}
+              <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
+                Ready when you are
+              </p>
+
+              {/* Headline */}
+              <h2
+                className="text-balance mt-4 font-semibold text-white"
+                style={{
+                  fontSize: "clamp(36px, 5.2vw, 64px)",
+                  letterSpacing: "-0.04em",
+                  lineHeight: 1.04,
+                }}
               >
-                Talk to a human →
-              </a>
+                <span className="block">Stop stitching tools.</span>
+                <span className="block">Start shipping lists.</span>
+              </h2>
+
+              {/* Subtitle */}
+              <p className="mt-6 max-w-[620px] text-balance text-[15px] leading-[1.55] text-white/85 md:text-[17px]">
+                Pick a niche. Pick your volume. Launch. We ship
+                carrier-verified Owners Mobiles as a clean CSV - with a refund
+                plus 50% bonus on anything that doesn&apos;t text.
+              </p>
+
+              {/* CTAs */}
+              <div className="mt-9 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:gap-5 md:mt-10">
+                <a
+                  href="#pricing"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-[15px] font-semibold text-[#0951FF] shadow-[0_18px_36px_-14px_rgba(0,0,0,0.4)] transition-transform duration-200 hover:-translate-y-0.5 sm:w-auto"
+                >
+                  Start Scraping
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="mailto:hello@leadity.com"
+                  className="text-[14px] font-medium text-white/90 underline-offset-4 transition-colors hover:text-white hover:underline"
+                >
+                  Talk to founders →
+                </a>
+              </div>
+
+              {/* Trust row */}
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] font-medium text-white/75 md:mt-10 md:text-[12px]">
+                <span className="tabular-nums">240+ agencies</span>
+                <span aria-hidden className="h-3 w-px bg-white/30" />
+                <span className="tabular-nums">4.9 / 5 rating</span>
+                <span aria-hidden className="h-3 w-px bg-white/30" />
+                <span>Refund + 50% bonus guarantee</span>
+              </div>
             </div>
           </div>
         </Reveal>
