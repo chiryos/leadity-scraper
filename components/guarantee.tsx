@@ -50,7 +50,7 @@ export function Guarantee() {
               }}
             />
             <Image
-              src="/refund-seal.png"
+              src="/leadity-guarantee.png"
               alt="Leadity refund plus 50% bonus seal"
               width={260}
               height={260}
