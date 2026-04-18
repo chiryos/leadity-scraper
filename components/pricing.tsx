@@ -149,8 +149,18 @@ export function Pricing() {
 
         {/* ───── Mobile accordion (below lg) ─────
             Three compact stacked rows. Tapping one expands it with a blue
-            gradient and reveals features + CTA. The others collapse. */}
-        <div className="mt-10 flex flex-col gap-3 lg:hidden">
+            gradient and reveals features + CTA. The others collapse.
+            All motion uses a soft spring (low stiffness, high damping) for
+            a buttery, Apple-ish feel — layout, height, content fade all
+            share the same timing so it feels like one continuous motion. */}
+        <motion.div
+          className="mt-10 flex flex-col gap-3 lg:hidden"
+          // Group-wide layout transition — every sibling row that shifts
+          // position as one row expands glides with the same spring.
+          transition={{
+            layout: { type: "spring", stiffness: 140, damping: 26, mass: 1 },
+          }}
+        >
           {plans.map((plan) => {
             const isActive = activePlan === plan.name;
             const price = affiliateOn ? plan.affiliate : plan.standard;
@@ -158,7 +168,14 @@ export function Pricing() {
               <motion.div
                 key={plan.name}
                 layout
-                transition={{ layout: { duration: 0.38, ease: easeOut } }}
+                transition={{
+                  layout: {
+                    type: "spring",
+                    stiffness: 140,
+                    damping: 26,
+                    mass: 1,
+                  },
+                }}
                 role="button"
                 tabIndex={0}
                 aria-pressed={isActive}
@@ -170,48 +187,69 @@ export function Pricing() {
                   }
                 }}
                 className={cn(
-                  "relative cursor-pointer overflow-hidden rounded-2xl border shadow-[0_14px_30px_-18px_rgba(15,23,42,0.18)] outline-none transition-colors",
+                  "relative cursor-pointer overflow-hidden rounded-2xl border shadow-[0_14px_30px_-18px_rgba(15,23,42,0.18)] outline-none",
                   isActive
                     ? "border-transparent text-white"
                     : "border-[#D8DEE6] bg-white",
                 )}
-                style={
-                  isActive
-                    ? {
-                        background:
-                          "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
-                      }
-                    : undefined
-                }
+                style={{
+                  background: isActive
+                    ? "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)"
+                    : undefined,
+                  // Color transitions are handled by framer's color crossfade
+                  // via background inline style. Tailwind transition-colors
+                  // would fight the inline background, so we rely on the
+                  // surrounding layout animation to mask the swap.
+                  transition: "background 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+                }}
               >
                 <motion.div layout className="flex items-center gap-4 p-5">
                   {/* Radio dot */}
-                  <span
+                  <motion.span
+                    layout
                     className={cn(
-                      "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+                      "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2",
                       isActive
                         ? "border-white bg-white"
                         : "border-[#C8D1DD] bg-white",
                     )}
+                    style={{
+                      transition:
+                        "border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+                    }}
                   >
-                    {isActive ? (
-                      <span
-                        aria-hidden
-                        className="h-2.5 w-2.5 rounded-full bg-[#0951FF]"
-                      />
-                    ) : null}
-                  </span>
+                    <AnimatePresence initial={false}>
+                      {isActive ? (
+                        <motion.span
+                          key="dot"
+                          aria-hidden
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          exit={{ scale: 0, opacity: 0 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 420,
+                            damping: 28,
+                            mass: 0.6,
+                          }}
+                          className="h-2.5 w-2.5 rounded-full bg-[#0951FF]"
+                        />
+                      ) : null}
+                    </AnimatePresence>
+                  </motion.span>
+
                   <div className="min-w-0 flex-1">
+                    {/* PRIMARY: mobile count */}
                     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                       <span
                         className={cn(
-                          "text-[16px] font-semibold",
+                          "text-[17px] font-semibold tabular-nums",
                           isActive
                             ? "text-white"
                             : "text-[var(--color-text-primary)]",
                         )}
                       >
-                        {plan.name}
+                        {plan.mobiles.toLocaleString()} Owners Mobiles
                       </span>
                       {plan.popular ? (
                         <span
@@ -226,17 +264,19 @@ export function Pricing() {
                         </span>
                       ) : null}
                     </div>
+                    {/* SECONDARY: plan name */}
                     <div
                       className={cn(
-                        "mt-0.5 text-[12px]",
+                        "mt-0.5 text-[11px] font-medium uppercase tracking-[0.12em]",
                         isActive
-                          ? "text-white/80"
+                          ? "text-white/75"
                           : "text-[var(--color-text-muted)]",
                       )}
                     >
-                      {plan.mobiles.toLocaleString()} Owners Mobiles
+                      {plan.name} plan
                     </div>
                   </div>
+
                   <div className="text-right">
                     <div
                       className={cn(
@@ -265,13 +305,29 @@ export function Pricing() {
                   {isActive ? (
                     <motion.div
                       key="expand"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.32, ease: easeOut }}
+                      initial={{ height: 0 }}
+                      animate={{ height: "auto" }}
+                      exit={{ height: 0 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 140,
+                        damping: 26,
+                        mass: 1,
+                      }}
                       style={{ overflow: "hidden" }}
                     >
-                      <div className="px-5 pb-5">
+                      {/* Inner fade slightly delayed + longer so the content
+                          materialises gracefully INSIDE the expanding card. */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 0 }}
+                        transition={{
+                          opacity: { duration: 0.45, ease: easeOut, delay: 0.08 },
+                          y: { duration: 0.5, ease: easeOut, delay: 0.08 },
+                        }}
+                        className="px-5 pb-5"
+                      >
                         <div className="mb-4 h-px w-full bg-white/20" />
                         <p className="text-[13px] leading-[1.55] text-white/85">
                           {plan.description}
@@ -308,14 +364,14 @@ export function Pricing() {
                         <p className="mt-4 text-[11px] italic text-white/70">
                           {plan.compareNote}
                         </p>
-                      </div>
+                      </motion.div>
                     </motion.div>
                   ) : null}
                 </AnimatePresence>
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* ───── Desktop grid (lg+) ───── */}
         <div className="mt-12 hidden gap-6 lg:grid lg:grid-cols-3 lg:items-stretch">
