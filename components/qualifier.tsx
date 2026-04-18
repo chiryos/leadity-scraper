@@ -16,18 +16,44 @@ import { cn } from "@/lib/utils";
  * to signal it's the preferred side.
  */
 
-const notFor = [
-  "don't run outbound or cold outreach",
-  "only need a few hundred leads a month",
-  "are fine with VOIPs and dead numbers in your list",
-  "prefer juggling three separate scrapers",
+type Item = { lead: string; body: string };
+
+const notFor: Item[] = [
+  {
+    lead: "Don't run outbound.",
+    body: "No cold SMS, no cold calls, no paid traffic feeding a dialer.",
+  },
+  {
+    lead: "Only need crumbs.",
+    body: "A few hundred leads a month covers your whole pipeline.",
+  },
+  {
+    lead: "Don't mind VOIPs.",
+    body: "You're okay paying for numbers that can't actually be texted.",
+  },
+  {
+    lead: "Prefer many tools.",
+    body: "You'd rather juggle three scrapers than consolidate to one.",
+  },
 ];
 
-const isFor = [
-  "run cold SMS or cold-call outbound",
-  "want mobile-only, carrier-verified leads",
-  "scrape multiple niches every month",
-  "want one vendor, one price, one refund policy",
+const isFor: Item[] = [
+  {
+    lead: "Run real outbound.",
+    body: "Cold SMS or cold-call every week, not once a quarter.",
+  },
+  {
+    lead: "Need real mobiles.",
+    body: "Your stack can't afford to waste sends on VOIPs and landlines.",
+  },
+  {
+    lead: "Scrape often.",
+    body: "New niches every month, not a single one-off batch a year.",
+  },
+  {
+    lead: "Want one vendor.",
+    body: "One product. One price. One refund policy. No tool-stacking.",
+  },
 ];
 
 export function Qualifier() {
@@ -78,19 +104,26 @@ export function Qualifier() {
                 {notFor.map((it, i) => (
                   <StaggerItem
                     as="li"
-                    key={it}
+                    key={it.lead}
                     className={cn(
-                      "flex items-start gap-3.5 py-4 text-[15px] leading-[1.55] text-[var(--color-text-secondary)] md:text-[16px]",
+                      "flex items-start gap-4 py-5",
                       i > 0 && "border-t border-[var(--color-border)]",
                     )}
                   >
                     <span
                       aria-hidden
-                      className="mt-[3px] inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#FFECEE] text-[#C4314B]"
+                      className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FFECEE] text-[#C4314B]"
                     >
-                      <Minus className="h-3 w-3" strokeWidth={3.5} />
+                      <Minus className="h-3.5 w-3.5" strokeWidth={3.5} />
                     </span>
-                    <span>{it}.</span>
+                    <div className="min-w-0 flex-1">
+                      <div className="font-semibold tracking-[-0.01em] text-[var(--color-text-primary)] text-[17px] md:text-[19px]">
+                        {it.lead}
+                      </div>
+                      <div className="mt-1 text-[14px] leading-[1.55] text-[var(--color-text-secondary)] md:text-[15px]">
+                        {it.body}
+                      </div>
+                    </div>
                   </StaggerItem>
                 ))}
               </StaggerGroup>
@@ -127,23 +160,30 @@ export function Qualifier() {
                   {isFor.map((it, i) => (
                     <StaggerItem
                       as="li"
-                      key={it}
+                      key={it.lead}
                       className={cn(
-                        "flex items-start gap-3.5 py-4 text-[15px] leading-[1.55] text-[var(--color-text-primary)] md:text-[16px]",
+                        "flex items-start gap-4 py-5",
                         i > 0 && "border-t border-[var(--color-border)]",
                       )}
                     >
                       <span
                         aria-hidden
-                        className="mt-[3px] inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-white"
+                        className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white"
                         style={{
                           background:
                             "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
                         }}
                       >
-                        <Check className="h-3 w-3" strokeWidth={3.5} />
+                        <Check className="h-3.5 w-3.5" strokeWidth={3.5} />
                       </span>
-                      <span>{it}.</span>
+                      <div className="min-w-0 flex-1">
+                        <div className="font-semibold tracking-[-0.01em] text-[var(--color-text-primary)] text-[17px] md:text-[19px]">
+                          {it.lead}
+                        </div>
+                        <div className="mt-1 text-[14px] leading-[1.55] text-[var(--color-text-secondary)] md:text-[15px]">
+                          {it.body}
+                        </div>
+                      </div>
                     </StaggerItem>
                   ))}
                 </StaggerGroup>
