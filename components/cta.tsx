@@ -22,7 +22,7 @@ export function CTA() {
               </span>
             </h2>
             <p className="mt-6 max-w-[640px] text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
-              Your next 2,000 verified mobiles are one click away — with a refund
+              Your next 2,000 verified Owners Mobiles are one click away — with a refund
               policy that means you&apos;re never paying for bad data.
             </p>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-4">

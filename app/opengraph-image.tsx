@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Leadity Scraper — Scrape Google Maps. Get real mobiles.";
+export const alt = "Leadity Scraper — Scrape Google Maps. Get Owners Mobiles.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -52,7 +52,7 @@ export default async function OG() {
               maxWidth: 980,
             }}
           >
-            Scrape Google Maps. Get real mobiles.
+            Scrape Google Maps. Get Owners Mobiles.
           </div>
         </div>
 

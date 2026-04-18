@@ -193,7 +193,7 @@ export function Showcase() {
             <p className="text-eyebrow">A look inside</p>
             <h2 className="text-h2 text-balance mt-4 text-[var(--color-text-primary)]">
               <span className="block">From a single niche</span>
-              <span className="block text-brand-gradient">to verified mobiles.</span>
+              <span className="block text-brand-gradient">to verified Owners Mobiles.</span>
             </h2>
             <p className="mt-5 max-w-[640px] mx-auto text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
               Five screens tell the whole story. Scroll through each one to see

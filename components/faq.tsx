@@ -17,7 +17,7 @@ const items = [
   },
   {
     q: "How fast will I get my leads?",
-    a: "Most orders under 5k mobiles are delivered the same day. 10k orders typically complete within 24 hours.",
+    a: "Most orders under 5k Owners Mobiles are delivered the same day. 10k Owners Mobiles orders typically complete within 24 hours.",
   },
   {
     q: "What format are the leads delivered in?",
@@ -29,7 +29,7 @@ const items = [
   },
   {
     q: "How does the refund + 50% bonus work?",
-    a: "If any lead is VOIP, a landline, or outside your niche, we automatically send you a replacement for the bad leads plus 50% of that amount as additional clean mobiles.",
+    a: "If any lead is VOIP, a landline, or outside your niche, we automatically send you a replacement for the bad leads plus 50% of that amount as additional clean Owners Mobiles.",
   },
   {
     q: "Do I need to bring my own tools?",

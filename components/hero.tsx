@@ -10,9 +10,9 @@ const trustInitials = ["SK", "MR", "AJ", "LC", "TD"];
 
 const stats = [
   { value: "95%", label: "Mobile · 5% Other", accent: true },
-  { value: "32,741", label: "ZIPs covered" },
-  { value: "1,255+", label: "Business niches" },
-  { value: "4.65M+", label: "Mobiles to scrape" },
+  { value: "32,741", label: "ZIPs Covered" },
+  { value: "1,255+", label: "Business Niches" },
+  { value: "4.65M+", label: "Owners Mobiles" },
 ];
 
 export function Hero() {
@@ -30,18 +30,17 @@ export function Hero() {
         }}
       />
 
-      {/* Cinematic bottom glow — same blue palette as the top header, softer intensity */}
+      {/* Cinematic bottom glow — stronger and wider so stat cards sit on a light strip */}
       <div
         aria-hidden
         className="glow-breathe pointer-events-none absolute inset-x-0 -z-10"
         style={{
-          bottom: "-160px",
-          height: "560px",
+          bottom: "-140px",
+          height: "520px",
           background:
-            "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.38) 0%, rgba(27, 134, 255, 0.24) 22%, rgba(27, 134, 255, 0.12) 45%, rgba(27, 134, 255, 0.04) 65%, transparent 82%)",
+            "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.55) 0%, rgba(27, 134, 255, 0.35) 22%, rgba(27, 134, 255, 0.16) 45%, rgba(27, 134, 255, 0.05) 65%, transparent 82%)",
         }}
       />
-      {/* Softer wide halo for extra depth */}
       <div
         aria-hidden
         className="glow-breathe-slow pointer-events-none absolute inset-x-0 -z-10"
@@ -49,17 +48,17 @@ export function Hero() {
           bottom: "-240px",
           height: "680px",
           background:
-            "radial-gradient(85% 100% at 50% 100%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.08) 40%, transparent 78%)",
+            "radial-gradient(85% 100% at 50% 100%, rgba(34, 201, 245, 0.22) 0%, rgba(27, 134, 255, 0.12) 40%, transparent 78%)",
         }}
       />
 
-      {/* Content vertically centered */}
-      <div className="container-page relative flex flex-1 flex-col items-center justify-center pt-12 pb-10 md:pt-16 md:pb-12">
+      {/* Content vertically centered — mobile padding tightened */}
+      <div className="container-page relative flex flex-1 flex-col items-center justify-center pt-8 pb-6 md:pt-16 md:pb-12">
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 4 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease }}
-          className="text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--color-text-muted)]"
+          className="text-center text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--color-text-muted)] md:text-[11px]"
         >
           Reach Decision Makers Directly
         </motion.p>
@@ -68,9 +67,9 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, y: 14 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease }}
-          className="text-balance mt-6 text-center font-semibold text-[var(--color-text-primary)]"
+          className="text-balance mt-4 text-center font-semibold text-[var(--color-text-primary)] md:mt-6"
           style={{
-            fontSize: "clamp(48px, 8vw, 104px)",
+            fontSize: "clamp(38px, 8vw, 104px)",
             letterSpacing: "-0.045em",
             lineHeight: 0.98,
           }}
@@ -83,9 +82,9 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, y: 14 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease }}
-          className="mt-7 max-w-[620px] text-balance text-center text-[18px] leading-[1.5] text-[var(--color-text-secondary)] md:text-[21px] md:leading-[1.45]"
+          className="mt-5 max-w-[620px] text-balance text-center text-[15px] leading-[1.5] text-[var(--color-text-secondary)] md:mt-7 md:text-[21px] md:leading-[1.45]"
         >
-          Business owner mobile numbers, pulled from Google Maps in your exact
+          Business Owners Mobiles, pulled from Google Maps in your exact
           niche — carrier-verified and exported as a clean CSV ready for SMS
           marketing.
         </motion.p>
@@ -94,7 +93,7 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, y: 14 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease }}
-          className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-3"
+          className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:gap-3 md:mt-10"
         >
           <Button asChild size="lg" variant="gradient">
             <a href="#pricing">
@@ -111,7 +110,7 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0 }}
           animate={reduce ? undefined : { opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.45, ease }}
-          className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2"
+          className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 md:mt-8"
         >
           <ul className="flex -space-x-2" aria-hidden>
             {trustInitials.map((n, i) => (
@@ -124,7 +123,7 @@ export function Hero() {
               </li>
             ))}
           </ul>
-          <span className="text-[13px] text-[var(--color-text-secondary)]">
+          <span className="text-[12px] text-[var(--color-text-secondary)] md:text-[13px]">
             Trusted by{" "}
             <strong className="font-semibold text-[var(--color-text-primary)]">
               500+
@@ -138,75 +137,90 @@ export function Hero() {
                 <Star key={i} className="h-3.5 w-3.5 fill-[#F6B700] text-[#F6B700]" />
               ))}
             </div>
-            <span className="text-[13px] font-medium text-[var(--color-text-primary)]">
+            <span className="text-[12px] font-medium text-[var(--color-text-primary)] md:text-[13px]">
               4.9/5
             </span>
           </div>
         </motion.div>
       </div>
 
-      {/* Premium stat strip — anchored to bottom of viewport */}
+      {/* Premium stat strip — floats on cinematic blue glow, each card has its own halo */}
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.55, ease }}
-        className="container-page relative pb-8 md:pb-10"
+        className="container-page relative pb-6 md:pb-10"
       >
-        <div
-          className="mx-auto grid max-w-[1180px] grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4"
-        >
+        <div className="mx-auto grid max-w-[1180px] grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
           {stats.map((s) => (
             <div
               key={s.label}
-              className="relative rounded-2xl border border-white/80 backdrop-blur-md"
+              className="group relative rounded-2xl"
               style={{
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(226,242,255,0.78) 100%)",
+                // Heavy multi-layer blue halo per card, matching the reference
                 boxShadow: [
-                  "0 32px 60px -22px rgba(27,134,255,0.38)",
-                  "0 16px 30px -14px rgba(34,201,245,0.30)",
-                  "inset 0 1px 0 rgba(255,255,255,0.9)",
-                  "inset 0 -20px 28px -22px rgba(34,201,245,0.22)",
+                  "0 0 0 1px rgba(34,201,245,0.35)",
+                  "0 0 32px 0 rgba(34,201,245,0.55)",
+                  "0 0 70px 0 rgba(27,134,255,0.45)",
+                  "0 30px 60px -20px rgba(27,134,255,0.55)",
+                  "0 18px 36px -16px rgba(34,201,245,0.55)",
                 ].join(", "),
               }}
             >
-              {/* inner bottom glow tying each card to the ambient light */}
               <div
-                aria-hidden
-                className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 rounded-b-2xl"
+                className="relative overflow-hidden rounded-2xl border border-white/70 backdrop-blur-md"
                 style={{
                   background:
-                    "linear-gradient(to top, rgba(34,201,245,0.15) 0%, rgba(34,201,245,0.03) 55%, transparent 100%)",
+                    "linear-gradient(180deg, rgba(255,255,255,0.94) 0%, rgba(220,238,255,0.82) 100%)",
                 }}
-              />
+              >
+                {/* Top highlight (glossy edge) */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 top-0 h-px"
+                  style={{
+                    background:
+                      "linear-gradient(to right, transparent, rgba(255,255,255,0.95), transparent)",
+                  }}
+                />
+                {/* Inner bottom glow */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 rounded-b-2xl"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(34,201,245,0.28) 0%, rgba(34,201,245,0.08) 50%, transparent 100%)",
+                  }}
+                />
 
-              <div className="relative z-10 px-5 py-5 sm:px-6 sm:py-6">
-                <div className="flex items-baseline justify-between gap-2">
-                  <span
-                    className={
-                      s.accent
-                        ? "font-semibold tabular-nums text-brand-gradient"
-                        : "font-semibold tabular-nums text-[var(--color-text-primary)]"
-                    }
-                    style={{
-                      fontSize: "clamp(32px, 4.6vw, 44px)",
-                      letterSpacing: "-0.035em",
-                      lineHeight: 1,
-                    }}
-                  >
-                    {s.value}
-                  </span>
-                  {s.accent ? (
+                <div className="relative z-10 px-4 py-4 sm:px-6 sm:py-6">
+                  <div className="flex items-baseline justify-between gap-2">
                     <span
-                      aria-hidden
-                      className="inline-block h-2 w-2 rounded-full bg-brand-gradient"
-                      style={{ boxShadow: "0 0 12px rgba(34,201,245,0.6)" }}
-                    />
-                  ) : null}
+                      className={
+                        s.accent
+                          ? "font-semibold tabular-nums text-brand-gradient"
+                          : "font-semibold tabular-nums text-[var(--color-text-primary)]"
+                      }
+                      style={{
+                        fontSize: "clamp(26px, 4.6vw, 44px)",
+                        letterSpacing: "-0.035em",
+                        lineHeight: 1,
+                      }}
+                    >
+                      {s.value}
+                    </span>
+                    {s.accent ? (
+                      <span
+                        aria-hidden
+                        className="inline-block h-2 w-2 rounded-full bg-brand-gradient"
+                        style={{ boxShadow: "0 0 12px rgba(34,201,245,0.8)" }}
+                      />
+                    ) : null}
+                  </div>
+                  <span className="mt-2 block text-[10px] font-medium uppercase tracking-[0.1em] text-[var(--color-text-muted)] sm:text-[12px]">
+                    {s.label}
+                  </span>
                 </div>
-                <span className="mt-2 block text-[12px] font-medium uppercase tracking-[0.1em] text-[var(--color-text-muted)]">
-                  {s.label}
-                </span>
               </div>
             </div>
           ))}

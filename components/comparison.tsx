@@ -49,7 +49,7 @@ function TierPill({ value }: { value: string }) {
         {value}
       </span>
       <span className="mt-1 text-[11px] font-medium text-[var(--color-text-muted)]">
-        Mobile Leads
+        Owners Mobiles
       </span>
     </div>
   );
@@ -75,7 +75,7 @@ export function Comparison() {
               <span className="block text-brand-gradient">three bills.</span>
             </h2>
             <p className="mt-5 max-w-[640px] mx-auto text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
-              Same verified mobiles. Two experiences. Only one of them feels
+              Same verified Owners Mobiles. Two experiences. Only one of them feels
               good.
             </p>
           </div>
@@ -153,6 +153,10 @@ export function Comparison() {
                         }}
                       >
                         {t.leadity}
+                      </span>
+                      {/* Inline tier label — shown on mobile where the center pills are hidden */}
+                      <span className="mt-2 block text-[12px] font-medium text-white/75 lg:hidden">
+                        {t.label} Owners Mobiles
                       </span>
                     </div>
                   ))}
@@ -260,6 +264,10 @@ export function Comparison() {
                         }}
                       >
                         {t.competitor}
+                      </span>
+                      {/* Inline tier label on mobile */}
+                      <span className="mt-2 block text-[12px] font-medium text-white/60 lg:hidden">
+                        {t.label} Owners Mobiles
                       </span>
                     </div>
                   ))}

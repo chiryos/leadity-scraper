@@ -69,8 +69,8 @@ export function Guarantee() {
           <p className="mt-6 text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
             Every mobile number we deliver is live-verified before it hits your
             inbox. If any number turns out to be VOIP, a landline, or off-niche,
-            we replace it free — and throw in 50% more clean mobiles on top. No
-            support tickets. No chasing us down. Buy 2,000 mobiles, 150 come
+            we replace it free — and throw in 50% more clean Owners Mobiles on top. No
+            support tickets. No chasing us down. Buy 2,000 Owners Mobiles, 150 come
             back bad? You get 150 replacements plus 75 bonus numbers. Simple as
             that.
           </p>

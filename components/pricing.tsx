@@ -81,7 +81,7 @@ export function Pricing() {
               <span className="block text-brand-gradient">scrape volume.</span>
             </h2>
             <p className="mt-5 max-w-[640px] mx-auto text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
-              Every plan ships with verified mobiles, refund + 50% bonus on bad
+              Every plan ships with verified Owners Mobiles, refund + 50% bonus on bad
               leads, and a real human in chat. No tool-stacking.
             </p>
           </div>
@@ -179,7 +179,7 @@ export function Pricing() {
                         popular={plan.popular}
                       />
                       <span className="pb-1 text-[14px] text-white/70 tabular-nums">
-                        / {plan.mobiles.toLocaleString()} mobiles
+                        / {plan.mobiles.toLocaleString()} Owners Mobiles
                       </span>
                     </div>
 
@@ -260,7 +260,7 @@ export function Pricing() {
                         popular={plan.popular}
                       />
                       <span className="pb-1 text-[14px] text-[var(--color-text-muted)] tabular-nums">
-                        / {plan.mobiles.toLocaleString()} mobiles
+                        / {plan.mobiles.toLocaleString()} Owners Mobiles
                       </span>
                     </div>
 

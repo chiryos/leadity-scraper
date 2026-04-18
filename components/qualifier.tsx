@@ -12,7 +12,7 @@ const notFor = [
 ];
 
 const isFor = [
-  "You need real mobiles, not landlines",
+  "You need real Owners Mobiles, not landlines",
   "Your SMS or cold-call team can't keep up",
   "Outscraper's quality is too low",
   "You scrape multiple niches per month",
