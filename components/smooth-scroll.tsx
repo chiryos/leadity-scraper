@@ -49,6 +49,25 @@ export function SmoothScroll() {
     }
 
     // Intercept anchor-link clicks so nav jumps glide smoothly (Lenis on desktop, native on mobile)
+    const NAV_HEIGHT = 72;
+    const BREATHING_ROOM = 8; // small gap between nav and content
+
+    const getSectionOffset = (el: HTMLElement) => {
+      // Each section has internal top padding (section-py: 96–160px). Without
+      // accounting for it, we land at the section's box top — which means the
+      // user sees 96–160px of empty padding before the heading. We want the
+      // actual CONTENT to land just below the sticky nav, so we shift the scroll
+      // target DOWN by the section's paddingTop.
+      if (el === document.body) return 0;
+      const style = getComputedStyle(el);
+      const padTop = parseFloat(style.paddingTop) || 0;
+      // Lenis-style offset: final scroll = element.top + offset
+      // We want content (element.top + padTop) to sit at viewport y = NAV_HEIGHT + BREATHING_ROOM
+      // → scroll position = element.top + padTop - (NAV_HEIGHT + BREATHING_ROOM)
+      // → offset = padTop - NAV_HEIGHT - BREATHING_ROOM
+      return padTop - NAV_HEIGHT - BREATHING_ROOM;
+    };
+
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
@@ -64,14 +83,15 @@ export function SmoothScroll() {
       if (!el) return;
 
       e.preventDefault();
+      const offset = getSectionOffset(el);
       if (lenis) {
-        lenis.scrollTo(el, { offset: -72, duration: 1.3 });
+        lenis.scrollTo(el, { offset, duration: 1.3 });
       } else {
-        // Mobile: native smooth-scroll, accounting for the 72px sticky nav
+        // Mobile: native smooth-scroll
         const top =
           el === document.body
             ? 0
-            : el.getBoundingClientRect().top + window.scrollY - 72;
+            : el.getBoundingClientRect().top + window.scrollY + offset;
         window.scrollTo({ top, behavior: "smooth" });
       }
       if (typeof history !== "undefined") {
