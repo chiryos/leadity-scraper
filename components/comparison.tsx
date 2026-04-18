@@ -18,7 +18,7 @@ const features: Feature[] = [
   },
   {
     ours: "4× higher quality filter built in",
-    theirs: "No quality filter — pay for VOIPs",
+    theirs: "No quality filter - pay for VOIPs",
   },
   {
     ours: "2× faster scraping, tunable workers",
@@ -134,7 +134,7 @@ export function Comparison() {
 
                 <div className="mt-8 h-px w-full bg-white/20" />
 
-                {/* Prices — uses same pricePadY as the pill overlay for perfect alignment */}
+                {/* Prices - uses same pricePadY as the pill overlay for perfect alignment */}
                 <div className="flex flex-col">
                   {tiers.map((t, i) => (
                     <div
@@ -154,7 +154,7 @@ export function Comparison() {
                       >
                         {t.leadity}
                       </span>
-                      {/* Inline tier label — shown on mobile where the center pills are hidden */}
+                      {/* Inline tier label - shown on mobile where the center pills are hidden */}
                       <span className="mt-2 block text-[12px] font-medium text-white/75 lg:hidden">
                         {t.label} Owners Mobiles
                       </span>
@@ -310,7 +310,7 @@ export function Comparison() {
               aria-hidden
               className="pointer-events-none absolute inset-x-0 top-[110px] z-10 hidden flex-col items-center px-8 lg:flex"
             >
-              {/* Title placeholder — must match h3 height + mt-8 + divider h-px */}
+              {/* Title placeholder - must match h3 height + mt-8 + divider h-px */}
               <div
                 style={{ height: "clamp(40px, 4.4vw, 56px)" }}
                 aria-hidden
@@ -353,7 +353,7 @@ export function Comparison() {
         <Reveal delay={0.2}>
           <p className="mt-10 max-w-[720px] mx-auto text-center text-[13px] text-[var(--color-text-muted)]">
             Pricing snapshot captured from public Outscraper + Clearoutphone
-            rates. Your actual mileage may vary — ours won&apos;t.
+            rates. Your actual mileage may vary - ours won&apos;t.
           </p>
         </Reveal>
       </div>

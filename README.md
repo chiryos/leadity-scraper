@@ -1,6 +1,6 @@
 # Leadity Scraper
 
-Single-page marketing site for **Leadity Scraper** — a SaaS that pulls high-intent mobile phone leads from Google Maps for SMS marketing teams.
+Single-page marketing site for **Leadity Scraper** - a SaaS that pulls high-intent mobile phone leads from Google Maps for SMS marketing teams.
 
 Tagline: _"Reach Decision-Makers Directly."_
 
@@ -15,10 +15,10 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Other scripts:
 
-- `pnpm build` — production build
-- `pnpm start` — serve production build
-- `pnpm lint` — Next.js lint
-- `pnpm typecheck` — strict TypeScript check
+- `pnpm build` - production build
+- `pnpm start` - serve production build
+- `pnpm lint` - Next.js lint
+- `pnpm typecheck` - strict TypeScript check
 
 ## Tech stack
 
@@ -31,13 +31,13 @@ Other scripts:
 - **Forms:** `react-hook-form` + `zod` (installed; the live form lives behind future order checkout)
 - **SEO:** Next metadata API, OG image at `/opengraph-image`, JSON-LD `Product` schema in `app/layout.tsx`
 
-File structure mirrors the spec exactly — every section lives in its own component under `components/`, kept under 250 lines.
+File structure mirrors the spec exactly - every section lives in its own component under `components/`, kept under 250 lines.
 
 ## Design tokens
 
 All colors, spacing, type, and breakpoints are exposed as CSS variables under `@theme` in `app/globals.css`. Tweak there, not in components.
 
-The mint accent (`--brand-mint`) is intentionally rare — used only on the hero "New" badge, the popular-pricing tier, the guarantee seal, the verified pills in the hero table, and the comparison-table column highlight.
+The mint accent (`--brand-mint`) is intentionally rare - used only on the hero "New" badge, the popular-pricing tier, the guarantee seal, the verified pills in the hero table, and the comparison-table column highlight.
 
 ## What I'd build next
 

@@ -22,9 +22,9 @@ const instrumentSerif = Instrument_Serif({
 
 const siteUrl = "https://leadity.com";
 const title =
-  "Leadity Scraper — Scrape Google Maps. Get Owners Mobiles.";
+  "Leadity Scraper - Scrape Google Maps. Get Owners Mobiles.";
 const description =
-  "Leadity Scraper pulls Business Owners Mobiles from Google Maps in your exact niche — carrier-verified, niche-precise, and exported as a clean CSV ready for SMS marketing. Trusted by 500+ creators and agencies.";
+  "Leadity Scraper pulls Business Owners Mobiles from Google Maps in your exact niche - carrier-verified, niche-precise, and exported as a clean CSV ready for SMS marketing. Trusted by 500+ creators and agencies.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

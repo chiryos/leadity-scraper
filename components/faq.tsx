@@ -25,7 +25,7 @@ const items = [
   },
   {
     q: "Can I pick a specific niche?",
-    a: "Yes. Describe the niche in plain English — no SIC codes, no picklists. Examples: 'chiropractors in Miami', 'solar installers in Texas with 10+ employees'.",
+    a: "Yes. Describe the niche in plain English - no SIC codes, no picklists. Examples: 'chiropractors in Miami', 'solar installers in Texas with 10+ employees'.",
   },
   {
     q: "How does the refund + 50% bonus work?",
@@ -37,7 +37,7 @@ const items = [
   },
   {
     q: "Is there an affiliate / community price?",
-    a: "Yes — members of Aditya's community get a standing discount. Toggle the switch on the pricing section to see it.",
+    a: "Yes - members of Aditya's community get a standing discount. Toggle the switch on the pricing section to see it.",
   },
 ];
 

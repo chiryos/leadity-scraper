@@ -53,7 +53,7 @@ export function Footer() {
         }}
       />
 
-      {/* Main column content — no watermark here so it can't overlap */}
+      {/* Main column content - no watermark here so it can't overlap */}
       <div className="relative container-page pt-20 pb-16">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -112,7 +112,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom strip — copyright + status line, with the giant "Leadity" watermark fully visible behind */}
+      {/* Bottom strip - copyright + status line, with the giant "Leadity" watermark fully visible behind */}
       <div className="relative">
         <div className="relative container-page">
           <div className="flex flex-col items-start justify-between gap-3 border-t border-white/15 pt-6 pb-5 text-[12px] text-white/80 md:flex-row md:items-center">
@@ -124,7 +124,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Full watermark block — sits below the line, fully visible */}
+        {/* Full watermark block - sits below the line, fully visible */}
         <div aria-hidden className="pointer-events-none flex select-none justify-center overflow-hidden px-4 pb-4">
           <span
             className="block whitespace-nowrap font-semibold text-white/[0.1]"

@@ -126,7 +126,7 @@ export function Nav() {
         </button>
       </nav>
 
-      {/* Mobile drawer island — smooth slide-down, clean white, non-fullscreen */}
+      {/* Mobile drawer island - smooth slide-down, clean white, non-fullscreen */}
       <AnimatePresence>
         {open ? (
           <>

@@ -28,7 +28,7 @@ export function Hero() {
         }}
       />
 
-      {/* Cinematic bottom glow — stronger and wider so stat cards sit on a light strip */}
+      {/* Cinematic bottom glow - stronger so the 3 stats sit on a punchy light strip */}
       <div
         aria-hidden
         className="glow-breathe pointer-events-none absolute inset-x-0 -z-10"
@@ -36,7 +36,7 @@ export function Hero() {
           bottom: "-140px",
           height: "520px",
           background:
-            "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.55) 0%, rgba(27, 134, 255, 0.35) 22%, rgba(27, 134, 255, 0.16) 45%, rgba(27, 134, 255, 0.05) 65%, transparent 82%)",
+            "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.75) 0%, rgba(27, 134, 255, 0.5) 22%, rgba(27, 134, 255, 0.22) 45%, rgba(27, 134, 255, 0.08) 65%, transparent 82%)",
         }}
       />
       <div
@@ -46,11 +46,11 @@ export function Hero() {
           bottom: "-240px",
           height: "680px",
           background:
-            "radial-gradient(85% 100% at 50% 100%, rgba(34, 201, 245, 0.22) 0%, rgba(27, 134, 255, 0.12) 40%, transparent 78%)",
+            "radial-gradient(85% 100% at 50% 100%, rgba(34, 201, 245, 0.32) 0%, rgba(27, 134, 255, 0.18) 40%, transparent 78%)",
         }}
       />
 
-      {/* Content vertically centered — mobile padding tightened */}
+      {/* Content vertically centered - mobile padding tightened */}
       <div className="container-page relative flex flex-1 flex-col items-center justify-center pt-8 pb-6 md:pt-16 md:pb-12">
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 4 }}
@@ -67,7 +67,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.1, ease }}
           className="text-balance mt-4 text-center font-semibold text-[var(--color-text-primary)] md:mt-6"
           style={{
-            fontSize: "clamp(38px, 8vw, 104px)",
+            fontSize: "clamp(36px, 6vw, 80px)",
             letterSpacing: "-0.045em",
             lineHeight: 0.98,
           }}
@@ -80,11 +80,10 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, y: 14 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease }}
-          className="mt-5 max-w-[620px] text-balance text-center text-[15px] leading-[1.5] text-[var(--color-text-secondary)] md:mt-7 md:text-[21px] md:leading-[1.45]"
+          className="mt-5 max-w-[760px] text-balance text-center text-[13px] leading-[1.55] text-[var(--color-text-secondary)] md:mt-6 md:text-[16px] md:leading-[1.5]"
         >
-          Business Owners Mobiles, pulled from Google Maps in your exact
-          niche — carrier-verified and exported as a clean CSV ready for SMS
-          marketing.
+          Business Owners Mobiles, pulled from Google Maps in your exact niche
+          - carrier-verified and exported as a clean CSV for SMS marketing.
         </motion.p>
 
         <motion.div
@@ -131,14 +130,14 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Inline stat row — bare numbers with hairline dividers, sitting on the section's ambient glow */}
+      {/* Inline stat row - bare numbers with hairline dividers, sitting on the section's ambient glow */}
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.55, ease }}
         className="container-page relative pb-6 md:pb-10"
       >
-        <div className="mx-auto flex max-w-[900px] flex-wrap items-center justify-center divide-x divide-[var(--color-border)] gap-y-4">
+        <div className="mx-auto flex max-w-[900px] flex-wrap items-center justify-center divide-x divide-[rgba(138,138,138,0.55)] gap-y-4">
           {stats.map((s) => (
             <div
               key={s.label}

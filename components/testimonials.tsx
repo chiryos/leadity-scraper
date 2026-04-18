@@ -44,14 +44,14 @@ const testimonials: Testimonial[] = [
   {
     src: "/testimonials/t5.jpg",
     alt: "Whop notification of new payment 300 dollars",
-    pull: "Closed G — $300 depo, 3k.",
+    pull: "Closed G - $300 depo, 3k.",
     width: 1280,
     height: 905,
   },
   {
     src: "/testimonials/t6.jpg",
     alt: "Customer DM went from no booked meetings to 5 tomorrow",
-    pull: "From 0 to 5 booked meetings — only 600 texts.",
+    pull: "From 0 to 5 booked meetings - only 600 texts.",
     width: 1280,
     height: 1280,
   },
@@ -162,7 +162,7 @@ export function Testimonials() {
             </h2>
             <p className="mt-5 max-w-[640px] mx-auto text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
               Every card below is a real screenshot from a real customer. Hover
-              to pause — tap any card to read the full conversation.
+              to pause - tap any card to read the full conversation.
             </p>
           </div>
         </Reveal>
@@ -178,7 +178,7 @@ export function Testimonials() {
               pausedRef.current = false;
             }}
           >
-            {/* Spotlight glow behind the focused card — sized to the carousel, not the full section */}
+            {/* Spotlight glow behind the focused card - sized to the carousel, not the full section */}
             <div
               aria-hidden
               className="glow-breathe pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2"

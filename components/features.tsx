@@ -65,7 +65,7 @@ const features: Feature[] = [
     badge: "Smart Filter",
     tone: "mint",
     title: "Niche-precise scraping",
-    body: "1,255+ business categories, full-US coverage by state or ZIP. Scrape one niche or a dozen — clean results either way.",
+    body: "1,255+ business categories, full-US coverage by state or ZIP. Scrape one niche or a dozen - clean results either way.",
     icon: Filter,
   },
   {

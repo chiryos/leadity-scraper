@@ -31,7 +31,7 @@ const shots: Shot[] = [
     label: "Choose",
     title: "Pick your niche.",
     body:
-      "1,255+ business categories, already organised into clean sectors. Start with Roofing, Dentist, or any of the other 1,254. Plain English — no SIC codes, no picklists.",
+      "1,255+ business categories, already organised into clean sectors. Start with Roofing, Dentist, or any of the other 1,254. Plain English - no SIC codes, no picklists.",
     src: "/product/01-categories.png",
     alt: "Category picker with Roofing Contractor selected and 16 sector groups",
     width: 1600,
@@ -43,7 +43,7 @@ const shots: Shot[] = [
     label: "Target",
     title: "Choose where to scrape.",
     body:
-      "By state, by ZIP, or the full US — 32,741 ZIPs included. Dial in the exact regions your team can actually service, and leave the rest on the shelf.",
+      "By state, by ZIP, or the full US - 32,741 ZIPs included. Dial in the exact regions your team can actually service, and leave the rest on the shelf.",
     src: "/product/02-location.png",
     alt: "Location picker showing By State, By ZIP Codes, and Full US Coverage options",
     width: 1600,
@@ -55,7 +55,7 @@ const shots: Shot[] = [
     label: "Launch",
     title: "Launch at your pace.",
     body:
-      "Careful, balanced, or aggressive workers. Pick the throughput that matches your rate limits and deadline — we handle the retries, the backoff, and the clean-up.",
+      "Careful, balanced, or aggressive workers. Pick the throughput that matches your rate limits and deadline - we handle the retries, the backoff, and the clean-up.",
     src: "/product/03-launch.png",
     alt: "Launch screen with Careful, Balanced, and Aggressive worker options",
     width: 1600,
@@ -67,7 +67,7 @@ const shots: Shot[] = [
     label: "Track",
     title: "Watch your pipeline fill.",
     body:
-      "Total leads, today, this week, this month — side by side. Every active job shows real-time progress, and the queue chart tells you when you'll land.",
+      "Total leads, today, this week, this month - side by side. Every active job shows real-time progress, and the queue chart tells you when you'll land.",
     src: "/product/04-dashboard.png",
     alt: "Dashboard with 200,010 total leads and live job tracking",
     width: 1600,
@@ -197,7 +197,7 @@ export function Showcase() {
             </h2>
             <p className="mt-5 max-w-[640px] mx-auto text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
               Five screens tell the whole story. Scroll through each one to see
-              exactly what you get — from the moment you click Start to the
+              exactly what you get - from the moment you click Start to the
               moment your CSV lands.
             </p>
           </div>
