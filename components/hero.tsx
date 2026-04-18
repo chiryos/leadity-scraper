@@ -28,12 +28,11 @@ export function Hero() {
         }}
       />
 
-      {/* Cinematic bottom glow - same light tone as the top, just mirrored */}
+      {/* Cinematic bottom glow - peak anchored AT the section boundary so it meets the next section's top glow seamlessly (no color seam on scroll) */}
       <div
         aria-hidden
-        className="glow-breathe pointer-events-none absolute inset-x-0 -z-10"
+        className="glow-breathe pointer-events-none absolute inset-x-0 bottom-0 -z-10"
         style={{
-          bottom: "-140px",
           height: "520px",
           background:
             "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
@@ -41,9 +40,8 @@ export function Hero() {
       />
       <div
         aria-hidden
-        className="glow-breathe-slow pointer-events-none absolute inset-x-0 -z-10"
+        className="glow-breathe-slow pointer-events-none absolute inset-x-0 bottom-0 -z-10"
         style={{
-          bottom: "-240px",
           height: "680px",
           background:
             "radial-gradient(85% 100% at 50% 100%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",

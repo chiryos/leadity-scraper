@@ -179,12 +179,13 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
 export function Showcase() {
   return (
     <section id="how-it-works" className="relative overflow-hidden bg-white py-24 md:py-28 lg:py-32">
+      {/* Top glow — same tone + shape as hero's bottom glow, anchored at y=0 so the two peaks meet at the section boundary and the seam disappears */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[520px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[680px]"
         style={{
           background:
-            "radial-gradient(60% 50% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
+            "radial-gradient(85% 100% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
         }}
       />
       <div className="relative container-page">
