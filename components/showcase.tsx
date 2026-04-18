@@ -2,13 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import {
-  motion,
-  useInView,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 
@@ -94,14 +88,6 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
   const ref = React.useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
 
-  // Subtle parallax on the image as it scrolls through the viewport.
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const imageY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [40, -40]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? [1, 1, 1] : [0.98, 1.0, 0.98]);
-
   const textFirst = index % 2 === 0;
 
   return (
@@ -157,7 +143,6 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 1, ease, delay: 0.1 }}
-          style={{ y: imageY, scale: imageScale }}
           className="relative rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-3 shadow-[0_30px_80px_-30px_rgba(27,134,255,0.35)] sm:p-4"
         >
           <div className="relative aspect-[16/11] w-full overflow-hidden rounded-xl bg-white">
