@@ -78,7 +78,7 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, y: 14 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease }}
-          className="mt-5 max-w-[760px] text-balance text-center text-[13px] leading-[1.55] text-[var(--color-text-secondary)] md:mt-6 md:text-[16px] md:leading-[1.5]"
+          className="mt-5 hidden max-w-[760px] text-balance text-center text-[13px] leading-[1.55] text-[var(--color-text-secondary)] md:mt-6 md:block md:text-[16px] md:leading-[1.5]"
         >
           Business Owners Mobiles, pulled from Google Maps in your exact niche
           - carrier-verified and exported as a clean CSV for SMS marketing.
