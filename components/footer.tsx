@@ -112,29 +112,30 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Watermark strip — isolated, overflow-clipped so letters never touch the columns above */}
-      <div className="relative h-[180px] md:h-[220px] lg:h-[260px] overflow-hidden">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-semibold text-white/[0.08]"
-          style={{
-            fontSize: "clamp(180px, 26vw, 420px)",
-            lineHeight: 0.85,
-            letterSpacing: "-0.06em",
-            bottom: "-32%",
-          }}
-        >
-          Leadity
-        </span>
-
-        <div className="relative container-page h-full">
-          <div className="flex h-full flex-col items-start justify-end gap-3 border-t border-white/15 pt-6 pb-6 text-[12px] text-white/80 md:flex-row md:items-center md:justify-between">
+      {/* Bottom strip — copyright + status line, with the giant "Leadity" watermark fully visible behind */}
+      <div className="relative">
+        <div className="relative container-page">
+          <div className="flex flex-col items-start justify-between gap-3 border-t border-white/15 pt-6 pb-5 text-[12px] text-white/80 md:flex-row md:items-center">
             <span>© 2026 Leadity Scraper. All rights reserved.</span>
             <span className="inline-flex items-center gap-2">
               <span aria-hidden className="block h-1.5 w-1.5 rounded-full bg-[#3DDB7F]" />
               All systems operational
             </span>
           </div>
+        </div>
+
+        {/* Full watermark block — sits below the line, fully visible */}
+        <div aria-hidden className="pointer-events-none flex select-none justify-center overflow-hidden px-4 pb-4">
+          <span
+            className="block whitespace-nowrap font-semibold text-white/[0.1]"
+            style={{
+              fontSize: "clamp(96px, 22vw, 380px)",
+              lineHeight: 0.85,
+              letterSpacing: "-0.06em",
+            }}
+          >
+            Leadity
+          </span>
         </div>
       </div>
     </footer>

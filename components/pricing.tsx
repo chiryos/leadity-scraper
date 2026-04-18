@@ -151,13 +151,13 @@ export function Pricing() {
                   className="order-first lg:order-none"
                 >
                   <article
-                    className="relative flex h-full flex-col overflow-hidden rounded-2xl p-8 text-white shadow-[0_40px_80px_-25px_rgba(27,134,255,0.6)] transition-transform duration-200 lg:-translate-y-3 hover:-translate-y-4"
+                    className="relative flex h-full flex-col rounded-2xl p-8 text-white shadow-[0_40px_80px_-25px_rgba(27,134,255,0.6)] transition-transform duration-200 lg:-translate-y-3 hover:-translate-y-4"
                     style={{
                       background:
                         "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
                     }}
                   >
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center rounded-full bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#0951FF] shadow-[0_8px_24px_-10px_rgba(27,134,255,0.6)]">
+                    <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 inline-flex items-center whitespace-nowrap rounded-full bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#0951FF] shadow-[0_8px_24px_-10px_rgba(27,134,255,0.6)]">
                       Most popular
                     </span>
 

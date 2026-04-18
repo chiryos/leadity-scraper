@@ -142,7 +142,7 @@ export function Testimonials() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden pt-24 pb-48 md:pt-28 md:pb-56 lg:pt-32 lg:pb-64">
+    <section className="relative overflow-hidden pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28">
       <div aria-hidden className="absolute inset-0 bg-grid opacity-50" />
       <div
         aria-hidden
@@ -178,25 +178,25 @@ export function Testimonials() {
               pausedRef.current = false;
             }}
           >
-            {/* Spotlight glow behind the focused card */}
+            {/* Spotlight glow behind the focused card — sized to the carousel, not the full section */}
             <div
               aria-hidden
               className="glow-breathe pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2"
               style={{
-                width: "min(1100px, 90vw)",
-                height: "min(900px, 80vh)",
+                width: "min(1000px, 85vw)",
+                height: "min(560px, 60vw)",
                 background:
-                  "radial-gradient(closest-side, rgba(34,201,245,0.45) 0%, rgba(27,134,255,0.28) 30%, rgba(27,134,255,0.10) 55%, transparent 80%)",
+                  "radial-gradient(closest-side, rgba(34,201,245,0.42) 0%, rgba(27,134,255,0.22) 35%, rgba(27,134,255,0.08) 60%, transparent 82%)",
               }}
             />
             <div
               aria-hidden
               className="glow-breathe-slow pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2"
               style={{
-                width: "min(1600px, 110vw)",
-                height: "min(1100px, 90vh)",
+                width: "min(1400px, 100vw)",
+                height: "min(700px, 75vw)",
                 background:
-                  "radial-gradient(closest-side, rgba(34,201,245,0.18) 0%, rgba(27,134,255,0.10) 45%, transparent 75%)",
+                  "radial-gradient(closest-side, rgba(34,201,245,0.14) 0%, rgba(27,134,255,0.07) 50%, transparent 78%)",
               }}
             />
 

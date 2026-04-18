@@ -6,7 +6,6 @@ import { ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ease = [0.16, 1, 0.3, 1] as const;
-const trustInitials = ["SK", "MR", "AJ", "LC", "TD"];
 
 const stats = [
   { value: "95%", label: "Mobile · 5% Other", accent: true },
@@ -110,27 +109,16 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0 }}
           animate={reduce ? undefined : { opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.45, ease }}
-          className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 md:mt-8"
+          className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:mt-8"
         >
-          <ul className="flex -space-x-2" aria-hidden>
-            {trustInitials.map((n, i) => (
-              <li
-                key={n}
-                className="inline-flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-brand-gradient text-[10px] font-semibold text-white"
-                style={{ zIndex: 5 - i }}
-              >
-                {n}
-              </li>
-            ))}
-          </ul>
           <span className="text-[12px] text-[var(--color-text-secondary)] md:text-[13px]">
             Trusted by{" "}
             <strong className="font-semibold text-[var(--color-text-primary)]">
-              500+
+              240+
             </strong>{" "}
-            creators &amp; agencies
+            Agencies
           </span>
-          <span aria-hidden className="hidden h-4 w-px bg-[var(--color-border)] sm:block" />
+          <span aria-hidden className="h-4 w-px bg-[var(--color-border)]" />
           <div className="flex items-center gap-1.5">
             <div className="flex" aria-hidden>
               {Array.from({ length: 5 }).map((_, i) => (
