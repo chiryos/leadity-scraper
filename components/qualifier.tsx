@@ -18,45 +18,48 @@ import { cn } from "@/lib/utils";
 
 type Item = { lead: string; body: string };
 
-// Each column covers a DIFFERENT axis of buyer fit (audience, data scope,
-// geography, usage pattern on the left; role, use-case, volume, delivery
-// on the right) so the two sides are genuinely distinct qualifiers and
-// not inverse-phrasings of each other.
+// Direct, pain-framed copy — the "not for you" side leans into the
+// status quo people put up with elsewhere; the "made for you" side
+// flips each of those into the Leadity promise.
 const notFor: Item[] = [
   {
-    lead: "Sell to consumers.",
-    body: "We carry business-owner mobiles only — no D2C or residential lists.",
+    lead: "Love overpaying for trash.",
+    body: "Dropping $300+ on a list that's half VOIPs, landlines, and dead numbers doesn't faze you.",
   },
   {
-    lead: "Need emails, not phones.",
-    body: "We don't enrich emails, firmographics, or LinkedIn data. Just mobiles.",
+    lead: "Stitch 2+ scrapers together.",
+    body: "Bouncing between Outscraper, Clearoutphone, and a dedupe sheet feels productive, not painful.",
   },
   {
-    lead: "Live outside the US.",
-    body: "Coverage is US-only — 32,741 ZIPs. No EU, UK, Canada, or APAC data.",
+    lead: "Welcome duplicates.",
+    body: "Same 2,000 numbers exported twice? Fine — you'll dedupe in Excel for the fifth time this month.",
   },
   {
-    lead: "Want a one-off batch.",
-    body: "We're built for recurring scrapes, not a single export-and-done job.",
+    lead: "Tolerate stale data.",
+    body: "A list scraped six months ago is still \"close enough\" for the campaign you're about to launch.",
   },
 ];
 
 const isFor: Item[] = [
   {
-    lead: "Run a lead-gen agency.",
-    body: "Multi-client, multi-niche campaigns delivered as clean CSVs every month.",
+    lead: "Need the freshest leads.",
+    body: "Scraped the moment you click launch — today's data, not a six-month-old snapshot someone resold.",
   },
   {
-    lead: "Text business owners direct.",
-    body: "Roofers, dentists, HVAC, solar — owner mobiles, not front-desk lines.",
+    lead: "Want owner mobiles direct.",
+    body: "The decision-maker's personal cell. Not the front desk, not the switchboard, not a contact form.",
   },
   {
-    lead: "Need production volume.",
-    body: "5k+ verified mobiles a month without rate-limits, retries, or queues.",
+    lead: "Hate the 3-tool shuffle.",
+    body: "One product scrapes, classifies, and delivers. End of stack. One bill, one dashboard, one login.",
   },
   {
-    lead: "Live inside a dialer.",
-    body: "CSV or webhook delivery that drops straight into your SMS stack.",
+    lead: "Refuse to pay for VOIPs.",
+    body: "Mobile-only, carrier-verified — or we refund the whole batch and ship you 50% more, free.",
+  },
+  {
+    lead: "Want volume on demand.",
+    body: "5,000 to 10,000 verified Owners Mobiles ready in days, not a trickle over six weeks.",
   },
 ];
 
