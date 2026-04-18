@@ -58,8 +58,14 @@ function PriceDisplay({
   );
 }
 
+const easeOut = [0.16, 1, 0.3, 1] as const;
+
 export function Pricing() {
   const [affiliateOn, setAffiliateOn] = React.useState(false);
+  // Mobile-only: which plan is currently expanded. Defaults to the popular one.
+  const [activePlan, setActivePlan] = React.useState<string>(
+    plans.find((p) => p.popular)?.name ?? plans[0].name,
+  );
 
   return (
     <section id="pricing" className="section-py relative overflow-hidden">
@@ -141,7 +147,178 @@ export function Pricing() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-stretch">
+        {/* ───── Mobile accordion (below lg) ─────
+            Three compact stacked rows. Tapping one expands it with a blue
+            gradient and reveals features + CTA. The others collapse. */}
+        <div className="mt-10 flex flex-col gap-3 lg:hidden">
+          {plans.map((plan) => {
+            const isActive = activePlan === plan.name;
+            const price = affiliateOn ? plan.affiliate : plan.standard;
+            return (
+              <motion.div
+                key={plan.name}
+                layout
+                transition={{ layout: { duration: 0.38, ease: easeOut } }}
+                role="button"
+                tabIndex={0}
+                aria-pressed={isActive}
+                onClick={() => setActivePlan(plan.name)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setActivePlan(plan.name);
+                  }
+                }}
+                className={cn(
+                  "relative cursor-pointer overflow-hidden rounded-2xl border shadow-[0_14px_30px_-18px_rgba(15,23,42,0.18)] outline-none transition-colors",
+                  isActive
+                    ? "border-transparent text-white"
+                    : "border-[#D8DEE6] bg-white",
+                )}
+                style={
+                  isActive
+                    ? {
+                        background:
+                          "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
+                      }
+                    : undefined
+                }
+              >
+                <motion.div layout className="flex items-center gap-4 p-5">
+                  {/* Radio dot */}
+                  <span
+                    className={cn(
+                      "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+                      isActive
+                        ? "border-white bg-white"
+                        : "border-[#C8D1DD] bg-white",
+                    )}
+                  >
+                    {isActive ? (
+                      <span
+                        aria-hidden
+                        className="h-2.5 w-2.5 rounded-full bg-[#0951FF]"
+                      />
+                    ) : null}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <span
+                        className={cn(
+                          "text-[16px] font-semibold",
+                          isActive
+                            ? "text-white"
+                            : "text-[var(--color-text-primary)]",
+                        )}
+                      >
+                        {plan.name}
+                      </span>
+                      {plan.popular ? (
+                        <span
+                          className={cn(
+                            "inline-flex items-center rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.08em]",
+                            isActive
+                              ? "bg-white/20 text-white"
+                              : "bg-[#EAF4FF] text-[#0951FF]",
+                          )}
+                        >
+                          Most popular
+                        </span>
+                      ) : null}
+                    </div>
+                    <div
+                      className={cn(
+                        "mt-0.5 text-[12px]",
+                        isActive
+                          ? "text-white/80"
+                          : "text-[var(--color-text-muted)]",
+                      )}
+                    >
+                      {plan.mobiles.toLocaleString()} Owners Mobiles
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div
+                      className={cn(
+                        "text-[22px] font-semibold leading-none tabular-nums",
+                        isActive
+                          ? "text-white"
+                          : "text-[var(--color-text-primary)]",
+                      )}
+                    >
+                      ${price}
+                    </div>
+                    {affiliateOn ? (
+                      <div
+                        className={cn(
+                          "mt-1 text-[11px] line-through tabular-nums",
+                          isActive ? "text-white/65" : "text-[var(--color-text-muted)]",
+                        )}
+                      >
+                        ${plan.standard}
+                      </div>
+                    ) : null}
+                  </div>
+                </motion.div>
+
+                <AnimatePresence initial={false}>
+                  {isActive ? (
+                    <motion.div
+                      key="expand"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.32, ease: easeOut }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <div className="px-5 pb-5">
+                        <div className="mb-4 h-px w-full bg-white/20" />
+                        <p className="text-[13px] leading-[1.55] text-white/85">
+                          {plan.description}
+                        </p>
+                        <ul className="mt-4 flex flex-col gap-2.5">
+                          {plan.features.map((f) => (
+                            <li
+                              key={f}
+                              className="flex items-start gap-2.5 text-[13px] text-white/95"
+                            >
+                              <span
+                                aria-hidden
+                                className="mt-0.5 inline-flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full bg-white/25 text-white"
+                              >
+                                <Check className="h-3 w-3" strokeWidth={3} />
+                              </span>
+                              <span>{f}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <Button
+                          asChild
+                          size="block"
+                          className="mt-5 bg-white text-[#0951FF] shadow-[0_12px_28px_-12px_rgba(0,0,0,0.35)] hover:bg-white/95 hover:brightness-100"
+                        >
+                          <a
+                            href="#pricing-cta"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {plan.cta}
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </a>
+                        </Button>
+                        <p className="mt-4 text-[11px] italic text-white/70">
+                          {plan.compareNote}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* ───── Desktop grid (lg+) ───── */}
+        <div className="mt-12 hidden gap-6 lg:grid lg:grid-cols-3 lg:items-stretch">
           {plans.map((plan, i) => {
             if (plan.popular) {
               return (
