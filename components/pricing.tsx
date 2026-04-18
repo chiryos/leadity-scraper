@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Gift } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
 import { plans } from "@/lib/plans";
@@ -146,6 +146,37 @@ export function Pricing() {
             </Tooltip>
           </div>
         </Reveal>
+
+        {/* ───── Affiliate discount banner ─────
+            Appears when Affiliate is on, so the value of the toggle is obvious
+            at a glance. Replaces any ambiguity about why prices dropped. */}
+        <AnimatePresence initial={false}>
+          {affiliateOn ? (
+            <motion.div
+              key="affiliate-banner"
+              initial={{ opacity: 0, y: -8, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: "auto" }}
+              exit={{ opacity: 0, y: -8, height: 0 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-visible"
+            >
+              <div className="mt-6 flex justify-center">
+                <div
+                  className="inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-white shadow-[0_18px_40px_-18px_rgba(27,134,255,0.65)]"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
+                  }}
+                >
+                  <Gift className="h-4 w-4 shrink-0" aria-hidden />
+                  <span className="text-[13px] font-semibold tracking-[0.01em] md:text-[14px]">
+                    Up to <span className="tabular-nums">−40%</span> off when you invite your friends
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
 
         {/* ───── Mobile accordion (below lg) ─────
             Three compact stacked rows. Tapping one expands it with a blue

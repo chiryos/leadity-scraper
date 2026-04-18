@@ -10,6 +10,7 @@ import { Testimonials } from "@/components/testimonials";
 import { FAQ } from "@/components/faq";
 import { CTA } from "@/components/cta";
 import { Footer } from "@/components/footer";
+import { SignupPopup } from "@/components/signup-popup";
 
 export default function Page() {
   return (
@@ -28,6 +29,7 @@ export default function Page() {
         <CTA />
       </main>
       <Footer />
+      <SignupPopup />
     </>
   );
 }
