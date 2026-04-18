@@ -8,10 +8,9 @@ import { Button } from "@/components/ui/button";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const stats = [
-  { value: "95%", label: "Mobile · 5% Other", accent: true },
   { value: "32,741", label: "ZIPs Covered" },
+  { value: "95%", label: "Mobile · 5% Other", accent: true },
   { value: "1,255+", label: "Business Niches" },
-  { value: "4.65M+", label: "Owners Mobiles" },
 ];
 
 export function Hero() {
@@ -132,84 +131,36 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Premium stat strip — floats on cinematic blue glow, each card has its own halo */}
+      {/* Inline stat row — bare numbers with hairline dividers, sitting on the section's ambient glow */}
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.55, ease }}
         className="container-page relative pb-6 md:pb-10"
       >
-        <div className="mx-auto grid max-w-[1180px] grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
+        <div className="mx-auto flex max-w-[900px] flex-wrap items-center justify-center divide-x divide-[var(--color-border)] gap-y-4">
           {stats.map((s) => (
             <div
               key={s.label}
-              className="group relative rounded-2xl"
-              style={{
-                // Heavy multi-layer blue halo per card, matching the reference
-                boxShadow: [
-                  "0 0 0 1px rgba(34,201,245,0.35)",
-                  "0 0 32px 0 rgba(34,201,245,0.55)",
-                  "0 0 70px 0 rgba(27,134,255,0.45)",
-                  "0 30px 60px -20px rgba(27,134,255,0.55)",
-                  "0 18px 36px -16px rgba(34,201,245,0.55)",
-                ].join(", "),
-              }}
+              className="flex min-w-[110px] flex-col items-center px-5 sm:min-w-[140px] sm:px-8 md:px-12"
             >
-              <div
-                className="relative overflow-hidden rounded-2xl border border-white/70 backdrop-blur-md"
+              <span
+                className={
+                  s.accent
+                    ? "font-semibold tabular-nums text-brand-gradient"
+                    : "font-semibold tabular-nums text-[var(--color-text-primary)]"
+                }
                 style={{
-                  background:
-                    "linear-gradient(180deg, rgba(255,255,255,0.94) 0%, rgba(220,238,255,0.82) 100%)",
+                  fontSize: "clamp(28px, 5vw, 52px)",
+                  letterSpacing: "-0.035em",
+                  lineHeight: 1,
                 }}
               >
-                {/* Top highlight (glossy edge) */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-0 top-0 h-px"
-                  style={{
-                    background:
-                      "linear-gradient(to right, transparent, rgba(255,255,255,0.95), transparent)",
-                  }}
-                />
-                {/* Inner bottom glow */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 rounded-b-2xl"
-                  style={{
-                    background:
-                      "linear-gradient(to top, rgba(34,201,245,0.28) 0%, rgba(34,201,245,0.08) 50%, transparent 100%)",
-                  }}
-                />
-
-                <div className="relative z-10 px-4 py-4 sm:px-6 sm:py-6">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <span
-                      className={
-                        s.accent
-                          ? "font-semibold tabular-nums text-brand-gradient"
-                          : "font-semibold tabular-nums text-[var(--color-text-primary)]"
-                      }
-                      style={{
-                        fontSize: "clamp(26px, 4.6vw, 44px)",
-                        letterSpacing: "-0.035em",
-                        lineHeight: 1,
-                      }}
-                    >
-                      {s.value}
-                    </span>
-                    {s.accent ? (
-                      <span
-                        aria-hidden
-                        className="inline-block h-2 w-2 rounded-full bg-brand-gradient"
-                        style={{ boxShadow: "0 0 12px rgba(34,201,245,0.8)" }}
-                      />
-                    ) : null}
-                  </div>
-                  <span className="mt-2 block text-[10px] font-medium uppercase tracking-[0.1em] text-[var(--color-text-muted)] sm:text-[12px]">
-                    {s.label}
-                  </span>
-                </div>
-              </div>
+                {s.value}
+              </span>
+              <span className="mt-2 text-center text-[10px] font-medium uppercase tracking-[0.12em] text-[var(--color-text-muted)] md:text-[12px]">
+                {s.label}
+              </span>
             </div>
           ))}
         </div>
