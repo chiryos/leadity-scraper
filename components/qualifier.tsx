@@ -57,10 +57,6 @@ const isFor: Item[] = [
     lead: "Refuse to pay for VOIPs.",
     body: "Mobile-only, carrier-verified — or we refund the whole batch and ship you 50% more, free.",
   },
-  {
-    lead: "Want volume on demand.",
-    body: "5,000 to 10,000 verified Owners Mobiles ready in days, not a trickle over six weeks.",
-  },
 ];
 
 export function Qualifier() {
