@@ -54,13 +54,24 @@ export function Hero() {
             "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.18) 0%, rgba(27, 134, 255, 0.08) 40%, transparent 75%)",
         }}
       />
+      {/* Core beam — wide horizontal, medium vertical, medium intensity */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 -z-10"
         style={{
-          height: "420px",
+          height: "440px",
           background:
-            "radial-gradient(130% 45% at 50% 100%, rgba(27, 134, 255, 0.34) 0%, rgba(34, 201, 245, 0.16) 35%, rgba(27, 134, 255, 0.04) 65%, transparent 82%)",
+            "radial-gradient(150% 50% at 50% 100%, rgba(27, 134, 255, 0.55) 0%, rgba(34, 201, 245, 0.28) 30%, rgba(27, 134, 255, 0.08) 60%, transparent 82%)",
+        }}
+      />
+      {/* Brightest focal beam — tight vertical, super-wide horizontal, high intensity */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10"
+        style={{
+          height: "220px",
+          background:
+            "radial-gradient(170% 60% at 50% 100%, rgba(27, 134, 255, 0.75) 0%, rgba(34, 201, 245, 0.4) 25%, transparent 70%)",
         }}
       />
 

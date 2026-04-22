@@ -184,12 +184,22 @@ export function Showcase() {
             "radial-gradient(60% 100% at 50% 0%, rgba(34, 201, 245, 0.18) 0%, rgba(27, 134, 255, 0.08) 40%, transparent 75%)",
         }}
       />
+      {/* Core beam — mirror of hero's matching layer */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[440px]"
         style={{
           background:
-            "radial-gradient(130% 45% at 50% 0%, rgba(27, 134, 255, 0.34) 0%, rgba(34, 201, 245, 0.16) 35%, rgba(27, 134, 255, 0.04) 65%, transparent 82%)",
+            "radial-gradient(150% 50% at 50% 0%, rgba(27, 134, 255, 0.55) 0%, rgba(34, 201, 245, 0.28) 30%, rgba(27, 134, 255, 0.08) 60%, transparent 82%)",
+        }}
+      />
+      {/* Brightest focal beam — mirror of hero's top layer */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[220px]"
+        style={{
+          background:
+            "radial-gradient(170% 60% at 50% 0%, rgba(27, 134, 255, 0.75) 0%, rgba(34, 201, 245, 0.4) 25%, transparent 70%)",
         }}
       />
       <div className="relative container-page">
