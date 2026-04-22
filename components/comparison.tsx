@@ -53,7 +53,7 @@ function TierPill({ value }: { value: string }) {
 
 export function Comparison() {
   return (
-    <section className="section-py relative overflow-hidden bg-[var(--color-surface)]">
+    <section className="section-py relative overflow-hidden">
       <div className="relative container-page">
         <Reveal>
           <div className="mx-auto max-w-[820px] text-center">
