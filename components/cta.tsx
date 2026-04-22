@@ -68,12 +68,15 @@ export function CTA() {
         />
       </div>
 
-      {/* Top fade — extends 200px UP into the FAQ area */}
+      {/* Top fade — extends 200px UP into the FAQ area. Short solid-white
+          cap at the top edge hides the blue bg canvas boundary; organic
+          radial clouds below. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 -top-[200px] z-[1] h-[460px]"
         style={{
           background: [
+            "linear-gradient(180deg, #ffffff 0%, #ffffff 20px, rgba(255,255,255,0.5) 50px, transparent 110px)",
             "radial-gradient(ellipse 70% 110% at 22% 0%, #ffffff 0%, rgba(255,255,255,0.6) 32%, rgba(255,255,255,0.12) 62%, transparent 82%)",
             "radial-gradient(ellipse 65% 95% at 78% 0%, #ffffff 0%, rgba(255,255,255,0.55) 34%, rgba(255,255,255,0.08) 64%, transparent 80%)",
             "radial-gradient(ellipse 45% 70% at 52% 0%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 40%, transparent 72%)",
