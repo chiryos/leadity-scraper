@@ -11,13 +11,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]",
+          "glass-chip-dark text-white [background-color:rgba(10,10,10,0.88)]",
         gradient:
-          "bg-brand-gradient text-white shadow-[0_8px_24px_-8px_rgba(27,134,255,0.55)] hover:shadow-[0_10px_30px_-6px_rgba(27,134,255,0.7)] hover:brightness-105",
+          "glass-brand text-white",
         ghost:
           "glass-chip text-[var(--color-text-primary)]",
         muted:
-          "bg-[var(--color-surface-muted)] text-[var(--color-accent)] hover:bg-[var(--color-border)]",
+          "glass-chip text-[var(--color-accent)]",
         link: "text-[var(--color-accent)] underline-offset-4 hover:underline",
       },
       size: {

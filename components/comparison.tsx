@@ -30,8 +30,6 @@ const features: Feature[] = [
   },
 ];
 
-const oursGradient =
-  "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)";
 
 // spacing rhythm used in BOTH the card price rows and the pills overlay
 // so the pills line up perfectly with each price row.
@@ -83,10 +81,9 @@ export function Comparison() {
           <div className="relative mx-auto mt-16 max-w-[720px]">
             {/* Two cards side-by-side; generous vertical gap on mobile so the floating Ours logo clears the Theirs card above */}
             <div className="grid grid-cols-1 gap-20 lg:grid-cols-2 lg:gap-6">
-              {/* ───────────── OURS CARD ───────────── */}
+              {/* ───────────── OURS CARD (tinted liquid glass) ───────────── */}
               <article
-                className="relative order-2 rounded-[18px] px-5 pt-[70px] pb-6 text-white shadow-[0_24px_48px_-20px_rgba(27,134,255,0.55)]"
-                style={{ background: oursGradient }}
+                className="glass-brand relative order-2 rounded-[18px] px-5 pt-[70px] pb-6 text-white"
               >
                 {/* floating logo with grounded black drop-shadow */}
                 <div

@@ -23,11 +23,7 @@ export function CTA() {
       <div className="container-page relative">
         <Reveal>
           <div
-            className="relative mx-auto max-w-[1120px] overflow-hidden rounded-[28px] px-6 py-14 text-white shadow-[0_60px_120px_-40px_rgba(9,81,255,0.55)] md:rounded-[32px] md:px-14 md:py-20 lg:px-20 lg:py-24"
-            style={{
-              background:
-                "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
-            }}
+            className="glass-brand relative mx-auto max-w-[1120px] overflow-hidden rounded-[28px] px-6 py-14 text-white md:rounded-[32px] md:px-14 md:py-20 lg:px-20 lg:py-24"
           >
             {/* Faint hairline grid for texture */}
             <div

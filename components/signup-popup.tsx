@@ -83,18 +83,14 @@ export function SignupPopup() {
               mass: 1,
             }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-[440px] overflow-hidden rounded-[28px] px-7 pb-7 pt-8 text-white shadow-[0_50px_120px_-20px_rgba(9,81,255,0.6)] sm:px-8"
-            style={{
-              background:
-                "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
-            }}
+            className="glass-brand relative w-full max-w-[440px] overflow-hidden rounded-[28px] px-7 pb-7 pt-8 text-white sm:px-8"
           >
             {/* Close button */}
             <button
               type="button"
               onClick={close}
               aria-label="Close"
-              className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-colors hover:bg-white/30"
+              className="glass-chip-dark absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-white"
             >
               <X className="h-4 w-4" />
             </button>

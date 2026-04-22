@@ -68,9 +68,11 @@ export function Nav() {
     <header
       id="top"
       className={cn(
-        "sticky top-0 z-50 backdrop-blur-md transition-colors duration-200",
-        "bg-white/80",
-        (scrolled || open) && "border-b border-[var(--color-border)]",
+        "sticky top-0 z-50 transition-[background-color,box-shadow,border-color] duration-200",
+        "bg-white/55 backdrop-blur-[24px] backdrop-saturate-[200%]",
+        (scrolled || open)
+          ? "border-b border-white/40 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_24px_-16px_rgba(15,23,42,0.1)]"
+          : "border-b border-transparent",
       )}
     >
       <nav
@@ -156,7 +158,7 @@ export function Nav() {
                 opacity: { duration: 0.3, ease },
               }}
               style={{ transformOrigin: "top center", willChange: "transform, opacity" }}
-              className="md:hidden absolute left-4 right-4 top-[calc(72px+8px)] z-50 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white shadow-[0_24px_60px_-20px_rgba(15,23,42,0.25)]"
+              className="glass-card md:hidden absolute left-4 right-4 top-[calc(72px+8px)] z-50 overflow-hidden rounded-2xl"
             >
               <motion.nav
                 initial="hidden"

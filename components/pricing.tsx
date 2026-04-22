@@ -218,21 +218,9 @@ export function Pricing() {
                   }
                 }}
                 className={cn(
-                  "relative cursor-pointer overflow-hidden rounded-2xl border shadow-[0_14px_30px_-18px_rgba(15,23,42,0.18)] outline-none",
-                  isActive
-                    ? "border-transparent text-white"
-                    : "border-[#D8DEE6] bg-white",
+                  "relative cursor-pointer overflow-hidden rounded-2xl outline-none",
+                  isActive ? "glass-brand text-white" : "glass-chip",
                 )}
-                style={{
-                  background: isActive
-                    ? "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)"
-                    : undefined,
-                  // Color transitions are handled by framer's color crossfade
-                  // via background inline style. Tailwind transition-colors
-                  // would fight the inline background, so we rely on the
-                  // surrounding layout animation to mask the swap.
-                  transition: "background 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
-                }}
               >
                 <motion.div layout className="flex items-center gap-4 p-5">
                   {/* Radio dot */}
@@ -415,11 +403,7 @@ export function Pricing() {
                   className="order-first lg:order-none"
                 >
                   <article
-                    className="relative flex h-full flex-col rounded-2xl p-8 text-white shadow-[0_40px_80px_-25px_rgba(27,134,255,0.6)] transition-transform duration-200 lg:-translate-y-3 hover:-translate-y-4"
-                    style={{
-                      background:
-                        "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
-                    }}
+                    className="glass-brand relative flex h-full flex-col rounded-2xl p-8 text-white transition-transform duration-200 lg:-translate-y-3 hover:-translate-y-4"
                   >
                     <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 inline-flex items-center whitespace-nowrap rounded-full bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#0951FF] shadow-[0_8px_24px_-10px_rgba(27,134,255,0.6)]">
                       Most popular

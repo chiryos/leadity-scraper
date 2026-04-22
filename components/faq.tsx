@@ -67,10 +67,14 @@ export function FAQ() {
         </Reveal>
         <Reveal delay={0.1}>
           <div className="mx-auto mt-12 max-w-[720px]">
-            <Accordion type="single" collapsible className="border-t border-[var(--color-border)]">
+            <Accordion type="single" collapsible className="flex flex-col gap-3">
               {items.map((item, i) => (
-                <AccordionItem key={item.q} value={`item-${i}`}>
-                  <AccordionTrigger>{item.q}</AccordionTrigger>
+                <AccordionItem
+                  key={item.q}
+                  value={`item-${i}`}
+                  className="glass-card rounded-2xl border-0 px-5 md:px-6"
+                >
+                  <AccordionTrigger className="py-4">{item.q}</AccordionTrigger>
                   <AccordionContent>{item.a}</AccordionContent>
                 </AccordionItem>
               ))}
