@@ -108,17 +108,17 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
         >
           <div className="flex items-center gap-3">
             <span
-              className="font-semibold tabular-nums text-brand-gradient"
+              className="font-semibold tabular-nums text-white"
               style={{ fontSize: 56, lineHeight: 1, letterSpacing: "-0.04em" }}
             >
               {shot.step}
             </span>
-            <span className="rounded-full border border-[var(--color-border)] bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+            <span className="inline-flex items-center rounded-full border border-white/25 bg-white/12 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/90 backdrop-blur-md">
               {shot.label}
             </span>
           </div>
           <h3
-            className="mt-5 font-semibold text-[var(--color-text-primary)]"
+            className="mt-5 font-semibold text-white"
             style={{
               fontSize: "clamp(28px, 3vw, 40px)",
               letterSpacing: "-0.03em",
@@ -127,7 +127,7 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
           >
             {shot.title}
           </h3>
-          <p className="mt-4 max-w-[460px] text-[16px] leading-[1.6] text-[var(--color-text-secondary)] md:text-[17px]">
+          <p className="mt-4 max-w-[460px] text-[16px] leading-[1.6] text-white/85 md:text-[17px]">
             {shot.body}
           </p>
         </motion.div>
@@ -161,21 +161,128 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
   );
 }
 
+/**
+ * Showcase — full-bleed blue glass section, matching the Guarantee / CTA
+ * treatment. Sandwiched between Hero (white) and Features (white), so it
+ * fades FROM white at the top AND BACK TO white at the bottom. Because the
+ * section is tall (5 steps), glow blobs are distributed vertically instead
+ * of clustered at the ends.
+ */
 export function Showcase() {
   return (
     <section
       id="how-it-works"
-      className="relative overflow-hidden bg-white py-24 md:py-28 lg:py-32"
+      className="relative overflow-hidden py-28 text-white md:py-36 lg:py-44"
+      style={{
+        background: [
+          // Specular corner highlight — sun hitting top-left of the glass
+          "radial-gradient(140% 60% at 18% -2%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.08) 28%, transparent 55%)",
+          // Brand gradient base
+          "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
+        ].join(", "),
+      }}
     >
-      <div className="relative container-page">
+      {/* Top fade — bridges Hero's white bg into the blue */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[260px]"
+        style={{
+          background:
+            "linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.55) 35%, rgba(255,255,255,0.2) 65%, transparent 100%)",
+        }}
+      />
+
+      {/* Bottom fade — bridges blue back into Features' white bg */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[260px]"
+        style={{
+          background:
+            "linear-gradient(0deg, #ffffff 0%, rgba(255,255,255,0.55) 35%, rgba(255,255,255,0.2) 65%, transparent 100%)",
+        }}
+      />
+
+      {/* ───── Gaussian-blur glow blobs ─────
+          Distributed along the section's full height (not just clustered
+          at top/bottom like in Guarantee/CTA) so the long body doesn't
+          feel empty in the middle. Same recipe: organic asymmetric
+          border-radius, huge blurs, plus-lighter blend. */}
+      <div
+        aria-hidden
+        className="glow-breathe-slow pointer-events-none absolute -top-[5%] -left-[8%] h-[720px] w-[720px] opacity-75"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(180, 140, 255, 0.95) 0%, rgba(120, 180, 255, 0.65) 40%, transparent 70%)",
+          filter: "blur(180px)",
+          mixBlendMode: "plus-lighter",
+          borderRadius: "63% 37% 54% 46% / 55% 48% 52% 45%",
+        }}
+      />
+      <div
+        aria-hidden
+        className="glow-breathe pointer-events-none absolute top-[22%] -right-[8%] h-[680px] w-[680px] opacity-75"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(100, 220, 255, 1) 0%, rgba(60, 140, 255, 0.7) 45%, transparent 75%)",
+          filter: "blur(190px)",
+          mixBlendMode: "plus-lighter",
+          borderRadius: "42% 58% 67% 33% / 48% 52% 48% 52%",
+        }}
+      />
+      <div
+        aria-hidden
+        className="glow-breathe-slow pointer-events-none absolute top-[48%] -left-[10%] h-[720px] w-[720px] opacity-75"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255, 200, 240, 0.75) 0%, rgba(180, 160, 255, 0.55) 45%, transparent 75%)",
+          filter: "blur(180px)",
+          mixBlendMode: "screen",
+          borderRadius: "58% 42% 45% 55% / 52% 48% 52% 48%",
+        }}
+      />
+      <div
+        aria-hidden
+        className="glow-breathe pointer-events-none absolute top-[72%] -right-[10%] h-[760px] w-[760px] opacity-80"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(100, 220, 255, 1) 0%, rgba(60, 140, 255, 0.7) 45%, transparent 75%)",
+          filter: "blur(200px)",
+          mixBlendMode: "plus-lighter",
+          borderRadius: "42% 58% 67% 33% / 48% 52% 48% 52%",
+        }}
+      />
+
+      {/* Faint hairline grid for texture */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[1] opacity-[0.08]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+        }}
+      />
+
+      <div className="relative z-[2] container-page">
         <Reveal>
           <div className="mx-auto max-w-[820px] text-center">
-            <p className="text-eyebrow">A look inside</p>
-            <h2 className="text-h2 text-balance mt-4 text-[var(--color-text-primary)]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
+              A look inside
+            </p>
+            <h2
+              className="text-balance mt-4 font-semibold text-white"
+              style={{
+                fontSize: "clamp(32px, 4.6vw, 56px)",
+                letterSpacing: "-0.04em",
+                lineHeight: 1.06,
+              }}
+            >
               <span className="block">From a single niche</span>
-              <span className="block text-brand-gradient">to verified Owners Mobiles.</span>
+              <span className="block text-white/85">
+                to verified Owners Mobiles.
+              </span>
             </h2>
-            <p className="mt-5 max-w-[640px] mx-auto text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
+            <p className="mt-5 max-w-[640px] mx-auto text-balance text-[18px] leading-[1.55] text-white/85">
               Five screens tell the whole story. Scroll through each one to see
               exactly what you get - from the moment you click Start to the
               moment your CSV lands.
@@ -183,7 +290,7 @@ export function Showcase() {
           </div>
         </Reveal>
 
-        <div className="mt-16 lg:mt-24 divide-y divide-[var(--color-border)]">
+        <div className="mt-16 lg:mt-24 divide-y divide-white/15">
           {shots.map((shot, i) => (
             <Step key={shot.id} shot={shot} index={i} />
           ))}
