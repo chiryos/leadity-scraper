@@ -172,22 +172,37 @@ export function Showcase() {
       // of a two-halves-meeting seam.
       className="relative overflow-x-clip bg-white py-24 md:py-28 lg:py-32"
     >
-      {/* Unified seam glow — ONE radial spanning both sections.
-          The div is 1000px tall and positioned top:-500px, so it extends
-          500px above the showcase's top edge (into the hero) and 500px
-          into the showcase. Peak at 50% 50% = dead center of the div
-          = exactly at the section boundary. Since the showcase paints
-          after the hero in document flow, this layer draws on top of
-          the hero's bottom as well — no two-peak compounding, just one
-          smooth deep-cyan core fading out both directions. */}
+      {/* Unified seam glow — ONE linear gradient with a plateau across
+          the boundary. The plateau (44% → 56% of the div) means the
+          zone right on the seam holds a SINGLE uniform cyan, so there's
+          no bright "peak line" at the boundary — the eye just sees a
+          wide band of blue that fades out symmetrically above and below.
+
+          Layered as two:
+            • Vertical linear: owns the fade-in → plateau → fade-out
+              shape (top↔bottom of the 1000px div).
+            • Horizontal radial: fades the band's horizontal intensity
+              into the white edges so the glow has a soft shape, not a
+              full-width strip.
+
+          Positioned top:-500px, height:1000px — extends 500px up into
+          the hero's area and 500px down into the showcase. Paints
+          after the hero in document flow, so the upper half draws
+          cleanly on top of the hero's bg-white. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0"
         style={{
           top: "-500px",
           height: "1000px",
-          background:
-            "radial-gradient(200% 50% at 50% 50%, rgba(34, 201, 245, 0.32) 0%, rgba(27, 134, 255, 0.20) 14%, rgba(34, 201, 245, 0.12) 34%, rgba(34, 201, 245, 0.05) 60%, transparent 88%)",
+          background: [
+            // Horizontal radial (mask): brightest at center, fades to
+            // transparent at the sides so the band doesn't hit hard
+            // vertical edges.
+            "radial-gradient(100% 100% at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.55) 90%)",
+            // Vertical linear (the band itself): plateau across the seam.
+            "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(34,201,245,0.04) 14%, rgba(27,134,255,0.14) 30%, rgba(27,134,255,0.22) 44%, rgba(27,134,255,0.22) 56%, rgba(27,134,255,0.14) 70%, rgba(34,201,245,0.04) 86%, rgba(255,255,255,0) 100%)",
+          ].join(", "),
         }}
       />
       <div className="relative container-page">
