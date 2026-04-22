@@ -95,14 +95,6 @@ export function Features() {
   return (
     <section id="features" className="section-py relative overflow-hidden">
       <div aria-hidden className="absolute inset-0 bg-grid opacity-50" />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-[420px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(60% 50% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
-        }}
-      />
       <div className="relative container-page">
         <Reveal>
           <div className="mx-auto max-w-[820px] text-center">
