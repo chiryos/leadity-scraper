@@ -68,18 +68,14 @@ export function CTA() {
         />
       </div>
 
-      {/* Top fade — abstract blurred organic fade (see Showcase for the
-          full recipe explanation). */}
+      {/* Top fade — one wide soft radial over angled linear (see Showcase). */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-[260px] z-[1] h-[520px] overflow-hidden"
+        className="pointer-events-none absolute inset-x-0 -top-[260px] z-[1] h-[520px]"
         style={{
-          filter: "blur(50px)",
           background: [
-            "linear-gradient(180deg, #ffffff 0%, #ffffff 200px, rgba(255,255,255,0.5) 340px, transparent 100%)",
-            "radial-gradient(ellipse 75% 105% at 22% 10%, #ffffff 0%, rgba(255,255,255,0.55) 40%, rgba(255,255,255,0.15) 70%, transparent 95%)",
-            "radial-gradient(ellipse 70% 95% at 78% 5%, #ffffff 0%, rgba(255,255,255,0.5) 42%, rgba(255,255,255,0.12) 72%, transparent 92%)",
-            "radial-gradient(ellipse 50% 75% at 52% 12%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.25) 50%, transparent 85%)",
+            "radial-gradient(ellipse 160% 130% at 38% 0%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 45%, transparent 80%)",
+            "linear-gradient(172deg, #ffffff 0%, #ffffff 220px, rgba(255,255,255,0.55) 340px, rgba(255,255,255,0.15) 440px, transparent 100%)",
           ].join(", "),
         }}
       />
