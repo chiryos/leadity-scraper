@@ -68,7 +68,7 @@ export function Pricing() {
   );
 
   return (
-    <section id="pricing" className="section-py relative overflow-hidden">
+    <section id="pricing" className="section-py relative z-10 overflow-hidden">
       <div aria-hidden className="absolute inset-0 bg-grid opacity-50" />
       <div className="relative container-page">
         <Reveal>

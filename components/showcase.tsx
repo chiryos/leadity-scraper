@@ -176,12 +176,7 @@ export function Showcase() {
     >
       {/* Blue bg canvas — INTENTIONALLY extends 200px above and below the
           section so it bleeds into the adjacent white Hero / Comparison
-          sections. Glow blobs live inside here, clipped by overflow-hidden.
-          The mask-image fades the canvas IN across the first 140-200px of
-          each extension so the canvas is invisible where neighboring
-          content (e.g. Pricing card shadows) lives, avoiding the blue-
-          over-shadow intersection. Fade overlay still paints on top to
-          keep the organic cloud transition. */}
+          sections. Glow blobs live inside here, clipped by overflow-hidden. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 -top-[200px] -bottom-[200px] z-0 overflow-hidden"
@@ -190,10 +185,6 @@ export function Showcase() {
             "radial-gradient(140% 60% at 18% -2%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.08) 28%, transparent 55%)",
             "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
           ].join(", "),
-          WebkitMaskImage:
-            "linear-gradient(180deg, transparent 0px, transparent 140px, #000 200px, #000 calc(100% - 200px), transparent calc(100% - 140px), transparent 100%)",
-          maskImage:
-            "linear-gradient(180deg, transparent 0px, transparent 140px, #000 200px, #000 calc(100% - 200px), transparent calc(100% - 140px), transparent 100%)",
         }}
       >
         {/* Glow blobs — distributed vertically across the tall section */}

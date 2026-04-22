@@ -43,7 +43,7 @@ const items = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="section-py relative overflow-hidden">
+    <section id="faq" className="section-py relative z-10 overflow-hidden">
       <div
         aria-hidden
         className="glow-blob"
