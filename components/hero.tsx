@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -73,6 +73,36 @@ export function Hero() {
               <ArrowRight className="ml-2 h-4 w-4" />
             </a>
           </Button>
+        </motion.div>
+
+        {/* Trust line — 240+ agencies · 4.9 / 5 */}
+        <motion.div
+          initial={reduce ? false : { opacity: 0 }}
+          animate={reduce ? undefined : { opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.45, ease }}
+          className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:mt-8"
+        >
+          <span className="text-[12px] text-[var(--color-text-secondary)] md:text-[13px]">
+            Trusted by{" "}
+            <strong className="font-semibold text-[var(--color-text-primary)]">
+              240+
+            </strong>{" "}
+            Agencies
+          </span>
+          <span aria-hidden className="h-4 w-px bg-[var(--color-border)]" />
+          <div className="flex items-center gap-1.5">
+            <div className="flex" aria-hidden>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star
+                  key={i}
+                  className="h-3.5 w-3.5 fill-[#F6B700] text-[#F6B700]"
+                />
+              ))}
+            </div>
+            <span className="text-[12px] font-medium text-[var(--color-text-primary)] md:text-[13px]">
+              4.9 / 5
+            </span>
+          </div>
         </motion.div>
       </div>
     </section>
