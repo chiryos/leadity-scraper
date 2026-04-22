@@ -2,7 +2,6 @@ import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
 import { Showcase } from "@/components/showcase";
 import { Features } from "@/components/features";
-import { Qualifier } from "@/components/qualifier";
 import { Comparison } from "@/components/comparison";
 import { Pricing } from "@/components/pricing";
 import { Guarantee } from "@/components/guarantee";
@@ -20,7 +19,6 @@ export default function Page() {
         <Hero />
         <Showcase />
         <Features />
-        <Qualifier />
         <Comparison />
         <Pricing />
         <Guarantee />

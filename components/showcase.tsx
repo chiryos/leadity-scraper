@@ -143,7 +143,7 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
           initial={reduce ? false : { opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 1, ease, delay: 0.1 }}
-          className="relative rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-3 shadow-[0_30px_80px_-30px_rgba(27,134,255,0.35)] sm:p-4"
+          className="glass-card relative rounded-2xl p-3 sm:p-4"
         >
           <div className="relative aspect-[16/11] w-full overflow-hidden rounded-xl bg-white">
             <Image

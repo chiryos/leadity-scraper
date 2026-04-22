@@ -37,7 +37,7 @@ const pricePadY = "py-4";
 
 function TierPill({ value }: { value: string }) {
   return (
-    <div className="pointer-events-auto inline-flex min-w-[90px] flex-col items-center rounded-full bg-white px-3.5 py-1.5 shadow-[0_12px_26px_-12px_rgba(15,23,42,0.3),0_4px_10px_-5px_rgba(27,134,255,0.35)]">
+    <div className="glass-chip pointer-events-auto inline-flex min-w-[90px] flex-col items-center rounded-full px-3.5 py-1.5">
       <span
         className="font-semibold leading-none tabular-nums text-brand-gradient"
         style={{ fontSize: "clamp(14px, 1.5vw, 17px)", letterSpacing: "-0.03em" }}
