@@ -164,23 +164,25 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
 export function Showcase() {
   return (
     <section id="how-it-works" className="relative overflow-hidden bg-white py-24 md:py-28 lg:py-32">
-      {/* Top glow — mirrors the hero's two-layer bottom glow. Peaks are
-          co-located at y=0 so they fuse with the hero's y=100% peaks into
-          one continuous horizontal band of light. */}
+      {/* Top glow — peaks are PUSHED OUTSIDE the section (-20% / -12%)
+          to match the hero's mirrored offset. Keeps the brightest point
+          invisible above the showcase's top edge, so at the actual seam
+          we only see the smooth falloff of each gradient — no hard line,
+          just one continuous wash across both sections. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[720px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[800px]"
         style={{
           background:
-            "radial-gradient(190% 60% at 50% 0%, rgba(9, 81, 255, 0.22) 0%, rgba(27, 134, 255, 0.16) 18%, rgba(34, 201, 245, 0.10) 40%, rgba(34, 201, 245, 0.04) 65%, transparent 90%)",
+            "radial-gradient(200% 75% at 50% -20%, rgba(34, 201, 245, 0.24) 0%, rgba(27, 134, 255, 0.16) 18%, rgba(34, 201, 245, 0.10) 40%, rgba(34, 201, 245, 0.04) 65%, transparent 90%)",
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[480px]"
         style={{
           background:
-            "radial-gradient(160% 55% at 50% 0%, rgba(9, 81, 255, 0.38) 0%, rgba(27, 134, 255, 0.26) 16%, rgba(34, 201, 245, 0.16) 36%, rgba(34, 201, 245, 0.06) 62%, transparent 85%)",
+            "radial-gradient(170% 65% at 50% -12%, rgba(34, 201, 245, 0.30) 0%, rgba(27, 134, 255, 0.20) 18%, rgba(34, 201, 245, 0.12) 38%, rgba(34, 201, 245, 0.04) 62%, transparent 85%)",
         }}
       />
       <div className="relative container-page">

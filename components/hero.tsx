@@ -28,32 +28,30 @@ export function Hero() {
         }}
       />
 
-      {/* Cinematic bottom glow — two stacked layers anchored at the seam
-          (y=100%) that mirror the showcase's top-anchored pair so the two
-          fuse into one continuous horizontal band of brand-blue light.
-
-            • Wash: biggest, softest, furthest reach — deep-blue core
-              that transitions smoothly out to cyan, 5 color stops so
-              the falloff is silky with no hard bands.
-            • Focal: slightly brighter, slightly tighter, sits on top
-              of the wash to give the seam a luminous heart without
-              ever turning into a laser line. */}
+      {/* Seam glow — peaks are PUSHED OUTSIDE the section (120% / 112%)
+          so the two radials' brightest points live below the visible
+          hero bottom. At the seam itself we only see the smooth falloff
+          curve of each gradient, which means the hero's bottom edge and
+          the showcase's top edge read as one continuous wash instead of
+          a two-peak compound line. Colors are all in the light-blue /
+          cyan range (no deep navy) so the band stays luminous, not
+          weighty. */}
       <div
         aria-hidden
         className="glow-breathe-slow pointer-events-none absolute inset-x-0 bottom-0 -z-10"
         style={{
-          height: "720px",
+          height: "800px",
           background:
-            "radial-gradient(190% 60% at 50% 100%, rgba(9, 81, 255, 0.22) 0%, rgba(27, 134, 255, 0.16) 18%, rgba(34, 201, 245, 0.10) 40%, rgba(34, 201, 245, 0.04) 65%, transparent 90%)",
+            "radial-gradient(200% 75% at 50% 120%, rgba(34, 201, 245, 0.24) 0%, rgba(27, 134, 255, 0.16) 18%, rgba(34, 201, 245, 0.10) 40%, rgba(34, 201, 245, 0.04) 65%, transparent 90%)",
         }}
       />
       <div
         aria-hidden
         className="glow-breathe pointer-events-none absolute inset-x-0 bottom-0 -z-10"
         style={{
-          height: "420px",
+          height: "480px",
           background:
-            "radial-gradient(160% 55% at 50% 100%, rgba(9, 81, 255, 0.38) 0%, rgba(27, 134, 255, 0.26) 16%, rgba(34, 201, 245, 0.16) 36%, rgba(34, 201, 245, 0.06) 62%, transparent 85%)",
+            "radial-gradient(170% 65% at 50% 112%, rgba(34, 201, 245, 0.30) 0%, rgba(27, 134, 255, 0.20) 18%, rgba(34, 201, 245, 0.12) 38%, rgba(34, 201, 245, 0.04) 62%, transparent 85%)",
         }}
       />
 
