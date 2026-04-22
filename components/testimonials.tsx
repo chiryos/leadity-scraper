@@ -2,12 +2,31 @@
 
 import * as React from "react";
 import Image from "next/image";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowLeft, ArrowRight, Quote, X } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { cn } from "@/lib/utils";
+
+/**
+ * Testimonials — manual horizontal carousel inspired by the "retro-testimonial"
+ * pattern (glass card grid with arrow navigation + expand-on-click modal),
+ * restyled in the site's Apple Liquid Glass aesthetic.
+ *
+ * Each card:
+ *   • Thumbnail of the real customer DM screenshot (the "receipt")
+ *   • Pull quote (punchy line)
+ *   • Verified customer attribution
+ * Click → modal with the full-size screenshot.
+ *
+ * No auto-scroll. User drives the carousel with ← → arrows or native
+ * overflow-x scroll / drag on touch.
+ */
 
 type Testimonial = {
   src: string;
   alt: string;
   pull: string;
+  role: string;
   width: number;
   height: number;
 };
@@ -16,14 +35,16 @@ const testimonials: Testimonial[] = [
   {
     src: "/testimonials/t1.jpg",
     alt: "DM saying 10x better than outscraper",
-    pull: "10× better than outscraper.",
+    pull: "10× better than Outscraper.",
+    role: "Outbound agency",
     width: 1170,
     height: 1280,
   },
   {
     src: "/testimonials/t2.jpg",
     alt: "Customer DM about 4 meetings booked yesterday",
-    pull: "Really like the leads, booked 4 meetings yesterday.",
+    pull: "Really like the leads — booked 4 meetings yesterday.",
+    role: "Cold SMS operator",
     width: 1280,
     height: 590,
   },
@@ -31,6 +52,7 @@ const testimonials: Testimonial[] = [
     src: "/testimonials/t3.jpg",
     alt: "Customer DM saying I love ur leads man",
     pull: "I love ur leads man. Direct business owner.",
+    role: "Growth agency",
     width: 1280,
     height: 720,
   },
@@ -38,20 +60,23 @@ const testimonials: Testimonial[] = [
     src: "/testimonials/t4.jpg",
     alt: "Customer DM with 4 meetings coming up",
     pull: "Got 4 meetings coming up. Let's run it.",
+    role: "Performance outbound",
     width: 1280,
     height: 1280,
   },
   {
     src: "/testimonials/t5.jpg",
     alt: "Whop notification of new payment 300 dollars",
-    pull: "Closed G - $300 depo, 3k.",
+    pull: "Closed — $300 depo, 3k.",
+    role: "Solo operator",
     width: 1280,
     height: 905,
   },
   {
     src: "/testimonials/t6.jpg",
     alt: "Customer DM went from no booked meetings to 5 tomorrow",
-    pull: "From 0 to 5 booked meetings - only 600 texts.",
+    pull: "From 0 to 5 booked meetings — only 600 texts.",
+    role: "Cold SMS campaign",
     width: 1280,
     height: 1280,
   },
@@ -59,107 +84,237 @@ const testimonials: Testimonial[] = [
     src: "/testimonials/t7.jpg",
     alt: "Customer DM saying SO GOOD, tons of responses to call",
     pull: "Tons of responses to call.",
+    role: "Agency partner",
     width: 1180,
     height: 1170,
   },
 ];
 
-// Triple the list for a seamless infinite loop buffer.
-const looped = [...testimonials, ...testimonials, ...testimonials];
+const easeOut = [0.22, 1, 0.36, 1] as const;
 
-export function Testimonials() {
-  const sectionRef = React.useRef<HTMLElement>(null);
-  const trackRef = React.useRef<HTMLDivElement>(null);
-  const cardsRef = React.useRef<(HTMLButtonElement | null)[]>([]);
-  const offsetRef = React.useRef(0);
-  const [active, setActive] = React.useState<number | null>(null);
-
-  React.useEffect(() => {
-    const track = trackRef.current;
-    const section = sectionRef.current;
-    if (!track || !section) return;
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const SET_COUNT = testimonials.length;
-    const SPEED = 0.55; // px per frame ≈ 33px/sec at 60fps
-
-    const measureSetWidth = () => {
-      const children = Array.from(track.children) as HTMLElement[];
-      if (children.length <= SET_COUNT) return 0;
-      const first = children[0].getBoundingClientRect();
-      const nextSet = children[SET_COUNT].getBoundingClientRect();
-      return nextSet.left - first.left;
-    };
-
-    let setWidth = 0;
-    let rafId = 0;
-    let inView = false; // only run the loop when the section is visible
-
-    const smoothstep = (t: number) => t * t * (3 - 2 * t);
-
-    const tick = () => {
-      if (!reduce) {
-        offsetRef.current += SPEED;
-        if (setWidth === 0) setWidth = measureSetWidth();
-        if (setWidth > 0 && offsetRef.current >= setWidth) {
-          offsetRef.current -= setWidth;
-        }
-        track.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
-      }
-
-      // Per-card scale + opacity falloff based on distance from viewport center
-      const vw = window.innerWidth;
-      const centerX = vw / 2;
-      const cards = cardsRef.current;
-      for (let i = 0; i < cards.length; i++) {
-        const card = cards[i];
-        if (!card) continue;
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const distance = Math.abs(cardCenter - centerX);
-        const maxDistance = vw / 2 + rect.width * 0.6;
-        const t = Math.min(distance / maxDistance, 1);
-        const e = smoothstep(t);
-        const scale = 1 - e * 0.18;
-        const opacity = 1 - e * 0.55;
-        card.style.transform = `scale(${scale})`;
-        card.style.opacity = `${opacity}`;
-        card.style.zIndex = `${Math.round(100 - distance / 10)}`;
-      }
-
-      if (inView) rafId = requestAnimationFrame(tick);
-    };
-
-    // Start/stop the RAF loop based on visibility — saves enormous cost on mobile scroll
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries[0]?.isIntersecting ?? false;
-        if (visible && !inView) {
-          inView = true;
-          rafId = requestAnimationFrame(tick);
-        } else if (!visible && inView) {
-          inView = false;
-          if (rafId) cancelAnimationFrame(rafId);
-        }
-      },
-      { rootMargin: "200px 0px" },
-    );
-    observer.observe(section);
-
-    const onResize = () => {
-      setWidth = measureSetWidth();
-    };
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      observer.disconnect();
-      if (rafId) cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
+function TestimonialCard({
+  t,
+  index,
+  onOpen,
+}: {
+  t: Testimonial;
+  index: number;
+  onOpen: () => void;
+}) {
+  const reduce = useReducedMotion();
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28">
+    <motion.button
+      layoutId={`card-${index}`}
+      type="button"
+      onClick={onOpen}
+      whileHover={reduce ? undefined : { y: -4 }}
+      transition={{ duration: 0.3, ease: easeOut }}
+      className="glass-card group relative flex h-[460px] w-[320px] shrink-0 flex-col overflow-hidden rounded-[28px] p-6 text-left md:h-[500px] md:w-[360px] md:p-7"
+    >
+      {/* Quote icon */}
+      <motion.div
+        layoutId={`quote-${index}`}
+        className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white"
+        style={{
+          background:
+            "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
+        }}
+      >
+        <Quote className="h-4 w-4" />
+      </motion.div>
+
+      {/* Pull quote */}
+      <motion.p
+        layoutId={`pull-${index}`}
+        className="mt-5 text-balance text-[20px] font-semibold leading-[1.25] tracking-[-0.015em] text-[var(--color-text-primary)] md:text-[22px]"
+      >
+        &ldquo;{t.pull}&rdquo;
+      </motion.p>
+
+      {/* Screenshot preview thumbnail — scales to fill remaining space */}
+      <motion.div
+        layoutId={`thumb-${index}`}
+        className="relative mt-auto overflow-hidden rounded-2xl border border-white/60 shadow-[0_10px_24px_-14px_rgba(15,23,42,0.18)]"
+      >
+        <div className="relative h-[180px] w-full bg-white md:h-[200px]">
+          <Image
+            src={t.src}
+            alt={t.alt}
+            fill
+            sizes="(min-width: 768px) 360px, 320px"
+            className="object-cover object-top"
+            draggable={false}
+          />
+        </div>
+      </motion.div>
+
+      {/* Attribution */}
+      <motion.div
+        layoutId={`meta-${index}`}
+        className="mt-5 flex items-center justify-between"
+      >
+        <div className="flex items-center gap-2">
+          <span
+            aria-hidden
+            className="inline-block h-2 w-2 rounded-full bg-[#22C9F5]"
+          />
+          <span className="text-[12px] font-medium text-[var(--color-text-secondary)]">
+            Verified customer
+          </span>
+        </div>
+        <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--color-text-muted)]">
+          {t.role}
+        </span>
+      </motion.div>
+    </motion.button>
+  );
+}
+
+function ExpandedModal({
+  t,
+  index,
+  onClose,
+}: {
+  t: Testimonial;
+  index: number;
+  onClose: () => void;
+}) {
+  const overlayRef = React.useRef<HTMLDivElement>(null);
+
+  // Escape + body scroll lock
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [onClose]);
+
+  return (
+    <motion.div
+      ref={overlayRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25, ease: easeOut }}
+      onClick={(e) => {
+        if (e.target === overlayRef.current) onClose();
+      }}
+      className="fixed inset-0 z-[80] flex items-center justify-center bg-black/55 p-4 backdrop-blur-md"
+      role="dialog"
+      aria-modal="true"
+    >
+      <motion.div
+        layoutId={`card-${index}`}
+        className="glass-card relative flex max-h-[92vh] w-full max-w-[520px] flex-col overflow-hidden rounded-[28px] p-5 md:p-7"
+      >
+        {/* Close */}
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="glass-chip absolute right-4 top-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full"
+        >
+          <X className="h-4 w-4 text-[var(--color-text-primary)]" />
+        </button>
+
+        {/* Quote icon + pull quote */}
+        <div className="flex items-start gap-4">
+          <motion.div
+            layoutId={`quote-${index}`}
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white"
+            style={{
+              background:
+                "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
+            }}
+          >
+            <Quote className="h-4 w-4" />
+          </motion.div>
+          <motion.p
+            layoutId={`pull-${index}`}
+            className="pr-12 text-balance text-[20px] font-semibold leading-[1.25] tracking-[-0.015em] text-[var(--color-text-primary)] md:text-[24px]"
+          >
+            &ldquo;{t.pull}&rdquo;
+          </motion.p>
+        </div>
+
+        {/* Full screenshot */}
+        <motion.div
+          layoutId={`thumb-${index}`}
+          className="mt-5 overflow-auto rounded-2xl border border-white/60 shadow-[0_20px_48px_-24px_rgba(15,23,42,0.25)]"
+        >
+          <Image
+            src={t.src}
+            alt={t.alt}
+            width={t.width}
+            height={t.height}
+            sizes="(min-width: 768px) 480px, 90vw"
+            className="h-auto w-full"
+          />
+        </motion.div>
+
+        {/* Attribution */}
+        <motion.div
+          layoutId={`meta-${index}`}
+          className="mt-5 flex items-center justify-between"
+        >
+          <div className="flex items-center gap-2">
+            <span
+              aria-hidden
+              className="inline-block h-2 w-2 rounded-full bg-[#22C9F5]"
+            />
+            <span className="text-[13px] font-medium text-[var(--color-text-secondary)]">
+              Verified customer
+            </span>
+          </div>
+          <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--color-text-muted)]">
+            {t.role}
+          </span>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+export function Testimonials() {
+  const trackRef = React.useRef<HTMLDivElement>(null);
+  const [canLeft, setCanLeft] = React.useState(false);
+  const [canRight, setCanRight] = React.useState(true);
+  const [active, setActive] = React.useState<number | null>(null);
+
+  const checkScroll = React.useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    setCanLeft(scrollLeft > 4);
+    setCanRight(scrollLeft < scrollWidth - clientWidth - 4);
+  }, []);
+
+  React.useEffect(() => {
+    checkScroll();
+    const el = trackRef.current;
+    if (!el) return;
+    const onScroll = () => checkScroll();
+    el.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", checkScroll);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, [checkScroll]);
+
+  const scrollBy = (dx: number) => {
+    trackRef.current?.scrollBy({ left: dx, behavior: "smooth" });
+  };
+
+  return (
+    <section className="relative overflow-hidden pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28">
       <div aria-hidden className="absolute inset-0 bg-grid opacity-50" />
       <div
         aria-hidden
@@ -169,6 +324,7 @@ export function Testimonials() {
             "radial-gradient(60% 50% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
         }}
       />
+
       <div className="relative">
         <Reveal>
           <div className="container-page mx-auto max-w-[820px] text-center">
@@ -178,118 +334,86 @@ export function Testimonials() {
               <span className="block text-brand-gradient">not testimonials.</span>
             </h2>
             <p className="mt-5 max-w-[640px] mx-auto text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
-              Every card below is a real screenshot from a real customer. Tap
-              any card to read the full conversation.
+              Every card is a real screenshot from a real customer. Tap any
+              card to read the full conversation.
             </p>
           </div>
         </Reveal>
 
-        {/* Infinite coverflow carousel — never pauses (not even on hover) */}
+        {/* Carousel */}
         <Reveal delay={0.1}>
-          <div className="relative mt-16 select-none">
-            {/* Spotlight glow behind the focused card - unified light tone */}
-            <div
-              aria-hidden
-              className="glow-breathe pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2"
-              style={{
-                width: "min(1000px, 85vw)",
-                height: "min(560px, 60vw)",
-                background:
-                  "radial-gradient(closest-side, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
-              }}
-            />
-            <div
-              aria-hidden
-              className="glow-breathe-slow pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2"
-              style={{
-                width: "min(1400px, 100vw)",
-                height: "min(700px, 75vw)",
-                background:
-                  "radial-gradient(closest-side, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
-              }}
-            />
-
-            {/* Track wrapper with edge mask so cards fade into the background */}
+          <div className="mt-12 md:mt-16">
+            {/* Scrollable track with edge mask so cards fade in/out */}
             <div
               className="relative"
               style={{
                 maskImage:
-                  "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                  "linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)",
                 WebkitMaskImage:
-                  "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                  "linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)",
               }}
             >
-            <div
-              ref={trackRef}
-              className="flex items-center gap-6 md:gap-8"
-              style={{ willChange: "transform" }}
-            >
-              {looped.map((t, i) => (
-                <button
-                  key={i}
-                  ref={(el) => {
-                    cardsRef.current[i] = el;
-                  }}
-                  type="button"
-                  onClick={() => setActive(i % testimonials.length)}
-                  className="group relative flex-shrink-0 overflow-hidden rounded-[26px] border border-[var(--color-border)] bg-white text-left shadow-[0_12px_28px_-18px_rgba(15,23,42,0.18)] transition-shadow duration-300 hover:shadow-[0_20px_40px_-20px_rgba(27,134,255,0.3)]"
-                  style={{
-                    width: "clamp(320px, 30vw, 460px)",
-                    transformOrigin: "center center",
-                  }}
-                >
-                  <div className="w-full bg-[var(--color-surface)]">
-                    <Image
-                      src={t.src}
-                      alt={t.alt}
-                      width={t.width}
-                      height={t.height}
-                      sizes="(min-width: 1024px) 460px, 80vw"
-                      className="block h-auto w-full"
-                      draggable={false}
+              <div
+                ref={trackRef}
+                className="flex gap-5 overflow-x-auto overflow-y-visible scroll-smooth px-6 py-4 [scrollbar-width:none] md:gap-6 md:px-[max(24px,calc((100vw-1200px)/2))] md:py-6 [&::-webkit-scrollbar]:hidden"
+                style={{ scrollSnapType: "x mandatory" }}
+              >
+                {testimonials.map((t, i) => (
+                  <div
+                    key={t.src}
+                    className="scroll-ml-6 shrink-0"
+                    style={{ scrollSnapAlign: "start" }}
+                  >
+                    <TestimonialCard
+                      t={t}
+                      index={i}
+                      onOpen={() => setActive(i)}
                     />
                   </div>
-                  <div className="border-t border-[var(--color-border)] p-5 md:p-6">
-                    <p className="text-[15px] font-medium leading-[1.4] text-[var(--color-text-primary)] md:text-[16px]">
-                      &ldquo;{t.pull}&rdquo;
-                    </p>
-                  </div>
-                </button>
-              ))}
+                ))}
+              </div>
             </div>
+
+            {/* Arrow nav */}
+            <div className="container-page mt-6 flex items-center justify-end gap-3 md:mt-8">
+              <button
+                type="button"
+                aria-label="Previous testimonials"
+                onClick={() => scrollBy(-360)}
+                disabled={!canLeft}
+                className={cn(
+                  "glass-chip inline-flex h-11 w-11 items-center justify-center rounded-full transition-opacity",
+                  !canLeft && "cursor-not-allowed opacity-40",
+                )}
+              >
+                <ArrowLeft className="h-4 w-4 text-[var(--color-text-primary)]" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next testimonials"
+                onClick={() => scrollBy(360)}
+                disabled={!canRight}
+                className={cn(
+                  "glass-chip inline-flex h-11 w-11 items-center justify-center rounded-full transition-opacity",
+                  !canRight && "cursor-not-allowed opacity-40",
+                )}
+              >
+                <ArrowRight className="h-4 w-4 text-[var(--color-text-primary)]" />
+              </button>
             </div>
           </div>
         </Reveal>
 
-        {active !== null ? (
-          <div
-            role="dialog"
-            aria-modal="true"
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 p-4 backdrop-blur-sm"
-            onClick={() => setActive(null)}
-          >
-            <div
-              className="relative max-h-[90vh] max-w-[640px] w-full overflow-auto rounded-2xl bg-white p-3"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={testimonials[active].src}
-                alt={testimonials[active].alt}
-                width={testimonials[active].width}
-                height={testimonials[active].height}
-                className="h-auto w-full rounded-xl"
-              />
-              <button
-                type="button"
-                onClick={() => setActive(null)}
-                aria-label="Close"
-                className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-[var(--color-text-primary)] shadow-md hover:bg-white"
-              >
-                ×
-              </button>
-            </div>
-          </div>
-        ) : null}
+        {/* Expanded modal */}
+        <AnimatePresence>
+          {active !== null ? (
+            <ExpandedModal
+              t={testimonials[active]}
+              index={active}
+              onClose={() => setActive(null)}
+            />
+          ) : null}
+        </AnimatePresence>
       </div>
     </section>
   );

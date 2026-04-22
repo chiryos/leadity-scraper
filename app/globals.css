@@ -181,95 +181,146 @@
     background-size: 56px 56px;
   }
 
-  /* ───────── Apple Liquid Glass ─────────
-     Inspired by Apple's Liquid Glass material (iOS/macOS 26).
-     Key properties of a real glass surface:
-       • High backdrop saturation (180%) — colors behind pop through vividly
-       • Non-trivial blur (20–28px) — content is readable, not crisp
-       • Vertical alpha gradient (top lighter, bottom slightly darker) so the
-         surface catches light like real glass
-       • Inset top highlight — 1px white ring on top edge like beveled glass
-       • Subtle inset bottom — barely-there reflection underneath
-       • Soft ground shadow with a hint of brand-blue for elevation
+  /* ───────── Apple Liquid Glass (iOS/macOS 26) ─────────
+     Researched recipe combining the techniques used by:
+       • Apple's own Liquid Glass material spec
+       • css-tricks "Getting Clarity on Apple's Liquid Glass"
+       • dev.to Kevin's pure-CSS recreation
+       • logrocket's SVG-filter deep dive
+
+     What makes Apple glass different from generic glassmorphism:
+
+       1. SATURATION BOOST (200%) — colors behind DON'T go milky. They
+          punch through more vividly than reality. This single thing
+          is ~80% of the "Apple" look.
+       2. INNER GLOW (not just a 1px line) — a diffuse inset top
+          highlight ≈ 4-6px offset, 20-28px blur, gives light pooling
+          inside the surface like a real convex glass.
+       3. SPECULAR CORNER — a radial gradient painted as a bg LAYER
+          (not a pseudo) in the top-left corner, simulating where the
+          imaginary light source hits the glass.
+       4. RIM LIGHTS — asymmetric inset shadows on edges (top+left are
+          bright catching the light; bottom+right are dimmer). This is
+          what gives the surface 3D curvature in 2D.
+       5. BRAND-TINTED GROUND SHADOW — the elevation shadow isn't
+          neutral grey; it carries a hint of the site's brand blue so
+          cards feel native to the atmosphere.
 
      Two tiers:
-       .glass-card  — primary surfaces (cards, modals, big CTAs)
-       .glass-chip  — small surfaces (buttons, pills, toggles, chips) */
+       .glass-card  — 24px blur, primary surfaces
+       .glass-chip  — 16px blur, secondary surfaces (buttons, pills)
+       .glass-chip-dark — inverted alpha for use over brand gradients */
 
   .glass-card {
     position: relative;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.62) 0%,
-      rgba(255, 255, 255, 0.42) 100%
-    );
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    background:
+      /* Specular corner — light hitting top-left */
+      radial-gradient(
+        120% 80% at 15% 0%,
+        rgba(255, 255, 255, 0.22) 0%,
+        transparent 55%
+      ),
+      /* Base vertical alpha gradient */
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.58) 0%,
+        rgba(255, 255, 255, 0.38) 100%
+      );
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
     border: 1px solid rgba(255, 255, 255, 0.55);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.85),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.18),
+      /* Inner diffuse top glow — Apple's "light pooling" trick */
+      inset 0 4px 24px rgba(255, 255, 255, 0.4),
+      /* Sharp top edge catch-light */
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      /* Left rim light (light comes from top-left) */
+      inset 1px 0 0 rgba(255, 255, 255, 0.35),
+      /* Subtle bottom rim — the "lit from above" inverse */
+      inset 0 -1px 0 rgba(255, 255, 255, 0.22),
+      /* Tight ground */
       0 1px 2px rgba(15, 23, 42, 0.04),
-      0 10px 28px -14px rgba(15, 23, 42, 0.14),
-      0 28px 56px -28px rgba(27, 134, 255, 0.18);
+      /* Soft elevation */
+      0 14px 36px -16px rgba(15, 23, 42, 0.14),
+      /* Brand-blue tinted glow shadow */
+      0 36px 72px -32px rgba(27, 134, 255, 0.22);
     transition:
-      border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .glass-card:hover {
     border-color: rgba(255, 255, 255, 0.85);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.95),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 5px 28px rgba(255, 255, 255, 0.48),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 1px 0 0 rgba(255, 255, 255, 0.45),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.26),
       0 1px 2px rgba(15, 23, 42, 0.04),
-      0 16px 36px -18px rgba(15, 23, 42, 0.18),
-      0 36px 72px -32px rgba(27, 134, 255, 0.28);
+      0 20px 48px -20px rgba(15, 23, 42, 0.2),
+      0 48px 96px -40px rgba(27, 134, 255, 0.36);
   }
 
   .glass-chip {
     position: relative;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.78) 0%,
-      rgba(255, 255, 255, 0.58) 100%
-    );
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background:
+      radial-gradient(
+        100% 80% at 15% 0%,
+        rgba(255, 255, 255, 0.3) 0%,
+        transparent 60%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.72) 0%,
+        rgba(255, 255, 255, 0.55) 100%
+      );
+    backdrop-filter: blur(16px) saturate(200%);
+    -webkit-backdrop-filter: blur(16px) saturate(200%);
     border: 1px solid rgba(255, 255, 255, 0.7);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 3px 14px rgba(255, 255, 255, 0.48),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 1px 0 0 rgba(255, 255, 255, 0.5),
       0 1px 2px rgba(15, 23, 42, 0.04),
       0 6px 14px -8px rgba(15, 23, 42, 0.12);
     transition:
-      border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+      border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .glass-chip:hover {
-    border-color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.95);
     box-shadow:
+      inset 0 3px 14px rgba(255, 255, 255, 0.58),
       inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 1px 0 0 rgba(255, 255, 255, 0.6),
       0 1px 2px rgba(15, 23, 42, 0.04),
-      0 10px 22px -10px rgba(27, 134, 255, 0.35);
+      0 12px 24px -10px rgba(27, 134, 255, 0.4);
     transform: translateY(-1px);
   }
 
-  /* Dark glass — for use on brand-gradient bgs (Ours card, CTA card).
-     Same physics but inverted alpha so it reads as translucent white-on-blue. */
   .glass-chip-dark {
     position: relative;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.24) 0%,
-      rgba(255, 255, 255, 0.14) 100%
-    );
-    backdrop-filter: blur(14px) saturate(160%);
-    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    background:
+      radial-gradient(
+        100% 80% at 15% 0%,
+        rgba(255, 255, 255, 0.14) 0%,
+        transparent 60%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.22) 0%,
+        rgba(255, 255, 255, 0.12) 100%
+      );
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.28);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.32),
+      inset 0 2px 10px rgba(255, 255, 255, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 1px 0 0 rgba(255, 255, 255, 0.18),
       0 1px 2px rgba(15, 23, 42, 0.08);
   }
 
