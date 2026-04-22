@@ -28,50 +28,32 @@ export function Hero() {
         }}
       />
 
-      {/* Cinematic bottom glow — three stacked layers that peak AT the
-          section boundary (y=100%) so they meet the showcase's matching
-          top-anchored layers and form a single continuous horizontal band
-          of brand-blue light across the seam.
-            • Layer 1 (widest + softest, breathing slow) — ambient wash
-            • Layer 2 (medium, breathing) — defines the glow's body
-            • Layer 3 (NEW: brighter, horizontally-stretched core beam) —
-              the focused "laser" that makes the seam look intentional */}
+      {/* Cinematic bottom glow — two stacked layers anchored at the seam
+          (y=100%) that mirror the showcase's top-anchored pair so the two
+          fuse into one continuous horizontal band of brand-blue light.
+
+            • Wash: biggest, softest, furthest reach — deep-blue core
+              that transitions smoothly out to cyan, 5 color stops so
+              the falloff is silky with no hard bands.
+            • Focal: slightly brighter, slightly tighter, sits on top
+              of the wash to give the seam a luminous heart without
+              ever turning into a laser line. */}
       <div
         aria-hidden
         className="glow-breathe-slow pointer-events-none absolute inset-x-0 bottom-0 -z-10"
         style={{
-          height: "680px",
+          height: "720px",
           background:
-            "radial-gradient(85% 100% at 50% 100%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
+            "radial-gradient(190% 60% at 50% 100%, rgba(9, 81, 255, 0.22) 0%, rgba(27, 134, 255, 0.16) 18%, rgba(34, 201, 245, 0.10) 40%, rgba(34, 201, 245, 0.04) 65%, transparent 90%)",
         }}
       />
       <div
         aria-hidden
         className="glow-breathe pointer-events-none absolute inset-x-0 bottom-0 -z-10"
         style={{
-          height: "520px",
+          height: "420px",
           background:
-            "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.18) 0%, rgba(27, 134, 255, 0.08) 40%, transparent 75%)",
-        }}
-      />
-      {/* Core beam — wide horizontal, medium vertical, medium intensity */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10"
-        style={{
-          height: "440px",
-          background:
-            "radial-gradient(150% 50% at 50% 100%, rgba(27, 134, 255, 0.55) 0%, rgba(34, 201, 245, 0.28) 30%, rgba(27, 134, 255, 0.08) 60%, transparent 82%)",
-        }}
-      />
-      {/* Brightest focal beam — tight vertical, super-wide horizontal, high intensity */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10"
-        style={{
-          height: "220px",
-          background:
-            "radial-gradient(170% 60% at 50% 100%, rgba(27, 134, 255, 0.75) 0%, rgba(34, 201, 245, 0.4) 25%, transparent 70%)",
+            "radial-gradient(160% 55% at 50% 100%, rgba(9, 81, 255, 0.38) 0%, rgba(27, 134, 255, 0.26) 16%, rgba(34, 201, 245, 0.16) 36%, rgba(34, 201, 245, 0.06) 62%, transparent 85%)",
         }}
       />
 

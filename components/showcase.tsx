@@ -164,42 +164,23 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
 export function Showcase() {
   return (
     <section id="how-it-works" className="relative overflow-hidden bg-white py-24 md:py-28 lg:py-32">
-      {/* Top glow — three stacked layers that mirror the hero's bottom-anchored
-          glow. Peaks sit at y=0 so they co-locate with the hero's y=100% peaks,
-          making the section seam disappear into a single continuous horizontal
-          band of brand-blue light. */}
+      {/* Top glow — mirrors the hero's two-layer bottom glow. Peaks are
+          co-located at y=0 so they fuse with the hero's y=100% peaks into
+          one continuous horizontal band of light. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[680px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[720px]"
         style={{
           background:
-            "radial-gradient(85% 100% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
+            "radial-gradient(190% 60% at 50% 0%, rgba(9, 81, 255, 0.22) 0%, rgba(27, 134, 255, 0.16) 18%, rgba(34, 201, 245, 0.10) 40%, rgba(34, 201, 245, 0.04) 65%, transparent 90%)",
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[520px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
         style={{
           background:
-            "radial-gradient(60% 100% at 50% 0%, rgba(34, 201, 245, 0.18) 0%, rgba(27, 134, 255, 0.08) 40%, transparent 75%)",
-        }}
-      />
-      {/* Core beam — mirror of hero's matching layer */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[440px]"
-        style={{
-          background:
-            "radial-gradient(150% 50% at 50% 0%, rgba(27, 134, 255, 0.55) 0%, rgba(34, 201, 245, 0.28) 30%, rgba(27, 134, 255, 0.08) 60%, transparent 82%)",
-        }}
-      />
-      {/* Brightest focal beam — mirror of hero's top layer */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[220px]"
-        style={{
-          background:
-            "radial-gradient(170% 60% at 50% 0%, rgba(27, 134, 255, 0.75) 0%, rgba(34, 201, 245, 0.4) 25%, transparent 70%)",
+            "radial-gradient(160% 55% at 50% 0%, rgba(9, 81, 255, 0.38) 0%, rgba(27, 134, 255, 0.26) 16%, rgba(34, 201, 245, 0.16) 36%, rgba(34, 201, 245, 0.06) 62%, transparent 85%)",
         }}
       />
       <div className="relative container-page">
