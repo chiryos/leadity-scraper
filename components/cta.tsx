@@ -63,7 +63,7 @@ export function CTA() {
                 className="h-[80px] w-[80px] object-contain md:h-[92px] md:w-[92px]"
                 style={{
                   filter:
-                    "drop-shadow(0 18px 32px rgba(0,0,0,0.32)) drop-shadow(0 4px 10px rgba(0,0,0,0.22))",
+                    "drop-shadow(0 18px 32px rgba(255,255,255,0.55)) drop-shadow(0 0 24px rgba(255,255,255,0.45))",
                 }}
                 priority={false}
               />
@@ -116,14 +116,6 @@ export function CTA() {
                 </a>
               </div>
 
-              {/* Trust row */}
-              <div className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] font-medium text-white/75 md:mt-10 md:text-[12px]">
-                <span className="tabular-nums">240+ agencies</span>
-                <span aria-hidden className="h-3 w-px bg-white/30" />
-                <span className="tabular-nums">4.9 / 5 rating</span>
-                <span aria-hidden className="h-3 w-px bg-white/30" />
-                <span>Refund + 50% bonus guarantee</span>
-              </div>
             </div>
           </div>
         </Reveal>

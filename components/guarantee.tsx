@@ -50,11 +50,11 @@ export function Guarantee() {
               }}
             />
             <Image
-              src="/leadity-guarantee.png"
-              alt="Leadity refund plus 50% bonus seal"
-              width={260}
-              height={260}
-              className="h-[220px] w-[220px] object-contain md:h-[260px] md:w-[260px]"
+              src="/leadity-refund-recycle.png"
+              alt="Leadity refund plus 50% bonus - replace and recycle bad leads"
+              width={320}
+              height={320}
+              className="h-[260px] w-[260px] object-contain md:h-[300px] md:w-[300px]"
               priority
             />
           </div>

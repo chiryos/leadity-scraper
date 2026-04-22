@@ -38,18 +38,18 @@ const theirsGradient =
 
 // spacing rhythm used in BOTH the card price rows and the pills overlay
 // so the pills line up perfectly with each price row.
-const pricePadY = "py-7";
+const pricePadY = "py-4";
 
 function TierPill({ value }: { value: string }) {
   return (
-    <div className="pointer-events-auto inline-flex min-w-[130px] flex-col items-center rounded-full bg-white px-5 py-2.5 shadow-[0_18px_40px_-18px_rgba(15,23,42,0.35),0_6px_16px_-8px_rgba(27,134,255,0.4)]">
+    <div className="pointer-events-auto inline-flex min-w-[90px] flex-col items-center rounded-full bg-white px-3.5 py-1.5 shadow-[0_12px_26px_-12px_rgba(15,23,42,0.3),0_4px_10px_-5px_rgba(27,134,255,0.35)]">
       <span
         className="font-semibold leading-none tabular-nums text-brand-gradient"
-        style={{ fontSize: "clamp(22px, 2.4vw, 26px)", letterSpacing: "-0.03em" }}
+        style={{ fontSize: "clamp(14px, 1.5vw, 17px)", letterSpacing: "-0.03em" }}
       >
         {value}
       </span>
-      <span className="mt-1 text-[11px] font-medium text-[var(--color-text-muted)]">
+      <span className="mt-0.5 text-[9px] font-medium text-[var(--color-text-muted)]">
         Owners Mobiles
       </span>
     </div>
@@ -83,40 +83,29 @@ export function Comparison() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="relative mx-auto mt-28 max-w-[1200px]">
+          <div className="relative mx-auto mt-16 max-w-[720px]">
             {/* Two cards side-by-side; generous vertical gap on mobile so the floating Ours logo clears the Theirs card above */}
-            <div className="grid grid-cols-1 gap-28 lg:grid-cols-2 lg:gap-10">
+            <div className="grid grid-cols-1 gap-20 lg:grid-cols-2 lg:gap-6">
               {/* ───────────── OURS CARD ───────────── */}
               <article
-                className="relative order-2 rounded-[28px] px-8 pt-[110px] pb-10 text-white shadow-[0_40px_80px_-30px_rgba(27,134,255,0.55)]"
+                className="relative order-2 rounded-[18px] px-5 pt-[70px] pb-6 text-white shadow-[0_24px_48px_-20px_rgba(27,134,255,0.55)]"
                 style={{ background: oursGradient }}
               >
-                {/* floating logo + white glow — centered on top, z-20 to sit above adjacent cards */}
+                {/* floating logo with grounded black drop-shadow */}
                 <div
                   aria-hidden
                   className="absolute left-1/2 z-20 -translate-x-1/2"
-                  style={{ top: "-90px" }}
+                  style={{ top: "-54px" }}
                 >
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2"
-                    style={{
-                      width: "300px",
-                      height: "300px",
-                      background:
-                        "radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.18) 55%, transparent 80%)",
-                      filter: "blur(10px)",
-                    }}
-                  />
                   <Image
                     src="/logo.png"
                     alt="Leadity"
-                    width={180}
-                    height={180}
-                    className="relative h-[180px] w-[180px] object-contain"
+                    width={108}
+                    height={108}
+                    className="relative h-[108px] w-[108px] object-contain"
                     style={{
                       filter:
-                        "drop-shadow(0 18px 36px rgba(9,81,255,0.4)) drop-shadow(0 0 30px rgba(255,255,255,0.6))",
+                        "drop-shadow(0 14px 26px rgba(0,0,0,0.4)) drop-shadow(0 4px 10px rgba(0,0,0,0.28))",
                     }}
                     priority
                   />
@@ -126,14 +115,14 @@ export function Comparison() {
                 <h3
                   className="text-center font-semibold tracking-[-0.04em] text-white"
                   style={{
-                    fontSize: "clamp(40px, 4.4vw, 56px)",
+                    fontSize: "clamp(24px, 2.8vw, 34px)",
                     lineHeight: 1,
                   }}
                 >
                   Ours
                 </h3>
 
-                <div className="mt-8 h-px w-full bg-white/20" />
+                <div className="mt-5 h-px w-full bg-white/20" />
 
                 {/* Prices - uses same pricePadY as the pill overlay for perfect alignment */}
                 <div className="flex flex-col">
@@ -148,7 +137,7 @@ export function Comparison() {
                       <span
                         className="inline-block font-semibold tabular-nums text-white"
                         style={{
-                          fontSize: "clamp(28px, 3.2vw, 36px)",
+                          fontSize: "clamp(17px, 2vw, 22px)",
                           letterSpacing: "-0.03em",
                           lineHeight: 1,
                         }}
@@ -156,14 +145,14 @@ export function Comparison() {
                         {t.leadity}
                       </span>
                       {/* Inline tier label - shown on mobile where the center pills are hidden */}
-                      <span className="mt-2 block text-[12px] font-medium text-white/75 lg:hidden">
+                      <span className="mt-1.5 block text-[10px] font-medium text-white/75 lg:hidden">
                         {t.label} Owners Mobiles
                       </span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-2 h-px w-full bg-white/20" />
+                <div className="mt-1.5 h-px w-full bg-white/20" />
 
                 {/* Features */}
                 <ul className="flex flex-col">
@@ -171,17 +160,17 @@ export function Comparison() {
                     <li
                       key={f.ours}
                       className={
-                        "flex items-center gap-3 py-4 " +
+                        "flex items-center gap-2.5 py-2.5 " +
                         (i < features.length - 1 ? "border-b border-white/20" : "")
                       }
                     >
                       <span
                         aria-hidden
-                        className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/95 text-[#1B86FF]"
+                        className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/95 text-[#1B86FF]"
                       >
-                        <Check className="h-4 w-4" strokeWidth={3} />
+                        <Check className="h-3 w-3" strokeWidth={3} />
                       </span>
-                      <span className="text-[15px] font-medium text-white md:text-[16px]">
+                      <span className="text-[12px] font-medium text-white md:text-[13px]">
                         {f.ours}
                       </span>
                     </li>
@@ -191,19 +180,19 @@ export function Comparison() {
 
               {/* ───────────── THEIRS CARD ───────────── */}
               <article
-                className="relative order-1 rounded-[28px] border border-[#D8DEE6] px-8 pt-[110px] pb-10 shadow-[0_20px_40px_-24px_rgba(15,23,42,0.18)]"
+                className="relative order-1 rounded-[18px] border border-[#D8DEE6] px-5 pt-[70px] pb-6 shadow-[0_12px_24px_-14px_rgba(15,23,42,0.18)]"
                 style={{ background: theirsGradient }}
               >
                 {/* floating logos — centered, z-20 to sit above adjacent cards */}
                 <div
                   aria-hidden
-                  className="absolute -top-[75px] left-1/2 z-20 flex -translate-x-1/2 items-center gap-3"
+                  className="absolute -top-[45px] left-1/2 z-20 flex -translate-x-1/2 items-center gap-2"
                 >
                   <div
-                    className="relative h-[130px] w-[130px] overflow-hidden rounded-2xl ring-4 ring-white"
+                    className="relative h-[78px] w-[78px] overflow-hidden rounded-xl ring-[3px] ring-white"
                     style={{
                       boxShadow:
-                        "0 24px 40px rgba(15,23,42,0.18), 0 6px 14px rgba(15,23,42,0.12)",
+                        "0 14px 24px rgba(15,23,42,0.18), 0 4px 8px rgba(15,23,42,0.12)",
                       transform: "rotate(-6deg)",
                     }}
                   >
@@ -211,24 +200,24 @@ export function Comparison() {
                       src="/competitors/outscraper.png"
                       alt="Outscraper"
                       fill
-                      sizes="130px"
+                      sizes="78px"
                       className="object-cover"
                     />
                   </div>
                   <div
-                    className="relative flex h-[130px] w-[130px] items-center justify-center overflow-hidden rounded-2xl bg-white ring-4 ring-white"
+                    className="relative flex h-[78px] w-[78px] items-center justify-center overflow-hidden rounded-xl bg-white ring-[3px] ring-white"
                     style={{
                       boxShadow:
-                        "0 24px 40px rgba(15,23,42,0.18), 0 6px 14px rgba(15,23,42,0.12)",
+                        "0 14px 24px rgba(15,23,42,0.18), 0 4px 8px rgba(15,23,42,0.12)",
                       transform: "rotate(6deg)",
                     }}
                   >
                     <Image
                       src="/competitors/clearoutphone.png"
                       alt="Clearoutphone"
-                      width={100}
-                      height={100}
-                      className="h-[100px] w-[100px] object-contain"
+                      width={60}
+                      height={60}
+                      className="h-[60px] w-[60px] object-contain"
                     />
                   </div>
                 </div>
@@ -237,14 +226,14 @@ export function Comparison() {
                 <h3
                   className="text-center font-semibold tracking-[-0.04em] text-[var(--color-text-primary)]"
                   style={{
-                    fontSize: "clamp(40px, 4.4vw, 56px)",
+                    fontSize: "clamp(24px, 2.8vw, 34px)",
                     lineHeight: 1,
                   }}
                 >
                   Theirs
                 </h3>
 
-                <div className="mt-8 h-px w-full bg-[#D8DEE6]" />
+                <div className="mt-5 h-px w-full bg-[#D8DEE6]" />
 
                 {/* Prices */}
                 <div className="flex flex-col">
@@ -259,23 +248,23 @@ export function Comparison() {
                       <span
                         className="inline-block font-semibold tabular-nums text-[#FF5A5A]"
                         style={{
-                          fontSize: "clamp(22px, 2.6vw, 30px)",
+                          fontSize: "clamp(14px, 1.6vw, 18px)",
                           letterSpacing: "-0.025em",
                           lineHeight: 1,
-                          textShadow: "0 0 24px rgba(255,90,90,0.25)",
+                          textShadow: "0 0 16px rgba(255,90,90,0.25)",
                         }}
                       >
                         {t.competitor}
                       </span>
                       {/* Inline tier label on mobile */}
-                      <span className="mt-2 block text-[12px] font-medium text-[var(--color-text-muted)] lg:hidden">
+                      <span className="mt-1.5 block text-[10px] font-medium text-[var(--color-text-muted)] lg:hidden">
                         {t.label} Owners Mobiles
                       </span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-2 h-px w-full bg-[#D8DEE6]" />
+                <div className="mt-1.5 h-px w-full bg-[#D8DEE6]" />
 
                 {/* Features */}
                 <ul className="flex flex-col">
@@ -283,17 +272,17 @@ export function Comparison() {
                     <li
                       key={f.theirs}
                       className={
-                        "flex items-center gap-3 py-4 " +
+                        "flex items-center gap-2.5 py-2.5 " +
                         (i < features.length - 1 ? "border-b border-[#D8DEE6]" : "")
                       }
                     >
                       <span
                         aria-hidden
-                        className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#E2E7EE] text-[var(--color-text-muted)]"
+                        className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#E2E7EE] text-[var(--color-text-muted)]"
                       >
-                        <X className="h-4 w-4" strokeWidth={3} />
+                        <X className="h-3 w-3" strokeWidth={3} />
                       </span>
-                      <span className="text-[15px] font-medium text-[var(--color-text-secondary)] md:text-[16px]">
+                      <span className="text-[12px] font-medium text-[var(--color-text-secondary)] md:text-[13px]">
                         {f.theirs}
                       </span>
                     </li>
@@ -302,27 +291,19 @@ export function Comparison() {
               </article>
             </div>
 
-            {/* ───────────── TIER PILLS OVERLAY ─────────────
-                Absolute overlay that mirrors the exact vertical rhythm of the
-                card's price section. Each pill lives in a row with the same
-                pricePadY, so it aligns perfectly with the corresponding price
-                row inside both cards. */}
+            {/* ───────────── TIER PILLS OVERLAY ───────────── */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-x-0 top-[110px] z-10 hidden flex-col items-center px-8 lg:flex"
+              className="pointer-events-none absolute inset-x-0 top-[70px] z-10 hidden flex-col items-center px-5 lg:flex"
             >
-              {/* Title placeholder - must match h3 height + mt-8 + divider h-px */}
+              {/* Title placeholder - must match h3 height + mt-5 + divider h-px */}
               <div
-                style={{ height: "clamp(40px, 4.4vw, 56px)" }}
+                style={{ height: "clamp(24px, 2.8vw, 34px)" }}
                 aria-hidden
               />
-              <div className="h-8" aria-hidden />
+              <div className="h-5" aria-hidden />
               <div className="h-px" aria-hidden />
 
-              {/* Price rows with pills centered in each.
-                  Invisible placeholder matches the ACTUAL price text height so the
-                  overlay rhythm stays identical to the cards' price rhythm. The pill
-                  is absolutely positioned over the placeholder without adding height. */}
               {tiers.map((t, i) => (
                 <div
                   key={t.label}
@@ -335,7 +316,7 @@ export function Comparison() {
                     aria-hidden
                     className="invisible font-semibold tabular-nums"
                     style={{
-                      fontSize: "clamp(28px, 3.2vw, 36px)",
+                      fontSize: "clamp(17px, 2vw, 22px)",
                       letterSpacing: "-0.03em",
                       lineHeight: 1,
                     }}

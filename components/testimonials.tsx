@@ -71,7 +71,6 @@ export function Testimonials() {
   const sectionRef = React.useRef<HTMLElement>(null);
   const trackRef = React.useRef<HTMLDivElement>(null);
   const cardsRef = React.useRef<(HTMLButtonElement | null)[]>([]);
-  const pausedRef = React.useRef(false);
   const offsetRef = React.useRef(0);
   const [active, setActive] = React.useState<number | null>(null);
 
@@ -99,7 +98,7 @@ export function Testimonials() {
     const smoothstep = (t: number) => t * t * (3 - 2 * t);
 
     const tick = () => {
-      if (!pausedRef.current && !reduce) {
+      if (!reduce) {
         offsetRef.current += SPEED;
         if (setWidth === 0) setWidth = measureSetWidth();
         if (setWidth > 0 && offsetRef.current >= setWidth) {
@@ -179,23 +178,15 @@ export function Testimonials() {
               <span className="block text-brand-gradient">not testimonials.</span>
             </h2>
             <p className="mt-5 max-w-[640px] mx-auto text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
-              Every card below is a real screenshot from a real customer. Hover
-              to pause - tap any card to read the full conversation.
+              Every card below is a real screenshot from a real customer. Tap
+              any card to read the full conversation.
             </p>
           </div>
         </Reveal>
 
-        {/* Infinite coverflow carousel */}
+        {/* Infinite coverflow carousel — never pauses (not even on hover) */}
         <Reveal delay={0.1}>
-          <div
-            className="relative mt-16 select-none"
-            onMouseEnter={() => {
-              pausedRef.current = true;
-            }}
-            onMouseLeave={() => {
-              pausedRef.current = false;
-            }}
-          >
+          <div className="relative mt-16 select-none">
             {/* Spotlight glow behind the focused card - unified light tone */}
             <div
               aria-hidden
@@ -241,7 +232,7 @@ export function Testimonials() {
                   }}
                   type="button"
                   onClick={() => setActive(i % testimonials.length)}
-                  className="group relative flex-shrink-0 overflow-hidden rounded-[26px] border border-[var(--color-border)] bg-white text-left shadow-[0_30px_60px_-30px_rgba(15,23,42,0.35)] transition-shadow duration-300 hover:shadow-[0_40px_80px_-30px_rgba(27,134,255,0.45)]"
+                  className="group relative flex-shrink-0 overflow-hidden rounded-[26px] border border-[var(--color-border)] bg-white text-left shadow-[0_12px_28px_-18px_rgba(15,23,42,0.18)] transition-shadow duration-300 hover:shadow-[0_20px_40px_-20px_rgba(27,134,255,0.3)]"
                   style={{
                     width: "clamp(320px, 30vw, 460px)",
                     transformOrigin: "center center",

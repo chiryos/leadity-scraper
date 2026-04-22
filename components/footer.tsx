@@ -117,10 +117,6 @@ export function Footer() {
         <div className="relative container-page">
           <div className="flex flex-col items-start justify-between gap-3 border-t border-white/15 pt-6 pb-5 text-[12px] text-white/80 md:flex-row md:items-center">
             <span>© 2026 Leadity Scraper. All rights reserved.</span>
-            <span className="inline-flex items-center gap-2">
-              <span aria-hidden className="block h-1.5 w-1.5 rounded-full bg-[#3DDB7F]" />
-              All systems operational
-            </span>
           </div>
         </div>
 
