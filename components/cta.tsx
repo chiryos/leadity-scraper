@@ -53,7 +53,7 @@ export function CTA() {
             />
 
             <div className="relative flex flex-col items-center text-center">
-              {/* Ghost logo */}
+              {/* Ghost logo — no shadow, clean */}
               <Image
                 src="/logo.png"
                 alt=""
@@ -61,10 +61,6 @@ export function CTA() {
                 width={96}
                 height={96}
                 className="h-[80px] w-[80px] object-contain md:h-[92px] md:w-[92px]"
-                style={{
-                  filter:
-                    "drop-shadow(0 18px 32px rgba(255,255,255,0.55)) drop-shadow(0 0 24px rgba(255,255,255,0.45))",
-                }}
                 priority={false}
               />
 
