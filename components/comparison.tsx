@@ -103,10 +103,6 @@ export function Comparison() {
                     width={108}
                     height={108}
                     className="relative h-[108px] w-[108px] object-contain"
-                    style={{
-                      filter:
-                        "drop-shadow(0 14px 26px rgba(0,0,0,0.4)) drop-shadow(0 4px 10px rgba(0,0,0,0.28))",
-                    }}
                     priority
                   />
                 </div>
