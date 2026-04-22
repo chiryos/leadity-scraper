@@ -28,11 +28,25 @@ export function Hero() {
         }}
       />
 
-      {/* Seam glow is owned by the Showcase section (see showcase.tsx) —
-          it's a single gradient with overflow-x-clip / overflow-y-visible,
-          extending upward INTO the hero's area via a negative top offset.
-          That gives one continuous wash instead of two halves trying to
-          meet at the boundary, which was showing a visible seam. */}
+      {/* Seam glow — single plateau-linear gradient that extends DOWN
+          past the hero's bottom into the showcase area. Lives inside
+          hero's isolated stacking context at -z-10 so it sits BEHIND
+          every hero element (h1, subtitle, CTAs, stats, trust row)
+          and above hero's bg-white. The downward portion paints on
+          top of the showcase (which now has no bg-white), so we get
+          one continuous wash across the boundary. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -z-10"
+        style={{
+          bottom: "-500px",
+          height: "1000px",
+          background: [
+            "radial-gradient(100% 100% at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.55) 90%)",
+            "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(34,201,245,0.06) 14%, rgba(34,201,245,0.16) 30%, rgba(34,201,245,0.24) 44%, rgba(34,201,245,0.24) 56%, rgba(34,201,245,0.16) 70%, rgba(34,201,245,0.06) 86%, rgba(255,255,255,0) 100%)",
+          ].join(", "),
+        }}
+      />
 
       {/* Content vertically centered - mobile padding tightened */}
       <div className="container-page relative flex flex-1 flex-col items-center justify-center pt-8 pb-6 md:pt-16 md:pb-12">

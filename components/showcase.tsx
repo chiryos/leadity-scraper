@@ -165,48 +165,12 @@ export function Showcase() {
   return (
     <section
       id="how-it-works"
-      // overflow-x-clip (not hidden) — still clips horizontal runaway but
-      // LEAVES vertical overflow visible, which lets the unified seam
-      // glow below extend upward past the section's top edge into the
-      // hero area. That's how we get a single continuous wash instead
-      // of a two-halves-meeting seam.
-      className="relative overflow-x-clip bg-white py-24 md:py-28 lg:py-32"
+      // No bg-white here: the seam glow is painted by the hero section
+      // (see hero.tsx) and extends DOWN past the hero's bottom into
+      // this section's area. A bg on this section would paint over it.
+      // The page body is already white, so the showcase reads the same.
+      className="relative overflow-x-clip py-24 md:py-28 lg:py-32"
     >
-      {/* Unified seam glow — ONE linear gradient with a plateau across
-          the boundary. The plateau (44% → 56% of the div) means the
-          zone right on the seam holds a SINGLE uniform cyan, so there's
-          no bright "peak line" at the boundary — the eye just sees a
-          wide band of blue that fades out symmetrically above and below.
-
-          Layered as two:
-            • Vertical linear: owns the fade-in → plateau → fade-out
-              shape (top↔bottom of the 1000px div).
-            • Horizontal radial: fades the band's horizontal intensity
-              into the white edges so the glow has a soft shape, not a
-              full-width strip.
-
-          Positioned top:-500px, height:1000px — extends 500px up into
-          the hero's area and 500px down into the showcase. Paints
-          after the hero in document flow, so the upper half draws
-          cleanly on top of the hero's bg-white. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0"
-        style={{
-          top: "-500px",
-          height: "1000px",
-          background: [
-            // Horizontal radial (mask): brightest at center, fades to
-            // transparent at the sides so the band doesn't hit hard
-            // vertical edges.
-            "radial-gradient(100% 100% at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.55) 90%)",
-            // Vertical linear (the band itself): plateau across the seam.
-            // All stops use the same light cyan (34,201,245 / #22C9F5)
-            // that the hero's top glow uses — same hue, just more alpha.
-            "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(34,201,245,0.06) 14%, rgba(34,201,245,0.16) 30%, rgba(34,201,245,0.24) 44%, rgba(34,201,245,0.24) 56%, rgba(34,201,245,0.16) 70%, rgba(34,201,245,0.06) 86%, rgba(255,255,255,0) 100%)",
-          ].join(", "),
-        }}
-      />
       <div className="relative container-page">
         <Reveal>
           <div className="mx-auto max-w-[820px] text-center">
