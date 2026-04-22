@@ -165,11 +165,7 @@ export function Showcase() {
   return (
     <section
       id="how-it-works"
-      // No bg-white here: the seam glow is painted by the hero section
-      // (see hero.tsx) and extends DOWN past the hero's bottom into
-      // this section's area. A bg on this section would paint over it.
-      // The page body is already white, so the showcase reads the same.
-      className="relative overflow-x-clip py-24 md:py-28 lg:py-32"
+      className="relative overflow-hidden bg-white py-24 md:py-28 lg:py-32"
     >
       <div className="relative container-page">
         <Reveal>
