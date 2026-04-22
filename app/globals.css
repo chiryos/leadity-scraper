@@ -324,33 +324,33 @@
   .glass-brand {
     position: relative;
     background:
-      /* Bright specular top-left — sun hitting the glass */
+      /* Softer specular top-left so the blue reads more saturated */
       radial-gradient(
         140% 90% at 18% -5%,
-        rgba(255, 255, 255, 0.42) 0%,
-        rgba(255, 255, 255, 0.1) 32%,
+        rgba(255, 255, 255, 0.28) 0%,
+        rgba(255, 255, 255, 0.06) 32%,
         transparent 60%
       ),
-      /* Brand blue at reduced alpha so page content shows through */
+      /* Brand blue at higher alpha — richer, more saturated blue */
       linear-gradient(
         160deg,
-        rgba(34, 201, 245, 0.85) 0%,
-        rgba(27, 134, 255, 0.82) 45%,
-        rgba(9, 81, 255, 0.82) 100%
+        rgba(34, 201, 245, 0.96) 0%,
+        rgba(27, 134, 255, 0.95) 45%,
+        rgba(9, 81, 255, 0.95) 100%
       );
     backdrop-filter: blur(28px) saturate(200%) brightness(1.06);
     -webkit-backdrop-filter: blur(28px) saturate(200%) brightness(1.06);
     border: 1.5px solid rgba(255, 255, 255, 0.35);
     box-shadow:
-      inset 0 8px 40px rgba(255, 255, 255, 0.32),
-      inset 0 -4px 28px rgba(255, 255, 255, 0.12),
-      inset 0 2px 0 rgba(255, 255, 255, 0.7),
-      inset 2px 0 0 rgba(255, 255, 255, 0.32),
-      inset -1.5px 0 0 rgba(255, 255, 255, 0.1),
-      inset 0 -1.5px 0 rgba(255, 255, 255, 0.18),
-      0 1px 2px rgba(9, 81, 255, 0.18),
-      0 24px 56px -18px rgba(9, 81, 255, 0.35),
-      0 56px 112px -40px rgba(9, 81, 255, 0.5);
+      inset 0 8px 40px rgba(255, 255, 255, 0.22),
+      inset 0 -4px 28px rgba(255, 255, 255, 0.08),
+      inset 0 2px 0 rgba(255, 255, 255, 0.6),
+      inset 2px 0 0 rgba(255, 255, 255, 0.22),
+      inset -1.5px 0 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1.5px 0 rgba(255, 255, 255, 0.14),
+      0 1px 2px rgba(9, 81, 255, 0.22),
+      0 24px 56px -18px rgba(9, 81, 255, 0.4),
+      0 56px 112px -40px rgba(9, 81, 255, 0.55);
   }
 
   /* Dark-surface glass — for elements sitting on the brand gradient
