@@ -29,18 +29,6 @@ export function CTA() {
                 "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
             }}
           >
-            {/* Top-center white halo — subtle spotlight the ghost sits in */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/3"
-              style={{
-                width: 560,
-                height: 560,
-                background:
-                  "radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 45%, transparent 75%)",
-                filter: "blur(8px)",
-              }}
-            />
             {/* Faint hairline grid for texture */}
             <div
               aria-hidden
@@ -53,9 +41,9 @@ export function CTA() {
             />
 
             <div className="relative flex flex-col items-center text-center">
-              {/* Ghost logo — no shadow, clean */}
+              {/* White ghost logo — flat, no shadow, no halo */}
               <Image
-                src="/logo.png"
+                src="/logo-white.png"
                 alt=""
                 aria-hidden
                 width={96}

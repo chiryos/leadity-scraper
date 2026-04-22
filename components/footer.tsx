@@ -63,7 +63,7 @@ export function Footer() {
               aria-label="Leadity Scraper home"
             >
               <Image
-                src="/logo.png"
+                src="/logo-white.png"
                 alt=""
                 width={36}
                 height={36}
