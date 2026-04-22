@@ -240,31 +240,25 @@ export function Showcase() {
         />
       </div>
 
-      {/* Top fade — one huge soft radial (ellipse 160% 130%) layered over
-          a slightly-angled linear gradient. Reads as abstract because the
-          gradient isn't a perfectly horizontal line, but there's only ONE
-          radial so there are no visible circle edges. No blur, no overflow
-          clipping — just a clean painterly wash. */}
+      {/* Top fade — simple smooth linear. 200px solid-white cap covers
+          the bg canvas extension + its top edge; then a straight linear
+          ramp to transparent inside the section. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-[260px] z-[1] h-[520px]"
+        className="pointer-events-none absolute inset-x-0 -top-[200px] z-[1] h-[460px]"
         style={{
-          background: [
-            "radial-gradient(ellipse 160% 130% at 38% 0%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 45%, transparent 80%)",
-            "linear-gradient(172deg, #ffffff 0%, #ffffff 220px, rgba(255,255,255,0.55) 340px, rgba(255,255,255,0.15) 440px, transparent 100%)",
-          ].join(", "),
+          background:
+            "linear-gradient(180deg, #ffffff 0%, #ffffff 200px, transparent 100%)",
         }}
       />
 
-      {/* Bottom fade — same recipe, mirrored vertically. */}
+      {/* Bottom fade — mirrored */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 -bottom-[260px] z-[1] h-[520px]"
+        className="pointer-events-none absolute inset-x-0 -bottom-[200px] z-[1] h-[460px]"
         style={{
-          background: [
-            "radial-gradient(ellipse 160% 130% at 62% 100%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 45%, transparent 80%)",
-            "linear-gradient(8deg, #ffffff 0%, #ffffff 220px, rgba(255,255,255,0.55) 340px, rgba(255,255,255,0.15) 440px, transparent 100%)",
-          ].join(", "),
+          background:
+            "linear-gradient(0deg, #ffffff 0%, #ffffff 200px, transparent 100%)",
         }}
       />
 

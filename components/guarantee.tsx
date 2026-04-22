@@ -72,27 +72,23 @@ export function Guarantee() {
         />
       </div>
 
-      {/* Top fade — one wide soft radial over angled linear (see Showcase). */}
+      {/* Top fade — simple smooth linear. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-[260px] z-[1] h-[520px]"
+        className="pointer-events-none absolute inset-x-0 -top-[200px] z-[1] h-[460px]"
         style={{
-          background: [
-            "radial-gradient(ellipse 160% 130% at 38% 0%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 45%, transparent 80%)",
-            "linear-gradient(172deg, #ffffff 0%, #ffffff 220px, rgba(255,255,255,0.55) 340px, rgba(255,255,255,0.15) 440px, transparent 100%)",
-          ].join(", "),
+          background:
+            "linear-gradient(180deg, #ffffff 0%, #ffffff 200px, transparent 100%)",
         }}
       />
 
       {/* Bottom fade — mirrored */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 -bottom-[260px] z-[1] h-[520px]"
+        className="pointer-events-none absolute inset-x-0 -bottom-[200px] z-[1] h-[460px]"
         style={{
-          background: [
-            "radial-gradient(ellipse 160% 130% at 62% 100%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 45%, transparent 80%)",
-            "linear-gradient(8deg, #ffffff 0%, #ffffff 220px, rgba(255,255,255,0.55) 340px, rgba(255,255,255,0.15) 440px, transparent 100%)",
-          ].join(", "),
+          background:
+            "linear-gradient(0deg, #ffffff 0%, #ffffff 200px, transparent 100%)",
         }}
       />
 
