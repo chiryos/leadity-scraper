@@ -70,10 +70,6 @@ export function Comparison() {
               <span className="block">One tool or</span>
               <span className="block text-brand-gradient">three bills.</span>
             </h2>
-            <p className="mt-5 max-w-[640px] mx-auto text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
-              Same verified Owners Mobiles. Two experiences. Only one of them feels
-              good.
-            </p>
           </div>
         </Reveal>
 

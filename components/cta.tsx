@@ -50,16 +50,10 @@ export function CTA() {
 
               {/* Eyebrow */}
               <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-                Ready when you are
+                Less stack. More pipeline.
               </p>
 
-              {/* Headline
-                  Mirrors the hero's "Scrape Google Maps. / Get Owners Mobiles."
-                  imperative pair, but closes on the benefit of SPEED. Two
-                  alternates kept as comments — swap in whichever reads best
-                  after a live look:
-                    • "Pick a niche. / Ship a CSV."   (echoes the subtitle)
-                    • "Niche in. / CSV out."          (minimalist, ultra-punchy) */}
+              {/* Headline — concrete, benefit-anchored, ties to the 5k plan */}
               <h2
                 className="text-balance mt-4 font-semibold text-white"
                 style={{
@@ -68,15 +62,15 @@ export function CTA() {
                   lineHeight: 1.04,
                 }}
               >
-                <span className="block">Scrape today.</span>
-                <span className="block">Text tomorrow.</span>
+                <span className="block">Your next 5,000 leads,</span>
+                <span className="block">pulled in one click.</span>
               </h2>
 
-              {/* Subtitle */}
+              {/* Subtitle — cut filler, keep the guarantee anchor */}
               <p className="mt-6 max-w-[620px] text-balance text-[15px] leading-[1.55] text-white/85 md:text-[17px]">
-                Pick a niche. Pick your volume. Launch. We ship
-                carrier-verified Owners Mobiles as a clean CSV - with a refund
-                plus 50% bonus on anything that doesn&apos;t text.
+                Pick a niche. Hit start. We deliver carrier-verified Owners
+                Mobiles straight to a clean CSV - refund plus 50% bonus on
+                anything that doesn&apos;t text.
               </p>
 
               {/* CTAs */}
@@ -85,14 +79,14 @@ export function CTA() {
                   href="#pricing"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-[15px] font-semibold text-[#0951FF] shadow-[0_18px_36px_-14px_rgba(0,0,0,0.4)] transition-transform duration-200 hover:-translate-y-0.5 sm:w-auto"
                 >
-                  Start Scraping
+                  Get my 5k leads
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
                   href="mailto:hello@leadity.com"
                   className="text-[14px] font-medium text-white/90 underline-offset-4 transition-colors hover:text-white hover:underline"
                 >
-                  Talk to founders →
+                  Talk to the founders →
                 </a>
               </div>
 

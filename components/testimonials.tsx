@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Quote, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 
@@ -110,62 +110,21 @@ function TestimonialCard({
       onClick={onOpen}
       whileHover={reduce ? undefined : { y: -4 }}
       transition={{ duration: 0.3, ease: easeOut }}
-      className="glass-card group relative flex h-[460px] w-[320px] shrink-0 flex-col overflow-hidden rounded-[28px] p-6 text-left md:h-[500px] md:w-[360px] md:p-7"
+      aria-label={t.alt}
+      className="group relative h-[460px] w-[320px] shrink-0 overflow-hidden rounded-[24px] border border-white/60 bg-white shadow-[0_10px_24px_-14px_rgba(15,23,42,0.14),0_26px_52px_-28px_rgba(27,134,255,0.2)] transition-shadow duration-300 hover:shadow-[0_14px_32px_-16px_rgba(15,23,42,0.18),0_40px_80px_-32px_rgba(27,134,255,0.35)] md:h-[500px] md:w-[360px]"
     >
-      {/* Quote icon */}
-      <motion.div
-        layoutId={`quote-${index}`}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white"
-        style={{
-          background:
-            "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
-        }}
-      >
-        <Quote className="h-4 w-4" />
-      </motion.div>
-
-      {/* Pull quote */}
-      <motion.p
-        layoutId={`pull-${index}`}
-        className="mt-5 text-balance text-[20px] font-semibold leading-[1.25] tracking-[-0.015em] text-[var(--color-text-primary)] md:text-[22px]"
-      >
-        &ldquo;{t.pull}&rdquo;
-      </motion.p>
-
-      {/* Screenshot preview thumbnail — scales to fill remaining space */}
       <motion.div
         layoutId={`thumb-${index}`}
-        className="relative mt-auto overflow-hidden rounded-2xl border border-white/60 shadow-[0_10px_24px_-14px_rgba(15,23,42,0.18)]"
+        className="relative h-full w-full"
       >
-        <div className="relative h-[180px] w-full bg-white md:h-[200px]">
-          <Image
-            src={t.src}
-            alt={t.alt}
-            fill
-            sizes="(min-width: 768px) 360px, 320px"
-            className="object-cover object-top"
-            draggable={false}
-          />
-        </div>
-      </motion.div>
-
-      {/* Attribution */}
-      <motion.div
-        layoutId={`meta-${index}`}
-        className="mt-5 flex items-center justify-between"
-      >
-        <div className="flex items-center gap-2">
-          <span
-            aria-hidden
-            className="inline-block h-2 w-2 rounded-full bg-[#22C9F5]"
-          />
-          <span className="text-[12px] font-medium text-[var(--color-text-secondary)]">
-            Verified customer
-          </span>
-        </div>
-        <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--color-text-muted)]">
-          {t.role}
-        </span>
+        <Image
+          src={t.src}
+          alt={t.alt}
+          fill
+          sizes="(min-width: 768px) 360px, 320px"
+          className="object-cover object-top"
+          draggable={false}
+        />
       </motion.div>
     </motion.button>
   );
@@ -212,9 +171,8 @@ function ExpandedModal({
     >
       <motion.div
         layoutId={`card-${index}`}
-        className="glass-card relative flex max-h-[92vh] w-full max-w-[520px] flex-col overflow-hidden rounded-[28px] p-5 md:p-7"
+        className="relative max-h-[92vh] w-full max-w-[520px] overflow-hidden rounded-[24px] border border-white/60 bg-white shadow-[0_40px_80px_-20px_rgba(15,23,42,0.35)]"
       >
-        {/* Close */}
         <button
           type="button"
           onClick={onClose}
@@ -224,58 +182,18 @@ function ExpandedModal({
           <X className="h-4 w-4 text-[var(--color-text-primary)]" />
         </button>
 
-        {/* Quote icon + pull quote */}
-        <div className="flex items-start gap-4">
-          <motion.div
-            layoutId={`quote-${index}`}
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white"
-            style={{
-              background:
-                "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
-            }}
-          >
-            <Quote className="h-4 w-4" />
-          </motion.div>
-          <motion.p
-            layoutId={`pull-${index}`}
-            className="pr-12 text-balance text-[20px] font-semibold leading-[1.25] tracking-[-0.015em] text-[var(--color-text-primary)] md:text-[24px]"
-          >
-            &ldquo;{t.pull}&rdquo;
-          </motion.p>
-        </div>
-
-        {/* Full screenshot */}
         <motion.div
           layoutId={`thumb-${index}`}
-          className="mt-5 overflow-auto rounded-2xl border border-white/60 shadow-[0_20px_48px_-24px_rgba(15,23,42,0.25)]"
+          className="h-full w-full overflow-auto"
         >
           <Image
             src={t.src}
             alt={t.alt}
             width={t.width}
             height={t.height}
-            sizes="(min-width: 768px) 480px, 90vw"
+            sizes="(min-width: 768px) 520px, 92vw"
             className="h-auto w-full"
           />
-        </motion.div>
-
-        {/* Attribution */}
-        <motion.div
-          layoutId={`meta-${index}`}
-          className="mt-5 flex items-center justify-between"
-        >
-          <div className="flex items-center gap-2">
-            <span
-              aria-hidden
-              className="inline-block h-2 w-2 rounded-full bg-[#22C9F5]"
-            />
-            <span className="text-[13px] font-medium text-[var(--color-text-secondary)]">
-              Verified customer
-            </span>
-          </div>
-          <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--color-text-muted)]">
-            {t.role}
-          </span>
         </motion.div>
       </motion.div>
     </motion.div>
@@ -314,7 +232,7 @@ export function Testimonials() {
   };
 
   return (
-    <section className="relative overflow-hidden pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28">
+    <section className="relative overflow-x-clip pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28">
       <div aria-hidden className="absolute inset-0 bg-grid opacity-50" />
       <div
         aria-hidden
@@ -355,7 +273,7 @@ export function Testimonials() {
             >
               <div
                 ref={trackRef}
-                className="flex gap-5 overflow-x-auto overflow-y-visible scroll-smooth px-6 py-4 [scrollbar-width:none] md:gap-6 md:px-[max(24px,calc((100vw-1200px)/2))] md:py-6 [&::-webkit-scrollbar]:hidden"
+                className="flex gap-5 overflow-x-auto scroll-smooth px-6 pt-6 pb-12 [scrollbar-width:none] md:gap-6 md:px-[max(24px,calc((100vw-1200px)/2))] md:pt-8 md:pb-16 [&::-webkit-scrollbar]:hidden"
                 style={{ scrollSnapType: "x mandatory" }}
               >
                 {testimonials.map((t, i) => (
