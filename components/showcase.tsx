@@ -201,7 +201,9 @@ export function Showcase() {
             // vertical edges.
             "radial-gradient(100% 100% at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.55) 90%)",
             // Vertical linear (the band itself): plateau across the seam.
-            "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(34,201,245,0.04) 14%, rgba(27,134,255,0.14) 30%, rgba(27,134,255,0.22) 44%, rgba(27,134,255,0.22) 56%, rgba(27,134,255,0.14) 70%, rgba(34,201,245,0.04) 86%, rgba(255,255,255,0) 100%)",
+            // All stops use the same light cyan (34,201,245 / #22C9F5)
+            // that the hero's top glow uses — same hue, just more alpha.
+            "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(34,201,245,0.06) 14%, rgba(34,201,245,0.16) 30%, rgba(34,201,245,0.24) 44%, rgba(34,201,245,0.24) 56%, rgba(34,201,245,0.16) 70%, rgba(34,201,245,0.06) 86%, rgba(255,255,255,0) 100%)",
           ].join(", "),
         }}
       />
