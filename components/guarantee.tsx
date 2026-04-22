@@ -36,13 +36,17 @@ export function Guarantee() {
         }}
       />
 
-      {/* Bottom fade — bridges blue BACK into Testimonials' white bg */}
+      {/* Bottom fade — bridges blue BACK into Testimonials' white bg.
+          Kept deliberately tall (480px) and with a long transparent tail so
+          the eye reads it as one continuous surface change, not a hard
+          boundary. The final 30% is solid white to fully kill the blue
+          before the section ends. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[260px]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[480px]"
         style={{
           background:
-            "linear-gradient(0deg, #ffffff 0%, rgba(255,255,255,0.55) 35%, rgba(255,255,255,0.2) 65%, transparent 100%)",
+            "linear-gradient(0deg, #ffffff 0%, #ffffff 22%, rgba(255,255,255,0.85) 45%, rgba(255,255,255,0.45) 70%, rgba(255,255,255,0.15) 88%, transparent 100%)",
         }}
       />
 
@@ -62,7 +66,7 @@ export function Guarantee() {
       />
       <div
         aria-hidden
-        className="glow-breathe pointer-events-none absolute -bottom-[15%] -right-[10%] h-[820px] w-[820px] opacity-80"
+        className="glow-breathe pointer-events-none absolute bottom-[20%] -right-[10%] h-[820px] w-[820px] opacity-80"
         style={{
           background:
             "radial-gradient(circle, rgba(100, 220, 255, 1) 0%, rgba(60, 140, 255, 0.7) 45%, transparent 75%)",

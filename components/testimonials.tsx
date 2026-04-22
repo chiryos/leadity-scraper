@@ -233,7 +233,16 @@ export function Testimonials() {
 
   return (
     <section className="relative overflow-x-clip pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28">
-      <div aria-hidden className="absolute inset-0 bg-grid opacity-50" />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-grid opacity-50"
+        style={{
+          WebkitMaskImage:
+            "linear-gradient(180deg, transparent 0%, #000 180px, #000 100%)",
+          maskImage:
+            "linear-gradient(180deg, transparent 0%, #000 180px, #000 100%)",
+        }}
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
