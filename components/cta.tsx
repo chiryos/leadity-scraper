@@ -26,17 +26,58 @@ export function CTA() {
           transition is seamless, not a hard color stop. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[260px]"
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[260px]"
         style={{
           background:
             "linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.55) 35%, rgba(255,255,255,0.2) 65%, transparent 100%)",
         }}
       />
 
-      {/* Faint hairline grid for texture */}
+      {/* ───── Gaussian-blur glow blobs ─────
+          Three organic, asymmetric-border-radius shapes with huge blurs
+          (150-200px) and blend-mode: plus-lighter painted OVER the brand
+          gradient. Gives that Figma-style "duplicate-and-blur-then-
+          plus-lighter" treatment — abstract glow/fade over the blue
+          surface that breathes gently. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.1]"
+        className="glow-breathe-slow pointer-events-none absolute -top-[10%] -left-[5%] h-[720px] w-[720px] opacity-75"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(180, 140, 255, 0.95) 0%, rgba(120, 180, 255, 0.65) 40%, transparent 70%)",
+          filter: "blur(180px)",
+          mixBlendMode: "plus-lighter",
+          borderRadius: "63% 37% 54% 46% / 55% 48% 52% 45%",
+        }}
+      />
+      <div
+        aria-hidden
+        className="glow-breathe pointer-events-none absolute -bottom-[15%] -right-[10%] h-[820px] w-[820px] opacity-80"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(100, 220, 255, 1) 0%, rgba(60, 140, 255, 0.7) 45%, transparent 75%)",
+          filter: "blur(200px)",
+          mixBlendMode: "plus-lighter",
+          borderRadius: "42% 58% 67% 33% / 48% 52% 48% 52%",
+        }}
+      />
+      <div
+        aria-hidden
+        className="glow-breathe-slow pointer-events-none absolute top-[40%] left-[50%] h-[540px] w-[540px] -translate-x-1/2 -translate-y-1/2 opacity-70"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255, 220, 240, 0.7) 0%, rgba(180, 160, 255, 0.4) 45%, transparent 75%)",
+          filter: "blur(160px)",
+          mixBlendMode: "screen",
+          borderRadius: "58% 42% 45% 55% / 52% 48% 52% 48%",
+        }}
+      />
+
+      {/* Faint hairline grid for texture — sits above the blobs so the
+          surface still reads as structured */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[1] opacity-[0.08]"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
@@ -44,7 +85,7 @@ export function CTA() {
         }}
       />
 
-      <div className="container-page relative">
+      <div className="container-page relative z-[2]">
         <Reveal>
           <div className="mx-auto flex max-w-[820px] flex-col items-center text-center">
             {/* Ghost logo — white variant, no shadow */}
