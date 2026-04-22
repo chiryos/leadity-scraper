@@ -11,7 +11,7 @@ export function Hero() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative isolate flex min-h-[calc(100svh-72px)] flex-col overflow-hidden bg-white">
+    <section className="relative isolate flex min-h-[calc(100svh-72px)] flex-col bg-white">
       {/* Apple-style ambient depth: wider horizontal wash, same softness vertically */}
       <div
         aria-hidden
@@ -19,22 +19,6 @@ export function Hero() {
         style={{
           background:
             "radial-gradient(80% 55% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
-        }}
-      />
-
-      {/* Blue preview at the bottom — teases the Showcase section below
-          with an organic cloud-shape peek of blue, not a straight linear
-          fade. Three overlapping radial gradients create uneven bumps so
-          the transition feels abstract and painterly. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[360px]"
-        style={{
-          background: [
-            "radial-gradient(ellipse 70% 110% at 22% 100%, rgba(27, 134, 255, 0.55) 0%, rgba(34, 201, 245, 0.28) 32%, rgba(27, 134, 255, 0.08) 60%, transparent 80%)",
-            "radial-gradient(ellipse 65% 95% at 78% 100%, rgba(9, 81, 255, 0.5) 0%, rgba(27, 134, 255, 0.22) 34%, transparent 72%)",
-            "radial-gradient(ellipse 45% 70% at 50% 100%, rgba(34, 201, 245, 0.4) 0%, rgba(27, 134, 255, 0.15) 45%, transparent 70%)",
-          ].join(", "),
         }}
       />
 

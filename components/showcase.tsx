@@ -172,23 +172,84 @@ export function Showcase() {
   return (
     <section
       id="how-it-works"
-      className="relative overflow-hidden py-28 text-white md:py-36 lg:py-44"
-      style={{
-        background: [
-          // Specular corner highlight — sun hitting top-left of the glass
-          "radial-gradient(140% 60% at 18% -2%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.08) 28%, transparent 55%)",
-          // Brand gradient base
-          "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
-        ].join(", "),
-      }}
+      className="relative isolate py-28 text-white md:py-36 lg:py-44"
     >
-      {/* Top fade — organic cloud-shape (three overlapping radial
-          gradients with uneven x-positions) so the transition from the
-          white Hero into the blue feels abstract/painterly, not a flat
-          horizontal line. */}
+      {/* Blue bg canvas — INTENTIONALLY extends 200px above and below the
+          section so it bleeds into the adjacent white Hero / Comparison
+          sections. This is what creates the "blue already visible from
+          the header" effect and also makes the boundary invisible — the
+          blue is one continuous painted surface across the section edge.
+          Glow blobs live inside here and are clipped by overflow-hidden. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[360px]"
+        className="pointer-events-none absolute inset-x-0 -top-[200px] -bottom-[200px] z-0 overflow-hidden"
+        style={{
+          background: [
+            "radial-gradient(140% 60% at 18% -2%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.08) 28%, transparent 55%)",
+            "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
+          ].join(", "),
+        }}
+      >
+        {/* Glow blobs — distributed vertically across the tall section */}
+        <div
+          className="glow-breathe-slow absolute -top-[5%] -left-[8%] h-[720px] w-[720px] opacity-75"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(180, 140, 255, 0.95) 0%, rgba(120, 180, 255, 0.65) 40%, transparent 70%)",
+            filter: "blur(180px)",
+            mixBlendMode: "plus-lighter",
+            borderRadius: "63% 37% 54% 46% / 55% 48% 52% 45%",
+          }}
+        />
+        <div
+          className="glow-breathe absolute top-[22%] -right-[8%] h-[680px] w-[680px] opacity-75"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(100, 220, 255, 1) 0%, rgba(60, 140, 255, 0.7) 45%, transparent 75%)",
+            filter: "blur(190px)",
+            mixBlendMode: "plus-lighter",
+            borderRadius: "42% 58% 67% 33% / 48% 52% 48% 52%",
+          }}
+        />
+        <div
+          className="glow-breathe-slow absolute top-[48%] -left-[10%] h-[720px] w-[720px] opacity-75"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(255, 200, 240, 0.75) 0%, rgba(180, 160, 255, 0.55) 45%, transparent 75%)",
+            filter: "blur(180px)",
+            mixBlendMode: "screen",
+            borderRadius: "58% 42% 45% 55% / 52% 48% 52% 48%",
+          }}
+        />
+        <div
+          className="glow-breathe absolute top-[72%] -right-[10%] h-[760px] w-[760px] opacity-80"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(100, 220, 255, 1) 0%, rgba(60, 140, 255, 0.7) 45%, transparent 75%)",
+            filter: "blur(200px)",
+            mixBlendMode: "plus-lighter",
+            borderRadius: "42% 58% 67% 33% / 48% 52% 48% 52%",
+          }}
+        />
+
+        {/* Faint hairline grid */}
+        <div
+          className="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+          }}
+        />
+      </div>
+
+      {/* Top fade — extends 200px UP into the Hero area. At the top the
+          radial gradients peak at uneven x-positions (22%, 78%, 52%),
+          creating an organic cloud edge: the blue peeks through between
+          the white "clouds", painterly instead of a straight line. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -top-[200px] z-[1] h-[460px]"
         style={{
           background: [
             "radial-gradient(ellipse 70% 110% at 22% 0%, #ffffff 0%, rgba(255,255,255,0.6) 32%, rgba(255,255,255,0.12) 62%, transparent 82%)",
@@ -198,78 +259,17 @@ export function Showcase() {
         }}
       />
 
-      {/* Bottom fade — same organic recipe, mirrored, bridging back into
-          the white Comparison section below. */}
+      {/* Bottom fade — mirrored, extends 200px DOWN into the Comparison
+          area below. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[360px]"
+        className="pointer-events-none absolute inset-x-0 -bottom-[200px] z-[1] h-[460px]"
         style={{
           background: [
             "radial-gradient(ellipse 70% 110% at 22% 100%, #ffffff 0%, rgba(255,255,255,0.6) 32%, rgba(255,255,255,0.12) 62%, transparent 82%)",
             "radial-gradient(ellipse 65% 95% at 78% 100%, #ffffff 0%, rgba(255,255,255,0.55) 34%, rgba(255,255,255,0.08) 64%, transparent 80%)",
             "radial-gradient(ellipse 45% 70% at 52% 100%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 40%, transparent 72%)",
           ].join(", "),
-        }}
-      />
-
-      {/* ───── Gaussian-blur glow blobs ─────
-          Distributed along the section's full height (not just clustered
-          at top/bottom like in Guarantee/CTA) so the long body doesn't
-          feel empty in the middle. Same recipe: organic asymmetric
-          border-radius, huge blurs, plus-lighter blend. */}
-      <div
-        aria-hidden
-        className="glow-breathe-slow pointer-events-none absolute -top-[5%] -left-[8%] h-[720px] w-[720px] opacity-75"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(180, 140, 255, 0.95) 0%, rgba(120, 180, 255, 0.65) 40%, transparent 70%)",
-          filter: "blur(180px)",
-          mixBlendMode: "plus-lighter",
-          borderRadius: "63% 37% 54% 46% / 55% 48% 52% 45%",
-        }}
-      />
-      <div
-        aria-hidden
-        className="glow-breathe pointer-events-none absolute top-[22%] -right-[8%] h-[680px] w-[680px] opacity-75"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(100, 220, 255, 1) 0%, rgba(60, 140, 255, 0.7) 45%, transparent 75%)",
-          filter: "blur(190px)",
-          mixBlendMode: "plus-lighter",
-          borderRadius: "42% 58% 67% 33% / 48% 52% 48% 52%",
-        }}
-      />
-      <div
-        aria-hidden
-        className="glow-breathe-slow pointer-events-none absolute top-[48%] -left-[10%] h-[720px] w-[720px] opacity-75"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(255, 200, 240, 0.75) 0%, rgba(180, 160, 255, 0.55) 45%, transparent 75%)",
-          filter: "blur(180px)",
-          mixBlendMode: "screen",
-          borderRadius: "58% 42% 45% 55% / 52% 48% 52% 48%",
-        }}
-      />
-      <div
-        aria-hidden
-        className="glow-breathe pointer-events-none absolute top-[72%] -right-[10%] h-[760px] w-[760px] opacity-80"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(100, 220, 255, 1) 0%, rgba(60, 140, 255, 0.7) 45%, transparent 75%)",
-          filter: "blur(200px)",
-          mixBlendMode: "plus-lighter",
-          borderRadius: "42% 58% 67% 33% / 48% 52% 48% 52%",
-        }}
-      />
-
-      {/* Faint hairline grid for texture */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] opacity-[0.08]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
         }}
       />
 
