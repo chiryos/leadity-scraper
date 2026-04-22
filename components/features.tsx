@@ -125,12 +125,11 @@ export function Features() {
             return (
               <StaggerItem
                 key={f.title}
-                // Only transition border + shadow via CSS. Transform is owned
-                // entirely by framer-motion (via StaggerItem's y variants) —
-                // letting `transition-all` animate transform at the same time
-                // creates a tug-of-war with the stagger intro under Lenis
-                // smooth-scroll and causes the cards to twitch on enter.
-                className="group rounded-2xl border border-[var(--color-border)] bg-white p-7 transition-[border-color,box-shadow] duration-200 hover:border-[var(--color-border-strong)] hover:shadow-[0_18px_40px_-22px_rgba(27,134,255,0.35)]"
+                // Glassmorphism — semi-transparent bg + backdrop-blur over the
+                // section's grid pattern for a premium frosted look.
+                // Transforms are owned by framer-motion; only border + shadow
+                // animate via CSS to avoid fighting the stagger intro.
+                className="group rounded-2xl border border-white/60 bg-white/55 p-7 shadow-[0_8px_24px_-16px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-[border-color,box-shadow] duration-200 hover:border-white/90 hover:shadow-[0_18px_40px_-22px_rgba(27,134,255,0.35)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <span

@@ -90,7 +90,7 @@ export function Qualifier() {
         <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-stretch">
           {/* ───────── NOT card ───────── */}
           <Reveal delay={0.05} className="h-full">
-            <article className="flex h-full flex-col rounded-[20px] border border-[var(--color-border)] bg-white p-8 md:p-10">
+            <article className="flex h-full flex-col rounded-[20px] border border-white/60 bg-white/55 p-8 shadow-[0_12px_28px_-18px_rgba(15,23,42,0.15)] backdrop-blur-xl md:p-10">
               <header className="flex items-center gap-3">
                 <span
                   aria-hidden
@@ -142,7 +142,7 @@ export function Qualifier() {
                   "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
               }}
             >
-              <article className="relative flex h-full flex-col rounded-[19px] bg-white p-8 md:p-10">
+              <article className="relative flex h-full flex-col rounded-[19px] bg-white/55 p-8 backdrop-blur-xl md:p-10">
                 <header className="flex items-center gap-3">
                   <span
                     aria-hidden

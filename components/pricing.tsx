@@ -500,11 +500,7 @@ export function Pricing() {
                     }}
                   />
                   <article
-                    className="relative flex h-full flex-col rounded-2xl border border-[#D8DEE6] p-8 shadow-[0_20px_40px_-24px_rgba(15,23,42,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#B8C2D0]"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, #FBFCFD 0%, #EEF1F6 55%, #E2E7EE 100%)",
-                    }}
+                    className="relative flex h-full flex-col rounded-2xl border border-white/60 bg-white/55 p-8 shadow-[0_12px_28px_-18px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-white/90 hover:shadow-[0_20px_40px_-24px_rgba(27,134,255,0.25)]"
                   >
                     <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
                       Plan

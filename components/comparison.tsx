@@ -32,9 +32,6 @@ const features: Feature[] = [
 
 const oursGradient =
   "linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)";
-// Same light-gray gradient as the Scale pricing card for a unified, premium look
-const theirsGradient =
-  "linear-gradient(180deg, #FBFCFD 0%, #EEF1F6 55%, #E2E7EE 100%)";
 
 // spacing rhythm used in BOTH the card price rows and the pills overlay
 // so the pills line up perfectly with each price row.
@@ -176,8 +173,7 @@ export function Comparison() {
 
               {/* ───────────── THEIRS CARD ───────────── */}
               <article
-                className="relative order-1 rounded-[18px] border border-[#D8DEE6] px-5 pt-[70px] pb-6 shadow-[0_12px_24px_-14px_rgba(15,23,42,0.18)]"
-                style={{ background: theirsGradient }}
+                className="relative order-1 rounded-[18px] border border-white/60 bg-white/55 px-5 pt-[70px] pb-6 shadow-[0_12px_24px_-14px_rgba(15,23,42,0.18)] backdrop-blur-xl"
               >
                 {/* floating logos — centered, z-20 to sit above adjacent cards */}
                 <div
