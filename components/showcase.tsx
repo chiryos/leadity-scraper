@@ -163,26 +163,31 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
 
 export function Showcase() {
   return (
-    <section id="how-it-works" className="relative overflow-hidden bg-white py-24 md:py-28 lg:py-32">
-      {/* Top glow — peaks are PUSHED OUTSIDE the section (-20% / -12%)
-          to match the hero's mirrored offset. Keeps the brightest point
-          invisible above the showcase's top edge, so at the actual seam
-          we only see the smooth falloff of each gradient — no hard line,
-          just one continuous wash across both sections. */}
+    <section
+      id="how-it-works"
+      // overflow-x-clip (not hidden) — still clips horizontal runaway but
+      // LEAVES vertical overflow visible, which lets the unified seam
+      // glow below extend upward past the section's top edge into the
+      // hero area. That's how we get a single continuous wash instead
+      // of a two-halves-meeting seam.
+      className="relative overflow-x-clip bg-white py-24 md:py-28 lg:py-32"
+    >
+      {/* Unified seam glow — ONE radial spanning both sections.
+          The div is 1000px tall and positioned top:-500px, so it extends
+          500px above the showcase's top edge (into the hero) and 500px
+          into the showcase. Peak at 50% 50% = dead center of the div
+          = exactly at the section boundary. Since the showcase paints
+          after the hero in document flow, this layer draws on top of
+          the hero's bottom as well — no two-peak compounding, just one
+          smooth deep-cyan core fading out both directions. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[800px]"
+        className="pointer-events-none absolute inset-x-0"
         style={{
+          top: "-500px",
+          height: "1000px",
           background:
-            "radial-gradient(200% 75% at 50% -20%, rgba(34, 201, 245, 0.24) 0%, rgba(27, 134, 255, 0.16) 18%, rgba(34, 201, 245, 0.10) 40%, rgba(34, 201, 245, 0.04) 65%, transparent 90%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[480px]"
-        style={{
-          background:
-            "radial-gradient(170% 65% at 50% -12%, rgba(34, 201, 245, 0.30) 0%, rgba(27, 134, 255, 0.20) 18%, rgba(34, 201, 245, 0.12) 38%, rgba(34, 201, 245, 0.04) 62%, transparent 85%)",
+            "radial-gradient(200% 50% at 50% 50%, rgba(34, 201, 245, 0.32) 0%, rgba(27, 134, 255, 0.20) 14%, rgba(34, 201, 245, 0.12) 34%, rgba(34, 201, 245, 0.05) 60%, transparent 88%)",
         }}
       />
       <div className="relative container-page">

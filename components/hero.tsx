@@ -28,32 +28,11 @@ export function Hero() {
         }}
       />
 
-      {/* Seam glow — peaks are PUSHED OUTSIDE the section (120% / 112%)
-          so the two radials' brightest points live below the visible
-          hero bottom. At the seam itself we only see the smooth falloff
-          curve of each gradient, which means the hero's bottom edge and
-          the showcase's top edge read as one continuous wash instead of
-          a two-peak compound line. Colors are all in the light-blue /
-          cyan range (no deep navy) so the band stays luminous, not
-          weighty. */}
-      <div
-        aria-hidden
-        className="glow-breathe-slow pointer-events-none absolute inset-x-0 bottom-0 -z-10"
-        style={{
-          height: "800px",
-          background:
-            "radial-gradient(200% 75% at 50% 120%, rgba(34, 201, 245, 0.24) 0%, rgba(27, 134, 255, 0.16) 18%, rgba(34, 201, 245, 0.10) 40%, rgba(34, 201, 245, 0.04) 65%, transparent 90%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="glow-breathe pointer-events-none absolute inset-x-0 bottom-0 -z-10"
-        style={{
-          height: "480px",
-          background:
-            "radial-gradient(170% 65% at 50% 112%, rgba(34, 201, 245, 0.30) 0%, rgba(27, 134, 255, 0.20) 18%, rgba(34, 201, 245, 0.12) 38%, rgba(34, 201, 245, 0.04) 62%, transparent 85%)",
-        }}
-      />
+      {/* Seam glow is owned by the Showcase section (see showcase.tsx) —
+          it's a single gradient with overflow-x-clip / overflow-y-visible,
+          extending upward INTO the hero's area via a negative top offset.
+          That gives one continuous wash instead of two halves trying to
+          meet at the boundary, which was showing a visible seam. */}
 
       {/* Content vertically centered - mobile padding tightened */}
       <div className="container-page relative flex flex-1 flex-col items-center justify-center pt-8 pb-6 md:pt-16 md:pb-12">
