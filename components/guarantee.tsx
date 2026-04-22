@@ -72,34 +72,23 @@ export function Guarantee() {
         />
       </div>
 
-      {/* Top fade — extends 200px UP into Pricing area. Short solid-white
-          cap at the top edge hides the blue bg canvas boundary; organic
-          radial clouds below. */}
+      {/* Top fade — smooth linear fade from pure white to transparent. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 -top-[200px] z-[1] h-[460px]"
         style={{
-          background: [
-            "linear-gradient(180deg, #ffffff 0%, #ffffff 20px, rgba(255,255,255,0.5) 50px, transparent 110px)",
-            "radial-gradient(ellipse 70% 110% at 22% 0%, #ffffff 0%, rgba(255,255,255,0.6) 32%, rgba(255,255,255,0.12) 62%, transparent 82%)",
-            "radial-gradient(ellipse 65% 95% at 78% 0%, #ffffff 0%, rgba(255,255,255,0.55) 34%, rgba(255,255,255,0.08) 64%, transparent 80%)",
-            "radial-gradient(ellipse 45% 70% at 52% 0%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 40%, transparent 72%)",
-          ].join(", "),
+          background:
+            "linear-gradient(180deg, #ffffff 0%, #ffffff 200px, transparent 100%)",
         }}
       />
 
-      {/* Bottom fade — extends 200px DOWN into Testimonials area. Same
-          solid-white cap at the bottom. */}
+      {/* Bottom fade — mirrored smooth fade. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 -bottom-[200px] z-[1] h-[460px]"
         style={{
-          background: [
-            "linear-gradient(0deg, #ffffff 0%, #ffffff 20px, rgba(255,255,255,0.5) 50px, transparent 110px)",
-            "radial-gradient(ellipse 70% 110% at 22% 100%, #ffffff 0%, rgba(255,255,255,0.6) 32%, rgba(255,255,255,0.12) 62%, transparent 82%)",
-            "radial-gradient(ellipse 65% 95% at 78% 100%, #ffffff 0%, rgba(255,255,255,0.55) 34%, rgba(255,255,255,0.08) 64%, transparent 80%)",
-            "radial-gradient(ellipse 45% 70% at 52% 100%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 40%, transparent 72%)",
-          ].join(", "),
+          background:
+            "linear-gradient(0deg, #ffffff 0%, #ffffff 200px, transparent 100%)",
         }}
       />
 
