@@ -101,7 +101,7 @@ export function Nav() {
           >
             Sign in
           </a>
-          <Button asChild size="md">
+          <Button asChild size="md" variant="gradient">
             <a href="#pricing">Get leads</a>
           </Button>
         </div>
