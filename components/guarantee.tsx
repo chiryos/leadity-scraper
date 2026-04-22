@@ -78,7 +78,7 @@ export function Guarantee() {
             {chips.map((c) => (
               <li
                 key={c}
-                className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-white px-3.5 py-1.5 text-[12px] font-medium text-[var(--color-text-secondary)]"
+                className="glass-chip inline-flex items-center rounded-full px-3.5 py-1.5 text-[12px] font-medium text-[var(--color-text-secondary)]"
               >
                 {c}
               </li>

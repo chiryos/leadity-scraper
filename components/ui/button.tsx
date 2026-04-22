@@ -15,7 +15,7 @@ const buttonVariants = cva(
         gradient:
           "bg-brand-gradient text-white shadow-[0_8px_24px_-8px_rgba(27,134,255,0.55)] hover:shadow-[0_10px_30px_-6px_rgba(27,134,255,0.7)] hover:brightness-105",
         ghost:
-          "border border-[var(--color-border)] bg-white text-[var(--color-text-primary)] hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface)]",
+          "glass-chip text-[var(--color-text-primary)]",
         muted:
           "bg-[var(--color-surface-muted)] text-[var(--color-accent)] hover:bg-[var(--color-border)]",
         link: "text-[var(--color-accent)] underline-offset-4 hover:underline",

@@ -173,7 +173,7 @@ export function Comparison() {
 
               {/* ───────────── THEIRS CARD ───────────── */}
               <article
-                className="relative order-1 rounded-[18px] border border-white/60 bg-white/55 px-5 pt-[70px] pb-6 shadow-[0_12px_24px_-14px_rgba(15,23,42,0.18)] backdrop-blur-xl"
+                className="glass-card relative order-1 rounded-[18px] px-5 pt-[70px] pb-6"
               >
                 {/* floating logos — centered, z-20 to sit above adjacent cards */}
                 <div

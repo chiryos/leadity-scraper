@@ -102,7 +102,7 @@ export function Pricing() {
                   role="switch"
                   aria-checked={affiliateOn}
                   onClick={() => setAffiliateOn((v) => !v)}
-                  className="inline-flex items-center gap-3 rounded-full border border-[var(--color-border)] bg-white px-1.5 py-1.5 pl-4 pr-1.5 shadow-[0_8px_24px_-16px_rgba(27,134,255,0.4)]"
+                  className="glass-chip inline-flex items-center gap-3 rounded-full px-1.5 py-1.5 pl-4 pr-1.5"
                 >
                   <span
                     className={cn(
@@ -500,7 +500,7 @@ export function Pricing() {
                     }}
                   />
                   <article
-                    className="relative flex h-full flex-col rounded-2xl border border-white/60 bg-white/55 p-8 shadow-[0_12px_28px_-18px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-white/90 hover:shadow-[0_20px_40px_-24px_rgba(27,134,255,0.25)]"
+                    className="glass-card relative flex h-full flex-col rounded-2xl p-8 transition-transform duration-200 hover:-translate-y-0.5"
                   >
                     <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
                       Plan

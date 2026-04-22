@@ -125,11 +125,10 @@ export function Features() {
             return (
               <StaggerItem
                 key={f.title}
-                // Glassmorphism — semi-transparent bg + backdrop-blur over the
-                // section's grid pattern for a premium frosted look.
-                // Transforms are owned by framer-motion; only border + shadow
-                // animate via CSS to avoid fighting the stagger intro.
-                className="group rounded-2xl border border-white/60 bg-white/55 p-7 shadow-[0_8px_24px_-16px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-[border-color,box-shadow] duration-200 hover:border-white/90 hover:shadow-[0_18px_40px_-22px_rgba(27,134,255,0.35)]"
+                // Apple Liquid Glass — .glass-card carries the full recipe
+                // (saturated backdrop-filter, top highlight, gradient alpha,
+                // soft blue-tinted ground shadow, hover state).
+                className="group glass-card rounded-2xl p-7"
               >
                 <div className="flex items-start justify-between gap-4">
                   <span

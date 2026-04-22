@@ -181,6 +181,98 @@
     background-size: 56px 56px;
   }
 
+  /* ───────── Apple Liquid Glass ─────────
+     Inspired by Apple's Liquid Glass material (iOS/macOS 26).
+     Key properties of a real glass surface:
+       • High backdrop saturation (180%) — colors behind pop through vividly
+       • Non-trivial blur (20–28px) — content is readable, not crisp
+       • Vertical alpha gradient (top lighter, bottom slightly darker) so the
+         surface catches light like real glass
+       • Inset top highlight — 1px white ring on top edge like beveled glass
+       • Subtle inset bottom — barely-there reflection underneath
+       • Soft ground shadow with a hint of brand-blue for elevation
+
+     Two tiers:
+       .glass-card  — primary surfaces (cards, modals, big CTAs)
+       .glass-chip  — small surfaces (buttons, pills, toggles, chips) */
+
+  .glass-card {
+    position: relative;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.62) 0%,
+      rgba(255, 255, 255, 0.42) 100%
+    );
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.18),
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 10px 28px -14px rgba(15, 23, 42, 0.14),
+      0 28px 56px -28px rgba(27, 134, 255, 0.18);
+    transition:
+      border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .glass-card:hover {
+    border-color: rgba(255, 255, 255, 0.85);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.2),
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 16px 36px -18px rgba(15, 23, 42, 0.18),
+      0 36px 72px -32px rgba(27, 134, 255, 0.28);
+  }
+
+  .glass-chip {
+    position: relative;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(255, 255, 255, 0.58) 100%
+    );
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 6px 14px -8px rgba(15, 23, 42, 0.12);
+    transition:
+      border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .glass-chip:hover {
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 10px 22px -10px rgba(27, 134, 255, 0.35);
+    transform: translateY(-1px);
+  }
+
+  /* Dark glass — for use on brand-gradient bgs (Ours card, CTA card).
+     Same physics but inverted alpha so it reads as translucent white-on-blue. */
+  .glass-chip-dark {
+    position: relative;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.24) 0%,
+      rgba(255, 255, 255, 0.14) 100%
+    );
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.32),
+      0 1px 2px rgba(15, 23, 42, 0.08);
+  }
+
   .text-balance {
     text-wrap: balance;
   }
