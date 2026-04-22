@@ -22,14 +22,18 @@ export function CTA() {
         ].join(", "),
       }}
     >
-      {/* Smooth top fade — bridges FAQ's white bg into the blue so the
-          transition is seamless, not a hard color stop. */}
+      {/* Top fade — organic cloud-shape (three overlapping radial
+          gradients with uneven x-positions) so the transition from the
+          white FAQ into the blue feels abstract/painterly. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[260px]"
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[360px]"
         style={{
-          background:
-            "linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.55) 35%, rgba(255,255,255,0.2) 65%, transparent 100%)",
+          background: [
+            "radial-gradient(ellipse 70% 110% at 22% 0%, #ffffff 0%, rgba(255,255,255,0.6) 32%, rgba(255,255,255,0.12) 62%, transparent 82%)",
+            "radial-gradient(ellipse 65% 95% at 78% 0%, #ffffff 0%, rgba(255,255,255,0.55) 34%, rgba(255,255,255,0.08) 64%, transparent 80%)",
+            "radial-gradient(ellipse 45% 70% at 52% 0%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 40%, transparent 72%)",
+          ].join(", "),
         }}
       />
 
