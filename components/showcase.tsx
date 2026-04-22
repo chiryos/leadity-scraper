@@ -240,28 +240,37 @@ export function Showcase() {
         />
       </div>
 
-      {/* Top fade — smooth linear fade from pure white to transparent.
-          200px solid-white cap at the top covers the extension into
-          Hero + the blue bg canvas's top edge; 260px smooth ramp into
-          transparent reveals the blue inside the section. No radials,
-          no artifacts — just a clean fade. */}
+      {/* Top fade — abstract painterly transition. Organic radials at
+          uneven x-positions give cloud-shaped coverage; filter: blur(50px)
+          erases any visible circle edges so the fade reads as one diffuse
+          wash, not distinct blobs. Solid linear cap underneath guarantees
+          the canvas top edge is covered even after blur's edge-bleed. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-[200px] z-[1] h-[460px]"
+        className="pointer-events-none absolute inset-x-0 -top-[260px] z-[1] h-[520px] overflow-hidden"
         style={{
-          background:
-            "linear-gradient(180deg, #ffffff 0%, #ffffff 200px, transparent 100%)",
+          filter: "blur(50px)",
+          background: [
+            "linear-gradient(180deg, #ffffff 0%, #ffffff 200px, rgba(255,255,255,0.5) 340px, transparent 100%)",
+            "radial-gradient(ellipse 75% 105% at 22% 10%, #ffffff 0%, rgba(255,255,255,0.55) 40%, rgba(255,255,255,0.15) 70%, transparent 95%)",
+            "radial-gradient(ellipse 70% 95% at 78% 5%, #ffffff 0%, rgba(255,255,255,0.5) 42%, rgba(255,255,255,0.12) 72%, transparent 92%)",
+            "radial-gradient(ellipse 50% 75% at 52% 12%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.25) 50%, transparent 85%)",
+          ].join(", "),
         }}
       />
 
-      {/* Bottom fade — mirrored smooth fade, covers extension into
-          Comparison + the blue bg canvas's bottom edge. */}
+      {/* Bottom fade — same recipe, mirrored, extends into Comparison. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 -bottom-[200px] z-[1] h-[460px]"
+        className="pointer-events-none absolute inset-x-0 -bottom-[260px] z-[1] h-[520px] overflow-hidden"
         style={{
-          background:
-            "linear-gradient(0deg, #ffffff 0%, #ffffff 200px, transparent 100%)",
+          filter: "blur(50px)",
+          background: [
+            "linear-gradient(0deg, #ffffff 0%, #ffffff 200px, rgba(255,255,255,0.5) 340px, transparent 100%)",
+            "radial-gradient(ellipse 75% 105% at 22% 90%, #ffffff 0%, rgba(255,255,255,0.55) 40%, rgba(255,255,255,0.15) 70%, transparent 95%)",
+            "radial-gradient(ellipse 70% 95% at 78% 95%, #ffffff 0%, rgba(255,255,255,0.5) 42%, rgba(255,255,255,0.12) 72%, transparent 92%)",
+            "radial-gradient(ellipse 50% 75% at 52% 88%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.25) 50%, transparent 85%)",
+          ].join(", "),
         }}
       />
 

@@ -72,23 +72,34 @@ export function Guarantee() {
         />
       </div>
 
-      {/* Top fade — smooth linear fade from pure white to transparent. */}
+      {/* Top fade — abstract blurred organic fade (see Showcase for the
+          full recipe explanation). */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-[200px] z-[1] h-[460px]"
+        className="pointer-events-none absolute inset-x-0 -top-[260px] z-[1] h-[520px] overflow-hidden"
         style={{
-          background:
-            "linear-gradient(180deg, #ffffff 0%, #ffffff 200px, transparent 100%)",
+          filter: "blur(50px)",
+          background: [
+            "linear-gradient(180deg, #ffffff 0%, #ffffff 200px, rgba(255,255,255,0.5) 340px, transparent 100%)",
+            "radial-gradient(ellipse 75% 105% at 22% 10%, #ffffff 0%, rgba(255,255,255,0.55) 40%, rgba(255,255,255,0.15) 70%, transparent 95%)",
+            "radial-gradient(ellipse 70% 95% at 78% 5%, #ffffff 0%, rgba(255,255,255,0.5) 42%, rgba(255,255,255,0.12) 72%, transparent 92%)",
+            "radial-gradient(ellipse 50% 75% at 52% 12%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.25) 50%, transparent 85%)",
+          ].join(", "),
         }}
       />
 
-      {/* Bottom fade — mirrored smooth fade. */}
+      {/* Bottom fade — mirrored */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 -bottom-[200px] z-[1] h-[460px]"
+        className="pointer-events-none absolute inset-x-0 -bottom-[260px] z-[1] h-[520px] overflow-hidden"
         style={{
-          background:
-            "linear-gradient(0deg, #ffffff 0%, #ffffff 200px, transparent 100%)",
+          filter: "blur(50px)",
+          background: [
+            "linear-gradient(0deg, #ffffff 0%, #ffffff 200px, rgba(255,255,255,0.5) 340px, transparent 100%)",
+            "radial-gradient(ellipse 75% 105% at 22% 90%, #ffffff 0%, rgba(255,255,255,0.55) 40%, rgba(255,255,255,0.15) 70%, transparent 95%)",
+            "radial-gradient(ellipse 70% 95% at 78% 95%, #ffffff 0%, rgba(255,255,255,0.5) 42%, rgba(255,255,255,0.12) 72%, transparent 92%)",
+            "radial-gradient(ellipse 50% 75% at 52% 88%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.25) 50%, transparent 85%)",
+          ].join(", "),
         }}
       />
 
