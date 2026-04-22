@@ -164,13 +164,32 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
 export function Showcase() {
   return (
     <section id="how-it-works" className="relative overflow-hidden bg-white py-24 md:py-28 lg:py-32">
-      {/* Top glow — same tone + shape as hero's bottom glow, anchored at y=0 so the two peaks meet at the section boundary and the seam disappears */}
+      {/* Top glow — three stacked layers that mirror the hero's bottom-anchored
+          glow. Peaks sit at y=0 so they co-locate with the hero's y=100% peaks,
+          making the section seam disappear into a single continuous horizontal
+          band of brand-blue light. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-[680px]"
         style={{
           background:
             "radial-gradient(85% 100% at 50% 0%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[520px]"
+        style={{
+          background:
+            "radial-gradient(60% 100% at 50% 0%, rgba(34, 201, 245, 0.18) 0%, rgba(27, 134, 255, 0.08) 40%, transparent 75%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
+        style={{
+          background:
+            "radial-gradient(130% 45% at 50% 0%, rgba(27, 134, 255, 0.34) 0%, rgba(34, 201, 245, 0.16) 35%, rgba(27, 134, 255, 0.04) 65%, transparent 82%)",
         }}
       />
       <div className="relative container-page">

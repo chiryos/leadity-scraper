@@ -28,16 +28,14 @@ export function Hero() {
         }}
       />
 
-      {/* Cinematic bottom glow - peak anchored AT the section boundary so it meets the next section's top glow seamlessly (no color seam on scroll) */}
-      <div
-        aria-hidden
-        className="glow-breathe pointer-events-none absolute inset-x-0 bottom-0 -z-10"
-        style={{
-          height: "520px",
-          background:
-            "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
-        }}
-      />
+      {/* Cinematic bottom glow — three stacked layers that peak AT the
+          section boundary (y=100%) so they meet the showcase's matching
+          top-anchored layers and form a single continuous horizontal band
+          of brand-blue light across the seam.
+            • Layer 1 (widest + softest, breathing slow) — ambient wash
+            • Layer 2 (medium, breathing) — defines the glow's body
+            • Layer 3 (NEW: brighter, horizontally-stretched core beam) —
+              the focused "laser" that makes the seam look intentional */}
       <div
         aria-hidden
         className="glow-breathe-slow pointer-events-none absolute inset-x-0 bottom-0 -z-10"
@@ -45,6 +43,24 @@ export function Hero() {
           height: "680px",
           background:
             "radial-gradient(85% 100% at 50% 100%, rgba(34, 201, 245, 0.16) 0%, rgba(27, 134, 255, 0.06) 40%, transparent 75%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="glow-breathe pointer-events-none absolute inset-x-0 bottom-0 -z-10"
+        style={{
+          height: "520px",
+          background:
+            "radial-gradient(60% 100% at 50% 100%, rgba(34, 201, 245, 0.18) 0%, rgba(27, 134, 255, 0.08) 40%, transparent 75%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10"
+        style={{
+          height: "420px",
+          background:
+            "radial-gradient(130% 45% at 50% 100%, rgba(27, 134, 255, 0.34) 0%, rgba(34, 201, 245, 0.16) 35%, rgba(27, 134, 255, 0.04) 65%, transparent 82%)",
         }}
       />
 
