@@ -111,9 +111,31 @@ export function Comparison() {
               }}
             />
 
+            {/* ───── Color punch-through ─────
+                Glass turns the black column gray. Re-apply black INSIDE the
+                card (clipped to card bounds) with mix-blend-mode: multiply so
+                it re-darkens what's underneath without affecting the content
+                text above. Only the theirs column; blue reads fine as-is. */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 z-[2] overflow-hidden rounded-[32px]"
+              style={{ mixBlendMode: "multiply" }}
+            >
+              <div
+                className="grid h-full"
+                style={{ gridTemplateColumns: GRID_COLS }}
+              >
+                <div />
+                <div style={{ background: "rgba(0,0,0,0.82)" }} />
+                <div />
+                <div />
+                <div />
+              </div>
+            </div>
+
             {/* ───── Floating logos on tab tops ───── */}
             <div
-              className="pointer-events-none absolute inset-x-0 z-[3] grid"
+              className="pointer-events-none absolute inset-x-0 z-[4] grid"
               style={{
                 top: `-${TAB_HEIGHT - 14}px`,
                 gridTemplateColumns: GRID_COLS,
@@ -175,7 +197,7 @@ export function Comparison() {
 
             {/* ───── Content grid ───── */}
             <div
-              className="relative z-[2] grid"
+              className="relative z-[3] grid"
               style={{ gridTemplateColumns: GRID_COLS }}
             >
               {/* Row 1 — tight top clearance; logos already float above
