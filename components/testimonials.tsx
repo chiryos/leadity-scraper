@@ -33,11 +33,9 @@ const SHADOWS: readonly string[] = (() => {
   for (let i = 0; i <= 20; i++) {
     const t = i / 20;
     const darkA = (0.14 - t * 0.08).toFixed(3);
-    const ringA = (t * 0.22).toFixed(3);
     const glowA = (t * 0.42).toFixed(3);
     arr.push(
       `0 20px 48px -16px rgba(15,23,42,${darkA}),` +
-        `0 0 0 1.5px rgba(27,134,255,${ringA}),` +
         `0 20px 56px -14px rgba(27,134,255,${glowA})`,
     );
   }
@@ -162,7 +160,7 @@ export function Testimonials() {
               <div
                 key={i}
                 data-tc
-                className="relative h-[460px] w-[300px] shrink-0 overflow-hidden rounded-[20px] border border-white/60 bg-white md:h-[480px] md:w-[340px]"
+                className="relative h-[460px] w-[300px] shrink-0 overflow-hidden rounded-[20px] bg-white md:h-[480px] md:w-[340px]"
                 style={{ contain: "paint" }}
               >
                 <Image
