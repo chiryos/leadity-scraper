@@ -48,11 +48,16 @@ export function Comparison() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <div
-            className="relative mx-auto max-w-[720px]"
-            style={{ marginTop: `${TAB_HEIGHT + 40}px` }}
-          >
+        {/* No Reveal wrapper around the card: Reveal animates
+            opacity + transform, and browsers skip backdrop-filter
+            rendering while those are animating — you get a half-
+            second flash of unblurred card on scroll-in. Keep the
+            card static so the frosted glass is correct from the
+            very first paint. */}
+        <div
+          className="relative mx-auto max-w-[720px]"
+          style={{ marginTop: `${TAB_HEIGHT + 40}px` }}
+        >
             {/* ───── Colored column TABS (behind glass) ─────
                 5-col grid matches content grid so tabs sit exactly under
                 their columns. Cols 1, 3, 5 are empty (no color). Cols 2
@@ -254,7 +259,7 @@ export function Comparison() {
               <div className="col-span-5 h-8 md:h-12" />
             </div>
           </div>
-        </Reveal>
+        </div>
 
         <Reveal delay={0.2}>
           <p className="mt-10 max-w-[720px] mx-auto text-center text-[13px] text-[var(--color-text-muted)]">
