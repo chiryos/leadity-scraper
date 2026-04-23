@@ -259,7 +259,6 @@ export function Comparison() {
               <div className="col-span-5 h-8 md:h-12" />
             </div>
           </div>
-        </div>
 
         <Reveal delay={0.2}>
           <p className="mt-10 max-w-[720px] mx-auto text-center text-[13px] text-[var(--color-text-muted)]">
