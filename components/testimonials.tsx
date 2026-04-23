@@ -101,10 +101,12 @@ export function Testimonials() {
           </div>
         </Reveal>
 
-        {/* Edges fade via mask; center-spotlight shadow done via rAF */}
+        {/* Edges fade via mask; center-spotlight shadow done via rAF.
+            No overflow-hidden here — that clips top/bottom shadows.
+            The section's overflow-x-clip handles horizontal containment. */}
         <div
           ref={outerRef}
-          className="mt-12 md:mt-16 overflow-hidden py-10 md:py-14"
+          className="mt-12 md:mt-16 py-10 md:py-14"
           style={{
             maskImage:
               "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
