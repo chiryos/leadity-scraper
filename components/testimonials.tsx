@@ -25,55 +25,90 @@ const testimonials: Testimonial[] = [
 // Duplicate for seamless loop: animate translateX(0 → -50%)
 const track = [...testimonials, ...testimonials];
 
-// Shadow at edges (t=0) → shadow at center (t=1)
-function buildShadow(t: number): string {
-  // Dark layer fades out as blue takes over
-  const darkAlpha = 0.14 - t * 0.08;
-  const darkSpread = 0.1 - t * 0.06;
-  // Blue ring + glow fade in toward center
-  const ringAlpha = t * 0.22;
-  const glowAlpha = t * 0.42;
-
-  return [
-    `0 10px 24px -14px rgba(15,23,42,${darkAlpha.toFixed(3)})`,
-    `0 28px 56px -28px rgba(15,23,42,${darkSpread.toFixed(3)})`,
-    `0 0 0 1.5px rgba(27,134,255,${ringAlpha.toFixed(3)})`,
-    `0 16px 64px -12px rgba(27,134,255,${glowAlpha.toFixed(3)})`,
-  ].join(", ");
-}
+// Pre-bake 21 shadow strings (t = 0.00, 0.05, … 1.00) — avoids per-frame string
+// concat. We just pick an index. Each card only re-sets style when its bucket
+// changes, so most frames = zero style writes.
+const SHADOWS: readonly string[] = (() => {
+  const arr: string[] = [];
+  for (let i = 0; i <= 20; i++) {
+    const t = i / 20;
+    const darkA = (0.14 - t * 0.08).toFixed(3);
+    const ringA = (t * 0.22).toFixed(3);
+    const glowA = (t * 0.42).toFixed(3);
+    arr.push(
+      `0 20px 48px -16px rgba(15,23,42,${darkA}),` +
+        `0 0 0 1.5px rgba(27,134,255,${ringA}),` +
+        `0 20px 56px -14px rgba(27,134,255,${glowA})`,
+    );
+  }
+  return arr;
+})();
 
 export function Testimonials() {
   const reduce = useReducedMotion();
   const outerRef = React.useRef<HTMLDivElement>(null);
-  const rafRef = React.useRef<number>(0);
 
   React.useEffect(() => {
     if (reduce) return;
+    const outer = outerRef.current;
+    if (!outer) return;
+
+    const trackEl = outer.querySelector<HTMLElement>("[data-track]");
+    if (!trackEl) return;
+
+    const cards = Array.from(outer.querySelectorAll<HTMLElement>("[data-tc]"));
+    // Track last bucket index per card so we skip no-op style writes.
+    const lastBucket: number[] = cards.map(() => -1);
+
+    let rafId = 0;
+    let running = false;
 
     const tick = () => {
-      const outer = outerRef.current;
-      if (!outer) return;
-
-      const cards = outer.querySelectorAll<HTMLElement>("[data-tc]");
+      // ONE getBoundingClientRect per frame (on the track); cards' offsetLeft
+      // is cached layout, free to read.
+      const trackRect = trackEl.getBoundingClientRect();
       const vCx = window.innerWidth / 2;
-      // Cards fully blue within 28% of center; fully dark beyond 45%
       const blueZone = window.innerWidth * 0.28;
       const darkZone = window.innerWidth * 0.45;
+      const range = darkZone - blueZone;
 
-      for (const card of cards) {
-        const rect = card.getBoundingClientRect();
-        const cardCx = rect.left + rect.width / 2;
+      for (let i = 0; i < cards.length; i++) {
+        const card = cards[i];
+        const cardCx = trackRect.left + card.offsetLeft + card.offsetWidth / 2;
         const dist = Math.abs(cardCx - vCx);
-        // t = 1 at center, 0 at edges, smooth ramp between zones
-        const t = Math.max(0, Math.min(1, 1 - (dist - blueZone) / (darkZone - blueZone)));
-        card.style.boxShadow = buildShadow(t);
+        let t = 1 - (dist - blueZone) / range;
+        t = t < 0 ? 0 : t > 1 ? 1 : t;
+        const bucket = (t * 20 + 0.5) | 0; // round → int, 0..20
+        if (lastBucket[i] !== bucket) {
+          lastBucket[i] = bucket;
+          card.style.boxShadow = SHADOWS[bucket];
+        }
       }
 
-      rafRef.current = requestAnimationFrame(tick);
+      if (running) rafId = requestAnimationFrame(tick);
     };
 
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
+    const start = () => {
+      if (running) return;
+      running = true;
+      rafId = requestAnimationFrame(tick);
+    };
+    const stop = () => {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+
+    // Pause the rAF loop when the marquee isn't near the viewport.
+    const io = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? start() : stop()),
+      { rootMargin: "200px 0px" },
+    );
+    io.observe(outer);
+
+    return () => {
+      stop();
+      io.disconnect();
+    };
   }, [reduce]);
 
   return (
@@ -115,7 +150,8 @@ export function Testimonials() {
           }}
         >
           <div
-            className="flex gap-5 md:gap-6"
+            data-track
+            className="relative flex gap-5 md:gap-6"
             style={{
               width: "max-content",
               willChange: "transform",
@@ -127,6 +163,7 @@ export function Testimonials() {
                 key={i}
                 data-tc
                 className="relative h-[460px] w-[300px] shrink-0 overflow-hidden rounded-[20px] border border-white/60 bg-white md:h-[480px] md:w-[340px]"
+                style={{ contain: "paint" }}
               >
                 <Image
                   src={t.src}
