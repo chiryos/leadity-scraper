@@ -440,21 +440,44 @@ stiffness 260, damping 28, mass 0.9  ← mobile drawer island
 - Plan data in `lib/plans.ts`. See §8.
 
 ### `Guarantee` — `components/guarantee.tsx`
-- Section with glow blobs left + bottom-right
-- Left column (col-span-4): `/leadity-refund-recycle.png` seal 260–300px
-  with ambient radial halo behind
-- Right column (col-span-8):
-  - Eyebrow: "The Leadity guarantee"
-  - H2: "Bad lead? We don't just replace it. We pay you back in bonus
-    leads."
-  - Paragraph explaining refund + 50% bonus mechanic
-  - 3 `.glass-chip` pills: "Verified at source", "Automatic replacement",
-    "Human account manager"
+- **FULL-WIDTH BLUE GLASS SECTION** (restyled 2026-04-22 to mirror the CTA)
+- `py-28 md:py-36 lg:py-44`, `text-white`, brand gradient bg with
+  specular top-left highlight (same recipe as CTA)
+- **Top fade** (260px, white → transparent) to bridge from Pricing's
+  white bg
+- **Bottom fade** (480px, transparent → solid white tail) to bridge back
+  into Testimonials' white bg — deliberately taller than the top fade
+  because the section below is light too (unlike CTA where Footer follows)
+- Three Gaussian-blur glow blobs (same recipe as CTA): purple/cyan/pink
+  radial circles, 540–820px, `blur(160–200px)`, `mix-blend-mode:
+  plus-lighter`, organic asymmetric `border-radius` blob shapes
+  - Bottom-right blob is positioned `bottom-[20%]` (not `-bottom-[15%]`)
+    so it doesn't tint the bottom fade zone
+- Faint hairline grid texture (56px × 56px) for depth
+- Layout stays two-column:
+  - Left col (col-span-4): `/leadity-refund-recycle.png` seal 260–300px
+    with white/tinted ambient radial halo behind (was cyan on white bg
+    before; now white-on-blue to match the new treatment)
+  - Right col (col-span-8):
+    - Eyebrow: `THE LEADITY GUARANTEE` in `text-white/85`
+    - H2: "Bad lead? We don't just replace it. We pay you back in bonus
+      leads." — white, `clamp(32px, 4.6vw, 56px)`
+    - Paragraph explaining refund + 50% bonus mechanic, `text-white/85`
+    - 3 glass pills: "Verified at source", "Automatic replacement",
+      "Human account manager" — NOT `.glass-chip` (too light for the
+      blue bg). Custom: `border border-white/25 bg-white/12 backdrop-blur-md
+      text-white/90`
 
 ### `Testimonials` — `components/testimonials.tsx`
 - Section `overflow-x-clip pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28`
   (not `overflow-hidden` — would clip shadow below cards)
 - Bg-grid texture + top radial glow
+- **Top 180px of the bg-grid is mask-faded** (`mask-image: linear-gradient
+  (180deg, transparent 0%, #000 180px, #000 100%)`) so the cyan grid
+  doesn't start with a hard top edge right after the Guarantee section's
+  blue → white fade. Without this mask, there's a visible seam between
+  the solid-white bottom of the Guarantee and the grid-patterned top of
+  Testimonials.
 - H2: "Receipts, / not testimonials." — sub: "Every card is a real
   screenshot from a real customer. Tap any card to read the full
   conversation."
@@ -491,7 +514,12 @@ stiffness 260, damping 28, mass 0.9  ← mobile drawer island
   painted directly via multi-layer `background` style
 - **Smooth top fade** (260px tall `linear-gradient(180deg, #fff 0%,
   … transparent 100%)`) so the previous FAQ section's white bg blends
-  seamlessly into the blue
+  seamlessly into the blue. No bottom fade — Footer follows.
+- **Gaussian-blur glow blobs** (shipped in `c640f53`, 2026-04-22): three
+  organic asymmetric-border-radius shapes with huge blurs (160–200px)
+  and `mix-blend-mode: plus-lighter` painted OVER the brand gradient.
+  Purple-cyan + cyan-blue + pink-purple palette. This is the same recipe
+  now reused verbatim in the Guarantee section.
 - Faint hairline grid texture (56px × 56px) for depth
 - Content centered, max-w-[820px]:
   - White-icon ghost logo (80/92px, no shadow)
@@ -503,11 +531,6 @@ stiffness 260, damping 28, mass 0.9  ← mobile drawer island
   - Primary CTA (solid white pill): `Get my 5k leads →` → `#pricing`
   - Secondary (text link): `Talk to the founders →` →
     `mailto:hello@leadity.com`
-
-> **Pending enhancement from the user:** add a gradient-blur soft glow
-> blob over the CTA section — duplicate the blue shape, apply Gaussian
-> blur 150–200px, blend-mode `plus-lighter` or `screen`, opacity 70–80%.
-> Not yet implemented. See §14.
 
 ### `Footer` — `components/footer.tsx`
 - Dark bg with giant "Leadity" watermark fully visible at the bottom

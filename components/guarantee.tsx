@@ -107,7 +107,7 @@ export function Guarantee() {
               }}
             />
             <Image
-              src="/leadity-refund-recycle.png"
+              src="/leadity-refund-recycle-v2.png"
               alt="Leadity refund plus 50% bonus - replace and recycle bad leads"
               width={320}
               height={320}
