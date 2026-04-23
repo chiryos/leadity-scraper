@@ -93,23 +93,36 @@ export function Comparison() {
               </div>
             </div>
 
-            {/* ───── Glass card overlay ─────
-                White tint kept low so both columns underneath punch through
-                with their real colors — blue stays vibrant, black stays dark.
-                A heavy white tint washed black to gray. */}
+            {/* ───── Glass card overlay — proper liquid glass ─────
+                • Slight blue-gray base tint (not pure white)
+                • Radial specular highlight top-left (catches an imaginary
+                  light source)
+                • Pooled-light inset glow top, shadow pool bottom for depth
+                • Asymmetric rim lights (top+left bright, bottom+right dim)
+                  to fake 3D curvature
+                • Brand-tinted elevation shadow
+                Columns underneath still punch through because the base tint
+                stays at low alpha. */}
             <div
               aria-hidden
-              className="absolute inset-0 z-[1] rounded-[32px] border-[1.5px] border-white/55"
+              className="absolute inset-0 z-[1] rounded-[32px] border-[1.5px] border-white/60"
               style={{
-                backdropFilter: "blur(40px) saturate(160%)",
-                WebkitBackdropFilter: "blur(40px) saturate(160%)",
-                background: "rgba(255, 255, 255, 0.08)",
+                backdropFilter: "blur(50px) saturate(200%) brightness(1.02)",
+                WebkitBackdropFilter: "blur(50px) saturate(200%) brightness(1.02)",
+                background: [
+                  "radial-gradient(130% 85% at 16% -2%, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.06) 30%, transparent 58%)",
+                  "linear-gradient(176deg, rgba(230,238,250,0.12) 0%, rgba(220,228,242,0.08) 55%, rgba(215,225,240,0.1) 100%)",
+                ].join(", "),
                 boxShadow: [
-                  "inset 0 1px 0 rgba(255,255,255,0.6)",
-                  "inset 0 -1px 0 rgba(255,255,255,0.18)",
-                  "0 1px 2px rgba(15,23,42,0.06)",
-                  "0 24px 48px -16px rgba(15,23,42,0.2)",
-                  "0 56px 96px -36px rgba(9,81,255,0.26)",
+                  "inset 0 10px 32px rgba(255,255,255,0.28)",
+                  "inset 0 -8px 28px rgba(170,188,212,0.14)",
+                  "inset 0 1.5px 0 rgba(255,255,255,0.85)",
+                  "inset 1.5px 0 0 rgba(255,255,255,0.4)",
+                  "inset -1.5px 0 0 rgba(255,255,255,0.14)",
+                  "inset 0 -1.5px 0 rgba(190,205,225,0.28)",
+                  "0 1px 2px rgba(15,23,42,0.04)",
+                  "0 24px 48px -16px rgba(15,23,42,0.22)",
+                  "0 56px 96px -36px rgba(9,81,255,0.3)",
                 ].join(", "),
               }}
             />
