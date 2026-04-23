@@ -93,15 +93,15 @@ export function Comparison() {
               aria-hidden
               className="absolute inset-0 z-[1] rounded-[32px] border-[1.5px] border-white/55"
               style={{
-                backdropFilter: "blur(60px) saturate(160%)",
-                WebkitBackdropFilter: "blur(60px) saturate(160%)",
-                background: "rgba(255, 255, 255, 0.42)",
+                backdropFilter: "blur(50px) saturate(200%)",
+                WebkitBackdropFilter: "blur(50px) saturate(200%)",
+                background: "rgba(255, 255, 255, 0.22)",
                 boxShadow: [
-                  "inset 0 1px 0 rgba(255,255,255,0.7)",
-                  "inset 0 -1px 0 rgba(255,255,255,0.2)",
+                  "inset 0 1px 0 rgba(255,255,255,0.6)",
+                  "inset 0 -1px 0 rgba(255,255,255,0.18)",
                   "0 1px 2px rgba(15,23,42,0.06)",
-                  "0 24px 48px -16px rgba(15,23,42,0.18)",
-                  "0 56px 96px -36px rgba(9,81,255,0.22)",
+                  "0 24px 48px -16px rgba(15,23,42,0.2)",
+                  "0 56px 96px -36px rgba(9,81,255,0.26)",
                 ].join(", "),
               }}
             />
