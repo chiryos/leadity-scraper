@@ -1,21 +1,26 @@
 import * as React from "react";
 import Image from "next/image";
+import { Check, X } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 type Row = {
   label: string;
-  theirs: string;
-  ours: string;
+  // For tier rows we show the prices as text strings; for feature rows
+  // we show a check (ours) / x (theirs). The `kind` discriminator tells
+  // the renderer which branch to take.
+  kind: "tier" | "feature";
+  theirs?: string;
+  ours?: string;
 };
 
 const rows: Row[] = [
-  { label: "2,000 Owners Mobiles", theirs: "$67 – $211", ours: "$59" },
-  { label: "5,000 Owners Mobiles", theirs: "$133 – $522", ours: "$139" },
-  { label: "10,000 Owners Mobiles", theirs: "$307 – $1,053", ours: "$229" },
-  { label: "All-in-one workflow", theirs: "2 tools, 2 bills", ours: "Single product" },
-  { label: "Quality filter built in", theirs: "Pay for VOIPs", ours: "4× stricter" },
-  { label: "Scraping speed", theirs: "Rate-limited", ours: "2× faster" },
-  { label: "Bad lead policy", theirs: "No safety net", ours: "Refund + 50% bonus" },
+  { kind: "tier", label: "2,000 Owners Mobiles", theirs: "$67 – $211", ours: "$59" },
+  { kind: "tier", label: "5,000 Owners Mobiles", theirs: "$133 – $522", ours: "$139" },
+  { kind: "tier", label: "10,000 Owners Mobiles", theirs: "$307 – $1,053", ours: "$229" },
+  { kind: "feature", label: "All-in-one workflow" },
+  { kind: "feature", label: "Quality filter built in" },
+  { kind: "feature", label: "Fast, tunable scraping" },
+  { kind: "feature", label: "Refund + 50% bonus policy" },
 ];
 
 // Tab extension height — how far the colored columns stick ABOVE the card.
@@ -174,33 +179,17 @@ export function Comparison() {
               className="relative z-[2] grid"
               style={{ gridTemplateColumns: GRID_COLS }}
             >
-              {/* Row 1 — COMPARED title + top clearance for logos on right cols */}
-              <div className="px-6 pt-10 pb-4 md:px-10 md:pt-14 md:pb-6">
-                <h3
-                  className="font-black uppercase text-[var(--color-text-primary)]"
-                  style={{
-                    fontSize: "clamp(34px, 5.2vw, 60px)",
-                    lineHeight: 0.95,
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  Compared
-                </h3>
-              </div>
-              {/* Right cols in row 1: empty spacers that still reserve
-                  the top padding so the row height matches COMPARED's. */}
-              <div className="pt-10 md:pt-14" />
-              <div />
-              <div className="pt-10 md:pt-14" />
-              <div />
+              {/* Row 1 — top clearance so logos clear the card edge */}
+              <div className="col-span-5 h-16 md:h-24" />
 
               {/* full-width divider */}
               <div className="col-span-5 mx-6 mb-2 h-px bg-white/30 md:mx-10" />
 
               {/* Data rows */}
               {rows.map((r, i) => {
-                const isTier = i < 3;
-                const isLastTier = i === 2;
+                const isTier = r.kind === "tier";
+                const isLastTier =
+                  isTier && rows[i + 1] && rows[i + 1].kind !== "tier";
                 return (
                   <React.Fragment key={r.label}>
                     {/* Label */}
@@ -211,46 +200,46 @@ export function Comparison() {
                     </div>
                     {/* Theirs */}
                     <div className="flex items-center justify-center px-2 py-3.5 text-center md:py-4">
-                      <span
-                        className={
-                          "tabular-nums " +
-                          (isTier
-                            ? "font-semibold text-[#FF8B8B]"
-                            : "font-medium text-white/80")
-                        }
-                        style={
-                          isTier
-                            ? {
-                                fontSize: "clamp(13px, 1.4vw, 16px)",
-                                letterSpacing: "-0.02em",
-                                textShadow: "0 0 18px rgba(255,130,130,0.35)",
-                              }
-                            : { fontSize: "clamp(11px, 1.15vw, 13px)" }
-                        }
-                      >
-                        {r.theirs}
-                      </span>
+                      {isTier ? (
+                        <span
+                          className="tabular-nums font-semibold text-[#FF8B8B]"
+                          style={{
+                            fontSize: "clamp(13px, 1.4vw, 16px)",
+                            letterSpacing: "-0.02em",
+                            textShadow: "0 0 18px rgba(255,130,130,0.35)",
+                          }}
+                        >
+                          {r.theirs}
+                        </span>
+                      ) : (
+                        <X
+                          aria-label="Not included"
+                          className="h-6 w-6 text-white md:h-7 md:w-7"
+                          strokeWidth={3}
+                        />
+                      )}
                     </div>
                     {/* gap between columns — empty cell */}
                     <div />
                     {/* Ours */}
                     <div className="flex items-center justify-center px-2 py-3.5 text-center md:py-4">
-                      <span
-                        className={
-                          "tabular-nums text-white " +
-                          (isTier ? "font-semibold" : "font-medium")
-                        }
-                        style={
-                          isTier
-                            ? {
-                                fontSize: "clamp(14px, 1.6vw, 18px)",
-                                letterSpacing: "-0.02em",
-                              }
-                            : { fontSize: "clamp(11px, 1.2vw, 13.5px)" }
-                        }
-                      >
-                        {r.ours}
-                      </span>
+                      {isTier ? (
+                        <span
+                          className="tabular-nums font-semibold text-white"
+                          style={{
+                            fontSize: "clamp(14px, 1.6vw, 18px)",
+                            letterSpacing: "-0.02em",
+                          }}
+                        >
+                          {r.ours}
+                        </span>
+                      ) : (
+                        <Check
+                          aria-label="Included"
+                          className="h-6 w-6 text-white md:h-7 md:w-7"
+                          strokeWidth={3}
+                        />
+                      )}
                     </div>
                     {/* right spacer */}
                     <div />
