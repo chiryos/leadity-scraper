@@ -179,8 +179,10 @@ export function Comparison() {
               className="relative z-[2] grid"
               style={{ gridTemplateColumns: GRID_COLS }}
             >
-              {/* Row 1 — top clearance so logos clear the card edge */}
-              <div className="col-span-5 h-16 md:h-24" />
+              {/* Row 1 — tight top clearance; logos already float above
+                  the card via TAB_HEIGHT, so we only need a small gap
+                  here so the first divider doesn't hug the card edge. */}
+              <div className="col-span-5 h-4 md:h-6" />
 
               {/* full-width divider */}
               <div className="col-span-5 mx-6 mb-2 h-px bg-white/30 md:mx-10" />
@@ -192,9 +194,11 @@ export function Comparison() {
                   isTier && rows[i + 1] && rows[i + 1].kind !== "tier";
                 return (
                   <React.Fragment key={r.label}>
-                    {/* Label */}
-                    <div className="flex items-center px-6 py-3.5 md:px-10 md:py-4">
-                      <span className="text-[13px] font-medium text-[var(--color-text-primary)] md:text-[14.5px]">
+                    {/* Label — right-aligned and padded close to the
+                        Theirs column so the eye doesn't cross empty
+                        space between the label and its values. */}
+                    <div className="flex items-center justify-end px-6 py-3.5 md:pr-6 md:pl-10 md:py-4">
+                      <span className="text-[13px] font-medium text-right text-[var(--color-text-primary)] md:text-[14.5px]">
                         {r.label}
                       </span>
                     </div>
