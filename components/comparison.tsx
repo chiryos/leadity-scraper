@@ -93,14 +93,17 @@ export function Comparison() {
               </div>
             </div>
 
-            {/* ───── Glass card overlay ───── */}
+            {/* ───── Glass card overlay ─────
+                White tint kept low so both columns underneath punch through
+                with their real colors — blue stays vibrant, black stays dark.
+                A heavy white tint washed black to gray. */}
             <div
               aria-hidden
               className="absolute inset-0 z-[1] rounded-[32px] border-[1.5px] border-white/55"
               style={{
-                backdropFilter: "blur(50px) saturate(200%)",
-                WebkitBackdropFilter: "blur(50px) saturate(200%)",
-                background: "rgba(255, 255, 255, 0.22)",
+                backdropFilter: "blur(40px) saturate(160%)",
+                WebkitBackdropFilter: "blur(40px) saturate(160%)",
+                background: "rgba(255, 255, 255, 0.08)",
                 boxShadow: [
                   "inset 0 1px 0 rgba(255,255,255,0.6)",
                   "inset 0 -1px 0 rgba(255,255,255,0.18)",
@@ -111,31 +114,9 @@ export function Comparison() {
               }}
             />
 
-            {/* ───── Color punch-through ─────
-                Glass washes black to gray. Re-apply a translucent darkening
-                layer INSIDE the card (clipped to bounds). Kept partial so the
-                frost/blur texture still reads through — column looks black
-                but you can still see it's behind glass. */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 z-[2] overflow-hidden rounded-[32px]"
-              style={{ mixBlendMode: "multiply" }}
-            >
-              <div
-                className="grid h-full"
-                style={{ gridTemplateColumns: GRID_COLS }}
-              >
-                <div />
-                <div style={{ background: "rgba(0,0,0,0.45)" }} />
-                <div />
-                <div />
-                <div />
-              </div>
-            </div>
-
             {/* ───── Floating logos on tab tops ───── */}
             <div
-              className="pointer-events-none absolute inset-x-0 z-[4] grid"
+              className="pointer-events-none absolute inset-x-0 z-[3] grid"
               style={{
                 top: `-${TAB_HEIGHT - 14}px`,
                 gridTemplateColumns: GRID_COLS,
@@ -197,7 +178,7 @@ export function Comparison() {
 
             {/* ───── Content grid ───── */}
             <div
-              className="relative z-[3] grid"
+              className="relative z-[2] grid"
               style={{ gridTemplateColumns: GRID_COLS }}
             >
               {/* Row 1 — tight top clearance; logos already float above
