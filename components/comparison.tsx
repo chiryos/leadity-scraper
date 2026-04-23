@@ -1,7 +1,12 @@
+"use client";
+
 import * as React from "react";
 import Image from "next/image";
 import { Check, X } from "lucide-react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Reveal } from "@/components/reveal";
+
+const GROW_EASE = [0.22, 1, 0.36, 1] as const;
 
 type Row = {
   label: string;
@@ -35,6 +40,15 @@ const TAB_HEIGHT = 96;
 const GRID_COLS = "minmax(220px, 1fr) 138px 14px 138px 104px";
 
 export function Comparison() {
+  const cardRef = React.useRef<HTMLDivElement>(null);
+  const inView = useInView(cardRef, { once: true, amount: 0.2 });
+  const reduce = useReducedMotion();
+  // Start grown when reduced-motion user — no animation flash.
+  const initial = reduce ? { scaleY: 1 } : { scaleY: 0 };
+  const animate = reduce || inView ? { scaleY: 1 } : { scaleY: 0 };
+  const logosInitial = reduce ? { opacity: 1 } : { opacity: 0 };
+  const logosAnimate = reduce || inView ? { opacity: 1 } : { opacity: 0 };
+
   return (
     <section className="section-py relative overflow-hidden">
       <div className="relative container-page">
@@ -55,6 +69,7 @@ export function Comparison() {
             card static so the frosted glass is correct from the
             very first paint. */}
         <div
+          ref={cardRef}
           className="relative mx-auto max-w-[720px]"
           style={{ marginTop: `${TAB_HEIGHT + 40}px` }}
         >
@@ -72,21 +87,31 @@ export function Comparison() {
                 style={{ gridTemplateColumns: GRID_COLS }}
               >
                 <div />
-                {/* Theirs — pure black, darker than before */}
-                <div
+                {/* Theirs — grows up from the bottom on scroll-into-view */}
+                <motion.div
+                  initial={initial}
+                  animate={animate}
+                  transition={{ duration: 1.0, ease: GROW_EASE, delay: 0 }}
                   style={{
                     background:
                       "linear-gradient(180deg, #000000 0%, #0a0f1c 100%)",
                     borderRadius: "72px 72px 0 0",
+                    transformOrigin: "bottom",
+                    willChange: "transform",
                   }}
                 />
                 <div />
-                {/* Ours — punchier cyan → blue gradient */}
-                <div
+                {/* Ours — same grow, slight stagger after the black column */}
+                <motion.div
+                  initial={initial}
+                  animate={animate}
+                  transition={{ duration: 1.0, ease: GROW_EASE, delay: 0.12 }}
                   style={{
                     background:
                       "linear-gradient(180deg, #00D4FF 0%, #118BFF 40%, #0443FF 100%)",
                     borderRadius: "72px 72px 0 0",
+                    transformOrigin: "bottom",
+                    willChange: "transform",
                   }}
                 />
                 <div />
@@ -127,8 +152,12 @@ export function Comparison() {
               }}
             />
 
-            {/* ───── Floating logos on tab tops ───── */}
-            <div
+            {/* ───── Floating logos on tab tops ─────
+                Fade in once the columns have finished growing up. */}
+            <motion.div
+              initial={logosInitial}
+              animate={logosAnimate}
+              transition={{ duration: 0.45, ease: GROW_EASE, delay: reduce ? 0 : 0.85 }}
               className="pointer-events-none absolute inset-x-0 z-[3] grid"
               style={{
                 top: `-${TAB_HEIGHT - 14}px`,
@@ -187,7 +216,7 @@ export function Comparison() {
                 </div>
               </div>
               <div />
-            </div>
+            </motion.div>
 
             {/* ───── Content grid ───── */}
             <div
