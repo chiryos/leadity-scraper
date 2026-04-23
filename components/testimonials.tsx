@@ -104,7 +104,7 @@ export function Testimonials() {
         {/* Edges fade via mask; center-spotlight shadow done via rAF */}
         <div
           ref={outerRef}
-          className="mt-12 md:mt-16 overflow-hidden pb-10 md:pb-14"
+          className="mt-12 md:mt-16 overflow-hidden py-10 md:py-14"
           style={{
             maskImage:
               "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
