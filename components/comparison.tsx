@@ -194,11 +194,10 @@ export function Comparison() {
                   isTier && rows[i + 1] && rows[i + 1].kind !== "tier";
                 return (
                   <React.Fragment key={r.label}>
-                    {/* Label — right-aligned and padded close to the
-                        Theirs column so the eye doesn't cross empty
-                        space between the label and its values. */}
-                    <div className="flex items-center justify-end px-6 py-3.5 md:pr-6 md:pl-10 md:py-4">
-                      <span className="text-[13px] font-medium text-right text-[var(--color-text-primary)] md:text-[14.5px]">
+                    {/* Label — left-aligned, stuck to the card's left
+                        edge per user request. */}
+                    <div className="flex items-center justify-start px-6 py-3.5 md:pl-10 md:pr-4 md:py-4">
+                      <span className="text-[13px] font-medium text-left text-[var(--color-text-primary)] md:text-[14.5px]">
                         {r.label}
                       </span>
                     </div>
