@@ -32,7 +32,7 @@ const TAB_HEIGHT = 96;
  * between them, and there's empty frosted space on the right edge of
  * the card — matching the reference mock.
  */
-const GRID_COLS = "minmax(200px, 1fr) 138px 14px 138px 104px";
+const GRID_COLS = "minmax(220px, 1fr) 138px 14px 138px 104px";
 
 export function Comparison() {
   return (
@@ -50,7 +50,7 @@ export function Comparison() {
 
         <Reveal delay={0.1}>
           <div
-            className="relative mx-auto max-w-[1040px]"
+            className="relative mx-auto max-w-[720px]"
             style={{ marginTop: `${TAB_HEIGHT + 40}px` }}
           >
             {/* ───── Colored column TABS (behind glass) ─────
