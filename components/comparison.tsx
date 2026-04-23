@@ -112,10 +112,10 @@ export function Comparison() {
             />
 
             {/* ───── Color punch-through ─────
-                Glass turns the black column gray. Re-apply black INSIDE the
-                card (clipped to card bounds) with mix-blend-mode: multiply so
-                it re-darkens what's underneath without affecting the content
-                text above. Only the theirs column; blue reads fine as-is. */}
+                Glass washes black to gray. Re-apply a translucent darkening
+                layer INSIDE the card (clipped to bounds). Kept partial so the
+                frost/blur texture still reads through — column looks black
+                but you can still see it's behind glass. */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 z-[2] overflow-hidden rounded-[32px]"
@@ -126,7 +126,7 @@ export function Comparison() {
                 style={{ gridTemplateColumns: GRID_COLS }}
               >
                 <div />
-                <div style={{ background: "rgba(0,0,0,0.82)" }} />
+                <div style={{ background: "rgba(0,0,0,0.45)" }} />
                 <div />
                 <div />
                 <div />
