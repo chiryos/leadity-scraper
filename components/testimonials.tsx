@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import { Reveal } from "@/components/reveal";
@@ -21,11 +22,59 @@ const testimonials: Testimonial[] = [
   { src: "/testimonials/t7.jpg", alt: "Customer DM saying SO GOOD, tons of responses to call", width: 1180, height: 1170 },
 ];
 
-// Duplicate so the loop is seamless: animate translateX(0 → -50%)
+// Duplicate for seamless loop: animate translateX(0 → -50%)
 const track = [...testimonials, ...testimonials];
+
+// Shadow at edges (t=0) → shadow at center (t=1)
+function buildShadow(t: number): string {
+  // Dark layer fades out as blue takes over
+  const darkAlpha = 0.14 - t * 0.08;
+  const darkSpread = 0.1 - t * 0.06;
+  // Blue ring + glow fade in toward center
+  const ringAlpha = t * 0.22;
+  const glowAlpha = t * 0.42;
+
+  return [
+    `0 10px 24px -14px rgba(15,23,42,${darkAlpha.toFixed(3)})`,
+    `0 28px 56px -28px rgba(15,23,42,${darkSpread.toFixed(3)})`,
+    `0 0 0 1.5px rgba(27,134,255,${ringAlpha.toFixed(3)})`,
+    `0 16px 64px -12px rgba(27,134,255,${glowAlpha.toFixed(3)})`,
+  ].join(", ");
+}
 
 export function Testimonials() {
   const reduce = useReducedMotion();
+  const outerRef = React.useRef<HTMLDivElement>(null);
+  const rafRef = React.useRef<number>(0);
+
+  React.useEffect(() => {
+    if (reduce) return;
+
+    const tick = () => {
+      const outer = outerRef.current;
+      if (!outer) return;
+
+      const cards = outer.querySelectorAll<HTMLElement>("[data-tc]");
+      const vCx = window.innerWidth / 2;
+      // Cards fully blue within 28% of center; fully dark beyond 45%
+      const blueZone = window.innerWidth * 0.28;
+      const darkZone = window.innerWidth * 0.45;
+
+      for (const card of cards) {
+        const rect = card.getBoundingClientRect();
+        const cardCx = rect.left + rect.width / 2;
+        const dist = Math.abs(cardCx - vCx);
+        // t = 1 at center, 0 at edges, smooth ramp between zones
+        const t = Math.max(0, Math.min(1, 1 - (dist - blueZone) / (darkZone - blueZone)));
+        card.style.boxShadow = buildShadow(t);
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [reduce]);
 
   return (
     <section className="relative overflow-x-clip pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28">
@@ -52,8 +101,9 @@ export function Testimonials() {
           </div>
         </Reveal>
 
-        {/* Marquee — edges fade out via mask-image, cards drift right→left */}
+        {/* Edges fade via mask; center-spotlight shadow done via rAF */}
         <div
+          ref={outerRef}
           className="mt-12 md:mt-16 overflow-hidden"
           style={{
             maskImage:
@@ -73,7 +123,8 @@ export function Testimonials() {
             {track.map((t, i) => (
               <div
                 key={i}
-                className="relative h-[460px] w-[300px] shrink-0 overflow-hidden rounded-[20px] border border-white/60 bg-white shadow-[0_10px_24px_-14px_rgba(15,23,42,0.14),0_26px_52px_-28px_rgba(27,134,255,0.2)] md:h-[480px] md:w-[340px]"
+                data-tc
+                className="relative h-[460px] w-[300px] shrink-0 overflow-hidden rounded-[20px] border border-white/60 bg-white md:h-[480px] md:w-[340px]"
               >
                 <Image
                   src={t.src}
