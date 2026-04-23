@@ -67,20 +67,20 @@ export function Comparison() {
                 style={{ gridTemplateColumns: GRID_COLS }}
               >
                 <div />
-                {/* Theirs — near-black */}
+                {/* Theirs — pure black, darker than before */}
                 <div
                   style={{
                     background:
-                      "linear-gradient(180deg, #0a0f1c 0%, #1d2437 100%)",
+                      "linear-gradient(180deg, #000000 0%, #0a0f1c 100%)",
                     borderRadius: "72px 72px 0 0",
                   }}
                 />
                 <div />
-                {/* Ours — brand blue */}
+                {/* Ours — punchier cyan → blue gradient */}
                 <div
                   style={{
                     background:
-                      "linear-gradient(180deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)",
+                      "linear-gradient(180deg, #00D4FF 0%, #118BFF 40%, #0443FF 100%)",
                     borderRadius: "72px 72px 0 0",
                   }}
                 />
@@ -196,11 +196,11 @@ export function Comparison() {
                     <div className="flex items-center justify-center px-2 py-3.5 text-center md:py-4">
                       {isTier ? (
                         <span
-                          className="tabular-nums font-semibold text-[#FF8B8B]"
+                          className="tabular-nums font-semibold text-[#FF3333]"
                           style={{
                             fontSize: "clamp(13px, 1.4vw, 16px)",
                             letterSpacing: "-0.02em",
-                            textShadow: "0 0 18px rgba(255,130,130,0.35)",
+                            textShadow: "0 0 22px rgba(255,60,60,0.55)",
                           }}
                         >
                           {r.theirs}
