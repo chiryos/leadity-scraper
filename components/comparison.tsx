@@ -180,12 +180,9 @@ export function Comparison() {
               style={{ gridTemplateColumns: GRID_COLS }}
             >
               {/* Row 1 — tight top clearance; logos already float above
-                  the card via TAB_HEIGHT, so we only need a small gap
-                  here so the first divider doesn't hug the card edge. */}
+                  the card via TAB_HEIGHT. No divider here — first data
+                  row follows directly. */}
               <div className="col-span-5 h-4 md:h-6" />
-
-              {/* full-width divider */}
-              <div className="col-span-5 mx-6 mb-2 h-px bg-white/30 md:mx-10" />
 
               {/* Data rows */}
               {rows.map((r, i) => {
