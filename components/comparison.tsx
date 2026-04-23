@@ -93,16 +93,15 @@ export function Comparison() {
               aria-hidden
               className="absolute inset-0 z-[1] rounded-[32px] border-[1.5px] border-white/55"
               style={{
-                backdropFilter: "blur(40px) saturate(160%) brightness(0.85)",
-                WebkitBackdropFilter:
-                  "blur(40px) saturate(160%) brightness(0.85)",
-                background: "rgba(40, 48, 68, 0.38)",
+                backdropFilter: "blur(60px) saturate(160%)",
+                WebkitBackdropFilter: "blur(60px) saturate(160%)",
+                background: "rgba(255, 255, 255, 0.42)",
                 boxShadow: [
-                  "inset 0 1px 0 rgba(255,255,255,0.35)",
-                  "inset 0 -1px 0 rgba(255,255,255,0.1)",
-                  "0 1px 2px rgba(15,23,42,0.08)",
-                  "0 24px 48px -16px rgba(15,23,42,0.28)",
-                  "0 56px 96px -36px rgba(9,81,255,0.3)",
+                  "inset 0 1px 0 rgba(255,255,255,0.7)",
+                  "inset 0 -1px 0 rgba(255,255,255,0.2)",
+                  "0 1px 2px rgba(15,23,42,0.06)",
+                  "0 24px 48px -16px rgba(15,23,42,0.18)",
+                  "0 56px 96px -36px rgba(9,81,255,0.22)",
                 ].join(", "),
               }}
             />
@@ -186,10 +185,10 @@ export function Comparison() {
                   isTier && rows[i + 1] && rows[i + 1].kind !== "tier";
                 return (
                   <React.Fragment key={r.label}>
-                    {/* Label — left-aligned, white text since the card
-                        now reads as a dark frosted surface. */}
+                    {/* Label — left-aligned, dark text on milky white
+                        glass. */}
                     <div className="flex items-center justify-start px-6 py-3.5 md:pl-10 md:pr-4 md:py-4">
-                      <span className="text-[13px] font-medium text-left text-white md:text-[14.5px]">
+                      <span className="text-[13px] font-medium text-left text-[var(--color-text-primary)] md:text-[14.5px]">
                         {r.label}
                       </span>
                     </div>
