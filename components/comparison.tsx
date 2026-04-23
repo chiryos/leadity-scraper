@@ -93,15 +93,16 @@ export function Comparison() {
               aria-hidden
               className="absolute inset-0 z-[1] rounded-[32px] border-[1.5px] border-white/55"
               style={{
-                backdropFilter: "blur(40px) saturate(180%)",
-                WebkitBackdropFilter: "blur(40px) saturate(180%)",
-                background: "rgba(255,255,255,0.12)",
+                backdropFilter: "blur(40px) saturate(160%) brightness(0.85)",
+                WebkitBackdropFilter:
+                  "blur(40px) saturate(160%) brightness(0.85)",
+                background: "rgba(40, 48, 68, 0.38)",
                 boxShadow: [
-                  "inset 0 1px 0 rgba(255,255,255,0.6)",
-                  "inset 0 -1px 0 rgba(255,255,255,0.22)",
-                  "0 1px 2px rgba(15,23,42,0.06)",
-                  "0 24px 48px -16px rgba(15,23,42,0.22)",
-                  "0 56px 96px -36px rgba(9,81,255,0.28)",
+                  "inset 0 1px 0 rgba(255,255,255,0.35)",
+                  "inset 0 -1px 0 rgba(255,255,255,0.1)",
+                  "0 1px 2px rgba(15,23,42,0.08)",
+                  "0 24px 48px -16px rgba(15,23,42,0.28)",
+                  "0 56px 96px -36px rgba(9,81,255,0.3)",
                 ].join(", "),
               }}
             />
@@ -153,15 +154,9 @@ export function Comparison() {
                 </div>
               </div>
               <div />
-              {/* Ours — Leadity white ghost */}
+              {/* Ours — Leadity white ghost (no shadow per user request) */}
               <div className="flex items-start justify-center">
-                <div
-                  className="relative h-[58px] w-[58px] md:h-[66px] md:w-[66px]"
-                  style={{
-                    filter:
-                      "drop-shadow(0 16px 26px rgba(9,81,255,0.45)) drop-shadow(0 4px 10px rgba(9,81,255,0.3))",
-                  }}
-                >
+                <div className="relative h-[58px] w-[58px] md:h-[66px] md:w-[66px]">
                   <Image
                     src="/logo-white.png"
                     alt="Leadity"
@@ -191,10 +186,10 @@ export function Comparison() {
                   isTier && rows[i + 1] && rows[i + 1].kind !== "tier";
                 return (
                   <React.Fragment key={r.label}>
-                    {/* Label — left-aligned, stuck to the card's left
-                        edge per user request. */}
+                    {/* Label — left-aligned, white text since the card
+                        now reads as a dark frosted surface. */}
                     <div className="flex items-center justify-start px-6 py-3.5 md:pl-10 md:pr-4 md:py-4">
-                      <span className="text-[13px] font-medium text-left text-[var(--color-text-primary)] md:text-[14.5px]">
+                      <span className="text-[13px] font-medium text-left text-white md:text-[14.5px]">
                         {r.label}
                       </span>
                     </div>
