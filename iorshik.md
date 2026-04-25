@@ -122,8 +122,11 @@ user's exact request if relevant. Multi-paragraph OK.
 Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 ```
 
-Latest commit as of this memory dump: `96f7a65`
-(fix: close JSX properly after removing Reveal wrapper — 2026-04-22).
+Latest commit as of this memory dump: `6840f56`
+(copy: remove all section eyebrow labels — go straight to the headline,
+2026-04-25). This is the **v1 final snapshot** before the SEO master-pack
+migration begins. A clean folder copy of the entire worktree at this
+commit is saved at `~/Desktop/leadity-v1-backup-pre-seo/`.
 
 ---
 
@@ -315,6 +318,33 @@ focal cards (updated 2026-04-22: alpha boosted to 0.95–0.96 for deeper
 blue, specular corner highlight reduced to 0.28/0.06 so it doesn't grey
 out on blue backgrounds).
 
+**`.btn-liquid`** — NEW (2026-04-25). Replaces every previous
+`bg-white text-[#0951FF]` pill on the site. Frosted white pill with a
+two-sided blue accent: light cyan blob fades in from the LEFT edge,
+white-frosted middle, saturated deeper blue blob comes in concentrated
+from the RIGHT edge. No warm/peach tint anywhere — only blue. Real
+`backdrop-filter: blur(50px) saturate(200%) brightness(1.02)` so it
+reads as glass on top of any backdrop (blue CTA, dark popup,
+white hero). Soft elevation shadow with a brand-blue floor glow.
+Hover lifts -1.5px and deepens both the dark and brand-blue glows.
+Now exposed as a `liquid` Button variant in `components/ui/button.tsx`
+so any `<Button>` can opt in. **Live on**:
+  - hero "See how it works" (variant=liquid)
+  - closing CTA "Get my 5k leads"
+  - signup popup "Claim my 300 free leads"
+  - Pricing Growth desktop card CTA
+  - Pricing Starter + Scale CTAs (also Growth mobile)
+
+**`.btn-liquid-clear`** — NEW (2026-04-25). Transparent variant of
+`.btn-liquid` for use on dark / colored backgrounds where a white-
+frosted pill would fight the bg. Same two-sided blue character (cyan
+left, blue right, no peach), but built on a transparent
+`rgba(255,255,255,0.08)` base with `backdrop-filter: blur(18px)
+saturate(160%)`. White text default. Used only on the three Guarantee
+chips ("Verified at source", "Automatic replacement", "Human account
+manager") with `pointer-events-none` so they're decorative-only —
+no hover, no cursor, no clicks.
+
 ### Critical insights about Apple Liquid Glass (from research):
 
 1. **`saturate(200%)` is 80% of the "Apple" look.** Generic glassmorphism
@@ -504,33 +534,51 @@ Clearoutphone rates. Your actual mileage may vary - ours won't."
       `border border-white/25 bg-white/12 backdrop-blur-md text-white/90`
 
 ### `Testimonials` — `components/testimonials.tsx`
-- Section `overflow-x-clip pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28`
-  (not `overflow-hidden` — would clip shadow below cards)
-- Bg-grid texture + top radial glow
-- **Top 180px of the bg-grid is mask-faded**:
-  `WebkitMaskImage: "linear-gradient(180deg, transparent 0%, #000 180px, #000 100%)"`
-  Prevents the cyan grid pattern from hard-starting right after the
-  Guarantee's bottom white fade — would create a visible seam otherwise.
-- H2: "Receipts, / not testimonials." — sub: "Every card is a real
-  screenshot from a real customer. Tap any card to read the full
-  conversation."
-- **Carousel (manual, no auto-scroll)**: horizontal `overflow-x-auto
-  scroll-smooth` track with scroll-snap-x. Track padding
-  `pt-6 pb-12 md:pt-8 md:pb-16` so card shadows don't get clipped.
-  Edge mask `linear-gradient(to right, transparent 0%, black 4%,
-  black 96%, transparent 100%)` for soft left/right fade.
-- **Cards**: 320×460 mobile, 360×500 md+. **Screenshot-only** —
-  `<button>` with the screenshot filling via `fill` + `object-cover
-  object-top`, no text, no icons, no attribution. Subtle border
-  `border-white/60` + soft shadows + hover shadow bloom.
-- **Click → modal**: framer-motion `layoutId="card-${i}"` and
-  `layoutId="thumb-${i}"` smoothly expand the card into a centered
-  modal showing the full-size screenshot. Close via X (glass-chip),
-  backdrop click, or Esc. Body scroll locks while open.
-- **Arrow nav**: two `.glass-chip` rounded buttons below the carousel,
-  left/right with `ArrowLeft`/`ArrowRight` icons. Disabled state dims.
-  Each click scrolls the track ±360px.
-- 7 testimonials total. See §8 for data.
+
+**FULLY REDESIGNED** (2026-04-25, ~10 commits). The manual carousel +
+arrows + click-to-modal are gone. Now: a single long liquid-glass
+strip holding an infinite right→left CSS marquee inside.
+
+- Section `overflow-x-clip pt-16 pb-14 md:pt-20 md:pb-16 lg:pt-24 lg:pb-20`
+  (compact paddings so heading + strip fit in one viewport)
+- Bg-grid texture, top 180px mask-faded as before
+- H1 only — eyebrow removed (2026-04-25). H2: "Receipts, / not
+  testimonials." Sub: "Every screenshot is a real DM from a real
+  customer." (the "tap any card" line is gone — no clicking now)
+
+**Glass strip container**:
+- Wider container: `mx-auto max-w-[1400px] px-4 md:px-8` (no longer
+  inside `container-page`'s 1200px max)
+- `relative overflow-hidden rounded-[32px] border-[1.5px] border-white/65 py-4 md:py-5`
+- Same liquid-glass recipe as `.btn-liquid`: light cyan blob from
+  the LEFT, white-frosted middle, saturated deeper blue from the
+  RIGHT. `backdrop-filter: blur(50px) saturate(200%) brightness(1.02)`.
+  Brand-blue floor glow underneath.
+
+**Marquee track**:
+- `<div data-track className="flex gap-4 md:gap-5">` with
+  `width: max-content` and `animation: testimonials-scroll 50s linear
+  infinite` (CSS keyframe in globals.css: `translateX(0 → -50%)`)
+- Cards array is duplicated `[...testimonials, ...testimonials]` (14
+  total) so the loop is seamless at -50%
+- Cards: `260×180 / 300×210` (mobile/desktop), `rounded-[16px]`, soft
+  drop shadow + brand-blue lower glow. No border, no per-card center-
+  spotlight rAF effect (was scrapped — too laggy + visually busy).
+
+**`prefers-reduced-motion`**: animation: none. Strip stays static.
+
+**Why no Click/Modal/Arrows**: User explicitly wanted ambient motion,
+no interaction. The framer-motion layoutId modal expand was lovely
+but added complexity that wasn't needed.
+
+**Performance history**: An earlier rAF-based center-spotlight effect
+(cards' shadow color shifted black→blue→black as they passed the
+viewport center) was *very* laggy and was scrapped after multiple
+optimization attempts (IntersectionObserver, batched reads,
+pre-baked shadow strings, contain:paint). The marquee + glass card
+alone is visually rich enough.
+
+7 unique testimonials. See §8 for data.
 
 ### `FAQ` — `components/faq.tsx`
 - Section `id="faq" section-py relative z-10 overflow-hidden`
@@ -1198,6 +1246,86 @@ things are the way they are:
     720px. Labels left-aligned. Red prices with glow shadow.
     Reveal removed from card to fix backdrop-filter flash bug.
 
+### Session 2026-04-25 — additional decisions
+
+29. **Comparison glass tuning + grow-up animation** (`af096b0`,
+    `0b2fda5`): Glass card upgraded to a real Apple-style liquid-glass
+    recipe (slight blue-gray base tint, radial specular highlight at
+    16% -2%, pooled inner light + bottom shadow pool, asymmetric rim
+    lights). Black + blue colored columns now grow up from the bottom
+    (`scaleY: 0 → 1`, `transform-origin: bottom`) when the card enters
+    view; black starts first, blue follows with 120ms stagger; logos
+    fade in at 0.85s.
+
+30. **Comparison black-column punch-through saga** (`0a080f0` →
+    `7123026` → `05c425b`): Black column was being washed to gray
+    by the glass overlay. Tried a `mix-blend-mode: multiply` re-darken
+    layer (looked like solid block ON TOP — wrong), tuned its alpha
+    down (still wrong), ultimately solved by **thinning the glass
+    itself**: white tint 0.22 → 0.08, saturate 200% → 160%, blur
+    50 → 40. Both columns now read with their real colors through
+    the same glass.
+
+31. **Pricing change**: Growth tier dropped from $139 → **$129**,
+    affiliate $83 → **$77** (now exact 40% off, matching Starter +
+    Scale's affiliate math). `lib/plans.ts`, `comparison.tsx` row,
+    iorshik all updated (`49d0a40`).
+
+32. **Testimonials fully redesigned** (~10 commits, `6cfa343` →
+    `eda5041`):
+    - Old: manual carousel + arrows + click-to-modal expand
+    - New: infinite right→left CSS marquee, no interaction at all
+    - Marquee lives inside ONE long liquid-glass card matching the
+      `.btn-liquid` recipe (cyan left, blue right, white middle)
+    - Card: `max-w-[1400px]`, `rounded-[32px]`, `py-4/5`, real
+      `backdrop-filter: blur(50px) saturate(200%)`
+    - Cards inside: 260×180 / 300×210, no border, soft shadow +
+      brand-blue lower glow
+    - 50s linear infinite CSS animation, `translateX(0 → -50%)` on
+      duplicated `[...testimonials, ...testimonials]` array for
+      seamless loop
+    - Earlier rAF center-spotlight shadow effect (color shift as
+      cards passed viewport center) was perf-laggy even with
+      IntersectionObserver + pre-baked shadows + contain:paint —
+      ultimately scrapped; the glass card carries the visual weight
+    - Section padding tightened so heading + strip fit one viewport.
+
+33. **`.btn-liquid` CSS class created** (`af29fd0`, refined in
+    `3a7dcd4`, `61d3aab`, `fd65286`). White-frosted pill with a
+    two-sided blue accent (cyan left, blue right, no peach), real
+    `backdrop-filter: blur(50px) saturate(200%) brightness(1.02)`,
+    soft elevation + brand-blue floor glow. Replaced **every** plain
+    `bg-white text-[#0951FF]` pill on the site:
+    - hero "See how it works" (variant=liquid)
+    - closing CTA "Get my 5k leads"
+    - signup popup "Claim my 300 free leads"
+    - Pricing Growth desktop + Starter/Scale CTAs
+    Also added a `liquid` variant to `components/ui/button.tsx`.
+
+34. **`.btn-liquid-clear`** (`41a0e99`): transparent variant of
+    btn-liquid for use on dark / brand-blue backgrounds. Same two-
+    sided blue character on a `rgba(255,255,255,0.08)` base. Used on
+    the three Guarantee chips with `pointer-events-none` (decorative
+    only).
+
+35. **All section eyebrow labels removed** (`6840f56`). Eight
+    sections lost their tiny uppercase prefix (hero "Reach Decision
+    Makers Directly", showcase "A look inside", comparison
+    "Compared", pricing "Pricing", guarantee "The Leadity guarantee",
+    testimonials "Real DMs · real customers", faq "FAQ", cta "Less
+    stack. More pipeline."). Each section now goes straight to its
+    H1/H2. Internal labels (pricing per-plan tags, showcase step
+    badges, MOST POPULAR pill, footer columns, popup banner) untouched.
+    smooth-scroll's anchor-target finder still works because it
+    falls back from `.text-eyebrow` to `h1`/`h2`.
+
+### v1 final state — pre-SEO snapshot (2026-04-25)
+
+This is the snapshot point before the Leadity SEO master-pack
+migration begins. A full clean copy of the worktree at commit
+`6840f56` is saved at `~/Desktop/leadity-v1-backup-pre-seo/` (no
+node_modules / .next, run `npm install` to restore).
+
 ---
 
 ## 14. Pending / Ideas
@@ -1281,7 +1409,32 @@ iPhone screenshots common (references iOS 26)
 ## Appendix B — Commits worth remembering
 
 ```
-96f7a65  fix: close JSX properly after removing Reveal wrapper ← LATEST
+6840f56  copy: remove all section eyebrow labels — go straight to the headline ← v1 FINAL / PRE-SEO SNAPSHOT
+eda5041  style(testimonials): shrink card + tighten paddings (one-viewport fit)
+9b0d6ea  style(testimonials): wider + shorter glass strip (matches .btn-liquid color)
+fd65286  style(btn-liquid): two-sided blue — light cyan left, saturated blue right
+61d3aab  style(btn-liquid): drop the peach tint — keep only the blue, more diffused
+bda8b74  style(pricing): Starter + Scale CTAs switch to liquid-glass variant
+41a0e99  style(guarantee): chips switch to .btn-liquid-clear (transparent glass)
+3a7dcd4  style(btn-liquid): match the dribble reference exactly
+85b1165  style(guarantee): liquid-glass chips, decorative-only (no hover, no click)
+f98334d  style(hero): "See how it works" -> liquid-glass variant
+af29fd0  feat(ui): .btn-liquid CSS class created + 4 buttons swapped + liquid variant
+90199e5  style(testimonials): taller glass card + brand-blue tint baked into the glass
+a75fbe3  redesign(testimonials): wrap the whole marquee in one long liquid-glass card
+a472b3d  feat(testimonials): liquid-glass tubes on the marquee edges (later scrapped)
+49d0a40  copy(pricing): Growth 5k drops to $129 ($77 affiliate, true -40%)
+0b2fda5  feat(comparison): black + blue columns grow up behind the card on scroll-into-view
+af096b0  style(comparison): real liquid-glass card — blue-gray tint, specular, depth
+05c425b  style(comparison): thin the glass — black punches through as real black
+7123026  style(comparison): dial back black punch-through — glass texture must read through
+0a080f0  style(comparison): make the black column punch through the glass as true black
+ae992ad  style(testimonials): remove card outline — drop border + blue ring shadow layer
+31ab7f4  perf(testimonials): kill the lag — IntersectionObserver, batched reads, prebaked shadows
+7f6cbef  fix(testimonials): remove overflow-hidden from marquee wrapper — was clipping shadows
+cfb6dfe  feat(testimonials): center-spotlight shadow (later scrapped, was laggy)
+6cfa343  redesign(testimonials): infinite auto-scroll marquee, no buttons or modal
+96f7a65  fix: close JSX properly after removing Reveal wrapper
 5ae1742  fix(comparison): kill flash of unfrosted card on scroll-in
            (removed <Reveal> from card — backdrop-filter flash bug fix)
 4137957  chore: bust guarantee image cache via rename (-> -v2.png)
