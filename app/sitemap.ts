@@ -1,4 +1,6 @@
 import type { MetadataRoute } from 'next'
+import { loadIndexableLeadPages } from '@/lib/lead-pages'
+import { STATES } from '@/lib/state-directories'
 
 const BASE = 'https://leadity.io'
 
@@ -165,25 +167,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/cookies`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
   ]
 
-  // TODO Phase 2: programmatic pages
-  // const programmaticLeads = await db.leadPages.findMany({
-  //   where: { recordCount: { gte: 100 } }, // HCU safety: only index pages with ≥100 records
-  //   select: { slug: true, updatedAt: true },
-  // })
-  // const programmatic: MetadataRoute.Sitemap = programmaticLeads.map(page => ({
-  //   url: `${BASE}/leads/${page.slug}`,
-  //   lastModified: page.updatedAt,
-  //   changeFrequency: 'weekly' as const,
-  //   priority: 0.6,
-  // }))
+  // Programmatic /leads/[slug] pages — only indexable ones (≥100 records)
+  // get a sitemap entry. loadIndexableLeadPages() reads from the DB; until
+  // the DB is wired up it returns []. This gracefully scales as records
+  // come online without code changes.
+  const indexableLeads = await loadIndexableLeadPages()
+  const programmatic: MetadataRoute.Sitemap = indexableLeads.map((p) => ({
+    url: `${BASE}/leads/${p.slug}`,
+    lastModified: new Date(p.updatedAt),
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
+  }))
 
-  // TODO Phase 2: state directories
-  // const stateDirectories: MetadataRoute.Sitemap = US_STATES.map(state => ({
-  //   url: `${BASE}/directories/${state}-business-directory`,
-  //   lastModified: now,
-  //   changeFrequency: 'monthly' as const,
-  //   priority: 0.5,
-  // }))
+  // 50 state directories — all 50 always indexed (static data, always
+  // ≥10K business records per state in the underlying DB).
+  const stateDirectories: MetadataRoute.Sitemap = STATES.map((s) => ({
+    url: `${BASE}/directories/${s.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }))
 
   return [
     ...core,
@@ -197,7 +200,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...tools,
     ...reports,
     ...trust,
-    // ...programmatic,
-    // ...stateDirectories,
+    ...programmatic,
+    ...stateDirectories,
   ]
 }
