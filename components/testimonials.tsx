@@ -28,7 +28,7 @@ export function Testimonials() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative overflow-x-clip pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28">
+    <section className="relative overflow-x-clip pt-16 pb-14 md:pt-20 md:pb-16 lg:pt-24 lg:pb-20">
       <div
         aria-hidden
         className="absolute inset-0 bg-grid opacity-50"
@@ -57,9 +57,9 @@ export function Testimonials() {
             band of receipts. Glass recipe matches the white .btn-liquid:
             light cyan from the LEFT, white-frosted middle, saturated deeper
             blue from the RIGHT. */}
-        <div className="mt-12 md:mt-16 mx-auto max-w-[1400px] px-4 md:px-8">
+        <div className="mt-8 md:mt-10 mx-auto max-w-[1400px] px-4 md:px-8">
           <div
-            className="relative overflow-hidden rounded-[40px] border-[1.5px] border-white/65 py-6 md:py-8"
+            className="relative overflow-hidden rounded-[32px] border-[1.5px] border-white/65 py-4 md:py-5"
             style={{
               backdropFilter: "blur(50px) saturate(200%) brightness(1.02)",
               WebkitBackdropFilter: "blur(50px) saturate(200%) brightness(1.02)",
@@ -81,7 +81,7 @@ export function Testimonials() {
             }}
           >
             <div
-              className="flex gap-5 md:gap-6"
+              className="flex gap-4 md:gap-5"
               style={{
                 width: "max-content",
                 willChange: "transform",
@@ -91,13 +91,13 @@ export function Testimonials() {
               {track.map((t, i) => (
                 <div
                   key={i}
-                  className="relative h-[360px] w-[260px] shrink-0 overflow-hidden rounded-[18px] bg-white shadow-[0_6px_18px_-10px_rgba(15,23,42,0.18),0_14px_32px_-18px_rgba(27,134,255,0.2)] md:h-[400px] md:w-[290px]"
+                  className="relative h-[260px] w-[180px] shrink-0 overflow-hidden rounded-[16px] bg-white shadow-[0_5px_16px_-10px_rgba(15,23,42,0.18),0_10px_24px_-16px_rgba(27,134,255,0.2)] md:h-[300px] md:w-[210px]"
                 >
                   <Image
                     src={t.src}
                     alt={t.alt}
                     fill
-                    sizes="(min-width: 768px) 290px, 260px"
+                    sizes="(min-width: 768px) 210px, 180px"
                     className="object-cover object-top"
                     draggable={false}
                   />
