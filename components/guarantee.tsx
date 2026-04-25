@@ -140,14 +140,15 @@ export function Guarantee() {
             back bad? You get 150 replacements plus 75 bonus numbers. Simple as
             that.
           </p>
-          {/* Liquid-glass chips — same .btn-liquid recipe as the white CTAs.
-              pointer-events-none keeps them purely decorative, no hover lift
-              or cursor change since they're not interactive. */}
+          {/* Transparent liquid-glass chips — .btn-liquid-clear keeps the
+              same subtle blob hints + glass blur but lets the brand-blue
+              section read through instead of stamping a white pill on it.
+              pointer-events-none = decorative only. */}
           <ul className="mt-8 flex flex-wrap items-center gap-3">
             {chips.map((c) => (
               <li
                 key={c}
-                className="btn-liquid pointer-events-none inline-flex items-center rounded-full px-4 py-1.5 text-[12px] font-medium"
+                className="btn-liquid-clear pointer-events-none inline-flex items-center rounded-full px-4 py-1.5 text-[12px] font-medium"
               >
                 {c}
               </li>
