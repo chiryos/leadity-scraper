@@ -501,7 +501,7 @@ export function Pricing() {
                       </span>
                     </div>
 
-                    <Button asChild size="block" variant="ghost" className="mt-7 glass-chip-ringed">
+                    <Button asChild size="block" variant="liquid" className="mt-7">
                       <a href="#pricing-cta">
                         {plan.cta}
                         <ArrowRight className="ml-2 h-4 w-4" />
