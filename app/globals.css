@@ -431,24 +431,25 @@
     transform: translateY(-1px);
   }
 
-  /* .btn-liquid — frosted white pill with a single soft, blurred blue
-     gradient covering ~35-45% of the right side. No warm/peach tint —
-     just blue. Real backdrop-filter blur so it reads as glass on top of
-     any backdrop (blue CTA, dark popup, white hero, etc).
-
-     Layer stack (top of the `background` shorthand renders FIRST, so
-     reading naturally:
-       1. Soft, diffused right-side blue gradient (~40% coverage)
-       2. Translucent frosted-white base */
+  /* .btn-liquid — frosted white pill with two-sided blue accents:
+     a soft light cyan fades in from the LEFT edge, the middle stays
+     white-frosted, then a saturated deeper blue blob comes in
+     concentrated from the RIGHT edge. No warm tint anywhere — only
+     blue. Real backdrop-filter blur so it reads as glass on top of
+     any backdrop. */
   .btn-liquid {
     position: relative;
     color: var(--color-text-primary);
     background:
-      radial-gradient(ellipse 70% 140% at 100% 50%,
-        rgba(60, 130, 255, 0.78) 0%,
-        rgba(100, 170, 255, 0.42) 28%,
-        rgba(150, 195, 255, 0.18) 58%,
-        transparent 85%),
+      radial-gradient(ellipse 55% 110% at 100% 50%,
+        rgba(40, 110, 245, 0.85) 0%,
+        rgba(80, 150, 250, 0.45) 28%,
+        rgba(140, 195, 255, 0.18) 55%,
+        transparent 78%),
+      radial-gradient(ellipse 40% 110% at 0% 50%,
+        rgba(150, 220, 255, 0.55) 0%,
+        rgba(180, 230, 255, 0.25) 40%,
+        transparent 75%),
       linear-gradient(180deg,
         rgba(255, 255, 255, 0.78) 0%,
         rgba(248, 252, 255, 0.66) 100%);
@@ -485,10 +486,14 @@
     position: relative;
     color: rgba(255, 255, 255, 0.95);
     background:
-      radial-gradient(ellipse 70% 140% at 100% 50%,
-        rgba(140, 200, 255, 0.28) 0%,
-        rgba(170, 215, 255, 0.14) 35%,
-        transparent 80%),
+      radial-gradient(ellipse 55% 110% at 100% 50%,
+        rgba(120, 180, 255, 0.38) 0%,
+        rgba(160, 205, 255, 0.18) 35%,
+        transparent 78%),
+      radial-gradient(ellipse 40% 110% at 0% 50%,
+        rgba(190, 230, 255, 0.26) 0%,
+        rgba(210, 235, 255, 0.1) 45%,
+        transparent 75%),
       rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(18px) saturate(160%);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
