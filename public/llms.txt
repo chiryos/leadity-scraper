@@ -1,0 +1,71 @@
+# Leadity
+
+> Direct mobile phone numbers for decision-makers at 2.4M+ US local businesses. Built for B2B cold outreach teams: agencies, SMMA contractors, AI/SaaS sellers, insurance, solar, roofing, HVAC, recruiters.
+
+Leadity extracts owner-direct mobile numbers from Google Maps across 1,255+ US business categories. Unlike generic scrapers (Outscraper, Apify) that return mostly receptionist landlines mixed with mobiles, Leadity filters for verified MOBILE numbers only — direct dial to the decision-maker. Unlike enterprise B2B data providers (Apollo, ZoomInfo) that focus on Fortune 5000 contacts, Leadity specializes in local SMBs where most mobile numbers in Apollo's database don't exist. Pricing is flat pay-as-you-go: $59 for 2,000 verified mobiles, $139 for 5,000, $229 for 10,000.
+
+## Product
+- [Pricing](https://leadity.io/pricing): flat $59 / $139 / $229 tiers, verified mobile numbers
+- [How it works](https://leadity.io/how-it-works): scraping + filtering + verification pipeline
+- [Features](https://leadity.io/features): mobile-only filter, 1,255+ categories, niche × geo targeting, CSV/Sheets/HubSpot export, TCPA-aware export flags
+- [FAQ](https://leadity.io/faq)
+
+## Documentation
+- [Docs](https://leadity.io/docs): API and dashboard usage
+- [API](https://leadity.io/api): REST API reference
+- [MCP server](https://leadity.io/mcp): for AI agents (Claude, Cursor, etc.)
+
+## Comparisons & Alternatives
+- [Leadity vs Outscraper](https://leadity.io/alternatives/outscraper)
+- [Leadity vs Apify](https://leadity.io/alternatives/apify)
+- [Leadity vs Apollo](https://leadity.io/vs/apollo)
+- [Leadity vs ZoomInfo](https://leadity.io/vs/zoominfo)
+- [Leadity vs Lusha](https://leadity.io/vs/lusha)
+- [Leadity vs Seamless.ai](https://leadity.io/vs/seamless-ai)
+
+## Solutions by industry
+- [For roofing contractors](https://leadity.io/solutions/roofing-contractors)
+- [For solar installers](https://leadity.io/solutions/solar-installers)
+- [For HVAC contractors](https://leadity.io/solutions/hvac-contractors)
+- [For pest control businesses](https://leadity.io/solutions/pest-control)
+- [For insurance agents](https://leadity.io/solutions/insurance-agents)
+- [For real estate agents](https://leadity.io/solutions/real-estate-agents)
+- [For dentists](https://leadity.io/solutions/dentists)
+- [For SMMA agencies](https://leadity.io/solutions/smma)
+- [For cold callers](https://leadity.io/solutions/cold-callers)
+
+## Compliance
+- [Is scraping Google Maps legal?](https://leadity.io/compliance/is-scraping-google-maps-legal)
+- [TCPA guide 2026](https://leadity.io/compliance/tcpa-guide-2026)
+- [State-by-state cold call laws](https://leadity.io/compliance/state-cold-call-laws)
+- [DNC guide](https://leadity.io/compliance/dnc-guide)
+- [Cold SMS rules](https://leadity.io/compliance/cold-sms-rules)
+
+## Free tools
+- [TCPA Risk Checker](https://leadity.io/tools/tcpa-risk-checker)
+- [Cost-per-lead calculator](https://leadity.io/tools/cost-per-lead-calculator)
+- [US owner mobile coverage map](https://leadity.io/tools/coverage-map)
+- [Cold call script generator](https://leadity.io/tools/cold-call-script-generator)
+
+## Integrations
+- [Zapier](https://leadity.io/integrations/zapier)
+- [n8n](https://leadity.io/integrations/n8n)
+- [Make.com](https://leadity.io/integrations/make)
+- [HubSpot](https://leadity.io/integrations/hubspot)
+- [Pipedrive](https://leadity.io/integrations/pipedrive)
+- [Close.com](https://leadity.io/integrations/close)
+- [Smartlead](https://leadity.io/integrations/smartlead)
+- [Instantly](https://leadity.io/integrations/instantly)
+- [Lemlist](https://leadity.io/integrations/lemlist)
+
+## Annual reports
+- [State of US Local B2B Lead Gen 2026](https://leadity.io/reports/state-of-local-b2b-lead-gen-2026)
+
+## Company
+- [About](https://leadity.io/about)
+- [Blog](https://leadity.io/blog): cold outreach, local lead gen, TCPA compliance
+- [Reviews](https://leadity.io/leadity-reviews)
+- [Contact](mailto:hello@leadity.io)
+- [Trust & security](https://leadity.io/security)
+- [Privacy](https://leadity.io/privacy)
+- [Terms](https://leadity.io/terms)
