@@ -144,7 +144,7 @@ export function SignupPopup() {
             <a
               href="#pricing"
               onClick={close}
-              className="relative mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-5 py-3.5 text-[15px] font-semibold text-[#0951FF] shadow-[0_18px_40px_-14px_rgba(0,0,0,0.35)] transition-transform duration-200 hover:-translate-y-0.5"
+              className="btn-liquid relative mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-[15px] font-semibold"
             >
               Claim my 300 free leads
               <ArrowRight className="h-4 w-4" />

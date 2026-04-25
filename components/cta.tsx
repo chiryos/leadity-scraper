@@ -121,7 +121,7 @@ export function CTA() {
             <div className="mt-9 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:gap-5 md:mt-10">
               <a
                 href="#pricing"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-[15px] font-semibold text-[#0951FF] shadow-[0_18px_36px_-14px_rgba(0,0,0,0.4)] transition-transform duration-200 hover:-translate-y-0.5 sm:w-auto"
+                className="btn-liquid inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-4 text-[15px] font-semibold sm:w-auto"
               >
                 Get my 5k leads
                 <ArrowRight className="h-4 w-4" />

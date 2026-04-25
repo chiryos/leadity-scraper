@@ -18,6 +18,8 @@ const buttonVariants = cva(
           "glass-chip text-[var(--color-text-primary)]",
         muted:
           "glass-chip text-[var(--color-accent)]",
+        liquid:
+          "btn-liquid text-[var(--color-text-primary)]",
         link: "text-[var(--color-accent)] underline-offset-4 hover:underline",
       },
       size: {

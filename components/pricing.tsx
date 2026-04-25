@@ -362,7 +362,8 @@ export function Pricing() {
                         <Button
                           asChild
                           size="block"
-                          className="mt-5 bg-white text-[#0951FF] shadow-[0_12px_28px_-12px_rgba(0,0,0,0.35)] hover:bg-white/95 hover:brightness-100"
+                          variant="liquid"
+                          className="mt-5"
                         >
                           <a
                             href="#pricing-cta"
@@ -423,12 +424,12 @@ export function Pricing() {
                       </span>
                     </div>
 
-                    {/* Plain solid white pill — no glass on this one, per
-                        request; the glass-brand CARD still carries the
-                        liquid-glass identity of the plan. */}
+                    {/* Liquid-glass pill — white-frosted base with abstract
+                        blue blobs inside. Same .btn-liquid recipe used by
+                        the closing CTA, signup popup, and Growth desktop. */}
                     <a
                       href="#pricing-cta"
-                      className="mt-7 inline-flex h-12 w-full items-center justify-center rounded-full bg-white text-[15px] font-medium text-[#0951FF] shadow-[0_12px_28px_-12px_rgba(0,0,0,0.35)] transition-[background-color,transform] duration-200 hover:-translate-y-0.5 hover:bg-white/95"
+                      className="btn-liquid mt-7 inline-flex h-12 w-full items-center justify-center rounded-full text-[15px] font-medium"
                     >
                       {plan.cta}
                       <ArrowRight className="ml-2 h-4 w-4" />
