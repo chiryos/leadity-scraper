@@ -3,6 +3,7 @@ import { Inter, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { AnalyticsProvider } from "@/components/analytics-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -238,6 +239,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${instrumentSerif.variable}`}>
       <body className="bg-white text-[var(--color-text-primary)] antialiased">
         <SmoothScroll />
+        <AnalyticsProvider />
         <TooltipProvider delayDuration={150}>{children}</TooltipProvider>
         <script
           type="application/ld+json"
