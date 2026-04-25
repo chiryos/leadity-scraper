@@ -54,8 +54,7 @@ export function Comparison() {
       <div className="relative container-page">
         <Reveal>
           <div className="mx-auto max-w-[820px] text-center">
-            <p className="text-eyebrow">Compared</p>
-            <h2 className="text-h2 text-balance mt-4 text-[var(--color-text-primary)]">
+            <h2 className="text-h2 text-balance text-[var(--color-text-primary)]">
               <span className="block">Three bills or</span>
               <span className="block text-brand-gradient">One Tool?</span>
             </h2>

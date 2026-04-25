@@ -73,8 +73,7 @@ export function Pricing() {
       <div className="relative container-page">
         <Reveal>
           <div className="mx-auto max-w-[820px] text-center">
-            <p className="text-eyebrow">Pricing</p>
-            <h2 className="text-h2 text-balance mt-4 text-[var(--color-text-primary)]">
+            <h2 className="text-h2 text-balance text-[var(--color-text-primary)]">
               <span className="block">Pick your</span>
               <span className="block text-brand-gradient">scrape volume.</span>
             </h2>

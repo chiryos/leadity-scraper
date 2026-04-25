@@ -92,14 +92,9 @@ export function CTA() {
               priority={false}
             />
 
-            {/* Eyebrow */}
-            <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-              Less stack. More pipeline.
-            </p>
-
             {/* Headline */}
             <h2
-              className="text-balance mt-4 font-semibold text-white"
+              className="mt-7 text-balance font-semibold text-white"
               style={{
                 fontSize: "clamp(36px, 5.2vw, 64px)",
                 letterSpacing: "-0.04em",

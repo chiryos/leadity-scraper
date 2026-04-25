@@ -24,20 +24,11 @@ export function Hero() {
 
       {/* Content vertically centered - mobile padding tightened */}
       <div className="container-page relative flex flex-1 flex-col items-center justify-center pt-8 pb-6 md:pt-16 md:pb-12">
-        <motion.p
-          initial={reduce ? false : { opacity: 0, y: 4 }}
-          animate={reduce ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease }}
-          className="text-center text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--color-text-muted)] md:text-[11px]"
-        >
-          Reach Decision Makers Directly
-        </motion.p>
-
         <motion.h1
           initial={reduce ? false : { opacity: 0, y: 14 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease }}
-          className="text-balance mt-4 text-center font-semibold text-[var(--color-text-primary)] md:mt-6"
+          className="text-balance text-center font-semibold text-[var(--color-text-primary)]"
           style={{
             fontSize: "clamp(36px, 6vw, 80px)",
             letterSpacing: "-0.045em",

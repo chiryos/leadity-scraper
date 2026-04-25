@@ -118,11 +118,8 @@ export function Guarantee() {
         </Reveal>
 
         <Reveal delay={0.1} className="lg:col-span-8">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-            The Leadity guarantee
-          </p>
           <h2
-            className="text-balance mt-4 font-semibold text-white"
+            className="text-balance font-semibold text-white"
             style={{
               fontSize: "clamp(32px, 4.6vw, 56px)",
               letterSpacing: "-0.04em",

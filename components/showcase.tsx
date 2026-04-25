@@ -265,11 +265,8 @@ export function Showcase() {
       <div className="relative z-[2] container-page">
         <Reveal>
           <div className="mx-auto max-w-[820px] text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85">
-              A look inside
-            </p>
             <h2
-              className="text-balance mt-4 font-semibold text-white"
+              className="text-balance font-semibold text-white"
               style={{
                 fontSize: "clamp(32px, 4.6vw, 56px)",
                 letterSpacing: "-0.04em",

@@ -59,8 +59,7 @@ export function FAQ() {
       <div className="relative container-page">
         <Reveal>
           <div className="mx-auto max-w-[720px] text-center">
-            <p className="text-eyebrow">FAQ</p>
-            <h2 className="text-h2 text-balance mt-4 text-[var(--color-text-primary)]">
+            <h2 className="text-h2 text-balance text-[var(--color-text-primary)]">
               Questions outbound teams actually ask.
             </h2>
           </div>

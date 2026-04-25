@@ -41,8 +41,7 @@ export function Testimonials() {
       <div className="relative">
         <Reveal>
           <div className="container-page mx-auto max-w-[820px] text-center">
-            <p className="text-eyebrow">Real DMs · real customers</p>
-            <h2 className="text-h2 text-balance mt-4 text-[var(--color-text-primary)]">
+            <h2 className="text-h2 text-balance text-[var(--color-text-primary)]">
               <span className="block">Receipts,</span>
               <span className="block text-brand-gradient">not testimonials.</span>
             </h2>
