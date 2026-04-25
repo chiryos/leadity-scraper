@@ -52,32 +52,31 @@ export function Testimonials() {
           </div>
         </Reveal>
 
-        {/* One long liquid-glass card holding the entire marquee. The card
-            uses overflow-hidden so cards never escape its bounds — they
-            slide in from the right edge and out the left edge. The glass
-            recipe matches the Comparison card. */}
-        <div className="container-page mt-12 md:mt-16">
+        {/* One long liquid-glass strip holding the entire marquee. Wider
+            (max-w 1400px) and shorter than before so it reads as a horizontal
+            band of receipts. Glass recipe matches the white .btn-liquid:
+            light cyan from the LEFT, white-frosted middle, saturated deeper
+            blue from the RIGHT. */}
+        <div className="mt-12 md:mt-16 mx-auto max-w-[1400px] px-4 md:px-8">
           <div
-            className="relative overflow-hidden rounded-[40px] border-[1.5px] border-white/60 py-14 md:py-20"
+            className="relative overflow-hidden rounded-[40px] border-[1.5px] border-white/65 py-6 md:py-8"
             style={{
               backdropFilter: "blur(50px) saturate(200%) brightness(1.02)",
               WebkitBackdropFilter: "blur(50px) saturate(200%) brightness(1.02)",
               background: [
-                // Specular highlight, top-left — keeps the glass shine
-                "radial-gradient(130% 85% at 16% -2%, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.06) 30%, transparent 58%)",
-                // Brand-blue tint baked into the glass body (cyan → mid-blue → deep)
-                "linear-gradient(176deg, rgba(34,201,245,0.12) 0%, rgba(27,134,255,0.09) 50%, rgba(9,81,255,0.11) 100%)",
+                // Right-edge saturated blue blob (mirrors .btn-liquid)
+                "radial-gradient(ellipse 28% 130% at 100% 50%, rgba(40,110,245,0.6) 0%, rgba(80,150,250,0.32) 35%, rgba(140,195,255,0.14) 60%, transparent 82%)",
+                // Left-edge soft light cyan blob (mirrors .btn-liquid)
+                "radial-gradient(ellipse 24% 130% at 0% 50%, rgba(150,220,255,0.45) 0%, rgba(180,230,255,0.2) 40%, transparent 78%)",
+                // White-frosted base
+                "linear-gradient(180deg, rgba(255,255,255,0.78) 0%, rgba(248,252,255,0.66) 100%)",
               ].join(", "),
               boxShadow: [
-                "inset 0 10px 32px rgba(255,255,255,0.26)",
-                "inset 0 -8px 28px rgba(150,180,235,0.18)",
-                "inset 0 1.5px 0 rgba(255,255,255,0.85)",
-                "inset 1.5px 0 0 rgba(255,255,255,0.4)",
-                "inset -1.5px 0 0 rgba(255,255,255,0.14)",
-                "inset 0 -1.5px 0 rgba(170,200,240,0.32)",
+                "inset 0 1px 0 rgba(255,255,255,0.95)",
+                "inset 0 -1px 0 rgba(220,228,242,0.4)",
                 "0 1px 2px rgba(15,23,42,0.04)",
-                "0 24px 48px -16px rgba(15,23,42,0.22)",
-                "0 60px 100px -36px rgba(9,81,255,0.4)",
+                "0 18px 36px -12px rgba(15,23,42,0.18)",
+                "0 40px 80px -24px rgba(60,130,255,0.45)",
               ].join(", "),
             }}
           >
@@ -92,13 +91,13 @@ export function Testimonials() {
               {track.map((t, i) => (
                 <div
                   key={i}
-                  className="relative h-[460px] w-[300px] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_8px_24px_-12px_rgba(15,23,42,0.18),0_18px_40px_-22px_rgba(27,134,255,0.22)] md:h-[500px] md:w-[340px]"
+                  className="relative h-[360px] w-[260px] shrink-0 overflow-hidden rounded-[18px] bg-white shadow-[0_6px_18px_-10px_rgba(15,23,42,0.18),0_14px_32px_-18px_rgba(27,134,255,0.2)] md:h-[400px] md:w-[290px]"
                 >
                   <Image
                     src={t.src}
                     alt={t.alt}
                     fill
-                    sizes="(min-width: 768px) 340px, 300px"
+                    sizes="(min-width: 768px) 290px, 260px"
                     className="object-cover object-top"
                     draggable={false}
                   />
