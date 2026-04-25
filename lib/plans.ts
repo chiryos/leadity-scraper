@@ -30,8 +30,8 @@ export const plans: Plan[] = [
   },
   {
     name: "Growth",
-    standard: 139,
-    affiliate: 83,
+    standard: 129,
+    affiliate: 77,
     mobiles: 5000,
     popular: true,
     description: "For agencies and outbound teams running multiple campaigns.",

@@ -40,7 +40,7 @@ stack.
 | Plan | Standard | Affiliate (−40%) | Mobiles | Popular |
 |---|---|---|---|---|
 | Starter | $59 | $35 | 2,000 | no |
-| Growth | $139 | $83 | 5,000 | **YES** |
+| Growth | $129 | $77 | 5,000 | **YES** |
 | Scale | $229 | $137 | 10,000 | no |
 
 Affiliate pricing = "for Aditya's community members" (referenced in the
@@ -122,8 +122,8 @@ user's exact request if relevant. Multi-paragraph OK.
 Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 ```
 
-Latest commit as of this memory dump: `8e2fcb9`
-(feat: remove qualifier, full glass coverage, full-width CTA section).
+Latest commit as of this memory dump: `96f7a65`
+(fix: close JSX properly after removing Reveal wrapper — 2026-04-22).
 
 ---
 
@@ -137,21 +137,26 @@ leadity/
 │   ├── opengraph-image.tsx  ← satori-rendered OG; gradient must be split into
 │   │                          backgroundColor + backgroundImage separately
 │   │                          (satori rejects shorthand with gradient + color)
-│   └── page.tsx             ← Nav · Hero · Showcase · Features · Comparison
+│   └── page.tsx             ← Nav · Hero · Showcase · Comparison
 │                              · Pricing · Guarantee · Testimonials · FAQ
 │                              · CTA · Footer · SignupPopup
+│                              (Features section removed 2026-04-22)
 ├── components/
 │   ├── nav.tsx              ← sticky top-0, glass backdrop, mobile drawer island
 │   ├── hero.tsx             ← 100svh-72 min-height, eyebrow+H1+sub+CTAs+trust row
-│   ├── showcase.tsx         ← "A look inside" — 5 glass step frames with screenshots
-│   ├── features.tsx         ← 6 glass-card feature tiles, colored badges
-│   ├── comparison.tsx       ← Ours vs Theirs cards + TierPills overlay
+│   ├── showcase.tsx         ← "A look inside" — full blue glass, 5 steps no dividers
+│   ├── features.tsx         ← DELETED (removed 2026-04-22, no longer imported)
+│   ├── comparison.tsx       ← single glass card with 2 arched colored columns behind
 │   ├── pricing.tsx          ← desktop 3-card grid (glass-brand Growth) + mobile
 │   │                          accordion + Standard/Affiliate toggle + -40% banner
-│   ├── guarantee.tsx        ← ghost-in-recycle-arrows seal + refund copy + chips
+│   │                          relative z-10 overflow-hidden; Starter+Scale CTA
+│   │                          uses .glass-chip-ringed (top+bottom shadow halos)
+│   ├── guarantee.tsx        ← full blue glass section (like CTA); bg extends
+│   │                          ±200px; image /leadity-refund-recycle-v2.png
 │   ├── testimonials.tsx     ← manual-scroll carousel, screenshot-only cards,
-│   │                          expand-to-modal via layoutId
+│   │                          expand-to-modal via layoutId; bg-grid masked top 180px
 │   ├── faq.tsx              ← 8 glass accordion items, 12px gap stack
+│   │                          relative z-10 overflow-hidden
 │   ├── cta.tsx              ← full-width blue-glass SECTION (not a card)
 │   ├── footer.tsx           ← dark bg, giant "Leadity" watermark, social row
 │   ├── signup-popup.tsx     ← delayed modal, glass-brand
@@ -169,7 +174,8 @@ leadity/
 │   ├── logo.png             ← blue ghost (primary wordmark icon)
 │   ├── logo-white.png       ← white-icon variant for dark/gradient bgs
 │   ├── favicon.ico
-│   ├── leadity-refund-recycle.png  ← guarantee seal (ghost + recycle arrows)
+│   ├── leadity-refund-recycle-v2.png ← CURRENT guarantee seal (ghost + recycle
+│   │                                   arrows, renamed -v2 to bust CDN cache)
 │   ├── competitors/
 │   │   ├── outscraper.png
 │   │   └── clearoutphone.png
@@ -195,12 +201,14 @@ leadity/
 ```
 
 **Removed from the codebase** (in case history confuses future sessions):
-- `components/qualifier.tsx` — "Is this for you?" section. The file still
-  exists on disk but is no longer imported or mounted. Delete safely if
-  user wants tree cleaned up.
-- `public/leadity-guarantee.png` — replaced by `leadity-refund-recycle.png`.
-  Old filename still exists on disk.
-- `public/refund-seal.png` — renamed earlier to cache-bust.
+- `components/qualifier.tsx` — "Is this for you?" section. **Deleted from
+  disk** in commit `5c0d7fd` (2026-04-22).
+- `components/features.tsx` — "What it does" section with 6 glass tiles.
+  **Deleted and removed from page.tsx** in commit `8359c22` (2026-04-22).
+- `public/leadity-guarantee.png` — **deleted from disk** in `5c0d7fd`.
+- `public/refund-seal.png` — **deleted from disk** in `5c0d7fd`.
+- `public/leadity-refund-recycle.png` — superseded by `-v2.png` (renamed
+  to bust CDN cache). The original name may still exist on disk.
 
 ---
 
@@ -298,8 +306,14 @@ Hover state deepens every layer in lockstep.
 
 **`.glass-chip`** — buttons, toggles, pills (blur 20px variant).
 **`.glass-chip-dark`** — for elements over brand gradients.
+**`.glass-chip-ringed`** — NEW (2026-04-22). Like `.glass-chip` but with
+inset box-shadows on ALL four sides (top + bottom halos, not just top).
+Used on Pricing's Starter + Scale CTA buttons so they feel "ringed" /
+floating. Defined in `app/globals.css`.
 **`.glass-brand`** — translucent blue-tinted glass with backdrop-blur for
-focal cards that used to be opaque brand gradients.
+focal cards (updated 2026-04-22: alpha boosted to 0.95–0.96 for deeper
+blue, specular corner highlight reduced to 0.28/0.06 so it doesn't grey
+out on blue backgrounds).
 
 ### Critical insights about Apple Liquid Glass (from research):
 
@@ -362,6 +376,8 @@ stiffness 260, damping 28, mass 0.9  ← mobile drawer island
   `left-4 right-4 top-[calc(72px+8px)]`, uses `.glass-card`
 - Drawer spring: `stiffness 260, damping 28, mass 0.9`
 - Menu-item stagger: `staggerChildren 0.035, delayChildren 0.08`
+- **"Get leads" button**: `variant="gradient"` (blue glass pill). Changed
+  from `primary` in commit `6bd3f3d` (2026-04-22).
 
 ### `Hero` — `components/hero.tsx`
 - `min-h-[calc(100svh-72px)]`, flex-col, `items-center justify-center`
@@ -373,54 +389,75 @@ stiffness 260, damping 28, mass 0.9  ← mobile drawer island
   (Start Scraping →)
 
 ### `Showcase` — `components/showcase.tsx`
-- Section `bg-white overflow-hidden py-24 md:py-28 lg:py-32`
-- 5 steps stacked with `divide-y`, each Step:
-  - Grid: text `col-span-5`, image `col-span-7`
-  - Alternates `textFirst` based on index % 2
-  - Image frame: `.glass-card rounded-2xl p-3 sm:p-4` containing
-    a 16:11 rounded inner div with the screenshot
-- Reveal-on-enter via `useInView(..., { once: true, amount: 0.2 })` +
-  motion.div opacity + y fade. **No parallax** — scroll-driven parallax
-  was removed because it fought the reveal animation under Lenis.
-- Each step data: `step` ("01"), `label` ("Choose"), `title`, `body`,
-  `src`, `alt`, `width: 1600, height: 1100`
+- **FULL-BLEED BLUE GLASS SECTION** (restyled 2026-04-22 to match Guarantee/CTA)
+- Same blue bg canvas as Guarantee/CTA: extends ±200px, linear fades,
+  3 glow blobs, hairline grid texture
+- `divide-y divide-white/15` dividers between steps **REMOVED** — steps
+  flow as one continuous blue canvas without lines
+- 5 steps each: grid text(col-5) + image(col-7), alternating sides
+- Image frame: `.glass-card rounded-2xl p-3 sm:p-4` (glass card on blue bg)
+- Reveal-on-enter via `useInView(..., { once: true, amount: 0.2 })`
+- **No parallax** — removed because it fought framer-motion under Lenis
 
-### `Features` — `components/features.tsx`
-- 6 `.glass-card` tiles in a `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
-- Each has a colour-coded badge (blue/mint/amber/green) + a lucide icon
-- `StaggerGroup` / `StaggerItem` reveal
-- CSS transition explicitly scoped to `[border-color, box-shadow]` so
-  framer-motion owns transform (fixed the "twitch on enter" bug)
-- Features:
-  - Core / Instant lead capture / Zap
-  - AI-Powered / Mobile-only classification / ShieldCheck
-  - Smart Filter / Niche-precise scraping / Filter
-  - Always On / Speed-tunable workers / RefreshCw
-  - Critical / Live pipeline tracking / BarChart3
-  - Visibility / Centralized dashboard / LayoutDashboard
+### `Features` — **DELETED** (commit `8359c22`, 2026-04-22)
+- File physically deleted from `components/features.tsx`
+- Removed from `app/page.tsx` imports and JSX
+- The "What it does" / eyebrow + 6 glass tiles section no longer exists
+- Do NOT recreate unless user explicitly asks
 
 ### `Comparison` — `components/comparison.tsx`
-- Section `section-py bg-[var(--color-surface)]` with top glow
-- H2: "One tool or / three bills." — **no subhead** anymore (removed)
-- Grid 2-col at lg, 1-col mobile with `gap-20 lg:gap-6`, `max-w-[720px]`
-- **Ours** card (order-2, on the right at lg): `.glass-brand` — translucent
-  blue-tinted glass. Ghost logo 108×108 floats on top, NO shadow. Title
-  "Ours" 24-34px. Prices in `tabular-nums`. 4 feature rows with white
-  check chips on blue.
-- **Theirs** card (order-1, on the left at lg): `.glass-card` with Outscraper
-  + Clearoutphone logos floating above (78×78 each, rotated -6° / +6°,
-  white rings). Title "Theirs" in primary text. Prices in `#FF5A5A` red
-  with subtle red text-shadow. 4 feature rows with muted X chips.
-- **TierPill overlay** (lg only): absolute overlay at `top-[70px]` with
-  3 `.glass-chip` pills (2,000 / 5,000 / 10,000) centered vertically
-  aligned with each price row via shared `pricePadY = "py-4"`.
-- Card sizes are 40% smaller than the original Attio-style design (user
-  asked for shrink).
-- Footnote: "Pricing snapshot captured from public Outscraper + Clearoutphone
-  rates. Your actual mileage may vary - ours won't."
+**COMPLETELY REDESIGNED** (2026-04-22, commits `c67b5b0` through `96f7a65`)
+
+Single unified liquid-glass card with two colored columns visible BEHIND
+the glass, not separate side-by-side cards anymore.
+
+**Layout constants:**
+- `TAB_HEIGHT = 96` — how far colored columns stick above the card
+- `GRID_COLS = "minmax(220px, 1fr) 138px 14px 138px 104px"` — 5 columns:
+  label · theirs-col · gap · ours-col · right-spacer
+
+**Colored columns (behind glass, z-0):**
+- Left (Theirs): `linear-gradient(180deg, #000000 0%, #0a0f1c 100%)` near-black,
+  `borderRadius: "72px 72px 0 0"` arched top
+- Right (Ours): `linear-gradient(180deg, #00D4FF 0%, #118BFF 40%, #0443FF 100%)`
+  brand blue, `borderRadius: "72px 72px 0 0"` arched top
+
+**Glass overlay (z-1):**
+- `rgba(255,255,255,0.22)`, `blur(50px) saturate(200%)`
+- Border `1.5px rgba(255,255,255,0.55)`, rounded-[32px]
+- Multi-layer box-shadow for elevation
+
+**Floating logos on tab tops (z-3, absolute, positioned by GRID_COLS):**
+- Left tab: Outscraper (54-60px, rotated -6°) + Clearoutphone (54-60px,
+  rotated +6°), white ring-[2.5px], dark drop shadows
+- Right tab: Leadity `/logo-white.png` (58-66px), no shadow
+
+**Data rows (z-2, grid matching GRID_COLS):**
+- Row type `"tier"`: prices as text — theirs in `#FF3333` red with
+  `textShadow: "0 0 22px rgba(255,60,60,0.55)"`, ours in white
+- Row type `"feature"`: Check (white, ours col) / X (white, theirs col)
+  icons via lucide-react, `strokeWidth={3}`, 24-28px
+- Labels LEFT-aligned in px-6 md:pl-10 cells, `text-[var(--color-text-primary)]`
+- Dividers: `bg-white/22` between rows; thicker `bg-white/35 my-2`
+  after last tier row. **No divider before first data row.**
+
+**Eyebrow / H2:**
+- Eyebrow: "Compared"
+- H2: "Three bills or" / "One Tool?" (gradient second line)
+
+**No Reveal wrapper on the card** — backdrop-filter flashes when parent
+has opacity/transform animation. The card is static from first paint.
+Reveal only wraps the heading above.
+
+**Max-width:** `max-w-[720px]` centered.
+
+**Footnote:** "Pricing snapshot captured from public Outscraper +
+Clearoutphone rates. Your actual mileage may vary - ours won't."
 
 ### `Pricing` — `components/pricing.tsx`
-- Section `id="pricing" section-py`, grid bg, top glow
+- Section `id="pricing" section-py relative z-10 overflow-hidden`
+  (`z-10` lifts it above the adjacent blue section transitions so they
+  don't bleed into the pricing bg)
 - H2: "Pick your / scrape volume."
 - **Affiliate toggle** (`.glass-chip`, rounded-full): Standard ↔ Affiliate
   switch with "SAVE MORE" gradient chip. Has a Tooltip: "Pricing for
@@ -437,47 +474,43 @@ stiffness 260, damping 28, mass 0.9  ← mobile drawer island
   - Growth popular card: `.glass-brand` with `lg:-translate-y-3` lifted,
     "MOST POPULAR" pill on top. CTA button is a **plain solid-white pill**
     (not glass) per user request — intentional inconsistency.
+  - **Starter + Scale CTA buttons**: `className="mt-7 glass-chip-ringed"` —
+    the new ringed variant with top+bottom shadow halos (commit `aaef7da`)
 - Plan data in `lib/plans.ts`. See §8.
 
 ### `Guarantee` — `components/guarantee.tsx`
 - **FULL-WIDTH BLUE GLASS SECTION** (restyled 2026-04-22 to mirror the CTA)
-- `py-28 md:py-36 lg:py-44`, `text-white`, brand gradient bg with
-  specular top-left highlight (same recipe as CTA)
-- **Top fade** (260px, white → transparent) to bridge from Pricing's
-  white bg
-- **Bottom fade** (480px, transparent → solid white tail) to bridge back
-  into Testimonials' white bg — deliberately taller than the top fade
-  because the section below is light too (unlike CTA where Footer follows)
-- Three Gaussian-blur glow blobs (same recipe as CTA): purple/cyan/pink
-  radial circles, 540–820px, `blur(160–200px)`, `mix-blend-mode:
-  plus-lighter`, organic asymmetric `border-radius` blob shapes
-  - Bottom-right blob is positioned `bottom-[20%]` (not `-bottom-[15%]`)
-    so it doesn't tint the bottom fade zone
-- Faint hairline grid texture (56px × 56px) for depth
-- Layout stays two-column:
-  - Left col (col-span-4): `/leadity-refund-recycle.png` seal 260–300px
-    with white/tinted ambient radial halo behind (was cyan on white bg
-    before; now white-on-blue to match the new treatment)
+- `py-28 md:py-36 lg:py-44`, `text-white`, `isolate`
+- **Blue bg canvas** extends `-top-[200px] -bottom-[200px]` (±200px past
+  section boundaries so it bleeds smoothly into adjacent white sections)
+- Brand gradient: `linear-gradient(160deg, #22C9F5 0%, #1B86FF 45%, #0951FF 100%)`
+  with specular top-left highlight overlay
+- **Top fade** (z-1, 460px tall): `linear-gradient(180deg, #fff 0%, #fff 200px, transparent 100%)`
+- **Bottom fade** (z-1, 460px tall, mirrored): `linear-gradient(0deg, #fff 0%, #fff 200px, transparent 100%)`
+- Three Gaussian-blur glow blobs (inside canvas, `mix-blend-mode: plus-lighter`):
+  - Purple-cyan, top-left, 720px, `blur(180px)`, `.glow-breathe-slow`
+  - Cyan-blue, bottom-right, 820px, `blur(200px)`, `.glow-breathe`
+  - Pink-purple, center, 540px, `blur(160px)`, `.glow-breathe-slow`, `mix-blend-mode: screen`
+- Faint hairline grid texture (56px × 56px, opacity 0.08)
+- Layout: 12-col grid (lg), 4+8 split
+  - Left col (col-span-4): `/leadity-refund-recycle-v2.png` seal 260–300px
+    (RENAMED from -v1, cache-bust). White ambient radial halo behind.
   - Right col (col-span-8):
     - Eyebrow: `THE LEADITY GUARANTEE` in `text-white/85`
     - H2: "Bad lead? We don't just replace it. We pay you back in bonus
       leads." — white, `clamp(32px, 4.6vw, 56px)`
     - Paragraph explaining refund + 50% bonus mechanic, `text-white/85`
-    - 3 glass pills: "Verified at source", "Automatic replacement",
-      "Human account manager" — NOT `.glass-chip` (too light for the
-      blue bg). Custom: `border border-white/25 bg-white/12 backdrop-blur-md
-      text-white/90`
+    - 3 glass pills (custom, NOT `.glass-chip`):
+      `border border-white/25 bg-white/12 backdrop-blur-md text-white/90`
 
 ### `Testimonials` — `components/testimonials.tsx`
 - Section `overflow-x-clip pt-24 pb-20 md:pt-28 md:pb-24 lg:pt-32 lg:pb-28`
   (not `overflow-hidden` — would clip shadow below cards)
 - Bg-grid texture + top radial glow
-- **Top 180px of the bg-grid is mask-faded** (`mask-image: linear-gradient
-  (180deg, transparent 0%, #000 180px, #000 100%)`) so the cyan grid
-  doesn't start with a hard top edge right after the Guarantee section's
-  blue → white fade. Without this mask, there's a visible seam between
-  the solid-white bottom of the Guarantee and the grid-patterned top of
-  Testimonials.
+- **Top 180px of the bg-grid is mask-faded**:
+  `WebkitMaskImage: "linear-gradient(180deg, transparent 0%, #000 180px, #000 100%)"`
+  Prevents the cyan grid pattern from hard-starting right after the
+  Guarantee's bottom white fade — would create a visible seam otherwise.
 - H2: "Receipts, / not testimonials." — sub: "Every card is a real
   screenshot from a real customer. Tap any card to read the full
   conversation."
@@ -500,7 +533,8 @@ stiffness 260, damping 28, mass 0.9  ← mobile drawer island
 - 7 testimonials total. See §8 for data.
 
 ### `FAQ` — `components/faq.tsx`
-- Section `id="faq" section-py` with blob glow
+- Section `id="faq" section-py relative z-10 overflow-hidden`
+  (`z-10` lifts it above the CTA's blue transition below)
 - H2: "Questions outbound teams actually ask."
 - 8 items in a `gap-3` stack (was an underline list — changed to glass
   cards). Each `AccordionItem` has `.glass-card rounded-2xl border-0
@@ -515,11 +549,13 @@ stiffness 260, damping 28, mass 0.9  ← mobile drawer island
 - **Smooth top fade** (260px tall `linear-gradient(180deg, #fff 0%,
   … transparent 100%)`) so the previous FAQ section's white bg blends
   seamlessly into the blue. No bottom fade — Footer follows.
-- **Gaussian-blur glow blobs** (shipped in `c640f53`, 2026-04-22): three
+- **Gaussian-blur glow blobs** (commit `c640f53`, 2026-04-22): three
   organic asymmetric-border-radius shapes with huge blurs (160–200px)
   and `mix-blend-mode: plus-lighter` painted OVER the brand gradient.
-  Purple-cyan + cyan-blue + pink-purple palette. This is the same recipe
-  now reused verbatim in the Guarantee section.
+  Purple-cyan + cyan-blue + pink-purple palette. Same recipe reused in
+  Guarantee and Showcase sections.
+- **Top fade** (simple linear): `linear-gradient(180deg, #fff 0%, #fff 200px, transparent 100%)`
+  from the FAQ section's white bg. No bottom fade — Footer is dark.
 - Faint hairline grid texture (56px × 56px) for depth
 - Content centered, max-w-[820px]:
   - White-icon ghost logo (80/92px, no shadow)
@@ -656,14 +692,20 @@ sub:     One scraper that pulls from Google Maps, splits mobiles from
 ### Comparison
 ```
 eyebrow: Compared
-H2:      One tool or
-         three bills.
-(no subhead)
-Ours: Scrape + validate in one product · 4× higher quality filter
-      built in · 2× faster scraping, tunable workers · Refund + 50%
-      bonus on bad leads
-Theirs: Two separate tools, two bills · No quality filter - pay for
-        VOIPs · Slow crawls and rate-limits · No refund, no safety net
+H2:      Three bills or
+         One Tool?   ← second line is .text-brand-gradient
+
+Tier rows (text):
+  2,000 Owners Mobiles  |  $67 – $211 (theirs, red)  |  $59 (ours, white)
+  5,000 Owners Mobiles  |  $133 – $522               |  $129
+  10,000 Owners Mobiles |  $307 – $1,053              |  $229
+
+Feature rows (Check / X icons, no text):
+  All-in-one workflow
+  Quality filter built in
+  Fast, tunable scraping
+  Refund + 50% bonus policy
+
 Footnote: Pricing snapshot captured from public Outscraper + Clearoutphone
           rates. Your actual mileage may vary - ours won't.
 ```
@@ -778,7 +820,7 @@ plans = [
     cta: "Start with 2k Owners Mobiles"
     compareNote: "vs. $67–$211 with Outscraper + Clearoutphone"
 
-  Growth    — $139 / $83 — 5k   — popular:true
+  Growth    — $129 / $77 — 5k   — popular:true
               "For agencies and outbound teams running multiple campaigns."
     features: 5,000 verified Owners Mobiles · Everything in Starter ·
               Priority scraping queue · Dedicated account manager in chat ·
@@ -796,16 +838,26 @@ plans = [
 ]
 ```
 
-### Comparison tiers + features — in `components/comparison.tsx`
+### Comparison rows — in `components/comparison.tsx`
 
-```
-tiers = [
-  { label: "2,000",  leadity: "$59",  competitor: "$67 – $211"   },
-  { label: "5,000",  leadity: "$139", competitor: "$133 – $522"  },
-  { label: "10,000", leadity: "$229", competitor: "$307 – $1,053" },
+```ts
+type Row = {
+  label: string;
+  kind: "tier" | "feature";
+  theirs?: string;  // only for tier rows
+  ours?: string;    // only for tier rows
+};
+
+rows = [
+  { kind: "tier",    label: "2,000 Owners Mobiles",  theirs: "$67 – $211",   ours: "$59"  },
+  { kind: "tier",    label: "5,000 Owners Mobiles",  theirs: "$133 – $522",  ours: "$129" },
+  { kind: "tier",    label: "10,000 Owners Mobiles", theirs: "$307 – $1,053",ours: "$229" },
+  { kind: "feature", label: "All-in-one workflow" },
+  { kind: "feature", label: "Quality filter built in" },
+  { kind: "feature", label: "Fast, tunable scraping" },
+  { kind: "feature", label: "Refund + 50% bonus policy" },
 ];
-
-features = 4 pairs (ours / theirs) — see §7 Comparison
+// Feature rows render Check (ours) / X (theirs) icons — no text
 ```
 
 ### Features grid — in `components/features.tsx`
@@ -971,6 +1023,20 @@ Each feature: { badge, tone, title, body, icon }
     screenshots, the session can error out. Next time, advise them to
     keep screenshots at 1500px max, or describe in text.
 
+14. **backdrop-filter flash on scroll-in** (Chromium + WebKit). When a
+    parent element has `opacity < 1` OR is actively running a CSS/JS
+    `transform` animation, browsers skip rendering `backdrop-filter` for
+    that subtree — you see a brief flash of un-blurred glass. The trigger
+    here: the `<Reveal>` component animates both opacity and y-transform.
+    Fix: **remove `<Reveal>` from any element that uses `backdrop-filter`**.
+    Applied to the Comparison card (commit `5ae1742`). The heading above
+    can still use Reveal — only the glass card itself must be static.
+
+15. **CDN-cached guarantee image didn't update after in-place overwrite.**
+    Vercel's edge caches the file by name indefinitely. Fix: rename the
+    file (`leadity-refund-recycle.png` → `leadity-refund-recycle-v2.png`)
+    and update the `src` in `guarantee.tsx`. (commit `4137957`)
+
 ---
 
 ## 11. Assets (public/)
@@ -980,9 +1046,9 @@ Each feature: { badge, tone, title, body, icon }
   (nav drawer on mobile? no. Footer? yes. CTA ghost? yes.
   Signup popup? yes)
 - `favicon.ico`
-- `leadity-refund-recycle.png` — refund+recycle guarantee seal
-  (current guarantee image; supersedes `leadity-guarantee.png` and the
-  even older `refund-seal.png`)
+- `leadity-refund-recycle-v2.png` — CURRENT refund+recycle guarantee seal
+  (renamed from `-v1` to bust CDN cache; supersedes `leadity-guarantee.png`
+  and `refund-seal.png`, both deleted)
 - `competitors/outscraper.png`, `competitors/clearoutphone.png`
 - `product/01-05.png` — five Showcase step screenshots
 - `testimonials/t1-t7.jpg` — seven real DM screenshots
@@ -1092,66 +1158,76 @@ things are the way they are:
 16. **Closing CTA copy** — "Scrape today. / Text tomorrow." →
     user wanted "10× better" → "Your next 5,000 leads, pulled in
     one click." + "LESS STACK. MORE PIPELINE." eyebrow.
+17. **CTA glow blobs** — added Gaussian-blur organic blob shapes
+    (`mix-blend-mode: plus-lighter`) over the CTA blue gradient
+    (`c640f53`). Same recipe later reused in Guarantee + Showcase.
+18. **Guarantee → full blue glass** — restyled from white-bg with cyan
+    seal to full-bleed blue matching CTA (`988d6d2`). Fades at top and
+    bottom blend into adjacent sections. Visible seam into Testimonials
+    fixed by extending canvas ±200px and simple linear fades (`3fe5671`).
+19. **Testimonials bg-grid mask** — top 180px of grid masked to prevent
+    hard edge after Guarantee's white fade (`testimonials.tsx` inline).
+20. **Features section deleted** — "What it does" section with 6 glass
+    tiles removed entirely from page (`8359c22`).
+21. **Showcase → full blue glass** — same treatment as Guarantee/CTA,
+    step dividers removed (`16b8e83`).
+22. **Blue section fades — many iterations:**
+    - First: organic cloud shapes with CSS `filter: blur(50px)` →
+      circles still visible (user: "wtf is that bro"). Reverted.
+    - Simple linear fade: `linear-gradient(#fff → #fff 200px → transparent)`.
+      Still had a hard seam at ±0px boundary.
+    - Fix: extend blue canvas ±200px, add solid-white 200px cap in the
+      linear gradient so the seam is hidden behind white (`0b9a383`).
+    - Final stable recipe: `linear-gradient(180deg, #fff 0%, #fff 200px, transparent 100%)`
+      with canvas at `inset-x-0 -top-[200px] -bottom-[200px]`.
+23. **Top cyan glows removed** from Comparison/Pricing/Testimonials
+    (`e711456`) — user asked to remove all ambient top glows on white
+    sections.
+24. **Pricing + FAQ → z-10** — lifted above blue section transitions so
+    white bgs don't get tinted by the blue canvas below (`2d1d60f`).
+25. **Nav "Get leads" → gradient variant** — blue glass pill button in
+    nav CTA (`6bd3f3d`).
+26. **glass-brand alpha boosted** — deeper blue on brand glass cards and
+    buttons (`45e75ec`).
+27. **Pricing Starter+Scale CTA → glass-chip-ringed** — new CSS class
+    with top+bottom shadow halos (`aaef7da`).
+28. **Comparison complete redesign** (9 commits, `c67b5b0` → `96f7a65`):
+    Two-card layout → single unified glass card with colored columns
+    behind glass. Logos float on arched tab tops. Check/X icons for
+    feature rows. H2 flipped to "Three bills or / One Tool?". Shrunk to
+    720px. Labels left-aligned. Red prices with glow shadow.
+    Reveal removed from card to fix backdrop-filter flash bug.
 
 ---
 
 ## 14. Pending / Ideas
 
-**Not yet implemented — user has requested but session ran out:**
+### Completed this session (were in backlog, now done):
+- ✅ CTA gradient-blur glow blobs (`c640f53`)
+- ✅ Guarantee → full blue glass (`988d6d2`)
+- ✅ Showcase → full blue glass (`16b8e83`)
+- ✅ Features section deleted (`8359c22`)
+- ✅ Qualifier.tsx + old guarantee images deleted from disk (`5c0d7fd`)
+- ✅ Comparison complete redesign (liquid-glass unified card)
+- ✅ Nav CTA → gradient variant
+- ✅ Pricing/FAQ z-10 to float above blue transitions
 
-### Gradient-blur glow on the CTA section (pending)
+### Remaining nice-to-haves (backlog)
 
-> **User's exact ask** (Romanian + English): "la sfarsit de pagina
-> transition for cta vreau sa fie Gradient blur soft peste shape-ul
-> albastru. Practic, duplici layer-ul, aplici Gaussian Blur mare
-> (150–200), apoi îl setezi pe blend mode 'Plus Lighter' sau 'Screen'
-> cu opacitate ~70–80% ca să creeze acel glow/fade smooth. Sa fie o
-> forma abstracta."
-
-Concrete implementation plan for the next session:
-
-1. Inside `components/cta.tsx`, inside the `<section>` but under the
-   text content, add 2–3 absolutely-positioned blurred blobs:
-   ```tsx
-   <div
-     aria-hidden
-     className="pointer-events-none absolute -top-[10%] left-[10%] h-[600px] w-[600px] opacity-70"
-     style={{
-       background: "radial-gradient(circle, #7B5CFF 0%, #22C9F5 50%, transparent 70%)",
-       filter: "blur(180px)",
-       mixBlendMode: "plus-lighter",
-       borderRadius: "63% 37% 54% 46% / 55% 48% 52% 45%", // organic blob
-     }}
-   />
-   ```
-2. Give them asymmetric `border-radius` values (the "63% 37% 54% 46% /
-   55% 48% 52% 45%" pattern) for organic glass-blob shapes.
-3. Layer 2–3 with different positions, sizes, opacities.
-4. Optionally animate slow drift via the existing `.glow-breathe` and
-   `.glow-breathe-slow` keyframes.
-5. Keep `mix-blend-mode: plus-lighter` (or `screen`) to additively
-   brighten the blue gradient underneath.
-
-### Other nice-to-haves on the backlog
-
-- Could delete unused `components/qualifier.tsx` file from disk (it's
-  no longer imported, but the file itself lingers)
-- Could delete unused `public/leadity-guarantee.png` and
-  `public/refund-seal.png`
-- Could refactor the inline brand-gradient backgrounds that still live
-  in a few places (`components/pricing.tsx` mobile row variable,
-  popup bg ghost spot, etc.) into a shared const or the `.bg-brand-gradient`
-  utility. Low priority.
-- FAQ could gain keyboard shortcut hints (like Stripe's) — not asked
-  for, just an idea.
+- Could refactor the inline brand-gradient backgrounds still scattered
+  in a few places (`components/pricing.tsx` mobile row variable, popup bg)
+  into a shared `.bg-brand-gradient` utility. Low priority.
+- FAQ keyboard shortcut hints (like Stripe's) — not asked for, idea only.
+- `public/leadity-refund-recycle.png` (the original non-v2) may still
+  linger on disk — safe to delete.
 
 ### Things the user might ask next session
 
 Based on their pattern, the next iteration might touch:
-- Polish the new gradient-blur glow (tuning after they see it live)
-- More copy revisions on specific sections
-- A new section (they've asked to add/remove several times)
-- Another glass tuning round (they love iterating on glass)
+- Glass tuning (they iterate a lot on glass density / blur / shadows)
+- New copy revisions on Showcase or Comparison
+- A new page or section (they've added/removed several times)
+- SEO / meta / og-image work (see leadity_seo_strategy.md in memory)
 
 ---
 
@@ -1205,8 +1281,34 @@ iPhone screenshots common (references iOS 26)
 ## Appendix B — Commits worth remembering
 
 ```
+96f7a65  fix: close JSX properly after removing Reveal wrapper ← LATEST
+5ae1742  fix(comparison): kill flash of unfrosted card on scroll-in
+           (removed <Reveal> from card — backdrop-filter flash bug fix)
+4137957  chore: bust guarantee image cache via rename (-> -v2.png)
+a8d998d  style(comparison): deeper black, punchier blue, hotter red prices
+bafdc2a  style(comparison): let black + blue columns show through stronger
+7eaac62  assets: replace guarantee seal with new ghost+recycle art
+f16f691  style(comparison): shrink card max-width 1040 -> 720
+9810b88  style(comparison): drop COMPARED title + use check/x for feature rows
+e034491  style(comparison): narrower tabs, right spacer, tighter reference match
+2498f2e  feat(comparison): identical to reference — arched tabs + glass card
+c67b5b0  feat(comparison): unified liquid-glass comparison table
+           (new design: single card + colored columns behind glass)
+aaef7da  style(pricing): Starter + Scale CTAs shadow on all sides
+45e75ec  style(glass-brand): boost blue saturation on buttons + brand cards
+6bd3f3d  style(nav): make "Get leads" button blue-glass (variant=gradient)
+b3112d1  revert(fades): back to the simple smooth linear recipe
+0b9a383  fix: solid-white cap at fade edges hides the blue bg canvas boundary
+8c3749b  fix: blue sections bleed beyond their boundaries — no more visible seam
+8359c22  feat: remove Features ("What it does") section
+16b8e83  style(showcase): full-bleed blue glass section matching Guarantee/CTA
+e711456  style: remove top cyan-glow overlays from Comparison/Pricing/Testimonials
+3fe5671  fix(guarantee): kill visible seam into Testimonials section
+988d6d2  style(guarantee): blue glass section matching CTA, fades both sides
+5c0d7fd  chore: remove orphaned files (qualifier + old guarantee images)
+c640f53  style(cta): Gaussian-blur glow blobs with plus-lighter blend over blue
+d4795f1  docs: add iorshik.md — internal memory for future sessions
 8e2fcb9  feat: remove qualifier, full glass coverage, full-width CTA section
-         ← latest as of this memory file
 a6f0976  feat: testimonial cards=PNG only + fix shadow cutoff + rewrite CTA copy
 587a1d5  feat: full Apple Liquid Glass pass — every card + every button
 20cfdf8  feat: high-quality Apple Liquid Glass + manual-carousel testimonials

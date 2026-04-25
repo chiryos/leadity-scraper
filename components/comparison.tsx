@@ -20,7 +20,7 @@ type Row = {
 
 const rows: Row[] = [
   { kind: "tier", label: "2,000 Owners Mobiles", theirs: "$67 – $211", ours: "$59" },
-  { kind: "tier", label: "5,000 Owners Mobiles", theirs: "$133 – $522", ours: "$139" },
+  { kind: "tier", label: "5,000 Owners Mobiles", theirs: "$133 – $522", ours: "$129" },
   { kind: "tier", label: "10,000 Owners Mobiles", theirs: "$307 – $1,053", ours: "$229" },
   { kind: "feature", label: "All-in-one workflow" },
   { kind: "feature", label: "Quality filter built in" },
