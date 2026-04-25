@@ -58,24 +58,26 @@ export function Testimonials() {
             recipe matches the Comparison card. */}
         <div className="container-page mt-12 md:mt-16">
           <div
-            className="relative overflow-hidden rounded-[40px] border-[1.5px] border-white/60 py-8 md:py-10"
+            className="relative overflow-hidden rounded-[40px] border-[1.5px] border-white/60 py-14 md:py-20"
             style={{
               backdropFilter: "blur(50px) saturate(200%) brightness(1.02)",
               WebkitBackdropFilter: "blur(50px) saturate(200%) brightness(1.02)",
               background: [
-                "radial-gradient(130% 85% at 16% -2%, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.06) 30%, transparent 58%)",
-                "linear-gradient(176deg, rgba(230,238,250,0.12) 0%, rgba(220,228,242,0.08) 55%, rgba(215,225,240,0.1) 100%)",
+                // Specular highlight, top-left — keeps the glass shine
+                "radial-gradient(130% 85% at 16% -2%, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.06) 30%, transparent 58%)",
+                // Brand-blue tint baked into the glass body (cyan → mid-blue → deep)
+                "linear-gradient(176deg, rgba(34,201,245,0.12) 0%, rgba(27,134,255,0.09) 50%, rgba(9,81,255,0.11) 100%)",
               ].join(", "),
               boxShadow: [
-                "inset 0 10px 32px rgba(255,255,255,0.28)",
-                "inset 0 -8px 28px rgba(170,188,212,0.14)",
+                "inset 0 10px 32px rgba(255,255,255,0.26)",
+                "inset 0 -8px 28px rgba(150,180,235,0.18)",
                 "inset 0 1.5px 0 rgba(255,255,255,0.85)",
                 "inset 1.5px 0 0 rgba(255,255,255,0.4)",
                 "inset -1.5px 0 0 rgba(255,255,255,0.14)",
-                "inset 0 -1.5px 0 rgba(190,205,225,0.28)",
+                "inset 0 -1.5px 0 rgba(170,200,240,0.32)",
                 "0 1px 2px rgba(15,23,42,0.04)",
                 "0 24px 48px -16px rgba(15,23,42,0.22)",
-                "0 56px 96px -36px rgba(9,81,255,0.3)",
+                "0 60px 100px -36px rgba(9,81,255,0.4)",
               ].join(", "),
             }}
           >
@@ -90,13 +92,13 @@ export function Testimonials() {
               {track.map((t, i) => (
                 <div
                   key={i}
-                  className="relative h-[420px] w-[280px] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_8px_24px_-12px_rgba(15,23,42,0.18),0_18px_40px_-22px_rgba(27,134,255,0.22)] md:h-[440px] md:w-[320px]"
+                  className="relative h-[460px] w-[300px] shrink-0 overflow-hidden rounded-[20px] bg-white shadow-[0_8px_24px_-12px_rgba(15,23,42,0.18),0_18px_40px_-22px_rgba(27,134,255,0.22)] md:h-[500px] md:w-[340px]"
                 >
                   <Image
                     src={t.src}
                     alt={t.alt}
                     fill
-                    sizes="(min-width: 768px) 320px, 280px"
+                    sizes="(min-width: 768px) 340px, 300px"
                     className="object-cover object-top"
                     draggable={false}
                   />
