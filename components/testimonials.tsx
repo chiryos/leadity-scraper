@@ -134,18 +134,13 @@ export function Testimonials() {
           </div>
         </Reveal>
 
-        {/* Edges fade via mask; center-spotlight shadow done via rAF.
-            No overflow-hidden here — that clips top/bottom shadows.
-            The section's overflow-x-clip handles horizontal containment. */}
+        {/* Cards travel right→left through two liquid-glass tubes anchored on
+            the section's edges. Cards inside a tube get blurred by its
+            backdrop-filter; cards in the center stay crisp. The inner edge
+            of each tube fades via mask-image so the transition is seamless. */}
         <div
           ref={outerRef}
-          className="mt-12 md:mt-16 py-10 md:py-14"
-          style={{
-            maskImage:
-              "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
-          }}
+          className="relative mt-12 md:mt-16 py-10 md:py-14"
         >
           <div
             data-track
@@ -174,6 +169,58 @@ export function Testimonials() {
               </div>
             ))}
           </div>
+
+          {/* Left liquid-glass tube — cards entering from the left appear to
+              dissolve into it. Inner edge fades to transparent via mask so
+              the boundary into the sharp center area is seamless. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 left-0 z-10"
+            style={{
+              width: "clamp(140px, 16%, 260px)",
+              backdropFilter: "blur(22px) saturate(180%) brightness(1.04)",
+              WebkitBackdropFilter: "blur(22px) saturate(180%) brightness(1.04)",
+              background: [
+                "radial-gradient(120% 80% at 0% 50%, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.18) 45%, transparent 75%)",
+                "linear-gradient(to right, rgba(238,244,255,0.55) 0%, rgba(228,236,250,0.22) 55%, rgba(220,230,245,0) 100%)",
+              ].join(", "),
+              maskImage:
+                "linear-gradient(to right, black 0%, black 35%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to right, black 0%, black 35%, transparent 100%)",
+              borderRadius: "0 96px 96px 0",
+              boxShadow: [
+                "inset 0 1px 0 rgba(255,255,255,0.7)",
+                "inset 0 -1px 0 rgba(190,205,225,0.25)",
+                "inset 1.5px 0 0 rgba(255,255,255,0.55)",
+              ].join(", "),
+            }}
+          />
+
+          {/* Right liquid-glass tube — mirror of the left. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 right-0 z-10"
+            style={{
+              width: "clamp(140px, 16%, 260px)",
+              backdropFilter: "blur(22px) saturate(180%) brightness(1.04)",
+              WebkitBackdropFilter: "blur(22px) saturate(180%) brightness(1.04)",
+              background: [
+                "radial-gradient(120% 80% at 100% 50%, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.18) 45%, transparent 75%)",
+                "linear-gradient(to left, rgba(238,244,255,0.55) 0%, rgba(228,236,250,0.22) 55%, rgba(220,230,245,0) 100%)",
+              ].join(", "),
+              maskImage:
+                "linear-gradient(to left, black 0%, black 35%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to left, black 0%, black 35%, transparent 100%)",
+              borderRadius: "96px 0 0 96px",
+              boxShadow: [
+                "inset 0 1px 0 rgba(255,255,255,0.7)",
+                "inset 0 -1px 0 rgba(190,205,225,0.25)",
+                "inset -1.5px 0 0 rgba(255,255,255,0.55)",
+              ].join(", "),
+            }}
+          />
         </div>
       </div>
     </section>
