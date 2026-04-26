@@ -178,15 +178,15 @@ export default function ApifyAlternativePage() {
               <tr><td>Product type</td><td>Single focused SaaS</td><td>Marketplace of 26,000+ scrapers</td></tr>
               <tr><td>Target user</td><td>Non-developer cold-call teams</td><td>Developers + ops engineers</td></tr>
               <tr><td>Setup time</td><td>2 minutes</td><td>15-60 minutes (per actor)</td></tr>
-              <tr><td>Mobile-only filter</td><td>✅ Built in</td><td>❌ No native filter</td></tr>
-              <tr><td>US-only data</td><td>✅</td><td>❌ Global</td></tr>
+              <tr><td>Mobile-only filter</td><td>Built in</td><td>No native filter</td></tr>
+              <tr><td>US-only data</td><td></td><td>Global</td></tr>
               <tr><td>Pricing model</td><td>Flat per-mobile ($59 = 2,000)</td><td>Credits + pay-per-event variable</td></tr>
               <tr><td>Cost predictability</td><td>Fully predictable</td><td>Variable per actor</td></tr>
-              <tr><td>TCPA-aware export</td><td>✅</td><td>❌</td></tr>
+              <tr><td>TCPA-aware export</td><td></td><td></td></tr>
               <tr><td>Categories</td><td>1,255 US business categories</td><td>All Google Maps + 26K other sources</td></tr>
               <tr><td>Other platforms</td><td>Google Maps only (focus)</td><td>YouTube, Reddit, Amazon, etc. (breadth)</td></tr>
               <tr><td>Free tier</td><td>50 verified mobiles</td><td>$5 credit (varies by actor)</td></tr>
-              <tr><td>MCP server</td><td>✅ mcp.leadity.io</td><td>✅ mcp.apify.com</td></tr>
+              <tr><td>MCP server</td><td>mcp.leadity.io</td><td>mcp.apify.com</td></tr>
               <tr><td>Last updated</td><td>April 2026</td><td>April 2026</td></tr>
             </tbody>
           </table>

@@ -161,7 +161,7 @@ export default function TCPARiskCheckerPage() {
             <div className="p-6 border rounded-xl">
               <h4 className="font-bold mt-0">National DNC Registry</h4>
               <p className="text-2xl font-bold mt-2">
-                {result.isOnNationalDNC ? '🚫 Registered' : '✅ Not registered'}
+                {result.isOnNationalDNC ? 'Registered' : 'Not registered'}
               </p>
               <p className="text-sm text-[var(--color-text-secondary)] mt-1">
                 {result.isOnNationalDNC
@@ -257,11 +257,11 @@ export default function TCPARiskCheckerPage() {
 
         <h2 className="text-2xl font-bold mt-12">Related compliance content</h2>
         <ul className="mt-4 space-y-1">
-          <li>📖 <Link href="/compliance/tcpa-guide-2026">TCPA Compliance Guide 2026</Link></li>
-          <li>📖 <Link href="/compliance/state-cold-call-laws">State-by-state cold call laws</Link></li>
-          <li>📖 <Link href="/compliance/dnc-guide">National DNC Registry guide</Link></li>
-          <li>📖 <Link href="/compliance/cold-sms-rules">Cold SMS rules and 10DLC</Link></li>
-          <li>🛠️ <Link href="/tools/cost-per-lead-calculator">Cost-per-lead calculator (free tool)</Link></li>
+          <li><Link href="/compliance/tcpa-guide-2026">TCPA Compliance Guide 2026</Link></li>
+          <li><Link href="/compliance/state-cold-call-laws">State-by-state cold call laws</Link></li>
+          <li><Link href="/compliance/dnc-guide">National DNC Registry guide</Link></li>
+          <li><Link href="/compliance/cold-sms-rules">Cold SMS rules and 10DLC</Link></li>
+          <li><Link href="/tools/cost-per-lead-calculator">Cost-per-lead calculator (free tool)</Link></li>
         </ul>
       </section>
     </div>

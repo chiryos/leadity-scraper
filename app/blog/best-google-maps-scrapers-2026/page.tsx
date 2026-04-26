@@ -281,16 +281,16 @@ export default function BestGoogleMapsScrapersPage() {
               </tr>
             </thead>
             <tbody>
-              <tr><td>Apify</td><td>Marketplace</td><td>Developers</td><td>10-15%</td><td>❌ Global</td><td>$5 credit</td><td>$5</td><td>9/10</td></tr>
-              <tr><td>Outscraper</td><td>SaaS suite</td><td>Multi-platform</td><td>~8.5%</td><td>❌ Global</td><td>$29/500 credits</td><td>500 records</td><td>8/10</td></tr>
-              <tr><td>Bright Data</td><td>Enterprise infra</td><td>Scale</td><td>~9%</td><td>❌ Global</td><td>~$1.27/1k</td><td>Trial</td><td>9/10</td></tr>
-              <tr><td><strong>Leadity</strong></td><td>Specialist SaaS</td><td>US B2B cold-call</td><td><strong>84.6%</strong></td><td>✅ US-only</td><td>$59/2k mobiles</td><td>50 mobiles</td><td>9/10*</td></tr>
-              <tr><td>Scrap.io</td><td>Specialist SaaS</td><td>Lead-gen positioning</td><td>~12%</td><td>❌ Global</td><td>$35/month</td><td>7-day trial</td><td>7/10</td></tr>
-              <tr><td>Lobstr.io</td><td>Multi-source</td><td>Reviews + leads</td><td>~10%</td><td>❌ Global</td><td>$20/month</td><td>$10 credit</td><td>7/10</td></tr>
-              <tr><td>PhantomBuster</td><td>Sales automation</td><td>Workflow</td><td>~9%</td><td>❌ Global</td><td>$56/month</td><td>14-day</td><td>7/10</td></tr>
-              <tr><td>Octoparse</td><td>Visual no-code</td><td>Non-dev</td><td>~8%</td><td>❌ Global</td><td>$75/month</td><td>Free tier</td><td>7/10</td></tr>
-              <tr><td>MapScraping</td><td>Specialist</td><td>Maps-focused</td><td>~10%</td><td>❌ Global</td><td>$29/month</td><td>Free tier</td><td>6/10</td></tr>
-              <tr><td>Instant Data Scraper</td><td>Chrome extension</td><td>Quick / free</td><td>0% (no phone field)</td><td>❌ N/A</td><td>$0</td><td>Free</td><td>6/10</td></tr>
+              <tr><td>Apify</td><td>Marketplace</td><td>Developers</td><td>10-15%</td><td>Global</td><td>$5 credit</td><td>$5</td><td>9/10</td></tr>
+              <tr><td>Outscraper</td><td>SaaS suite</td><td>Multi-platform</td><td>~8.5%</td><td>Global</td><td>$29/500 credits</td><td>500 records</td><td>8/10</td></tr>
+              <tr><td>Bright Data</td><td>Enterprise infra</td><td>Scale</td><td>~9%</td><td>Global</td><td>~$1.27/1k</td><td>Trial</td><td>9/10</td></tr>
+              <tr><td><strong>Leadity</strong></td><td>Specialist SaaS</td><td>US B2B cold-call</td><td><strong>84.6%</strong></td><td>US-only</td><td>$59/2k mobiles</td><td>50 mobiles</td><td>9/10*</td></tr>
+              <tr><td>Scrap.io</td><td>Specialist SaaS</td><td>Lead-gen positioning</td><td>~12%</td><td>Global</td><td>$35/month</td><td>7-day trial</td><td>7/10</td></tr>
+              <tr><td>Lobstr.io</td><td>Multi-source</td><td>Reviews + leads</td><td>~10%</td><td>Global</td><td>$20/month</td><td>$10 credit</td><td>7/10</td></tr>
+              <tr><td>PhantomBuster</td><td>Sales automation</td><td>Workflow</td><td>~9%</td><td>Global</td><td>$56/month</td><td>14-day</td><td>7/10</td></tr>
+              <tr><td>Octoparse</td><td>Visual no-code</td><td>Non-dev</td><td>~8%</td><td>Global</td><td>$75/month</td><td>Free tier</td><td>7/10</td></tr>
+              <tr><td>MapScraping</td><td>Specialist</td><td>Maps-focused</td><td>~10%</td><td>Global</td><td>$29/month</td><td>Free tier</td><td>6/10</td></tr>
+              <tr><td>Instant Data Scraper</td><td>Chrome extension</td><td>Quick / free</td><td>0% (no phone field)</td><td>N/A</td><td>$0</td><td>Free</td><td>6/10</td></tr>
             </tbody>
           </table>
           <p className="text-xs text-[var(--color-text-secondary)] mt-2">
@@ -303,15 +303,15 @@ export default function BestGoogleMapsScrapersPage() {
         <h2 className="text-3xl font-bold mt-16">#1 Apify — Best for Developers</h2>
 
         <p>
-          🛠️ <strong>Features:</strong> 26,000+ pre-built scrapers ("actors"), full SDK, marketplace ecosystem, MCP server, integrations with everything<br />
-          🔖 <strong>Type:</strong> Marketplace platform<br />
-          🗂️ <strong>Data fields:</strong> Customizable per actor<br />
-          📞 <strong>Owner mobile coverage:</strong> 10-15% (with email-extractor actor)<br />
-          💰 <strong>Pricing:</strong> $5 free credit; $29/month Starter + per-actor variable<br />
+          <strong>Features:</strong> 26,000+ pre-built scrapers ("actors"), full SDK, marketplace ecosystem, MCP server, integrations with everything<br />
+          <strong>Type:</strong> Marketplace platform<br />
+          <strong>Data fields:</strong> Customizable per actor<br />
+          <strong>Owner mobile coverage:</strong> 10-15% (with email-extractor actor)<br />
+          <strong>Pricing:</strong> $5 free credit; $29/month Starter + per-actor variable<br />
           🆓 <strong>Free tier:</strong> $5 credit (one-time)<br />
-          ⭐ <strong>Review score:</strong> 4.6 (Capterra, 431 reviews)<br />
-          ✅ <strong>Best for:</strong> Developers building custom data pipelines<br />
-          ⚠️ <strong>Limitations:</strong> No mobile-only filter; cost unpredictability per actor; requires developer skill to configure
+          <strong>Review score:</strong> 4.6 (Capterra, 431 reviews)<br />
+          <strong>Best for:</strong> Developers building custom data pipelines<br />
+          <strong>Limitations:</strong> No mobile-only filter; cost unpredictability per actor; requires developer skill to configure
         </p>
 
         <p>
@@ -340,15 +340,15 @@ export default function BestGoogleMapsScrapersPage() {
         <h2 className="text-3xl font-bold mt-12">#2 Outscraper — Best for Multi-Platform Scraping Suite</h2>
 
         <p>
-          🛠️ <strong>Features:</strong> 23+ scrapers (Google Maps, Reviews, YouTube, Reddit, TripAdvisor, Amazon, ZoomInfo, Crunchbase, more); pay-as-you-go credit pricing<br />
-          🔖 <strong>Type:</strong> SaaS scraping suite<br />
-          🗂️ <strong>Data fields:</strong> Standard Google Maps fields per scraper<br />
-          📞 <strong>Owner mobile coverage:</strong> ~8.5% (default); ~10% with phone-validation enrichment<br />
-          💰 <strong>Pricing:</strong> $29 for 500 credits; $3/1,000 records baseline + enrichment multipliers<br />
+          <strong>Features:</strong> 23+ scrapers (Google Maps, Reviews, YouTube, Reddit, TripAdvisor, Amazon, ZoomInfo, Crunchbase, more); pay-as-you-go credit pricing<br />
+          <strong>Type:</strong> SaaS scraping suite<br />
+          <strong>Data fields:</strong> Standard Google Maps fields per scraper<br />
+          <strong>Owner mobile coverage:</strong> ~8.5% (default); ~10% with phone-validation enrichment<br />
+          <strong>Pricing:</strong> $29 for 500 credits; $3/1,000 records baseline + enrichment multipliers<br />
           🆓 <strong>Free tier:</strong> 500 records/month, free<br />
-          ⭐ <strong>Review score:</strong> 4.7 (Trustpilot, 248 reviews)<br />
-          ✅ <strong>Best for:</strong> Teams needing one vendor for multi-platform scraping<br />
-          ⚠️ <strong>Limitations:</strong> No US-only filter; mostly returns landlines; credit math unpredictable; data quality complaints on Reddit/Trustpilot
+          <strong>Review score:</strong> 4.7 (Trustpilot, 248 reviews)<br />
+          <strong>Best for:</strong> Teams needing one vendor for multi-platform scraping<br />
+          <strong>Limitations:</strong> No US-only filter; mostly returns landlines; credit math unpredictable; data quality complaints on Reddit/Trustpilot
         </p>
 
         <p>
@@ -369,15 +369,15 @@ export default function BestGoogleMapsScrapersPage() {
         <h2 className="text-3xl font-bold mt-12">#3 Bright Data — Best for Enterprise Scale</h2>
 
         <p>
-          🛠️ <strong>Features:</strong> Pre-built Google Maps Scraper API + Datasets, residential + datacenter proxies, full anti-bot infrastructure, web unblocker<br />
-          🔖 <strong>Type:</strong> Enterprise scraping infrastructure<br />
-          🗂️ <strong>Data fields:</strong> Comprehensive (40+ fields available)<br />
-          📞 <strong>Owner mobile coverage:</strong> ~9%<br />
-          💰 <strong>Pricing:</strong> ~$1.27/1,000 records on enterprise plans (volume tiers)<br />
+          <strong>Features:</strong> Pre-built Google Maps Scraper API + Datasets, residential + datacenter proxies, full anti-bot infrastructure, web unblocker<br />
+          <strong>Type:</strong> Enterprise scraping infrastructure<br />
+          <strong>Data fields:</strong> Comprehensive (40+ fields available)<br />
+          <strong>Owner mobile coverage:</strong> ~9%<br />
+          <strong>Pricing:</strong> ~$1.27/1,000 records on enterprise plans (volume tiers)<br />
           🆓 <strong>Free tier:</strong> 7-day trial<br />
-          ⭐ <strong>Review score:</strong> 4.5 (G2, 230+ reviews)<br />
-          ✅ <strong>Best for:</strong> Enterprise teams scraping at multi-million-record scale<br />
-          ⚠️ <strong>Limitations:</strong> Enterprise pricing structure (sales-led); overkill for SMB cold-call use cases; no mobile-only filter
+          <strong>Review score:</strong> 4.5 (G2, 230+ reviews)<br />
+          <strong>Best for:</strong> Enterprise teams scraping at multi-million-record scale<br />
+          <strong>Limitations:</strong> Enterprise pricing structure (sales-led); overkill for SMB cold-call use cases; no mobile-only filter
         </p>
 
         <p>
@@ -405,15 +405,15 @@ export default function BestGoogleMapsScrapersPage() {
         </div>
 
         <p>
-          🛠️ <strong>Features:</strong> Mobile-only filter, US-only data, 1,255+ business categories, TCPA-aware export (DNC + line-type flags), MCP server, native CRM integrations<br />
-          🔖 <strong>Type:</strong> Specialist SaaS<br />
-          🗂️ <strong>Data fields:</strong> 12 default + 5 optional (mobile, owner name, address, category, rating, hours, website, year established, service area, DNC status, line type, carrier, time zone)<br />
-          📞 <strong>Owner mobile coverage:</strong> <strong>84.6%</strong> (carrier-verified)<br />
-          💰 <strong>Pricing:</strong> $0/50 mobiles; $59/2,000; $139/5,000; $229/10,000 (flat)<br />
+          <strong>Features:</strong> Mobile-only filter, US-only data, 1,255+ business categories, TCPA-aware export (DNC + line-type flags), MCP server, native CRM integrations<br />
+          <strong>Type:</strong> Specialist SaaS<br />
+          <strong>Data fields:</strong> 12 default + 5 optional (mobile, owner name, address, category, rating, hours, website, year established, service area, DNC status, line type, carrier, time zone)<br />
+          <strong>Owner mobile coverage:</strong> <strong>84.6%</strong> (carrier-verified)<br />
+          <strong>Pricing:</strong> $0/50 mobiles; $59/2,000; $139/5,000; $229/10,000 (flat)<br />
           🆓 <strong>Free tier:</strong> 50 verified owner mobiles, no card<br />
-          ⭐ <strong>Review score:</strong> 4.9 (47 reviews, growing)<br />
-          ✅ <strong>Best for:</strong> US B2B cold-call agencies, SMMA, AI sellers, vertical specialists (roofing/solar/HVAC)<br />
-          ⚠️ <strong>Limitations:</strong> US-only as of April 2026 (no UK/EU coverage); Google Maps only as data source (no LinkedIn, Apollo); newer brand vs Apify/Outscraper
+          <strong>Review score:</strong> 4.9 (47 reviews, growing)<br />
+          <strong>Best for:</strong> US B2B cold-call agencies, SMMA, AI sellers, vertical specialists (roofing/solar/HVAC)<br />
+          <strong>Limitations:</strong> US-only as of April 2026 (no UK/EU coverage); Google Maps only as data source (no LinkedIn, Apollo); newer brand vs Apify/Outscraper
         </p>
 
         <p>
@@ -441,15 +441,15 @@ export default function BestGoogleMapsScrapersPage() {
         <h2 className="text-3xl font-bold mt-12">#5 Scrap.io — Best for Narrow Lead-Gen Positioning</h2>
 
         <p>
-          🛠️ <strong>Features:</strong> Lead-based pricing, country/state/county/ZIP targeting, 4,000+ categories, 195 countries<br />
-          🔖 <strong>Type:</strong> Specialist SaaS<br />
-          🗂️ <strong>Data fields:</strong> Standard Google Maps fields<br />
-          📞 <strong>Owner mobile coverage:</strong> ~12%<br />
-          💰 <strong>Pricing:</strong> $35-$499/month (lead-based, tiered)<br />
+          <strong>Features:</strong> Lead-based pricing, country/state/county/ZIP targeting, 4,000+ categories, 195 countries<br />
+          <strong>Type:</strong> Specialist SaaS<br />
+          <strong>Data fields:</strong> Standard Google Maps fields<br />
+          <strong>Owner mobile coverage:</strong> ~12%<br />
+          <strong>Pricing:</strong> $35-$499/month (lead-based, tiered)<br />
           🆓 <strong>Free tier:</strong> 7-day trial<br />
-          ⭐ <strong>Review score:</strong> 4.8 (Capterra)<br />
-          ✅ <strong>Best for:</strong> International lead-gen with niche-aware pricing<br />
-          ⚠️ <strong>Limitations:</strong> No mobile-only filter; subscription pricing locks tier features behind upgrades; thin TCPA content
+          <strong>Review score:</strong> 4.8 (Capterra)<br />
+          <strong>Best for:</strong> International lead-gen with niche-aware pricing<br />
+          <strong>Limitations:</strong> No mobile-only filter; subscription pricing locks tier features behind upgrades; thin TCPA content
         </p>
 
         <p>
@@ -470,15 +470,15 @@ export default function BestGoogleMapsScrapersPage() {
         <h2 className="text-3xl font-bold mt-12">#6 Lobstr.io — Best for Reviews + Lead Hybrid</h2>
 
         <p>
-          🛠️ <strong>Features:</strong> Reviews-specific scraping ($1/1k reviews), multi-source (LinkedIn, Yelp, Vinted), strong dev/ops blog<br />
-          🔖 <strong>Type:</strong> Multi-source scraper<br />
-          🗂️ <strong>Data fields:</strong> 49+ attributes per record (Google Maps Leads scraper)<br />
-          📞 <strong>Owner mobile coverage:</strong> ~10%<br />
-          💰 <strong>Pricing:</strong> $20-$500/month subscription, $0.25-$3 per 1k results<br />
+          <strong>Features:</strong> Reviews-specific scraping ($1/1k reviews), multi-source (LinkedIn, Yelp, Vinted), strong dev/ops blog<br />
+          <strong>Type:</strong> Multi-source scraper<br />
+          <strong>Data fields:</strong> 49+ attributes per record (Google Maps Leads scraper)<br />
+          <strong>Owner mobile coverage:</strong> ~10%<br />
+          <strong>Pricing:</strong> $20-$500/month subscription, $0.25-$3 per 1k results<br />
           🆓 <strong>Free tier:</strong> $10 credit<br />
-          ⭐ <strong>Review score:</strong> 4.9 (Capterra)<br />
-          ✅ <strong>Best for:</strong> Teams needing reviews + leads from same vendor<br />
-          ⚠️ <strong>Limitations:</strong> French team, EU framing on legal content (less US-relevant); subscription model
+          <strong>Review score:</strong> 4.9 (Capterra)<br />
+          <strong>Best for:</strong> Teams needing reviews + leads from same vendor<br />
+          <strong>Limitations:</strong> French team, EU framing on legal content (less US-relevant); subscription model
         </p>
 
         <p>
@@ -490,57 +490,57 @@ export default function BestGoogleMapsScrapersPage() {
         <h2 className="text-3xl font-bold mt-12">#7 PhantomBuster — Best for Sales Automation Suite</h2>
 
         <p>
-          🛠️ <strong>Features:</strong> 50+ "phantoms" (LinkedIn, Twitter, Facebook, Instagram, Maps), execution-time pricing<br />
-          🔖 <strong>Type:</strong> Sales automation platform<br />
-          🗂️ <strong>Data fields:</strong> Standard per phantom<br />
-          📞 <strong>Owner mobile coverage:</strong> ~9%<br />
-          💰 <strong>Pricing:</strong> $56-$352/month (execution-time tiered)<br />
+          <strong>Features:</strong> 50+ "phantoms" (LinkedIn, Twitter, Facebook, Instagram, Maps), execution-time pricing<br />
+          <strong>Type:</strong> Sales automation platform<br />
+          <strong>Data fields:</strong> Standard per phantom<br />
+          <strong>Owner mobile coverage:</strong> ~9%<br />
+          <strong>Pricing:</strong> $56-$352/month (execution-time tiered)<br />
           🆓 <strong>Free tier:</strong> 14-day trial<br />
-          ⭐ <strong>Review score:</strong> 4.4 (G2, 200+ reviews)<br />
-          ✅ <strong>Best for:</strong> Sales teams running multi-channel outbound automation<br />
-          ⚠️ <strong>Limitations:</strong> Google Maps is one of 50+ phantoms (not a specialty); execution-time pricing is opaque
+          <strong>Review score:</strong> 4.4 (G2, 200+ reviews)<br />
+          <strong>Best for:</strong> Sales teams running multi-channel outbound automation<br />
+          <strong>Limitations:</strong> Google Maps is one of 50+ phantoms (not a specialty); execution-time pricing is opaque
         </p>
 
         <h2 className="text-3xl font-bold mt-12">#8 Octoparse — Best Visual No-Code</h2>
 
         <p>
-          🛠️ <strong>Features:</strong> Point-and-click visual scraper builder, pre-built Google Maps templates (updated 2026), cloud + desktop<br />
-          🔖 <strong>Type:</strong> No-code visual scraper<br />
-          🗂️ <strong>Data fields:</strong> Configurable per template<br />
-          📞 <strong>Owner mobile coverage:</strong> ~8%<br />
-          💰 <strong>Pricing:</strong> $75-$249/month<br />
+          <strong>Features:</strong> Point-and-click visual scraper builder, pre-built Google Maps templates (updated 2026), cloud + desktop<br />
+          <strong>Type:</strong> No-code visual scraper<br />
+          <strong>Data fields:</strong> Configurable per template<br />
+          <strong>Owner mobile coverage:</strong> ~8%<br />
+          <strong>Pricing:</strong> $75-$249/month<br />
           🆓 <strong>Free tier:</strong> Yes, limited<br />
-          ⭐ <strong>Review score:</strong> 4.2 (G2)<br />
-          ✅ <strong>Best for:</strong> Non-developers learning to scrape<br />
-          ⚠️ <strong>Limitations:</strong> Desktop-first feel; subscription model; no mobile-only filter
+          <strong>Review score:</strong> 4.2 (G2)<br />
+          <strong>Best for:</strong> Non-developers learning to scrape<br />
+          <strong>Limitations:</strong> Desktop-first feel; subscription model; no mobile-only filter
         </p>
 
         <h2 className="text-3xl font-bold mt-12">#9 MapScraping — Best Pure-Maps Specialist</h2>
 
         <p>
-          🛠️ <strong>Features:</strong> Pure Google Maps focus, simple UI<br />
-          🔖 <strong>Type:</strong> Specialist SaaS<br />
-          🗂️ <strong>Data fields:</strong> Standard Google Maps<br />
-          📞 <strong>Owner mobile coverage:</strong> ~10%<br />
-          💰 <strong>Pricing:</strong> $29-$299/month<br />
+          <strong>Features:</strong> Pure Google Maps focus, simple UI<br />
+          <strong>Type:</strong> Specialist SaaS<br />
+          <strong>Data fields:</strong> Standard Google Maps<br />
+          <strong>Owner mobile coverage:</strong> ~10%<br />
+          <strong>Pricing:</strong> $29-$299/month<br />
           🆓 <strong>Free tier:</strong> Free tier exists<br />
-          ⭐ <strong>Review score:</strong> 4.5<br />
-          ✅ <strong>Best for:</strong> Light Google Maps usage<br />
-          ⚠️ <strong>Limitations:</strong> Smaller team, fewer integrations, no mobile filter, no TCPA flags
+          <strong>Review score:</strong> 4.5<br />
+          <strong>Best for:</strong> Light Google Maps usage<br />
+          <strong>Limitations:</strong> Smaller team, fewer integrations, no mobile filter, no TCPA flags
         </p>
 
         <h2 className="text-3xl font-bold mt-12">#10 Instant Data Scraper — Best Free Quick Tool</h2>
 
         <p>
-          🛠️ <strong>Features:</strong> Chrome extension, AI-powered HTML detection, 30-second setup<br />
-          🔖 <strong>Type:</strong> Browser extension<br />
-          🗂️ <strong>Data fields:</strong> Business name, address, category, rating, review count, URL (no phone or email)<br />
-          📞 <strong>Owner mobile coverage:</strong> 0% (extension doesn&rsquo;t extract phones)<br />
-          💰 <strong>Pricing:</strong> Free<br />
+          <strong>Features:</strong> Chrome extension, AI-powered HTML detection, 30-second setup<br />
+          <strong>Type:</strong> Browser extension<br />
+          <strong>Data fields:</strong> Business name, address, category, rating, review count, URL (no phone or email)<br />
+          <strong>Owner mobile coverage:</strong> 0% (extension doesn&rsquo;t extract phones)<br />
+          <strong>Pricing:</strong> Free<br />
           🆓 <strong>Free tier:</strong> Always free<br />
-          ⭐ <strong>Review score:</strong> 4.4 (Chrome Web Store)<br />
-          ✅ <strong>Best for:</strong> Ad-hoc small-volume extraction; quickly checking if a niche has volume<br />
-          ⚠️ <strong>Limitations:</strong> No phone or email extraction; flagged as malware by Windows Defender for some users
+          <strong>Review score:</strong> 4.4 (Chrome Web Store)<br />
+          <strong>Best for:</strong> Ad-hoc small-volume extraction; quickly checking if a niche has volume<br />
+          <strong>Limitations:</strong> No phone or email extraction; flagged as malware by Windows Defender for some users
         </p>
 
         {/* HOW TO CHOOSE */}

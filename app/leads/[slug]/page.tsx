@@ -118,7 +118,7 @@ export default async function LeadProgrammaticPage(props: {
         <ul className="mt-4 space-y-2 text-base">
           {page.sampleBusinesses.slice(0, 10).map((b) => (
             <li key={b.name} className="border-b py-2">
-              {b.name} — {b.rating}★ ({b.reviews} reviews)
+              {b.name} — {b.rating} ({b.reviews} reviews)
             </li>
           ))}
         </ul>

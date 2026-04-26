@@ -184,12 +184,12 @@ export default function PricingPage() {
             <p className="text-4xl font-bold mt-2">$0</p>
             <p className="text-sm text-[var(--color-text-secondary)] mt-1">50 mobiles</p>
             <ul className="text-sm mt-6 space-y-2">
-              <li>✓ 50 verified owner mobiles</li>
-              <li>✓ No credit card required</li>
-              <li>✓ No expiration</li>
-              <li>✓ Full feature set</li>
-              <li>✓ TCPA-aware export</li>
-              <li>✓ CSV / Sheets export</li>
+              <li>50 verified owner mobiles</li>
+              <li>No credit card required</li>
+              <li>No expiration</li>
+              <li>Full feature set</li>
+              <li>TCPA-aware export</li>
+              <li>CSV / Sheets export</li>
             </ul>
             <Link href="/signup" className="glass-chip mt-6 block text-center">
               Start free
@@ -202,12 +202,12 @@ export default function PricingPage() {
             <p className="text-4xl font-bold mt-2">$59</p>
             <p className="text-sm text-[var(--color-text-secondary)] mt-1">2,000 mobiles</p>
             <ul className="text-sm mt-6 space-y-2">
-              <li>✓ 2,000 verified mobiles</li>
-              <li>✓ $0.030 per mobile</li>
-              <li>✓ ~40-80 appointments at 2-4% conv.</li>
-              <li>✓ All free-tier features</li>
-              <li>✓ HubSpot / Pipedrive / Close export</li>
-              <li>✓ Email support</li>
+              <li>2,000 verified mobiles</li>
+              <li>$0.030 per mobile</li>
+              <li>~40-80 appointments at 2-4% conv.</li>
+              <li>All free-tier features</li>
+              <li>HubSpot / Pipedrive / Close export</li>
+              <li>Email support</li>
             </ul>
             <Link href="/checkout?tier=starter" className="btn-liquid mt-6 block text-center">
               Get 2,000 mobiles
@@ -223,12 +223,12 @@ export default function PricingPage() {
             <p className="text-4xl font-bold mt-2">$129</p>
             <p className="text-sm text-[var(--color-text-secondary)] mt-1">5,000 mobiles</p>
             <ul className="text-sm mt-6 space-y-2">
-              <li>✓ 5,000 verified mobiles</li>
-              <li>✓ $0.028 per mobile</li>
-              <li>✓ ~100-200 appointments</li>
-              <li>✓ All Starter features</li>
-              <li>✓ Smartlead / Instantly / Lemlist</li>
-              <li>✓ Priority support</li>
+              <li>5,000 verified mobiles</li>
+              <li>$0.028 per mobile</li>
+              <li>~100-200 appointments</li>
+              <li>All Starter features</li>
+              <li>Smartlead / Instantly / Lemlist</li>
+              <li>Priority support</li>
             </ul>
             <Link href="/checkout?tier=pro" className="btn-liquid mt-6 block text-center">
               Get 5,000 mobiles
@@ -241,12 +241,12 @@ export default function PricingPage() {
             <p className="text-4xl font-bold mt-2">$229</p>
             <p className="text-sm text-[var(--color-text-secondary)] mt-1">10,000 mobiles</p>
             <ul className="text-sm mt-6 space-y-2">
-              <li>✓ 10,000 verified mobiles</li>
-              <li>✓ $0.023 per mobile</li>
-              <li>✓ ~200-400 appointments</li>
-              <li>✓ All Pro features</li>
-              <li>✓ MCP server access</li>
-              <li>✓ Founder-direct support</li>
+              <li>10,000 verified mobiles</li>
+              <li>$0.023 per mobile</li>
+              <li>~200-400 appointments</li>
+              <li>All Pro features</li>
+              <li>MCP server access</li>
+              <li>Founder-direct support</li>
             </ul>
             <Link href="/checkout?tier=scale" className="btn-liquid mt-6 block text-center">
               Get 10,000 mobiles
@@ -346,12 +346,12 @@ export default function PricingPage() {
         {/* TRUST BADGES */}
         <div className="mt-20 grid md:grid-cols-4 gap-4 text-center">
           <div className="p-6 border rounded-xl">
-            <p className="text-3xl">🛡️</p>
+            <p className="text-3xl font-semibold text-[#1B86FF]">G</p>
             <h3 className="text-base font-bold mt-2">Stripe-secured</h3>
             <p className="text-sm text-[var(--color-text-secondary)]">PCI-compliant payments</p>
           </div>
           <div className="p-6 border rounded-xl">
-            <p className="text-3xl">⚖️</p>
+            <p className="text-3xl font-semibold text-[#1B86FF]">L</p>
             <h3 className="text-base font-bold mt-2">TCPA-aware export</h3>
             <p className="text-sm text-[var(--color-text-secondary)]">DNC + line-type flags built in</p>
           </div>

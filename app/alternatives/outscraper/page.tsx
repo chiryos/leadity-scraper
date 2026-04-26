@@ -307,13 +307,13 @@ export default function OutscraperAlternativePage() {
               </tr>
               <tr>
                 <td>Mobile-only filter</td>
-                <td>✅ Verified mobile-only</td>
-                <td>❌ Returns landlines + mobiles mixed</td>
+                <td>Verified mobile-only</td>
+                <td>Returns landlines + mobiles mixed</td>
               </tr>
               <tr>
                 <td>US-only data</td>
-                <td>✅ Built for US cold callers</td>
-                <td>❌ Global, no US specialization</td>
+                <td>Built for US cold callers</td>
+                <td>Global, no US specialization</td>
               </tr>
               <tr>
                 <td>Pricing model</td>
@@ -337,8 +337,8 @@ export default function OutscraperAlternativePage() {
               </tr>
               <tr>
                 <td>TCPA-aware export</td>
-                <td>✅ DNC + line-type flags built in</td>
-                <td>❌ Raw data only</td>
+                <td>DNC + line-type flags built in</td>
+                <td>Raw data only</td>
               </tr>
               <tr>
                 <td>Categories</td>
@@ -362,8 +362,8 @@ export default function OutscraperAlternativePage() {
               </tr>
               <tr>
                 <td>MCP server (AI agents)</td>
-                <td>✅ mcp.leadity.io</td>
-                <td>❌</td>
+                <td>mcp.leadity.io</td>
+                <td></td>
               </tr>
               <tr>
                 <td>Last updated</td>

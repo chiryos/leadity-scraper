@@ -206,43 +206,43 @@ export default function GoogleMapsScraperPage() {
               <tr>
                 <td><strong>Leadity</strong></td>
                 <td>US B2B cold-call</td>
-                <td>✅</td>
-                <td>✅</td>
+                <td></td>
+                <td></td>
                 <td>$59 (2,000)</td>
               </tr>
               <tr>
                 <td>Apify</td>
                 <td>General + custom workflows</td>
-                <td>❌</td>
-                <td>❌</td>
+                <td></td>
+                <td></td>
                 <td>$5 credit</td>
               </tr>
               <tr>
                 <td>Outscraper</td>
                 <td>Multi-platform suite</td>
-                <td>❌</td>
-                <td>❌</td>
+                <td></td>
+                <td></td>
                 <td>$29 (500 credits)</td>
               </tr>
               <tr>
                 <td>Bright Data</td>
                 <td>Enterprise scale</td>
-                <td>❌</td>
-                <td>❌</td>
+                <td></td>
+                <td></td>
                 <td>~$1.27/1k</td>
               </tr>
               <tr>
                 <td>Octoparse</td>
                 <td>No-code visual</td>
-                <td>❌</td>
-                <td>❌</td>
+                <td></td>
+                <td></td>
                 <td>$75/month</td>
               </tr>
               <tr>
                 <td>Lobstr.io</td>
                 <td>Reviews-specific</td>
-                <td>❌</td>
-                <td>❌</td>
+                <td></td>
+                <td></td>
                 <td>$20/month</td>
               </tr>
             </tbody>

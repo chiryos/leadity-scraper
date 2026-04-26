@@ -331,9 +331,9 @@ export default function CPLCalculatorPage() {
 
         <h2 className="text-2xl font-bold mt-12">Related tools</h2>
         <ul className="mt-4 space-y-1">
-          <li>🛠️ <Link href="/tools/tcpa-risk-checker">TCPA Risk Checker</Link></li>
-          <li>🛠️ <Link href="/tools/cold-call-script-generator">Cold Call Script Generator</Link></li>
-          <li>🛠️ <Link href="/tools/coverage-map">US Owner Mobile Coverage Map</Link></li>
+          <li><Link href="/tools/tcpa-risk-checker">TCPA Risk Checker</Link></li>
+          <li><Link href="/tools/cold-call-script-generator">Cold Call Script Generator</Link></li>
+          <li><Link href="/tools/coverage-map">US Owner Mobile Coverage Map</Link></li>
         </ul>
       </section>
     </div>

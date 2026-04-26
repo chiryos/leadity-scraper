@@ -93,11 +93,11 @@ export default function CompliancePage() {
             The 30-second compliance checklist
           </p>
           <ul className="mt-3 space-y-2 text-sm">
-            <li>✓ Scrub against the National DNC Registry before every campaign</li>
-            <li>✓ Filter to mobile-only (or know which numbers are mobiles)</li>
-            <li>✓ Check state-specific opt-in rules (FL, WA, OK most strict)</li>
-            <li>✓ Honor opt-outs immediately — store DNC list internally</li>
-            <li>✓ Keep records of consent for any contact with prior relationship</li>
+            <li>Scrub against the National DNC Registry before every campaign</li>
+            <li>Filter to mobile-only (or know which numbers are mobiles)</li>
+            <li>Check state-specific opt-in rules (FL, WA, OK most strict)</li>
+            <li>Honor opt-outs immediately — store DNC list internally</li>
+            <li>Keep records of consent for any contact with prior relationship</li>
           </ul>
         </div>
 
