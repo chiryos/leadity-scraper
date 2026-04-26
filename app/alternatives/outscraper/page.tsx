@@ -23,6 +23,7 @@ import Link from 'next/link'
 import { Nav } from "@/components/nav"
 import { Footer } from "@/components/footer"
 import { SignupPopup } from "@/components/signup-popup"
+import { Reveal } from "@/components/reveal"
 
 // =============================================================================
 // METADATA — Open Graph, Twitter, canonical
@@ -255,43 +256,48 @@ export default function OutscraperAlternativePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
       />
 
-      <article className="prose mx-auto max-w-4xl px-6 py-20 dark:prose-invert">
+      <article className="container-page section-py mx-auto max-w-4xl">
         {/* ===================================================================
             HERO — H1 + AI-citable direct answer
             ================================================================ */}
 
-        <nav aria-label="Breadcrumb" className="text-sm text-[var(--color-text-secondary)] mb-6">
-          <Link href="/">Home</Link> / <Link href="/alternatives">Alternatives</Link> /{' '}
+        <nav aria-label="Breadcrumb" className="text-sm text-[var(--color-text-secondary)] mb-8">
+          <Link href="/" className="hover:underline">Home</Link>
+          <span className="mx-2">/</span>
+          <Link href="/alternatives" className="hover:underline">Alternatives</Link>
+          <span className="mx-2">/</span>
           <span>Outscraper</span>
         </nav>
 
-        <h1 className="text-5xl font-bold tracking-tight">
-          Outscraper Alternative for US Cold Callers — Why Leadity Returns{' '}
-          <span className="text-brand-gradient">10× More Owner Mobiles</span>
-        </h1>
+        <Reveal>
+          <h1 className="text-h2 text-balance font-semibold text-[var(--color-text-primary)]">
+            Outscraper alternative for US cold callers —{' '}
+            <span className="text-brand-gradient">10× more owner mobiles.</span>
+          </h1>
 
-        {/* The 50-80 word direct-answer paragraph — placed for AIO extraction */}
-        <p className="lead text-xl text-[var(--color-text-secondary)] mt-6">
-          Leadity is a purpose-built Outscraper alternative for teams who cold-call or
-          cold-SMS US local businesses. Where Outscraper is a broad 23-scraper suite
-          returning mostly receptionist landlines, Leadity does one thing — extract
-          and verify <strong>owner-direct mobile numbers</strong> across 1,255+ US
-          business categories — with TCPA-aware export flags, flat pay-as-you-go
-          pricing from $59, and a free tier of 50 verified mobiles.
-        </p>
+          {/* The 50-80 word direct-answer paragraph — placed for AIO extraction */}
+          <p className="mt-8 text-[18px] md:text-[20px] leading-[1.55] text-[var(--color-text-secondary)]">
+            Leadity is a purpose-built Outscraper alternative for teams who cold-call or
+            cold-SMS US local businesses. Where Outscraper is a broad 23-scraper suite
+            returning mostly receptionist landlines, Leadity does one thing — extract
+            and verify <strong className="text-[var(--color-text-primary)]">owner-direct mobile numbers</strong> across 1,255+ US
+            business categories — with TCPA-aware export flags, flat pay-as-you-go
+            pricing from $59, and a free tier of 50 verified mobiles.
+          </p>
 
-        <p className="text-sm text-[var(--color-text-secondary)] mt-2">
-          By Vincent Chiriac, Founder · Last updated April 2026 · 12-min read
-        </p>
+          <p className="text-[13px] text-[var(--color-text-muted)] mt-4">
+            By Vincent Chiriac, Founder · Last updated April 2026 · 12-min read
+          </p>
+        </Reveal>
 
         {/* ===================================================================
             AT-A-GLANCE COMPARISON TABLE — placed early for AI extraction
             ================================================================ */}
 
-        <h2 className="text-3xl font-bold mt-16">Leadity vs Outscraper at a glance</h2>
+        <h2 className="text-[28px] md:text-[34px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mt-20">Leadity vs Outscraper at a glance</h2>
 
-        <div className="overflow-x-auto mt-6">
-          <table className="w-full">
+        <div className="glass-card rounded-3xl p-6 md:p-8 mt-8 overflow-x-auto">
+          <table className="w-full text-[14px] md:text-[15px]">
             <thead>
               <tr>
                 <th>Feature</th>
@@ -378,7 +384,7 @@ export default function OutscraperAlternativePage() {
             WHY YOU NEED AN OUTSCRAPER ALTERNATIVE
             ================================================================ */}
 
-        <h2 className="text-3xl font-bold mt-16">Why teams switch from Outscraper</h2>
+        <h2 className="text-[28px] md:text-[34px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mt-20">Why teams switch from Outscraper</h2>
 
         <p>
           Outscraper is the dominant Google Maps scraper by traffic — ~151,000
@@ -420,7 +426,7 @@ export default function OutscraperAlternativePage() {
             OUTSCRAPER WALKTHROUGH (honesty section)
             ================================================================ */}
 
-        <h2 className="text-3xl font-bold mt-16">Outscraper: where it genuinely wins</h2>
+        <h2 className="text-[28px] md:text-[34px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mt-20">Outscraper: where it genuinely wins</h2>
         <p>
           We have to be honest about what Outscraper does well, because if your use
           case fits, Outscraper is the right tool — not Leadity.
@@ -449,7 +455,7 @@ export default function OutscraperAlternativePage() {
             LEADITY: THE OWNER MOBILE SPECIALIST
             ================================================================ */}
 
-        <h2 className="text-3xl font-bold mt-16">Leadity: the US owner-mobile specialist</h2>
+        <h2 className="text-[28px] md:text-[34px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mt-20">Leadity: the US owner-mobile specialist</h2>
         <p>
           Leadity does one thing. We extract verified owner-direct mobile numbers
           from US local businesses, with TCPA-aware export flags, at flat pricing.
@@ -470,15 +476,15 @@ export default function OutscraperAlternativePage() {
             DATA COMPARISON — the numeric proof
             ================================================================ */}
 
-        <h2 className="text-3xl font-bold mt-16">Tested on 5,000 plumbers in Texas</h2>
+        <h2 className="text-[28px] md:text-[34px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mt-20">Tested on 5,000 plumbers in Texas</h2>
         <p>
           We ran an identical query — "plumbers in Texas, businesses with phone
           numbers" — through Outscraper and Leadity in March 2026. Here's what came
           back:
         </p>
 
-        <div className="overflow-x-auto mt-6">
-          <table className="w-full">
+        <div className="glass-card rounded-3xl p-6 md:p-8 mt-8 overflow-x-auto">
+          <table className="w-full text-[14px] md:text-[15px]">
             <thead>
               <tr>
                 <th>Metric</th>
@@ -539,7 +545,7 @@ export default function OutscraperAlternativePage() {
             PRICING ARITHMETIC
             ================================================================ */}
 
-        <h2 className="text-3xl font-bold mt-16">The pricing math, step by step</h2>
+        <h2 className="text-[28px] md:text-[34px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mt-20">The pricing math, step by step</h2>
         <p>
           Outscraper's pricing page advertises "$3 per 1,000 records" — but that's
           the baseline before enrichment. Each additional field (email, phone
@@ -571,7 +577,7 @@ export default function OutscraperAlternativePage() {
             VERDICT — when to choose each
             ================================================================ */}
 
-        <h2 className="text-3xl font-bold mt-16">When Leadity is the right choice</h2>
+        <h2 className="text-[28px] md:text-[34px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mt-20">When Leadity is the right choice</h2>
         <ul>
           <li>You cold-call or cold-SMS US local SMBs (agencies, insurance, solar, roofing, HVAC, pest control, real estate)</li>
           <li>You&rsquo;ve hit the wall where 80%+ of \"phone numbers\" you paid for turn out to be receptionist landlines</li>
@@ -581,7 +587,7 @@ export default function OutscraperAlternativePage() {
           <li>You&rsquo;re building agentic AI workflows and want native MCP server access</li>
         </ul>
 
-        <h2 className="text-3xl font-bold mt-16">When to stick with Outscraper</h2>
+        <h2 className="text-[28px] md:text-[34px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mt-20">When to stick with Outscraper</h2>
         <ul>
           <li>You need a full 23-tool scraping suite in one vendor (YouTube comments, Reddit subreddits, TripAdvisor reviews, Amazon)</li>
           <li>You&rsquo;re already on an <a href="https://appsumo.com" rel="nofollow noopener">AppSumo</a> lifetime deal and your usage is light</li>
@@ -594,7 +600,7 @@ export default function OutscraperAlternativePage() {
             CUSTOMER STORY — the testimonial
             ================================================================ */}
 
-        <h2 className="text-3xl font-bold mt-16">Real numbers: a cold-call team switching over</h2>
+        <h2 className="text-[28px] md:text-[34px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mt-20">Real numbers: a cold-call team switching over</h2>
         <blockquote className="border-l-4 border-[#1B86FF] pl-6 italic my-8">
           <p className="text-lg">
             "We ran 16,000 leads through Outscraper last quarter and found about 500
@@ -611,16 +617,16 @@ export default function OutscraperAlternativePage() {
             CTA BLOCK
             ================================================================ */}
 
-        <div className="mt-16 rounded-2xl bg-[rgba(27,134,255,0.05)] p-8 text-center">
+        <div className="glass-card mt-20 rounded-3xl p-8 md:p-10 text-center">
           <h3 className="text-2xl font-bold">Try Leadity for 50 US owner mobiles, free</h3>
           <p className="mt-2 text-[var(--color-text-secondary)]">
             No credit card. Tag-checked for line type. Refunds on any bad number we ship.
           </p>
           <div className="mt-6 flex gap-4 justify-center">
-            <Link href="/pricing" className="btn-liquid inline-block">
+            <Link href="/pricing" className="btn-liquid inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[15px] font-semibold">
               Start free · 50 mobiles
             </Link>
-            <a href="https://outscraper.com" rel="nofollow noopener" className="glass-chip inline-block">
+            <a href="https://outscraper.com" rel="nofollow noopener" className="glass-chip inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[15px]">
               Visit Outscraper
             </a>
           </div>
@@ -630,10 +636,10 @@ export default function OutscraperAlternativePage() {
             FAQ SECTION (mirrors JSON-LD above)
             ================================================================ */}
 
-        <h2 className="text-3xl font-bold mt-16">Frequently asked questions</h2>
+        <h2 className="text-[28px] md:text-[34px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mt-20">Frequently asked questions</h2>
 
-        <details className="mt-6 rounded-lg border p-4">
-          <summary className="font-semibold cursor-pointer">
+        <details className="glass-card mt-8 rounded-2xl px-5 md:px-6 py-4">
+          <summary className="font-medium cursor-pointer text-[15px] md:text-[16px] py-1 list-none [&::-webkit-details-marker]:hidden">
             What is the best Outscraper alternative for cold callers in 2026?
           </summary>
           <p className="mt-2">
@@ -647,8 +653,8 @@ export default function OutscraperAlternativePage() {
           </p>
         </details>
 
-        <details className="mt-4 rounded-lg border p-4">
-          <summary className="font-semibold cursor-pointer">
+        <details className="glass-card mt-3 rounded-2xl px-5 md:px-6 py-4">
+          <summary className="font-medium cursor-pointer text-[15px] md:text-[16px] py-1 list-none [&::-webkit-details-marker]:hidden">
             How does Leadity pricing compare to Outscraper?
           </summary>
           <p className="mt-2">
@@ -660,8 +666,8 @@ export default function OutscraperAlternativePage() {
           </p>
         </details>
 
-        <details className="mt-4 rounded-lg border p-4">
-          <summary className="font-semibold cursor-pointer">
+        <details className="glass-card mt-3 rounded-2xl px-5 md:px-6 py-4">
+          <summary className="font-medium cursor-pointer text-[15px] md:text-[16px] py-1 list-none [&::-webkit-details-marker]:hidden">
             Does Leadity return mobile numbers or landlines?
           </summary>
           <p className="mt-2">
@@ -671,8 +677,8 @@ export default function OutscraperAlternativePage() {
           </p>
         </details>
 
-        <details className="mt-4 rounded-lg border p-4">
-          <summary className="font-semibold cursor-pointer">Is Leadity TCPA compliant?</summary>
+        <details className="glass-card mt-3 rounded-2xl px-5 md:px-6 py-4">
+          <summary className="font-medium cursor-pointer text-[15px] md:text-[16px] py-1 list-none [&::-webkit-details-marker]:hidden">Is Leadity TCPA compliant?</summary>
           <p className="mt-2">
             Leadity delivers data; TCPA compliance lives in how you use it. We
             provide TCPA-aware export flags (DNC status, line-type classification,
@@ -682,8 +688,8 @@ export default function OutscraperAlternativePage() {
           </p>
         </details>
 
-        <details className="mt-4 rounded-lg border p-4">
-          <summary className="font-semibold cursor-pointer">
+        <details className="glass-card mt-3 rounded-2xl px-5 md:px-6 py-4">
+          <summary className="font-medium cursor-pointer text-[15px] md:text-[16px] py-1 list-none [&::-webkit-details-marker]:hidden">
             When should I choose Outscraper over Leadity?
           </summary>
           <p className="mt-2">
@@ -694,8 +700,8 @@ export default function OutscraperAlternativePage() {
           </p>
         </details>
 
-        <details className="mt-4 rounded-lg border p-4">
-          <summary className="font-semibold cursor-pointer">
+        <details className="glass-card mt-3 rounded-2xl px-5 md:px-6 py-4">
+          <summary className="font-medium cursor-pointer text-[15px] md:text-[16px] py-1 list-none [&::-webkit-details-marker]:hidden">
             How does Leadity verify mobile numbers?
           </summary>
           <p className="mt-2">
@@ -705,8 +711,8 @@ export default function OutscraperAlternativePage() {
           </p>
         </details>
 
-        <details className="mt-4 rounded-lg border p-4">
-          <summary className="font-semibold cursor-pointer">
+        <details className="glass-card mt-3 rounded-2xl px-5 md:px-6 py-4">
+          <summary className="font-medium cursor-pointer text-[15px] md:text-[16px] py-1 list-none [&::-webkit-details-marker]:hidden">
             Does Leadity offer a free trial?
           </summary>
           <p className="mt-2">
@@ -715,8 +721,8 @@ export default function OutscraperAlternativePage() {
           </p>
         </details>
 
-        <details className="mt-4 rounded-lg border p-4">
-          <summary className="font-semibold cursor-pointer">
+        <details className="glass-card mt-3 rounded-2xl px-5 md:px-6 py-4">
+          <summary className="font-medium cursor-pointer text-[15px] md:text-[16px] py-1 list-none [&::-webkit-details-marker]:hidden">
             Can I integrate Leadity with my CRM and dialer?
           </summary>
           <p className="mt-2">
@@ -730,7 +736,7 @@ export default function OutscraperAlternativePage() {
             RELATED LINKS — internal linking for topical authority
             ================================================================ */}
 
-        <h2 className="text-3xl font-bold mt-16">You might also compare</h2>
+        <h2 className="text-[28px] md:text-[34px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mt-20">You might also compare</h2>
         <ul>
           <li><Link href="/alternatives/apify">Leadity vs Apify</Link></li>
           <li><Link href="/alternatives/scrap-io">Leadity vs Scrap.io</Link></li>

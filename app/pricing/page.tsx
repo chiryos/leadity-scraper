@@ -1,439 +1,370 @@
 /**
- * /pricing — Full page
+ * /pricing — dedicated pricing route, v1-styled rewrite
  *
- * Drop into: app/pricing/page.tsx
+ * Reuses the existing <Pricing /> component (toggle + 3-card grid + mobile
+ * accordion, all glass-brand for Growth, glass-chip-ringed for Starter/Scale).
+ * Adds a hero, a cost-per-usable-mobile glass-card strip, an 8-question
+ * glass-card FAQ accordion, and a closing CTA — all in v1 design language.
  *
- * The #1 conversion page after homepage. Must be optimized for:
- * - Decision-stage buyers (already convinced of value)
- * - Comparison-stage buyers (vs Outscraper credit math)
- * - Trust signals (refund, no card, transparent pricing)
- *
- * Schema: Product + Offer (multiple) + AggregateRating + FAQPage + BreadcrumbList
+ * Schema: Product (with AggregateOffer + AggregateRating) + FAQPage +
+ * BreadcrumbList. The Product schema is the SERP rich-snippet weapon —
+ * star rating + price range surface in Google results.
  */
 
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { Nav } from "@/components/nav"
-import { Footer } from "@/components/footer"
-import { SignupPopup } from "@/components/signup-popup"
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Nav } from "@/components/nav";
+import { Footer } from "@/components/footer";
+import { SignupPopup } from "@/components/signup-popup";
+import { Reveal } from "@/components/reveal";
+import { Pricing as PricingSection } from "@/components/pricing";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export const metadata: Metadata = {
-  title: 'Pricing — Flat $59 for 2,000 Verified Owner Mobiles | Leadity',
+  title:
+    "Pricing — Flat $59 for 2,000 Verified Owner Mobiles | Leadity",
   description:
-    'Simple flat pricing. No credits, no per-task multipliers, no surprises. $59 for 2,000 US owner mobiles, $129 for 5,000, $229 for 10,000. Free tier: 50 mobiles, no credit card.',
-  alternates: { canonical: 'https://leadity.io/pricing' },
+    "Simple flat pricing. No credits, no per-task multipliers, no surprises. $59 for 2,000 US owner mobiles, $129 for 5,000, $229 for 10,000. Free tier: 50 mobiles, no credit card.",
+  alternates: { canonical: "https://leadity.io/pricing" },
   openGraph: {
-    title: 'Leadity Pricing — Flat $59 for 2,000 Verified Owner Mobiles',
-    description: 'No credits. No surprises. The pay-as-you-go alternative to Outscraper credit math.',
-    type: 'website',
-    url: 'https://leadity.io/pricing',
+    title: "Leadity Pricing — Flat $59 for 2,000 Verified Owner Mobiles",
+    description:
+      "No credits. No surprises. The pay-as-you-go alternative to Outscraper credit math.",
+    type: "website",
+    url: "https://leadity.io/pricing",
   },
-}
+};
 
 const pageSchema = {
-  '@context': 'https://schema.org',
-  '@graph': [
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      '@type': 'Product',
-      '@id': 'https://leadity.io/pricing#product',
-      name: 'Leadity — US Owner Mobile Numbers',
-      description: 'Verified owner-direct mobile phone numbers from US local businesses across 1,255+ categories.',
-      brand: { '@id': 'https://leadity.io/#organization' },
+      "@type": "Product",
+      "@id": "https://leadity.io/pricing#product",
+      name: "Leadity — US Owner Mobile Numbers",
+      description:
+        "Verified owner-direct mobile phone numbers from US local businesses across 1,255+ categories.",
+      brand: { "@id": "https://leadity.io/#organization" },
       offers: {
-        '@type': 'AggregateOffer',
-        lowPrice: '0',
-        highPrice: '229',
-        priceCurrency: 'USD',
+        "@type": "AggregateOffer",
+        lowPrice: "0",
+        highPrice: "229",
+        priceCurrency: "USD",
         offerCount: 4,
-        availability: 'https://schema.org/InStock',
+        availability: "https://schema.org/InStock",
       },
       aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        ratingCount: '47',
-        bestRating: '5',
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        ratingCount: "47",
+        bestRating: "5",
       },
     },
     {
-      '@type': 'FAQPage',
+      "@type": "FAQPage",
       mainEntity: [
         {
-          '@type': 'Question',
-          name: 'Why does Leadity charge per mobile instead of per record?',
+          "@type": "Question",
+          name: "Why does Leadity charge per mobile instead of per record?",
           acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'We charge for verified mobiles only. If we can&rsquo;t find a verified mobile for a business, you don&rsquo;t pay for it. This makes pricing predictable and aligned with what cold-call teams actually need: usable mobiles, not raw records mixing landlines and mobiles. Generic scrapers like Outscraper charge per record (regardless of phone availability or line type), so your real cost per usable mobile is 3-5× higher than the headline price.',
+            "@type": "Answer",
+            text: "We charge for verified mobiles only. If we can't find a verified mobile for a business, you don't pay for it. Generic scrapers like Outscraper charge per record regardless of phone availability or line type, so your real cost per usable mobile ends up 3-5x higher than the headline price.",
           },
         },
         {
-          '@type': 'Question',
-          name: 'What&rsquo;s included in the free tier?',
+          "@type": "Question",
+          name: "What's included in the free tier?",
           acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'The free tier includes 50 verified owner mobile numbers, no credit card required, no expiration. You get the full feature set: niche × geo filtering, 1,255+ business categories, TCPA-aware export with DNC + line-type flags, CSV/Sheets export. The free tier is enough to test data quality on a small batch before committing to a paid tier.',
+            "@type": "Answer",
+            text: "50 verified owner mobile numbers, no credit card, no expiration. Full feature set: niche x geo filtering, 1,255+ categories, TCPA-aware export with DNC + line-type flags, CSV/Sheets export.",
           },
         },
         {
-          '@type': 'Question',
-          name: 'Do credits or unused mobiles expire?',
+          "@type": "Question",
+          name: "Do credits or unused mobiles expire?",
           acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Leadity does not use a credit system. When you purchase a tier (2,000 / 5,000 / 10,000 mobiles), the mobiles are delivered as a CSV export to your dashboard. There&rsquo;s no concept of expiring credits. The free tier 50 mobiles are also non-expiring.',
+            "@type": "Answer",
+            text: "Leadity does not use a credit system. When you purchase a tier (2,000 / 5,000 / 10,000 mobiles), the mobiles are delivered as a CSV export to your dashboard. No expiry concept.",
           },
         },
         {
-          '@type': 'Question',
-          name: 'What&rsquo;s your refund policy?',
+          "@type": "Question",
+          name: "What's your refund policy?",
           acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'We refund any number that fails our quality guarantee within 7 days of delivery. Quality guarantee covers: line-type accuracy (mobile vs landline), DNC scrubbing accuracy, geographic accuracy. If a record we delivered as "mobile" turns out to be a landline, we refund that record. If a number was on the National DNC at time of export, we refund. Submit refund requests via the dashboard or hello@leadity.io.',
+            "@type": "Answer",
+            text: "7-day refund on any record that fails our quality guarantee — wrong line type, DNC-listed at time of export, or geographic mismatch. Submit refund requests via the dashboard or hello@leadity.io.",
           },
         },
         {
-          '@type': 'Question',
-          name: 'Do you offer enterprise pricing or volume discounts?',
+          "@type": "Question",
+          name: "Do you offer enterprise pricing or volume discounts?",
           acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'For volumes above 10,000 mobiles per request or recurring monthly purchases, contact us via hello@leadity.io. We offer custom enterprise pricing with annual contracts, dedicated success manager, custom integrations, and SLA guarantees. Typical enterprise ranges: 50,000-500,000 mobiles per quarter.',
+            "@type": "Answer",
+            text: "For volumes above 10,000 mobiles per request or recurring monthly purchases, contact us via hello@leadity.io. Enterprise plans include annual contracts, dedicated success manager, custom integrations, and SLA guarantees.",
           },
         },
         {
-          '@type': 'Question',
-          name: 'Can I cancel anytime?',
+          "@type": "Question",
+          name: "Can I cancel anytime?",
           acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'There&rsquo;s nothing to cancel — Leadity is pay-as-you-go, not subscription. You purchase a tier (2k / 5k / 10k), receive the data, and that&rsquo;s the entire transaction. No recurring billing, no subscription to cancel, no contracts.',
+            "@type": "Answer",
+            text: "There's nothing to cancel — Leadity is pay-as-you-go, not subscription. You purchase a tier, receive the data, and that's the entire transaction. No recurring billing.",
           },
         },
         {
-          '@type': 'Question',
-          name: 'What payment methods do you accept?',
+          "@type": "Question",
+          name: "What payment methods do you accept?",
           acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Credit cards (Visa, Mastercard, American Express, Discover) via Stripe. ACH transfer for enterprise plans. Currently US-only billing. Crypto payments coming Q3 2026.',
+            "@type": "Answer",
+            text: "Credit cards (Visa, Mastercard, American Express, Discover) via Stripe. ACH transfer for enterprise plans. Currently US-only billing.",
           },
         },
         {
-          '@type': 'Question',
-          name: 'How does Leadity&rsquo;s pricing compare to Outscraper, Apollo, and ZoomInfo?',
+          "@type": "Question",
+          name: "How does Leadity's pricing compare to Outscraper, Apollo, and ZoomInfo?",
           acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Outscraper: $3 per 1,000 records baseline + enrichment multipliers. Real cost per usable mobile: ~$0.10. Apollo: $49-$99/user/month subscription with weak SMB mobile coverage. Per usable SMB mobile: $0.50-$2+. ZoomInfo: enterprise pricing $15K-$50K/year, weak SMB. Leadity: flat $0.027 per verified mobile. For US B2B cold-call use cases targeting local SMBs, Leadity is 4-50× cheaper per usable mobile.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Is there tax / VAT?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'US customers: state sales tax applies based on billing address (Stripe handles automatically). International customers: VAT/GST may apply per local regulations. Tax is shown at checkout before payment.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Can I get an invoice for accounting?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Yes. Stripe-generated invoices are emailed automatically after each purchase. Custom enterprise invoices with PO numbers available on request via hello@leadity.io.',
+            "@type": "Answer",
+            text: "Leadity: $59 for 2,000 verified mobiles ($0.027 per usable mobile). Outscraper: $3 per 1,000 records but ~8.5% mobile coverage (real cost ~$0.10 per usable). Apollo: $99/user/month with ~10% SMB coverage. ZoomInfo: $15K-$30K annual contract for SMB plan with ~12% local SMB coverage. Leadity is roughly 5-10x cheaper per usable mobile in the SMB space.",
           },
         },
       ],
     },
     {
-      '@type': 'BreadcrumbList',
+      "@type": "BreadcrumbList",
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://leadity.io' },
-        { '@type': 'ListItem', position: 2, name: 'Pricing', item: 'https://leadity.io/pricing' },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://leadity.io" },
+        { "@type": "ListItem", position: 2, name: "Pricing", item: "https://leadity.io/pricing" },
       ],
     },
   ],
-}
+};
+
+const pricingFaqs = [
+  {
+    q: "Why does Leadity charge per mobile instead of per record?",
+    a: "We charge for verified mobiles only. If we can't find a verified mobile for a business, you don't pay for it. Generic scrapers like Outscraper charge per record regardless of phone availability — your real cost per usable mobile ends up 3-5× higher than the headline.",
+  },
+  {
+    q: "What's included in the free tier?",
+    a: "50 verified owner mobile numbers, no credit card, no expiration. Full feature set: niche × geo filtering, 1,255+ categories, TCPA-aware export with DNC + line-type flags, CSV/Sheets export.",
+  },
+  {
+    q: "Do credits or unused mobiles expire?",
+    a: "Leadity doesn't use credits. When you purchase a tier, mobiles are delivered as a CSV to your dashboard. No expiry concept — you keep what you bought.",
+  },
+  {
+    q: "What's your refund policy?",
+    a: "7-day refund on any record that fails our quality guarantee — wrong line type, DNC-listed at time of export, or geographic mismatch. Refund requests via dashboard or hello@leadity.io.",
+  },
+  {
+    q: "Do you offer enterprise or volume pricing?",
+    a: "Yes — for volumes above 10K mobiles per request or recurring monthly buys. Reach hello@leadity.io for custom contract, dedicated success manager, SLA guarantees, custom integrations.",
+  },
+  {
+    q: "Can I cancel anytime?",
+    a: "Nothing to cancel — pay-as-you-go, not subscription. Purchase a tier, receive the data, transaction complete.",
+  },
+  {
+    q: "Which payment methods do you accept?",
+    a: "Credit cards (Visa, Mastercard, Amex, Discover) via Stripe. ACH for enterprise. US-only billing for now.",
+  },
+  {
+    q: "How does pricing compare to Outscraper / Apollo / ZoomInfo?",
+    a: "Leadity: $0.027 per usable mobile flat. Outscraper: ~$0.10 per usable mobile (after the ~8.5% mobile coverage hit). Apollo: $0.50–$2+ on local SMB (~10% mobile coverage). ZoomInfo: $15K–$30K annual contract, ~12% local SMB coverage. We're 5-10× cheaper for SMB outreach.",
+  },
+];
+
+const costComparison = [
+  { tool: "Leadity", headline: "$59 / 2,000", coverage: "84.6%", real: "$0.027", isUs: true },
+  { tool: "Outscraper", headline: "$3 / 1,000 records", coverage: "~8.5%", real: "~$0.10" },
+  { tool: "Apify", headline: "$2.10 / 1,000 places", coverage: "~12%", real: "~$0.022 (no TCPA)" },
+  { tool: "Apollo", headline: "$99/user/month", coverage: "~10%", real: "~$0.50–$2+" },
+  { tool: "Pay-per-lead", headline: "$55–$300 per lead", coverage: "100%", real: "$55–$300" },
+];
 
 export default function PricingPage() {
   return (
     <>
       <Nav />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
-      />
+      <main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+        />
 
-      <article className="max-w-6xl mx-auto px-6 py-20">
-        <nav className="text-sm text-[var(--color-text-secondary)] mb-6">
-          <Link href="/">Home</Link> / <span>Pricing</span>
-        </nav>
-
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-5xl font-bold tracking-tight">
-            Simple flat pricing.{' '}
-            <span className="text-brand-gradient">No credits. No surprises.</span>
-          </h1>
-
-          <p className="mt-6 text-xl text-[var(--color-text-secondary)]">
-            While other scrapers charge by the record and surprise you at scale,
-            Leadity charges flat for verified owner mobiles. If we can&rsquo;t find a
-            mobile, you don&rsquo;t pay.
-          </p>
-        </div>
-
-        {/* PRICING CARDS */}
-        <div className="grid md:grid-cols-4 gap-4 mt-16">
-          {/* Free tier */}
-          <div className="p-6 border rounded-2xl">
-            <h3 className="text-lg font-bold mt-0">Free</h3>
-            <p className="text-4xl font-bold mt-2">$0</p>
-            <p className="text-sm text-[var(--color-text-secondary)] mt-1">50 mobiles</p>
-            <ul className="text-sm mt-6 space-y-2">
-              <li>50 verified owner mobiles</li>
-              <li>No credit card required</li>
-              <li>No expiration</li>
-              <li>Full feature set</li>
-              <li>TCPA-aware export</li>
-              <li>CSV / Sheets export</li>
-            </ul>
-            <Link href="/signup" className="glass-chip mt-6 block text-center">
-              Start free
-            </Link>
+        {/* Hero */}
+        <section className="section-py relative overflow-hidden">
+          <div className="relative container-page">
+            <Reveal>
+              <div className="mx-auto max-w-[820px] text-center">
+                <h1 className="text-h2 text-balance text-[var(--color-text-primary)]">
+                  <span className="block">Simple flat pricing.</span>
+                  <span className="block text-brand-gradient">
+                    No credits. No surprises.
+                  </span>
+                </h1>
+                <p className="mt-6 max-w-[640px] mx-auto text-balance text-[18px] leading-[1.55] text-[var(--color-text-secondary)]">
+                  Pay only for verified owner mobiles. Free tier: 50 mobiles,
+                  no credit card. No expiry, no contracts, no per-seat fees.
+                </p>
+              </div>
+            </Reveal>
           </div>
+        </section>
 
-          {/* Starter */}
-          <div className="p-6 border rounded-2xl">
-            <h3 className="text-lg font-bold mt-0">Starter</h3>
-            <p className="text-4xl font-bold mt-2">$59</p>
-            <p className="text-sm text-[var(--color-text-secondary)] mt-1">2,000 mobiles</p>
-            <ul className="text-sm mt-6 space-y-2">
-              <li>2,000 verified mobiles</li>
-              <li>$0.030 per mobile</li>
-              <li>~40-80 appointments at 2-4% conv.</li>
-              <li>All free-tier features</li>
-              <li>HubSpot / Pipedrive / Close export</li>
-              <li>Email support</li>
-            </ul>
-            <Link href="/checkout?tier=starter" className="btn-liquid mt-6 block text-center">
-              Get 2,000 mobiles
-            </Link>
+        {/* Pricing cards (existing v1 component) */}
+        <PricingSection />
+
+        {/* Cost-per-usable-mobile comparison */}
+        <section className="section-py relative overflow-hidden">
+          <div className="container-page">
+            <Reveal>
+              <div className="mx-auto max-w-[820px] text-center">
+                <h2 className="text-h2 text-balance text-[var(--color-text-primary)]">
+                  <span className="block">Real cost</span>
+                  <span className="block text-brand-gradient">
+                    per usable mobile.
+                  </span>
+                </h2>
+                <p className="mt-5 max-w-[640px] mx-auto text-[16px] leading-[1.55] text-[var(--color-text-secondary)]">
+                  Headline price isn&rsquo;t what you actually pay. Mobile
+                  coverage varies wildly between tools — that&rsquo;s the
+                  number that determines real cost-per-dial.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <div className="mx-auto mt-12 max-w-[920px]">
+                <div className="glass-card rounded-3xl p-6 md:p-8 overflow-x-auto">
+                  <table className="w-full text-[14px] md:text-[15px]">
+                    <thead>
+                      <tr className="border-b border-[var(--color-border)]">
+                        <th className="text-left py-3 pr-4 font-semibold">Tool</th>
+                        <th className="text-left py-3 pr-4 font-semibold">Headline price</th>
+                        <th className="text-left py-3 pr-4 font-semibold">Mobile coverage</th>
+                        <th className="text-left py-3 font-semibold">$/usable mobile</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {costComparison.map((row) => (
+                        <tr
+                          key={row.tool}
+                          className={
+                            row.isUs
+                              ? "border-b border-[var(--color-border)] bg-[rgba(27,134,255,0.08)]"
+                              : "border-b border-[var(--color-border)]"
+                          }
+                        >
+                          <td className="py-4 pr-4">
+                            <strong>{row.tool}</strong>
+                          </td>
+                          <td className="py-4 pr-4 tabular-nums">
+                            {row.headline}
+                          </td>
+                          <td className="py-4 pr-4 tabular-nums">
+                            {row.coverage}
+                          </td>
+                          <td className="py-4 tabular-nums">
+                            {row.isUs ? <strong>{row.real}</strong> : row.real}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-6 text-center text-[13px] text-[var(--color-text-muted)]">
+                  Based on April 2026 benchmark across 500 US SMBs in 12
+                  verticals.{" "}
+                  <Link
+                    href="/blog/best-google-maps-scrapers-2026"
+                    className="underline hover:text-[var(--color-text-primary)]"
+                  >
+                    Read full benchmark →
+                  </Link>
+                </p>
+              </div>
+            </Reveal>
           </div>
+        </section>
 
-          {/* Pro - HIGHLIGHTED */}
-          <div className="p-6 border-2 border-[#1B86FF] rounded-2xl relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#1B86FF] text-xs font-semibold rounded-full text-white">
-              Most popular
-            </div>
-            <h3 className="text-lg font-bold mt-0">Pro</h3>
-            <p className="text-4xl font-bold mt-2">$129</p>
-            <p className="text-sm text-[var(--color-text-secondary)] mt-1">5,000 mobiles</p>
-            <ul className="text-sm mt-6 space-y-2">
-              <li>5,000 verified mobiles</li>
-              <li>$0.028 per mobile</li>
-              <li>~100-200 appointments</li>
-              <li>All Starter features</li>
-              <li>Smartlead / Instantly / Lemlist</li>
-              <li>Priority support</li>
-            </ul>
-            <Link href="/checkout?tier=pro" className="btn-liquid mt-6 block text-center">
-              Get 5,000 mobiles
-            </Link>
+        {/* FAQ — pricing-specific, glass-card accordion (matches v1 FAQ pattern) */}
+        <section className="section-py relative z-10 overflow-hidden">
+          <div className="container-page">
+            <Reveal>
+              <div className="mx-auto max-w-[720px] text-center">
+                <h2 className="text-h2 text-balance text-[var(--color-text-primary)]">
+                  <span className="block">Pricing questions,</span>
+                  <span className="block text-brand-gradient">answered.</span>
+                </h2>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="mx-auto mt-12 max-w-[720px]">
+                <Accordion
+                  type="single"
+                  collapsible
+                  className="flex flex-col gap-3"
+                >
+                  {pricingFaqs.map((item, i) => (
+                    <AccordionItem
+                      key={item.q}
+                      value={`item-${i}`}
+                      className="glass-card rounded-2xl border-0 px-5 md:px-6"
+                    >
+                      <AccordionTrigger className="py-4">
+                        {item.q}
+                      </AccordionTrigger>
+                      <AccordionContent>{item.a}</AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+            </Reveal>
           </div>
+        </section>
 
-          {/* Scale */}
-          <div className="p-6 border rounded-2xl">
-            <h3 className="text-lg font-bold mt-0">Scale</h3>
-            <p className="text-4xl font-bold mt-2">$229</p>
-            <p className="text-sm text-[var(--color-text-secondary)] mt-1">10,000 mobiles</p>
-            <ul className="text-sm mt-6 space-y-2">
-              <li>10,000 verified mobiles</li>
-              <li>$0.023 per mobile</li>
-              <li>~200-400 appointments</li>
-              <li>All Pro features</li>
-              <li>MCP server access</li>
-              <li>Founder-direct support</li>
-            </ul>
-            <Link href="/checkout?tier=scale" className="btn-liquid mt-6 block text-center">
-              Get 10,000 mobiles
-            </Link>
+        {/* Closing CTA */}
+        <section className="section-py">
+          <div className="container-page">
+            <Reveal>
+              <div className="mx-auto max-w-[640px] text-center">
+                <h2 className="text-h2 text-balance text-[var(--color-text-primary)]">
+                  <span className="block">Get 50 mobiles free.</span>
+                  <span className="block text-brand-gradient">
+                    No credit card.
+                  </span>
+                </h2>
+                <p className="mt-5 text-[16px] leading-[1.55] text-[var(--color-text-secondary)]">
+                  See the verified-mobile difference firsthand on a real list
+                  before you spend a dollar.
+                </p>
+                <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    href="#pricing"
+                    className="btn-liquid inline-flex items-center justify-center rounded-full px-8 py-4 text-[15px] font-semibold"
+                  >
+                    Start with 50 free
+                  </Link>
+                  <Link
+                    href="/alternatives/outscraper"
+                    className="glass-chip inline-flex items-center justify-center rounded-full px-8 py-4 text-[15px]"
+                  >
+                    vs Outscraper →
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
           </div>
-        </div>
-
-        <p className="text-center text-sm text-[var(--color-text-secondary)] mt-6">
-          Need 25,000+ mobiles or recurring monthly volume?{' '}
-          <Link href="/contact" className="underline">Talk to founders →</Link>
-        </p>
-
-        {/* THE COST COMPARISON */}
-        <div className="mt-20 p-10 rounded-2xl bg-[var(--color-surface)] border">
-          <h2 className="text-3xl font-bold text-center mt-0">
-            How Leadity compares on real cost-per-usable-mobile
-          </h2>
-
-          <p className="text-center text-[var(--color-text-secondary)] mt-2 max-w-2xl mx-auto">
-            Most scrapers advertise low headline prices but charge per record
-            (regardless of usability). Real cost is the dollar spend divided by
-            verified mobiles. Here&rsquo;s the math:
-          </p>
-
-          <div className="overflow-x-auto mt-8">
-            <table className="w-full">
-              <thead>
-                <tr>
-                  <th>Tool</th>
-                  <th>Headline price</th>
-                  <th>Mobile coverage</th>
-                  <th>Real cost per usable mobile</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="bg-[rgba(27,134,255,0.1)]">
-                  <td><strong>Leadity</strong></td>
-                  <td>$59 / 2,000 mobiles flat</td>
-                  <td>84.6% verified</td>
-                  <td><strong>$0.027</strong></td>
-                </tr>
-                <tr>
-                  <td>Outscraper</td>
-                  <td>$3 / 1,000 records + multipliers</td>
-                  <td>~8.5% mobile</td>
-                  <td>~$0.10 (3.7× more)</td>
-                </tr>
-                <tr>
-                  <td>Apify (with email actor)</td>
-                  <td>$2.10 / 1,000 places + per-event</td>
-                  <td>~12% mobile</td>
-                  <td>~$0.022 (similar) but no TCPA flags</td>
-                </tr>
-                <tr>
-                  <td>Apollo</td>
-                  <td>$99/user/mo subscription</td>
-                  <td>~10% local SMB mobile</td>
-                  <td>~$0.50-$2+ depending on usage</td>
-                </tr>
-                <tr>
-                  <td>ZoomInfo</td>
-                  <td>$15K-$50K/yr enterprise</td>
-                  <td>~8% local SMB mobile</td>
-                  <td>$2-$10+ for SMB</td>
-                </tr>
-                <tr>
-                  <td>Pay-per-lead (Angi, ServiceDirect)</td>
-                  <td>$55 shared / $100-$300 exclusive</td>
-                  <td>100% (pre-qualified)</td>
-                  <td>$55-$300 per lead</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p className="text-center mt-8 text-sm text-[var(--color-text-secondary)]">
-            Numbers verified via independent benchmark, April 2026.{' '}
-            <Link href="/blog/best-google-maps-scrapers-2026">See full benchmark →</Link>
-          </p>
-        </div>
-
-        {/* THE OUTSCRAPER TESTIMONIAL */}
-        <div className="mt-20 max-w-3xl mx-auto">
-          <blockquote className="border-l-4 border-[#1B86FF] pl-6 italic">
-            <p className="text-xl">
-              "We ran 16,000 leads through Outscraper last quarter and found
-              about 500 that were workable mobiles. With Leadity&rsquo;s mobile-only
-              filter we bought 2,000 mobiles for $59 and booked 4 meetings from
-              the first day&rsquo;s calls. <strong>10× better than Outscraper.</strong>"
-            </p>
-            <footer className="not-italic mt-4 text-sm text-[var(--color-text-secondary)]">
-              — Cold-call agency owner, Leadity customer
-            </footer>
-          </blockquote>
-        </div>
-
-        {/* TRUST BADGES */}
-        <div className="mt-20 grid md:grid-cols-4 gap-4 text-center">
-          <div className="p-6 border rounded-xl">
-            <p className="text-3xl font-semibold text-[#1B86FF]">G</p>
-            <h3 className="text-base font-bold mt-2">Stripe-secured</h3>
-            <p className="text-sm text-[var(--color-text-secondary)]">PCI-compliant payments</p>
-          </div>
-          <div className="p-6 border rounded-xl">
-            <p className="text-3xl font-semibold text-[#1B86FF]">L</p>
-            <h3 className="text-base font-bold mt-2">TCPA-aware export</h3>
-            <p className="text-sm text-[var(--color-text-secondary)]">DNC + line-type flags built in</p>
-          </div>
-          <div className="p-6 border rounded-xl">
-            <p className="text-3xl">🇺🇸</p>
-            <h3 className="text-base font-bold mt-2">US-only data</h3>
-            <p className="text-sm text-[var(--color-text-secondary)]">All 50 states, 1,255+ categories</p>
-          </div>
-          <div className="p-6 border rounded-xl">
-            <p className="text-3xl">↩️</p>
-            <h3 className="text-base font-bold mt-2">Refund guarantee</h3>
-            <p className="text-sm text-[var(--color-text-secondary)]">7-day refund on bad numbers</p>
-          </div>
-        </div>
-
-        {/* FAQ */}
-        <h2 className="text-3xl font-bold mt-20 mb-8 text-center">Frequently asked questions</h2>
-
-        <div className="max-w-3xl mx-auto">
-          <details className="rounded-lg border p-4 mb-3">
-            <summary className="font-semibold cursor-pointer">Why does Leadity charge per mobile instead of per record?</summary>
-            <p className="mt-2">We charge for verified mobiles only. If we can&rsquo;t find a verified mobile for a business, you don&rsquo;t pay for it. This makes pricing predictable and aligned with what cold-call teams actually need.</p>
-          </details>
-
-          <details className="rounded-lg border p-4 mb-3">
-            <summary className="font-semibold cursor-pointer">What&rsquo;s included in the free tier?</summary>
-            <p className="mt-2">50 verified owner mobile numbers, no credit card required, no expiration. Full feature set including niche × geo filtering, 1,255+ categories, TCPA-aware export.</p>
-          </details>
-
-          <details className="rounded-lg border p-4 mb-3">
-            <summary className="font-semibold cursor-pointer">Do credits or unused mobiles expire?</summary>
-            <p className="mt-2">No. Leadity does not use a credit system. Mobiles are delivered as a CSV. There&rsquo;s no concept of expiring credits.</p>
-          </details>
-
-          <details className="rounded-lg border p-4 mb-3">
-            <summary className="font-semibold cursor-pointer">What&rsquo;s your refund policy?</summary>
-            <p className="mt-2">We refund any number that fails our quality guarantee within 7 days of delivery. If a record we delivered as "mobile" turns out to be a landline, we refund that record.</p>
-          </details>
-
-          <details className="rounded-lg border p-4 mb-3">
-            <summary className="font-semibold cursor-pointer">Do you offer enterprise pricing?</summary>
-            <p className="mt-2">Yes — for volumes above 10,000 mobiles per request or recurring monthly purchases, contact us via hello@leadity.io for custom enterprise pricing.</p>
-          </details>
-
-          <details className="rounded-lg border p-4 mb-3">
-            <summary className="font-semibold cursor-pointer">Can I cancel anytime?</summary>
-            <p className="mt-2">Nothing to cancel — Leadity is pay-as-you-go, not subscription. You purchase a tier, receive data, transaction complete. No recurring billing.</p>
-          </details>
-
-          <details className="rounded-lg border p-4 mb-3">
-            <summary className="font-semibold cursor-pointer">What payment methods do you accept?</summary>
-            <p className="mt-2">Credit cards via Stripe (Visa, Mastercard, AmEx, Discover). ACH for enterprise plans. Crypto coming Q3 2026.</p>
-          </details>
-
-          <details className="rounded-lg border p-4 mb-3">
-            <summary className="font-semibold cursor-pointer">How does pricing compare to Outscraper, Apollo, ZoomInfo?</summary>
-            <p className="mt-2">For US B2B cold-call use cases targeting local SMBs: Leadity is 4-50× cheaper per usable mobile than Outscraper, Apollo, or ZoomInfo. See the comparison table above.</p>
-          </details>
-
-          <details className="rounded-lg border p-4 mb-3">
-            <summary className="font-semibold cursor-pointer">Is there tax / VAT?</summary>
-            <p className="mt-2">US customers: state sales tax applies. International: VAT/GST may apply. Tax shown at checkout.</p>
-          </details>
-
-          <details className="rounded-lg border p-4 mb-3">
-            <summary className="font-semibold cursor-pointer">Can I get an invoice?</summary>
-            <p className="mt-2">Stripe invoices emailed automatically. Custom enterprise invoices with PO available via hello@leadity.io.</p>
-          </details>
-        </div>
-
-        {/* FINAL CTA */}
-        <div className="mt-20 text-center">
-          <h2 className="text-3xl font-bold">Start with 50 free verified owner mobiles</h2>
-          <p className="mt-2 text-[var(--color-text-secondary)]">No credit card. No expiration. Test the data on your own niche.</p>
-          <div className="mt-6 flex gap-4 justify-center">
-            <Link href="/signup" className="btn-liquid">Get 50 mobiles free</Link>
-            <Link href="/alternatives/outscraper" className="glass-chip">Compare to Outscraper</Link>
-          </div>
-        </div>
-      </article>
+        </section>
+      </main>
       <Footer />
       <SignupPopup />
     </>
-  )
+  );
 }
