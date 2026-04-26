@@ -90,7 +90,7 @@ export function Testimonials() {
               {track.map((t, i) => (
                 <div
                   key={i}
-                  className="relative h-[260px] w-[180px] shrink-0 overflow-hidden rounded-[16px] bg-white shadow-[0_5px_16px_-10px_rgba(15,23,42,0.18),0_10px_24px_-16px_rgba(27,134,255,0.2)] md:h-[300px] md:w-[210px]"
+                  className="relative h-[260px] w-[180px] shrink-0 overflow-hidden rounded-[16px] bg-white shadow-[0_2px_4px_-1px_rgba(15,23,42,0.08),0_12px_24px_-8px_rgba(15,23,42,0.22),0_24px_48px_-20px_rgba(27,134,255,0.4)] md:h-[300px] md:w-[210px]"
                 >
                   <Image
                     src={t.src}

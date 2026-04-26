@@ -65,13 +65,17 @@ export function FAQ() {
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <div className="mx-auto mt-12 max-w-[720px]">
+          {/* min-h sized to fit ALL questions collapsed + the longest one
+              expanded. With 8 items × ~62px + gaps + ~180px answer room,
+              780px is enough that opening any item doesn't shift the
+              footer below. */}
+          <div className="mx-auto mt-12 max-w-[720px] min-h-[780px]">
             <Accordion type="single" collapsible className="flex flex-col gap-3">
               {items.map((item, i) => (
                 <AccordionItem
                   key={item.q}
                   value={`item-${i}`}
-                  className="glass-card rounded-2xl border-0 px-5 md:px-6"
+                  className="glass-card rounded-2xl border-0 px-5 md:px-6 shadow-[0_2px_4px_-1px_rgba(15,23,42,0.06),0_18px_36px_-12px_rgba(15,23,42,0.18),0_36px_72px_-32px_rgba(27,134,255,0.35)]"
                 >
                   <AccordionTrigger className="py-4">{item.q}</AccordionTrigger>
                   <AccordionContent>{item.a}</AccordionContent>

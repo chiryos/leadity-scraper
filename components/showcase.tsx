@@ -145,7 +145,7 @@ function Step({ shot, index }: { shot: Shot; index: number }) {
           transition={{ duration: 1, ease, delay: 0.1 }}
           className="glass-card relative rounded-2xl p-3 sm:p-4"
         >
-          <div className="relative aspect-[16/11] w-full overflow-hidden rounded-xl bg-white">
+          <div className="relative aspect-[16/11] w-full overflow-hidden rounded-xl bg-white shadow-[0_2px_4px_-1px_rgba(15,23,42,0.08),0_14px_28px_-12px_rgba(15,23,42,0.22)] ring-1 ring-black/5">
             <Image
               src={shot.src}
               alt={shot.alt}
