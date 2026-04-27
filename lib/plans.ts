@@ -8,9 +8,31 @@ export type Plan = {
   features: string[];
   cta: string;
   compareNote: string;
+  badgeText?: string; // overrides "Most popular" when set
+  isFree?: boolean; // suppresses strike-through + affiliate toggle effect
 };
 
 export const plans: Plan[] = [
+  {
+    name: "Free",
+    standard: 0,
+    affiliate: 0,
+    mobiles: 400,
+    popular: true,
+    isFree: true,
+    badgeText: "Start free",
+    description:
+      "Test the data before you spend a dollar. Just create an account.",
+    features: [
+      "400 verified Owners Mobiles",
+      "Full mobile-only filter",
+      "TCPA-aware export (DNC + line-type)",
+      "CSV + Sheets export",
+      "Real human in chat",
+    ],
+    cta: "Create free account",
+    compareNote: "No credit card. No expiry. No catch.",
+  },
   {
     name: "Starter",
     standard: 59,
@@ -33,7 +55,7 @@ export const plans: Plan[] = [
     standard: 129,
     affiliate: 77,
     mobiles: 5000,
-    popular: true,
+    popular: false,
     description: "For agencies and outbound teams running multiple campaigns.",
     features: [
       "5,000 verified Owners Mobiles",

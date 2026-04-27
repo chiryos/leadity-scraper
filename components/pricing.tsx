@@ -18,17 +18,20 @@ function PriceDisplay({
   affiliate,
   affiliateOn,
   popular,
+  isFree,
 }: {
   standard: number;
   affiliate: number;
   affiliateOn: boolean;
   popular: boolean;
+  isFree?: boolean;
 }) {
   const reduce = useReducedMotion();
-  const value = affiliateOn ? affiliate : standard;
+  const value = affiliateOn && !isFree ? affiliate : standard;
+  const showStrike = affiliateOn && !isFree && affiliate < standard;
 
   return (
-    <div className="flex items-end gap-3">
+    <div className="flex items-end gap-2.5">
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={value}
@@ -37,17 +40,17 @@ function PriceDisplay({
           exit={reduce ? undefined : { opacity: 0 }}
           transition={{ duration: 0.18 }}
           className={cn(
-            "text-[64px] font-semibold leading-none tracking-[-0.04em] tabular-nums",
+            "text-[48px] lg:text-[44px] xl:text-[52px] font-semibold leading-none tracking-[-0.04em] tabular-nums",
             popular ? "text-white" : "text-[var(--color-text-primary)]",
           )}
         >
           ${value}
         </motion.span>
       </AnimatePresence>
-      {affiliateOn ? (
+      {showStrike ? (
         <span
           className={cn(
-            "pb-2 text-[14px] line-through tabular-nums",
+            "pb-2 text-[12px] line-through tabular-nums",
             popular ? "text-white/65" : "text-[var(--color-text-muted)]",
           )}
         >
@@ -185,7 +188,10 @@ export function Pricing() {
         >
           {plans.map((plan) => {
             const isActive = activePlan === plan.name;
-            const price = affiliateOn ? plan.affiliate : plan.standard;
+            const price =
+              affiliateOn && !plan.isFree ? plan.affiliate : plan.standard;
+            const showStrike =
+              affiliateOn && !plan.isFree && plan.affiliate < plan.standard;
             return (
               <motion.div
                 key={plan.name}
@@ -270,7 +276,7 @@ export function Pricing() {
                               : "bg-[#EAF4FF] text-[#0951FF]",
                           )}
                         >
-                          Most popular
+                          {plan.badgeText ?? "Most popular"}
                         </span>
                       ) : null}
                     </div>
@@ -298,7 +304,7 @@ export function Pricing() {
                     >
                       ${price}
                     </div>
-                    {affiliateOn ? (
+                    {showStrike ? (
                       <div
                         className={cn(
                           "mt-1 text-[11px] line-through tabular-nums",
@@ -365,7 +371,7 @@ export function Pricing() {
                           className="mt-5"
                         >
                           <a
-                            href="#pricing-cta"
+                            href={plan.isFree ? "#signup" : "#pricing-cta"}
                             onClick={(e) => e.stopPropagation()}
                           >
                             {plan.cta}
@@ -384,8 +390,8 @@ export function Pricing() {
           })}
         </motion.div>
 
-        {/* ───── Desktop grid (lg+) ───── */}
-        <div className="mt-12 hidden gap-6 lg:grid lg:grid-cols-3 lg:items-stretch">
+        {/* ───── Desktop grid (lg+) — now 4 cards ───── */}
+        <div className="mt-14 hidden gap-4 lg:grid lg:grid-cols-4 lg:items-stretch xl:gap-5">
           {plans.map((plan, i) => {
             if (plan.popular) {
               return (
@@ -395,65 +401,65 @@ export function Pricing() {
                   className="order-first lg:order-none"
                 >
                   <article
-                    className="glass-brand relative flex h-full flex-col rounded-2xl p-8 text-white transition-transform duration-200 lg:-translate-y-3 hover:-translate-y-4"
+                    className="glass-brand relative flex h-full flex-col rounded-2xl p-6 text-white transition-transform duration-200 lg:-translate-y-3 hover:-translate-y-4"
                   >
                     <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 inline-flex items-center whitespace-nowrap rounded-full bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#0951FF] shadow-[0_8px_24px_-10px_rgba(27,134,255,0.6)]">
-                      Most popular
+                      {plan.badgeText ?? "Most popular"}
                     </span>
 
                     <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/75">
                       Plan
                     </div>
-                    <h3 className="mt-1 text-[24px] font-semibold tracking-[-0.02em] text-white">
+                    <h3 className="mt-1 text-[22px] font-semibold tracking-[-0.02em] text-white">
                       {plan.name}
                     </h3>
-                    <p className="mt-2 text-[14px] leading-[1.55] text-white/85">
+                    <p className="mt-2 text-[13px] leading-[1.5] text-white/85">
                       {plan.description}
                     </p>
 
-                    <div className="mt-7 flex items-baseline gap-3">
+                    <div className="mt-6 flex items-baseline gap-2">
                       <PriceDisplay
                         standard={plan.standard}
                         affiliate={plan.affiliate}
                         affiliateOn={affiliateOn}
                         popular={plan.popular}
+                        isFree={plan.isFree}
                       />
-                      <span className="pb-1 text-[14px] text-white/70 tabular-nums">
-                        / {plan.mobiles.toLocaleString()} Owners Mobiles
+                      <span className="pb-1 text-[12px] text-white/70 tabular-nums">
+                        / {plan.mobiles.toLocaleString()}
+                        <br />
+                        Owners Mobiles
                       </span>
                     </div>
 
-                    {/* Liquid-glass pill — white-frosted base with abstract
-                        blue blobs inside. Same .btn-liquid recipe used by
-                        the closing CTA, signup popup, and Growth desktop. */}
                     <a
-                      href="#pricing-cta"
-                      className="btn-liquid mt-7 inline-flex h-12 w-full items-center justify-center rounded-full text-[15px] font-medium"
+                      href={plan.isFree ? "#signup" : "#pricing-cta"}
+                      className="btn-liquid mt-6 inline-flex h-11 w-full items-center justify-center rounded-full text-[13.5px] font-medium px-3"
                     >
                       {plan.cta}
-                      <ArrowRight className="ml-2 h-4 w-4" />
+                      <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                     </a>
 
-                    <div className="my-7 h-px w-full bg-white/20" />
+                    <div className="my-6 h-px w-full bg-white/20" />
 
-                    <ul className="flex flex-col gap-3">
+                    <ul className="flex flex-col gap-2.5">
                       {plan.features.map((f) => (
                         <li
                           key={f}
-                          className="flex items-start gap-2.5 text-[14px] text-white/90"
+                          className="flex items-start gap-2 text-[13px] text-white/90"
                         >
                           <span
                             aria-hidden
-                            className="mt-0.5 inline-flex h-4.5 w-4.5 items-center justify-center rounded-full bg-white/25 text-white"
+                            className="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-white/25 text-white shrink-0"
                           >
-                            <Check className="h-3 w-3" strokeWidth={3} />
+                            <Check className="h-2.5 w-2.5" strokeWidth={3} />
                           </span>
                           <span>{f}</span>
                         </li>
                       ))}
                     </ul>
 
-                    <p className="mt-auto pt-7 text-[12px] italic text-white/65">
+                    <p className="mt-auto pt-6 text-[11.5px] italic text-white/65">
                       {plan.compareNote}
                     </p>
                   </article>
@@ -461,11 +467,10 @@ export function Pricing() {
               );
             }
 
-            // Non-popular: subtle white/gray gradient with soft blue ambient glow behind
+            // Non-popular: subtle white card, ambient blue glow behind
             return (
               <Reveal key={plan.name} delay={0.05 * i}>
                 <div className="relative h-full">
-                  {/* Ambient blue glow behind each outer card */}
                   <div
                     aria-hidden
                     className="pointer-events-none absolute -inset-6 -z-10"
@@ -476,57 +481,65 @@ export function Pricing() {
                     }}
                   />
                   <article
-                    className="glass-card relative flex h-full flex-col rounded-2xl p-8 transition-transform duration-200 hover:-translate-y-0.5"
+                    className="glass-card relative flex h-full flex-col rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-0.5"
                   >
                     <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
                       Plan
                     </div>
-                    <h3 className="mt-1 text-[24px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)]">
+                    <h3 className="mt-1 text-[22px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)]">
                       {plan.name}
                     </h3>
-                    <p className="mt-2 text-[14px] leading-[1.55] text-[var(--color-text-secondary)]">
+                    <p className="mt-2 text-[13px] leading-[1.5] text-[var(--color-text-secondary)]">
                       {plan.description}
                     </p>
 
-                    <div className="mt-7 flex items-baseline gap-3">
+                    <div className="mt-6 flex items-baseline gap-2">
                       <PriceDisplay
                         standard={plan.standard}
                         affiliate={plan.affiliate}
                         affiliateOn={affiliateOn}
                         popular={plan.popular}
+                        isFree={plan.isFree}
                       />
-                      <span className="pb-1 text-[14px] text-[var(--color-text-muted)] tabular-nums">
-                        / {plan.mobiles.toLocaleString()} Owners Mobiles
+                      <span className="pb-1 text-[12px] text-[var(--color-text-muted)] tabular-nums">
+                        / {plan.mobiles.toLocaleString()}
+                        <br />
+                        Owners Mobiles
                       </span>
                     </div>
 
-                    <Button asChild size="block" variant="liquid" className="mt-7">
+                    <Button
+                      asChild
+                      size="block"
+                      variant="liquid"
+                      className="mt-6 h-11 text-[13.5px] px-3"
+                    >
                       <a href="#pricing-cta">
                         {plan.cta}
-                        <ArrowRight className="ml-2 h-4 w-4" />
+                        <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                       </a>
                     </Button>
 
-                    <div className="my-7 h-px w-full bg-[#D8DEE6]" />
+                    <div className="my-6 h-px w-full bg-[#D8DEE6]" />
 
-                    <ul className="flex flex-col gap-3">
+                    <ul className="flex flex-col gap-2.5">
                       {plan.features.map((f) => (
                         <li
                           key={f}
-                          className="flex items-start gap-2.5 text-[14px] text-[var(--color-text-secondary)]"
+                          className="flex items-start gap-2 text-[13px] text-[var(--color-text-secondary)]"
                         >
                           <span
                             aria-hidden
-                            className="mt-0.5 inline-flex h-4.5 w-4.5 items-center justify-center rounded-full bg-[#EAF4FF] text-[#0B5394]"
+                            className="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-[#EAF4FF] text-[#0B5394] shrink-0"
                           >
-                            <Check className="h-3 w-3" strokeWidth={3} />
+                            <Check className="h-2.5 w-2.5" strokeWidth={3} />
                           </span>
                           <span>{f}</span>
                         </li>
                       ))}
                     </ul>
 
-                    <p className="mt-auto pt-7 text-[12px] italic text-[var(--color-text-muted)]">
+                    <p className="mt-auto pt-6 text-[11.5px] italic text-[var(--color-text-muted)]">
                       {plan.compareNote}
                     </p>
                   </article>
