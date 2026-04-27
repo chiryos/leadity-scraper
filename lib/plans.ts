@@ -22,7 +22,7 @@ export const plans: Plan[] = [
     isFree: true,
     badgeText: "Start free",
     description:
-      "Test the data before you spend a dollar. Just create an account.",
+      "Test data quality risk-free. Sign up in 30 seconds, no credit card needed.",
     features: [
       "400 verified Owners Mobiles",
       "Full mobile-only filter",
@@ -47,7 +47,7 @@ export const plans: Plan[] = [
       "Refund + 50% bonus on bad leads",
       "Live human support",
     ],
-    cta: "Start with 2k Owners Mobiles",
+    cta: "Get 2k Owners Mobiles",
     compareNote: "vs. $67–$211 with Outscraper + Clearoutphone",
   },
   {

@@ -401,19 +401,19 @@ export function Pricing() {
                   className="order-first lg:order-none"
                 >
                   <article
-                    className="glass-brand relative flex h-full flex-col rounded-2xl p-6 text-white transition-transform duration-200 lg:-translate-y-3 hover:-translate-y-4"
+                    className="glass-brand relative flex h-full min-h-[640px] flex-col rounded-2xl p-6 text-white transition-transform duration-200 lg:-translate-y-5 lg:scale-[1.02] hover:-translate-y-6"
                   >
                     <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 inline-flex items-center whitespace-nowrap rounded-full bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#0951FF] shadow-[0_8px_24px_-10px_rgba(27,134,255,0.6)]">
                       {plan.badgeText ?? "Most popular"}
                     </span>
 
-                    <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/75">
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/90">
                       Plan
                     </div>
                     <h3 className="mt-1 text-[22px] font-semibold tracking-[-0.02em] text-white">
                       {plan.name}
                     </h3>
-                    <p className="mt-2 text-[13px] leading-[1.5] text-white/85">
+                    <p className="mt-2 min-h-[60px] text-[13px] leading-[1.5] text-white/85">
                       {plan.description}
                     </p>
 
@@ -425,10 +425,8 @@ export function Pricing() {
                         popular={plan.popular}
                         isFree={plan.isFree}
                       />
-                      <span className="pb-1 text-[12px] text-white/70 tabular-nums">
-                        / {plan.mobiles.toLocaleString()}
-                        <br />
-                        Owners Mobiles
+                      <span className="pb-1.5 whitespace-nowrap text-[12px] text-white/75 tabular-nums">
+                        / {plan.mobiles.toLocaleString()} mobiles
                       </span>
                     </div>
 
@@ -481,7 +479,7 @@ export function Pricing() {
                     }}
                   />
                   <article
-                    className="glass-card relative flex h-full flex-col rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-0.5"
+                    className="glass-card relative flex h-full min-h-[640px] flex-col rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-0.5"
                   >
                     <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
                       Plan
@@ -489,7 +487,7 @@ export function Pricing() {
                     <h3 className="mt-1 text-[22px] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)]">
                       {plan.name}
                     </h3>
-                    <p className="mt-2 text-[13px] leading-[1.5] text-[var(--color-text-secondary)]">
+                    <p className="mt-2 min-h-[60px] text-[13px] leading-[1.5] text-[var(--color-text-secondary)]">
                       {plan.description}
                     </p>
 
@@ -501,10 +499,8 @@ export function Pricing() {
                         popular={plan.popular}
                         isFree={plan.isFree}
                       />
-                      <span className="pb-1 text-[12px] text-[var(--color-text-muted)] tabular-nums">
-                        / {plan.mobiles.toLocaleString()}
-                        <br />
-                        Owners Mobiles
+                      <span className="pb-1.5 whitespace-nowrap text-[12px] text-[var(--color-text-muted)] tabular-nums">
+                        / {plan.mobiles.toLocaleString()} mobiles
                       </span>
                     </div>
 
