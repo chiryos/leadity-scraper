@@ -13,7 +13,47 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-function PriceDisplay({
+/**
+ * MobileCountHero — the BIG number per card (the actual product unit).
+ * The price drops below as supporting info; this is what the eye lands
+ * on first.
+ */
+function MobileCountHero({
+  mobiles,
+  popular,
+}: {
+  mobiles: number;
+  popular: boolean;
+}) {
+  return (
+    <div>
+      <div
+        className={cn(
+          "flex items-baseline leading-none tracking-[-0.04em] tabular-nums",
+          popular ? "text-white" : "text-[var(--color-text-primary)]",
+        )}
+      >
+        <span className="text-[56px] lg:text-[52px] xl:text-[60px] font-semibold">
+          {mobiles.toLocaleString()}
+        </span>
+      </div>
+      <div
+        className={cn(
+          "mt-1.5 text-[10.5px] font-semibold uppercase tracking-[0.14em]",
+          popular ? "text-white/85" : "text-[var(--color-text-muted)]",
+        )}
+      >
+        Owners Mobiles
+      </div>
+    </div>
+  );
+}
+
+/**
+ * PriceLine — secondary info under the mobile count. Smaller font,
+ * supporting role.
+ */
+function PriceLine({
   standard,
   affiliate,
   affiliateOn,
@@ -31,7 +71,7 @@ function PriceDisplay({
   const showStrike = affiliateOn && !isFree && affiliate < standard;
 
   return (
-    <div className="flex items-end gap-2.5">
+    <div className="mt-4 flex items-baseline gap-2">
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={value}
@@ -40,18 +80,26 @@ function PriceDisplay({
           exit={reduce ? undefined : { opacity: 0 }}
           transition={{ duration: 0.18 }}
           className={cn(
-            "text-[48px] lg:text-[44px] xl:text-[52px] font-semibold leading-none tracking-[-0.04em] tabular-nums",
+            "text-[26px] lg:text-[24px] xl:text-[28px] font-semibold leading-none tabular-nums",
             popular ? "text-white" : "text-[var(--color-text-primary)]",
           )}
         >
           ${value}
         </motion.span>
       </AnimatePresence>
+      <span
+        className={cn(
+          "text-[12px]",
+          popular ? "text-white/75" : "text-[var(--color-text-muted)]",
+        )}
+      >
+        {isFree ? "free" : "flat, one-time"}
+      </span>
       {showStrike ? (
         <span
           className={cn(
-            "pb-2 text-[12px] line-through tabular-nums",
-            popular ? "text-white/65" : "text-[var(--color-text-muted)]",
+            "text-[12px] line-through tabular-nums",
+            popular ? "text-white/55" : "text-[var(--color-text-muted)]",
           )}
         >
           ${standard}
@@ -417,17 +465,18 @@ export function Pricing() {
                       {plan.description}
                     </p>
 
-                    <div className="mt-6 flex items-baseline gap-2">
-                      <PriceDisplay
+                    <div className="mt-6">
+                      <MobileCountHero
+                        mobiles={plan.mobiles}
+                        popular={plan.popular}
+                      />
+                      <PriceLine
                         standard={plan.standard}
                         affiliate={plan.affiliate}
                         affiliateOn={affiliateOn}
                         popular={plan.popular}
                         isFree={plan.isFree}
                       />
-                      <span className="pb-1.5 whitespace-nowrap text-[12px] text-white/75 tabular-nums">
-                        / {plan.mobiles.toLocaleString()} mobiles
-                      </span>
                     </div>
 
                     <a
@@ -491,17 +540,18 @@ export function Pricing() {
                       {plan.description}
                     </p>
 
-                    <div className="mt-6 flex items-baseline gap-2">
-                      <PriceDisplay
+                    <div className="mt-6">
+                      <MobileCountHero
+                        mobiles={plan.mobiles}
+                        popular={plan.popular}
+                      />
+                      <PriceLine
                         standard={plan.standard}
                         affiliate={plan.affiliate}
                         affiliateOn={affiliateOn}
                         popular={plan.popular}
                         isFree={plan.isFree}
                       />
-                      <span className="pb-1.5 whitespace-nowrap text-[12px] text-[var(--color-text-muted)] tabular-nums">
-                        / {plan.mobiles.toLocaleString()} mobiles
-                      </span>
                     </div>
 
                     <Button
