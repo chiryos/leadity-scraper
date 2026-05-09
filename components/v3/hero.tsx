@@ -16,8 +16,7 @@
  */
 
 import * as React from "react";
-import Link from "next/link";
-import { ArrowUp } from "lucide-react";
+import { Search } from "lucide-react";
 import { FadeWords } from "@/components/v3/fade-words";
 
 export function HeroV3() {
@@ -77,28 +76,19 @@ export function HeroV3() {
           <FadeWords>Scraped. Verified. Yours.</FadeWords>
         </h1>
 
-        {/* White-box prompt input */}
-        <div className="w-full max-w-[720px] v3-white-box v3-grad-ring rounded-[14px] p-4 md:p-5">
-          <div
-            className="v3-font text-[15px] md:text-[17px] leading-snug text-[var(--v3-fg)]"
-            style={{ minHeight: "2.5em" }}
-          >
-            Roofing contractors in Texas with mobile-only filter…
-          </div>
-          <div className="mt-3 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="v3-white-box v3-grad-ring v3-font inline-flex h-7 items-center gap-1.5 rounded-[10px] px-3 text-[11.5px] text-[var(--v3-fg)]">
-                <SparkleIcon /> Enhance prompt
+        {/* Search categories input — webild-style search picker.
+            Cmd icon left, placeholder text, "/" hotkey hint right. */}
+        <div className="w-full max-w-[760px]">
+          <div className="text-center">
+            <p className="v3-font text-[14.5px] md:text-[15.5px] text-[var(--v3-fg)]/75">
+              Select one or more business categories to scrape{" "}
+              <span className="text-[var(--v3-fg)]/55">
+                (1,255+ available)
               </span>
-            </div>
-            <Link
-              href="#pricing"
-              aria-label="Scrape now"
-              className="v3-btn-blue v3-grad-ring inline-flex h-9 w-9 items-center justify-center rounded-full"
-            >
-              <ArrowUp className="h-4 w-4" />
-            </Link>
+            </p>
           </div>
+
+          <CategorySearchInput />
         </div>
 
         {/* Trust strip */}
@@ -114,22 +104,74 @@ export function HeroV3() {
   );
 }
 
-function SparkleIcon() {
+/**
+ * Category search input — focusable, with Cmd hint left and `/` hotkey
+ * right. Matches the reference image (large, white, blue focus ring).
+ *
+ * Pressing `/` anywhere on the page focuses it. Pressing Esc blurs.
+ */
+function CategorySearchInput() {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [focused, setFocused] = React.useState(false);
+
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "/" && document.activeElement?.tagName !== "INPUT") {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+      if (e.key === "Escape" && document.activeElement === inputRef.current) {
+        inputRef.current?.blur();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
   return (
-    <svg
-      viewBox="0 0 24 24"
-      width="11"
-      height="11"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <path d="M12 3l1.9 4.9L18 10l-4.1 1.9L12 17l-1.9-4.9L6 10l4.1-2.1z" />
-      <path d="M19 14l.7 1.8L21 17l-1.8.7L18 19l-.7-1.8L16 17l1.8-1.2z" />
-      <path d="M5 4l.7 1.8L7 6.5 5.2 7 5 8.5 4.3 7 3 6.5l1.7-.7z" />
-    </svg>
+    <div className="mt-5 w-full">
+      <div
+        className={`v3-white-box v3-grad-ring relative flex h-[60px] md:h-[68px] items-center rounded-[14px] pl-4 pr-3 transition-shadow duration-200 ${
+          focused
+            ? "shadow-[0_0_0_3px_rgba(77,150,255,0.18),0_8px_28px_-12px_rgba(58,137,253,0.45)]"
+            : ""
+        }`}
+        onClick={() => inputRef.current?.focus()}
+      >
+        {/* Cmd hint */}
+        <kbd
+          className="v3-font mr-3 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-[var(--v3-fg)]/10 bg-[var(--v3-fg)]/[0.04] text-[12.5px] text-[var(--v3-fg)]/55 select-none"
+          aria-hidden
+        >
+          ⌘
+        </kbd>
+
+        {/* Search icon */}
+        <Search
+          className="hidden md:block mr-2 h-[18px] w-[18px] text-[var(--v3-fg)]/35 shrink-0"
+          strokeWidth={1.7}
+          aria-hidden
+        />
+
+        {/* Input */}
+        <input
+          ref={inputRef}
+          type="text"
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          placeholder='Search categories — "plumber", "dentist", "roofer"…'
+          aria-label="Search business categories"
+          className="v3-font flex-1 min-w-0 bg-transparent border-none outline-none text-[15px] md:text-[18px] text-[var(--v3-fg)] placeholder:text-[var(--v3-fg)]/40"
+        />
+
+        {/* `/` hotkey hint */}
+        <kbd
+          className="v3-font ml-2 hidden sm:inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-[var(--v3-fg)]/10 bg-[var(--v3-fg)]/[0.04] text-[12.5px] text-[var(--v3-fg)]/55 select-none"
+          aria-hidden
+        >
+          /
+        </kbd>
+      </div>
+    </div>
   );
 }
