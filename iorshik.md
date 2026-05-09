@@ -122,11 +122,30 @@ user's exact request if relevant. Multi-paragraph OK.
 Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 ```
 
-Latest commit as of this memory dump: `6840f56`
-(copy: remove all section eyebrow labels — go straight to the headline,
-2026-04-25). This is the **v1 final snapshot** before the SEO master-pack
-migration begins. A clean folder copy of the entire worktree at this
-commit is saved at `~/Desktop/leadity-v1-backup-pre-seo/`.
+## Versioning shorthand the user uses
+
+The user has named two snapshot points he refers back to in conversation:
+
+  • **v1** = commit `b82d5e8` (2026-04-25) — pure liquid-glass v1 site
+    before the SEO master-pack migration. A clean folder copy is saved
+    at `~/Desktop/leadity-v1-backup-pre-seo/`.
+
+  • **v2.1** = commit `0f1be2f` (2026-04-27) — current main. Hybrid:
+    v1 liquid-glass design on the homepage + on /pricing + on
+    /alternatives/outscraper, full SEO master-pack inventory (47 routes)
+    sitting at the other URLs but still in generic SEO-pack styling.
+    Pricing card hierarchy was flipped here so the mobile count is the
+    hero number (56-60px) and the price drops below as 24-28px subtitle.
+
+When the user says "v2.1" he means commit `0f1be2f`. When he says "v1"
+he means commit `b82d5e8`. Tags not yet pushed to git remote — these are
+informal labels in conversation only.
+
+---
+
+Latest commit as of this memory dump: `0f1be2f`
+(style(pricing): mobile count is the hero number, price drops below —
+2026-04-27). This is **v2.1** in the user's shorthand.
 
 ---
 
