@@ -70,7 +70,7 @@ export function FooterV3() {
             WebkitTextFillColor: "transparent",
           }}
         >
-          leadity
+          Leadity
         </div>
       </div>
 
