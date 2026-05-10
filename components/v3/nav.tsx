@@ -46,7 +46,7 @@ function Pill({
 
 export function NavV3() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
+    <header className="fixed inset-x-0 top-0 z-50 pointer-events-none px-3 md:px-4">
       <div className="mx-auto mt-3 flex w-full max-w-[1140px] items-center justify-between gap-2 rounded-[14px] px-2 py-1.5 pointer-events-auto v3-white-box v3-grad-ring">
         {/* Logo + wordmark */}
         <Link

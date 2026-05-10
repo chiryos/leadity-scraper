@@ -26,22 +26,20 @@ export function HeroV3() {
       className="relative isolate flex min-h-[92svh] flex-col items-center justify-center overflow-hidden v3-bg"
     >
       {/* Sky / cloud background — layered radial gradients evoking
-          a soft sky with cloud blooms. Replace with an actual sky
-          image (/public/sky.jpg) once available for an even closer
-          match to webild. */}
+          a soft sky. Critical: the BOTTOM of this gradient must end
+          exactly at #F5F8FF (--v3-bg) so the seam into the next
+          section is invisible. */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10"
         style={{
           background: [
-            // Distant blue sky at top
-            "linear-gradient(180deg, #DCE6F8 0%, #EBF1FB 38%, #F5F8FF 62%, #E8EFFA 88%, #DAE6F4 100%)",
-            // Cloud blooms (white radials)
-            "radial-gradient(45% 35% at 18% 32%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 70%)",
-            "radial-gradient(40% 28% at 78% 22%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 70%)",
-            "radial-gradient(55% 30% at 50% 55%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 75%)",
-            // Soft "ground" suggestion at bottom
-            "radial-gradient(80% 35% at 50% 100%, rgba(170, 195, 230, 0.45) 0%, rgba(170, 195, 230, 0) 70%)",
+            // Distant blue sky → seamlessly fades into body bg at bottom
+            "linear-gradient(180deg, #DCE6F8 0%, #E8EFFA 30%, #EFF4FE 55%, #F2F6FE 80%, #F5F8FF 100%)",
+            // Cloud blooms (white radials, kept above the bottom seam)
+            "radial-gradient(45% 35% at 18% 32%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 70%)",
+            "radial-gradient(40% 28% at 78% 22%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 70%)",
+            "radial-gradient(55% 30% at 50% 50%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 75%)",
           ].join(", "),
         }}
       />
@@ -58,21 +56,22 @@ export function HeroV3() {
       />
 
       {/* Content stack */}
-      <div className="relative z-10 flex w-full max-w-[940px] flex-col items-center gap-7 px-5 pt-10 md:pt-0">
+      <div className="relative z-10 flex w-full max-w-[940px] flex-col items-center gap-6 md:gap-7 px-5 pt-20 md:pt-10">
         {/* Rainbow accent badge */}
-        <div className="v3-font v3-rainbow-text text-[13px] md:text-[14px] font-medium tracking-tight">
+        <div className="v3-font v3-rainbow-text text-[12.5px] md:text-[14px] font-medium tracking-tight text-center">
           Verified at the source · 95% mobile rate
         </div>
 
         {/* Headline — big tight Inter Tight */}
         <h1
-          className="text-center v3-text-h1"
+          className="text-center v3-text-h1 text-balance"
           style={{
-            fontSize: "clamp(2.6rem, 5.8vw, 4.6rem)",
+            fontSize: "clamp(2.2rem, 5.8vw, 4.6rem)",
+            textWrap: "balance",
           }}
         >
           <FadeWords>Owners&rsquo; mobiles.</FadeWords>
-          <br />
+          <br className="hidden sm:inline" />{" "}
           <FadeWords>Scraped. Verified. Yours.</FadeWords>
         </h1>
 

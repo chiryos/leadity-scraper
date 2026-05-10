@@ -112,8 +112,8 @@ function PricingCard({
 
   // Free card uses blue gradient; others are plain white-box.
   const cardClass = showBlue
-    ? "relative flex h-full min-h-[600px] flex-col overflow-hidden rounded-[14px] p-7 text-white shadow-[0_22px_60px_-20px_rgba(58,137,253,0.55)]"
-    : "v3-white-box v3-grad-ring relative flex h-full min-h-[600px] flex-col rounded-[14px] p-7";
+    ? "relative flex h-full lg:min-h-[600px] flex-col overflow-hidden rounded-[14px] p-7 text-white shadow-[0_22px_60px_-20px_rgba(58,137,253,0.55)]"
+    : "v3-white-box v3-grad-ring relative flex h-full lg:min-h-[600px] flex-col rounded-[14px] p-7";
 
   const cardStyle: React.CSSProperties = showBlue
     ? {
