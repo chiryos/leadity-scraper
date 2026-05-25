@@ -59,7 +59,7 @@ export function HeroV3() {
       <div className="relative z-10 flex w-full max-w-[940px] flex-col items-center gap-6 md:gap-7 px-5 pt-20 md:pt-10">
         {/* Rainbow accent badge */}
         <div className="v3-font v3-rainbow-text text-[12.5px] md:text-[14px] font-medium tracking-tight text-center">
-          Verified at the source · 95% mobile rate
+          1,255+ categories &middot; 32,741 US ZIP codes &middot; TCPA-aware export
         </div>
 
         {/* Headline — big tight Inter Tight */}
@@ -87,15 +87,6 @@ export function HeroV3() {
 
           <CategorySearchInput />
         </div>
-
-        {/* Trust strip */}
-        <p
-          className="v3-font mt-2 text-center text-[13px] md:text-[14px] tracking-tight"
-          style={{ color: "var(--v3-fg)", opacity: 0.55 }}
-        >
-          1,255+ categories &middot; 32,741 US ZIP codes &middot; TCPA-aware
-          export
-        </p>
       </div>
     </section>
   );
