@@ -70,9 +70,7 @@ export function HeroV3() {
             textWrap: "balance",
           }}
         >
-          <FadeWords>Owners&rsquo; mobiles.</FadeWords>
-          <br className="hidden sm:inline" />{" "}
-          <FadeWords>Scraped. Verified. Yours.</FadeWords>
+          <FadeWords>Get Business Owner&rsquo;s Mobiles</FadeWords>
         </h1>
 
         {/* Search categories input — webild-style search picker.
