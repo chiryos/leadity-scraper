@@ -1,40 +1,29 @@
 /**
- * / — Homepage (v3 — webild-style refit, full content)
+ * / — Homepage (v2.1 — Apple Liquid Glass design)
  *
- * v2 components remain in components/* and v2.1 is recoverable at
- * commit 0f1be2f. v3 components live in components/v3/*.
+ * Switched back from v3 (webild-style refit) per user request.
+ * v3 components remain available in components/v3/* — restore by
+ * reverting this file to the v3 import set. v3 tokens in globals.css
+ * + Inter Tight font load are additive and harmless when unused.
  *
- * v3 sections shipped:
- *   ✓ NavV3          white-box pill nav, fixed top
- *   ✓ HeroV3         cloud sky bg + tight Inter Tight h1 + category
- *                    search input (Cmd ⌘ left, "/" hotkey right)
- *   ✓ ShowcaseV3     "How it works" 5-step product tour
- *   ✓ ComparisonV3   real cost-per-mobile table (Leadity vs alts)
- *   ✓ PricingV3      4-card grid (Free / Starter / Growth / Scale),
- *                    Standard ⇄ Affiliate toggle, hero count first
- *   ✓ GuaranteeV3    refund + 50% bonus, dark portal section with
- *                    conic rainbow halo on the seal image
- *   ✓ TestimonialsV3 infinite right→left marquee inside white-box
- *   ✓ FaqV3          accordion items, blue + button rotates on open
- *   ✓ CtaV3          dark portal final CTA with rainbow ring effect
- *   ✓ FooterV3       massive blue wordmark + 3-column links
- *
- * Background: v3-bg (#F5F8FF) flows through all light sections.
- * Dark portal sections (Guarantee, Cta) bleed in/out via radial blue
- * glow ribbons.
+ * Per-version git anchors:
+ *   v1    b82d5e8   pure liquid-glass, pre-SEO
+ *   v2.1  0f1be2f   v1 design + SEO inventory + pricing hero-count flip
+ *   v3    b4a832d   webild-style refit (current branch on git, this file
+ *                   import set restores v2.1)
  */
 
 import type { Metadata } from "next";
-import { NavV3 } from "@/components/v3/nav";
-import { HeroV3 } from "@/components/v3/hero";
-import { ShowcaseV3 } from "@/components/v3/showcase";
-import { ComparisonV3 } from "@/components/v3/comparison";
-import { PricingV3 } from "@/components/v3/pricing";
-import { GuaranteeV3 } from "@/components/v3/guarantee";
-import { TestimonialsV3 } from "@/components/v3/testimonials";
-import { FaqV3 } from "@/components/v3/faq";
-import { CtaV3 } from "@/components/v3/cta";
-import { FooterV3 } from "@/components/v3/footer";
+import { Nav } from "@/components/nav";
+import { Hero } from "@/components/hero";
+import { Showcase } from "@/components/showcase";
+import { Comparison } from "@/components/comparison";
+import { Pricing } from "@/components/pricing";
+import { Guarantee } from "@/components/guarantee";
+import { Testimonials } from "@/components/testimonials";
+import { FAQ } from "@/components/faq";
+import { CTA } from "@/components/cta";
+import { Footer } from "@/components/footer";
 import { SignupPopup } from "@/components/signup-popup";
 
 export const metadata: Metadata = {
@@ -48,18 +37,18 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <NavV3 />
-      <main className="v3-bg">
-        <HeroV3 />
-        <ShowcaseV3 />
-        <ComparisonV3 />
-        <PricingV3 />
-        <GuaranteeV3 />
-        <TestimonialsV3 />
-        <FaqV3 />
-        <CtaV3 />
+      <Nav />
+      <main>
+        <Hero />
+        <Showcase />
+        <Comparison />
+        <Pricing />
+        <Guarantee />
+        <Testimonials />
+        <FAQ />
+        <CTA />
       </main>
-      <FooterV3 />
+      <Footer />
       <SignupPopup />
     </>
   );
