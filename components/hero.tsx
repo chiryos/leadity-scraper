@@ -55,9 +55,6 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.3, ease }}
           className="mt-7 flex flex-row items-center justify-center gap-3 md:mt-10"
         >
-          <Button asChild size="lg" variant="liquid">
-            <a href="#how-it-works">See how it works</a>
-          </Button>
           <Button asChild size="lg" variant="gradient">
             <a href="#pricing">
               Start Scraping
