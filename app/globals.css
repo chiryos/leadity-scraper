@@ -1150,5 +1150,212 @@
       transform: none;
     }
   }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     v4.1 — hybrid scope. v2 liquid-glass surfaces stay (glass-card,
+     glass-brand, blue-glass sections, comparison/testimonial/FAQ
+     visuals), but inside `.v41-scope`:
+       • Roboto Flex font cascades to every text node
+       • v2 pill buttons (.btn-liquid, .glass-chip) repaint as v4 buttons
+       • <Button variant="gradient"> and variant="liquid" also flip
+     ═══════════════════════════════════════════════════════════════════ */
+
+  .v41-scope,
+  .v41-scope * {
+    font-family: var(--v4-font);
+  }
+
+  /* tabular-nums on numerals across the scope */
+  .v41-scope .tabular-nums,
+  .v41-scope [class*="tabular"] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Repaint v2's primary pill (.btn-liquid) as the v4 solid CTA. */
+  .v41-scope .btn-liquid {
+    background: var(--v4-accent) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.08),
+      0 6px 14px -6px rgba(59, 91, 219, 0.45) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transition:
+      background 0.15s,
+      box-shadow 0.15s,
+      transform 0.15s !important;
+  }
+  .v41-scope .btn-liquid::before {
+    display: none !important;
+  }
+  .v41-scope .btn-liquid:hover {
+    background: var(--v4-accent-hover) !important;
+    transform: none !important;
+  }
+  .v41-scope .btn-liquid:active {
+    transform: translateY(1px) !important;
+  }
+
+  /* Repaint v2's .glass-chip as the v4 secondary CTA. */
+  .v41-scope .glass-chip {
+    background: var(--v4-surface) !important;
+    color: var(--v4-text) !important;
+    border: 1px solid var(--v4-border-strong) !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .v41-scope .glass-chip::before {
+    display: none !important;
+  }
+  .v41-scope .glass-chip:hover {
+    background: var(--v4-row-hover) !important;
+    border-color: var(--v4-text-muted) !important;
+    transform: none !important;
+  }
+
+  /* Repaint v2's .glass-chip-ringed (Starter+Scale CTAs) as v4 secondary. */
+  .v41-scope .glass-chip-ringed {
+    background: var(--v4-surface) !important;
+    color: var(--v4-text) !important;
+    border: 1px solid var(--v4-border-strong) !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .v41-scope .glass-chip-ringed::before {
+    display: none !important;
+  }
+  .v41-scope .glass-chip-ringed:hover {
+    background: var(--v4-row-hover) !important;
+    border-color: var(--v4-text-muted) !important;
+    transform: none !important;
+  }
+
+  /* Repaint v2's .glass-chip-dark (used over brand gradients — keeps
+     readable on blue sections). */
+  .v41-scope .glass-chip-dark {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    border-radius: 12px !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+  .v41-scope .glass-chip-dark::before {
+    display: none !important;
+  }
+
+  /* On blue/gradient backgrounds inside .v41-scope, .btn-liquid flips
+     to the "white-on-grad" CTA shape (white surface, accent text). */
+  .v41-scope .glass-brand .btn-liquid,
+  .v41-scope [data-on-gradient] .btn-liquid,
+  .v41-scope .v41-on-grad .btn-liquid {
+    background: #fff !important;
+    color: var(--v4-accent) !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.14) !important;
+  }
+  .v41-scope .glass-brand .btn-liquid:hover,
+  .v41-scope [data-on-gradient] .btn-liquid:hover,
+  .v41-scope .v41-on-grad .btn-liquid:hover {
+    background: #fff !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Repaint v2's <Button variant="gradient"> (.glass-brand on <a> or
+     <button>) as v4 primary CTA. .glass-brand is also used as a section
+     card surface (e.g. pricing Growth card), so we target only when it's
+     a button/anchor — leaves section cards untouched. */
+  .v41-scope a.glass-brand,
+  .v41-scope button.glass-brand,
+  .v41-scope [role="button"].glass-brand {
+    background: var(--v4-accent) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.08),
+      0 6px 14px -6px rgba(59, 91, 219, 0.45) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .v41-scope a.glass-brand::before,
+  .v41-scope button.glass-brand::before,
+  .v41-scope [role="button"].glass-brand::before,
+  .v41-scope a.glass-brand::after,
+  .v41-scope button.glass-brand::after,
+  .v41-scope [role="button"].glass-brand::after {
+    display: none !important;
+  }
+  .v41-scope a.glass-brand:hover,
+  .v41-scope button.glass-brand:hover,
+  .v41-scope [role="button"].glass-brand:hover {
+    background: var(--v4-accent-hover) !important;
+    transform: none !important;
+  }
+
+  /* Repaint v2's <Button variant="primary"> (.glass-chip-dark) as v4
+     primary CTA when used as a button. */
+  .v41-scope a.glass-chip-dark,
+  .v41-scope button.glass-chip-dark,
+  .v41-scope [role="button"].glass-chip-dark {
+    background: var(--v4-accent) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.08),
+      0 6px 14px -6px rgba(59, 91, 219, 0.45) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .v41-scope a.glass-chip-dark::before,
+  .v41-scope button.glass-chip-dark::before,
+  .v41-scope [role="button"].glass-chip-dark::before {
+    display: none !important;
+  }
+  .v41-scope a.glass-chip-dark:hover,
+  .v41-scope button.glass-chip-dark:hover,
+  .v41-scope [role="button"].glass-chip-dark:hover {
+    background: var(--v4-accent-hover) !important;
+  }
+
+  /* On blue/gradient surfaces, primary buttons flip to white pill. */
+  .v41-scope .glass-brand a.btn-liquid,
+  .v41-scope [data-on-gradient] a.btn-liquid,
+  .v41-scope .v41-on-grad a.btn-liquid,
+  .v41-scope .glass-brand a.glass-brand,
+  .v41-scope [data-on-gradient] a.glass-brand,
+  .v41-scope .v41-on-grad a.glass-brand,
+  .v41-scope [data-on-gradient] a.glass-chip-dark,
+  .v41-scope .v41-on-grad a.glass-chip-dark {
+    background: #fff !important;
+    color: var(--v4-accent) !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.14) !important;
+  }
+
+  /* The v2 Button sizes all add `rounded-full` via Tailwind — squash
+     them back to v4's 12px radius. .v41-btn-keep-pill opts out for cases
+     where a true pill IS desired (none in current pages). */
+  .v41-scope a[class*="rounded-full"]:not(.v41-btn-keep-pill),
+  .v41-scope button[class*="rounded-full"]:not(.v41-btn-keep-pill),
+  .v41-scope [role="button"][class*="rounded-full"]:not(.v41-btn-keep-pill) {
+    border-radius: 12px !important;
+  }
+
+  /* In v2, the brand pricing card (.glass-brand on the Growth tier) is
+     a SECTION card — keep its surface gradient + glass. But inside it,
+     buttons flip to the white-on-grad shape. */
+  .v41-scope .glass-brand .btn-liquid,
+  .v41-scope .glass-brand a.glass-brand,
+  .v41-scope .glass-brand button.glass-brand {
+    background: #fff !important;
+    color: var(--v4-accent) !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.14) !important;
+  }
 }
 
