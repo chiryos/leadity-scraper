@@ -56,9 +56,13 @@ export function Hero() {
           centers around the real viewport middle. Mobile keeps a small
           top pad so the H1 doesn't sit under the nav island. */}
       <div className="relative mx-auto flex h-full w-full max-w-[1360px] items-center px-5 pt-[80px] pb-6 md:px-10 md:pt-0 md:pb-0">
-        <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.4fr)] md:gap-14 lg:gap-20">
-          {/* ─────────────── Left column: text + CTAs + trust ─────────────── */}
-          <div className="flex flex-col items-start text-left">
+        <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.4fr)] md:gap-10 lg:gap-14">
+          {/* ─────────────── Left column: text + CTAs + trust ───────────────
+              Extra leading-padding on md+ shifts the text column inward
+              toward the viewport center (was hugging the left edge on
+              wide displays). Scales with viewport so it stays balanced
+              from 1024 up through ultrawide. */}
+          <div className="flex flex-col items-start text-left md:pl-[5vw] lg:pl-[7vw] xl:pl-[8vw]">
             <motion.h1
               initial={reduce ? false : { opacity: 0, y: 14 }}
               animate={reduce ? undefined : { opacity: 1, y: 0 }}
