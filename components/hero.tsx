@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -90,6 +91,46 @@ export function Hero() {
             <span className="text-[12px] font-medium text-[var(--color-text-primary)] md:text-[13px]">
               4.9 / 5
             </span>
+          </div>
+        </motion.div>
+
+        {/* Hero product showcase — actual app UI: credits balance card +
+            scraped CSV table preview + business photos. Replaces the
+            inline credits/CSV mini-components used in v4; this is one
+            composed mockup rendered at full hero scale. */}
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          animate={reduce ? undefined : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.55, ease }}
+          className="relative mt-12 w-full max-w-[1120px] md:mt-16"
+        >
+          {/* Ambient brand-blue glow underneath, blends into the
+              section's top-radial wash. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-x-10 -inset-y-8 -z-10 rounded-[40px]"
+            style={{
+              background:
+                "radial-gradient(60% 50% at 50% 60%, rgba(27, 134, 255, 0.22) 0%, rgba(34, 201, 245, 0.08) 45%, transparent 75%)",
+              filter: "blur(40px)",
+            }}
+          />
+          <div
+            className="relative overflow-hidden rounded-[20px] md:rounded-[24px]"
+            style={{
+              boxShadow:
+                "0 1px 0 rgba(255,255,255,0.7) inset, 0 30px 60px -20px rgba(15, 23, 42, 0.18), 0 50px 120px -40px rgba(27, 134, 255, 0.28)",
+            }}
+          >
+            <Image
+              src="/hero/landing-mock.png"
+              alt="Leadity dashboard — credit balance card and a scraped CSV of carrier-validated US owner mobiles (mobile kept, landline and VoIP filtered out)"
+              width={1536}
+              height={1024}
+              priority
+              sizes="(max-width: 768px) 100vw, 1120px"
+              className="block h-auto w-full"
+            />
           </div>
         </motion.div>
       </div>
