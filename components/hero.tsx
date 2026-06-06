@@ -50,9 +50,13 @@ export function Hero() {
         }}
       />
 
-      {/* Full-height grid, vertically centered */}
-      <div className="relative mx-auto flex h-full w-full max-w-[1280px] items-center px-5 pt-[88px] pb-6 md:px-8 md:pt-[96px] md:pb-10">
-        <div className="grid w-full grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:gap-12 lg:gap-16">
+      {/* Full-height grid, true-center vertical alignment.
+          Nav is `position: fixed` and floats above transparently, so
+          the section doesn't need top padding to clear it — content
+          centers around the real viewport middle. Mobile keeps a small
+          top pad so the H1 doesn't sit under the nav island. */}
+      <div className="relative mx-auto flex h-full w-full max-w-[1360px] items-center px-5 pt-[80px] pb-6 md:px-10 md:pt-0 md:pb-0">
+        <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.4fr)] md:gap-14 lg:gap-20">
           {/* ─────────────── Left column: text + CTAs + trust ─────────────── */}
           <div className="flex flex-col items-start text-left">
             <motion.h1
@@ -61,7 +65,7 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.1, ease }}
               className="text-balance font-semibold text-[var(--color-text-primary)]"
               style={{
-                fontSize: "clamp(32px, 5vw, 68px)",
+                fontSize: "clamp(30px, 4.2vw, 60px)",
                 letterSpacing: "-0.045em",
                 lineHeight: 0.98,
               }}
@@ -151,7 +155,7 @@ export function Hero() {
               width={1536}
               height={1024}
               priority
-              sizes="(max-width: 768px) 100vw, 640px"
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 820px"
               className="block h-auto w-full"
             />
           </motion.div>
