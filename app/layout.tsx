@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Inter_Tight, Instrument_Serif } from "next/font/google";
+import { Inter, Inter_Tight, Instrument_Serif, Roboto_Flex } from "next/font/google";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SmoothScroll } from "@/components/smooth-scroll";
@@ -27,6 +27,15 @@ const instrumentSerif = Instrument_Serif({
   weight: ["400"],
   style: ["italic"],
   variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+// Roboto Flex — v4 typography (Google-Workspace / Material-3 feel).
+// Used in components/v4/* via `var(--font-roboto-flex)`.
+const robotoFlex = Roboto_Flex({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-roboto-flex",
   display: "swap",
 });
 
@@ -246,7 +255,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${interTight.variable} ${instrumentSerif.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${interTight.variable} ${instrumentSerif.variable} ${robotoFlex.variable}`}
+    >
+      <head>
+        {/* Material Symbols (Rounded) — used by v4 components. Variable font
+            with full opsz/wght/FILL/GRAD axes. */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
+        />
+      </head>
       <body className="bg-white text-[var(--color-text-primary)] antialiased">
         <SmoothScroll />
         <AnalyticsProvider />

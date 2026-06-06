@@ -71,6 +71,43 @@
   --v3-text-7xl:                clamp(3.80rem, 6.00vw, 5.20rem);
   --v3-text-section-headline:   clamp(1.78rem, 3.00vw, 3.00rem);
   --v3-text-section-subheadline: clamp(1.20rem, 1.59vw, 1.69rem);
+
+  /* ═══════════════════════════════════════════════════════════════════
+     v4 TOKENS — Google Material-3 light palette, matching the live app.
+     Additive; v1/v2/v3 tokens above stay untouched.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* Surfaces */
+  --v4-canvas:        #F8FAFC;
+  --v4-surface:       #FFFFFF;
+  --v4-row-hover:     #F1F3F4;
+
+  /* Borders */
+  --v4-border:        #E8EAED;
+  --v4-border-strong: #DADCE0;
+
+  /* Text */
+  --v4-text:          #202124;
+  --v4-text-secondary: #5F6368;
+  --v4-text-muted:    #9AA0A6;
+
+  /* Brand blues */
+  --v4-accent:        #3B5BDB;
+  --v4-accent-hover:  #2B4ACB;
+  --v4-link:          #1A73E8;
+  --v4-deep-ink:      #1A3DA9;
+  --v4-soft-bg:       #E3E9FE;
+
+  /* Status (validated mobile = success, dropped = danger) */
+  --v4-success:       #137333;
+  --v4-success-bg:    #E8F6EE;
+  --v4-warning:       #D97706;
+  --v4-warning-bg:    #FEF7E0;
+  --v4-danger:        #C5221F;
+  --v4-danger-bg:     #FCE8E6;
+
+  /* Font */
+  --v4-font:          var(--font-roboto-flex), -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 @layer base {
@@ -891,3 +928,227 @@
     }
   }
 }
+
+/* ═════════════════════════════════════════════════════════════════════
+   v4 — Material-3 light landing utilities.
+   Roboto Flex everywhere · Material Symbols icons · 12px default radius.
+   ═════════════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+  .v4-font {
+    font-family: var(--v4-font);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .v4-headline {
+    font-family: var(--v4-font);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+
+  .v4-display {
+    font-family: var(--v4-font);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+  }
+
+  .v4-eyebrow {
+    font-family: var(--v4-font);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--v4-accent);
+    font-size: 12px;
+  }
+
+  /* Signature blue gradient — used ONLY on hero credits card, guarantee
+     panel, and final CTA. Never as a background fog. */
+  .v4-grad {
+    background:
+      radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.26), transparent 52%),
+      radial-gradient(circle at 100% 110%, rgba(255, 255, 255, 0.18), transparent 55%),
+      linear-gradient(140deg, #2B4ACB 0%, #3B5BDB 52%, #1A73E8 100%);
+    box-shadow:
+      0 12px 26px -12px rgba(43, 74, 203, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    color: #fff;
+  }
+
+  /* Material Symbols (Rounded) — single class to opt into the icon font.
+     Set axes inline if a particular instance needs different fill/wght. */
+  .ms-icon,
+  .material-symbols-rounded {
+    font-family: "Material Symbols Rounded";
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings:
+      "FILL" 0,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 24;
+  }
+  .ms-icon[data-fill="1"] {
+    font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24;
+  }
+
+  /* Glassmorphism nav island — matches the live app's floating header. */
+  .v4-nav-glass {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid var(--v4-border);
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 8px 24px -10px rgba(15, 23, 42, 0.08);
+  }
+
+  /* Standard light surface card. Hairline border, 12px radius, soft lift. */
+  .v4-card {
+    background: var(--v4-surface);
+    border: 1px solid var(--v4-border);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  }
+
+  /* Subtle pill chip — used for "Most picked" badges, status flags etc. */
+  .v4-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-family: var(--v4-font);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  /* Primary CTA — solid accent on light surfaces. */
+  .v4-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 12px;
+    font-family: var(--v4-font);
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--v4-accent);
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.08),
+      0 6px 14px -6px rgba(59, 91, 219, 0.45);
+    transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+    border: none;
+  }
+  .v4-btn-primary:hover {
+    background: var(--v4-accent-hover);
+  }
+  .v4-btn-primary:active {
+    transform: translateY(1px);
+  }
+
+  /* Secondary CTA — hairline-on-white, used for "See how it works" etc. */
+  .v4-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 12px;
+    font-family: var(--v4-font);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--v4-text);
+    background: var(--v4-surface);
+    border: 1px solid var(--v4-border-strong);
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+  }
+  .v4-btn-secondary:hover {
+    background: var(--v4-row-hover);
+    border-color: var(--v4-text-muted);
+  }
+
+  /* White CTA — only used on top of the signature gradient surfaces. */
+  .v4-btn-on-grad {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 12px;
+    font-family: var(--v4-font);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--v4-accent);
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.14);
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+  }
+  .v4-btn-on-grad:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Big "ghost" step numerals (01/02/03) behind section headings */
+  .v4-ghost-numeral {
+    font-family: var(--v4-font);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--v4-soft-bg);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Mount-fired reveal (above-the-fold) — opacity + tiny y translate. */
+  @keyframes v4-reveal-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .v4-reveal {
+    animation: v4-reveal-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .v4-reveal-delay-1 { animation-delay: 0.05s; }
+  .v4-reveal-delay-2 { animation-delay: 0.12s; }
+  .v4-reveal-delay-3 { animation-delay: 0.20s; }
+  .v4-reveal-delay-4 { animation-delay: 0.28s; }
+  .v4-reveal-delay-5 { animation-delay: 0.36s; }
+
+  /* Scroll-in reveal — class is added by IntersectionObserver. */
+  .v4-in {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .v4-in.v4-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .v4-reveal, .v4-in, .v4-in.v4-in-view {
+      animation: none;
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
